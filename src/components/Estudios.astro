@@ -1,0 +1,83 @@
+<style>
+    @keyframes fade-up {
+      0% {
+        opacity: 0;
+        transform: translateY(60px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  
+    .fade-up {
+      animation: fade-up 1.2s ease-out both;
+    }
+  
+    .fade-up-delay {
+      animation: fade-up 1.2s ease-out both;
+      animation-delay: 0.4s;
+    }
+  
+    .glow-card {
+      position: relative;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+  
+    .glow-card:hover {
+      transform: scale(1.05);
+    }
+  
+    .glow-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 1rem;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+  
+    .glow-ipn:hover::before {
+      box-shadow: 0 0 40px 15px rgba(130, 0, 70, 0.8);
+      background: radial-gradient(circle, rgba(130, 0, 70, 0.15) 0%, transparent 70%);
+      opacity: 1;
+    }
+  
+    .glow-upp:hover::before {
+      box-shadow: 0 0 40px 15px rgba(139, 92, 246, 0.8);
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+      opacity: 1;
+    }
+  </style>
+  
+  <section id="estudios" class="bg-neutral-950 py-24 px-6 text-white">
+    <h2 class="text-3xl font-bold mb-20 text-center fade-up">📚 Formación Académica</h2>
+  
+    <div class="max-w-5xl mx-auto grid gap-16 md:grid-cols-2">
+      <!-- Preparatoria -->
+      <div class="bg-neutral-800 p-8 rounded-2xl text-center glow-card glow-ipn fade-up">
+        <img
+          src="/images/ipn.png"
+          alt="CECyT 16"
+          class="w-44 h-44 object-contain mx-auto mb-6"
+        />
+        <h3 class="text-xl font-semibold text-white">CECyT 16 “Hidalgo”</h3>
+        <p class="text-neutral-400 text-sm mt-1">Técnico en Administración</p>
+        <p class="text-neutral-500 text-sm">2019 - 2022</p>
+      </div>
+  
+      <!-- Universidad -->
+      <div class="bg-neutral-800 p-8 rounded-2xl text-center glow-card glow-upp fade-up-delay">
+        <img
+          src="/images/upp.png"
+          alt="UPP"
+          class="w-44 h-44 object-contain mx-auto mb-6"
+        />
+        <h3 class="text-xl font-semibold text-white">Universidad Politécnica de Pachuca</h3>
+        <p class="text-neutral-400 text-sm mt-1">Ingeniería en Software</p>
+        <p class="text-neutral-500 text-sm">2023 - Actualidad</p>
+        <p class="text-neutral-500 text-xs italic">Actualmente en 7º cuatrimestre</p>
+      </div>
+    </div>
+  </section>

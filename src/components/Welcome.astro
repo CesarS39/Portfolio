@@ -1,0 +1,62 @@
+---
+import astroLogo from '../assets/astro.svg';
+import background from '../assets/background.svg';
+---
+
+<main class="min-h-screen bg-neutral-950 text-white">
+    <!-- Hero Section -->
+    <section class="flex flex-col items-center justify-center py-20 text-center">
+      <h1 class="text-5xl font-bold">César Enríquez</h1>
+      <p class="mt-4 text-lg text-neutral-400">Desarrollador de software enfocado en crear soluciones elegantes, eficientes y bien estructuradas.</p>
+      <div class="mt-6 flex gap-4">
+        <a href="#contacto" class="px-4 py-2 bg-white text-black rounded-xl font-semibold">Contacto</a>
+        <a href="/cv.pdf" class="px-4 py-2 border border-white rounded-xl">Ver CV</a>
+      </div>
+    </section>
+
+    <!-- Sobre Mí -->
+    <section class="max-w-4xl mx-auto px-6 py-16">
+      <h2 class="text-3xl font-bold mb-6">Sobre mí</h2>
+      <p class="text-neutral-300 text-lg leading-relaxed">
+        Soy un desarrollador apasionado por la tecnología y el aprendizaje constante. Me encanta desarrollar software, investigar nuevas herramientas y metodologías. Además, disfruto del tenis y valoro profundamente la organización y el trabajo con metodologías ágiles. Me considero una persona comprometida con los tiempos y la calidad del trabajo.
+      </p>
+    </section>
+
+    <!-- Tecnologías -->
+    <section class="bg-neutral-900 py-16 px-6">
+      <h2 class="text-3xl font-bold mb-6 text-center">Tecnologías</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+        <span class="bg-neutral-800 px-4 py-2 rounded-xl text-center">Astro</span>
+        <span class="bg-neutral-800 px-4 py-2 rounded-xl text-center">React</span>
+        <span class="bg-neutral-800 px-4 py-2 rounded-xl text-center">Flutter</span>
+        <span class="bg-neutral-800 px-4 py-2 rounded-xl text-center">Firebase</span>
+        <span class="bg-neutral-800 px-4 py-2 rounded-xl text-center">TailwindCSS</span>
+        <span class="bg-neutral-800 px-4 py-2 rounded-xl text-center">Git</span>
+        <span class="bg-neutral-800 px-4 py-2 rounded-xl text-center">Scrum</span>
+      </div>
+    </section>
+
+    <!-- Proyectos -->
+    <section class="max-w-5xl mx-auto px-6 py-16">
+      <h2 class="text-3xl font-bold mb-10 text-center">Proyectos</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-neutral-900 p-6 rounded-xl border border-neutral-800">
+          <h3 class="text-xl font-semibold">Gestor de Tareas Multitienda</h3>
+          <p class="text-neutral-400 mt-2 text-sm">App Flutter con Firebase para asignar tareas a empleados según su tienda. Incluye notificaciones, calendario, autenticación y gestión por rol.</p>
+          <p class="text-neutral-500 mt-1 text-xs">Flutter · Firebase · Android · iOS · Scrum</p>
+        </div>
+        <!-- Otros proyectos pueden ir aquí -->
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="bg-neutral-900 py-16 px-6 text-center">
+      <h2 class="text-3xl font-bold mb-6">Contacto</h2>
+      <p class="text-neutral-400 mb-4">¿Te interesa colaborar o tienes una propuesta?</p>
+      <p class="text-neutral-300">📧 cesar.enriquez@example.com</p>
+      <div class="flex justify-center gap-4 mt-4">
+        <a href="https://github.com/usuario-ejemplo" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/usuario-ejemplo" target="_blank">LinkedIn</a>
+      </div>
+    </section>
+  </main>

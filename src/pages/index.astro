@@ -1,0 +1,28 @@
+---
+import CLILoader from "../components/CLILoader.astro";
+import ParallaxHero from "../components/ParallaxHero.astro";
+import AboutMe from "../components/AboutMe.astro";
+import Technologies from "../components/Technologies.astro";
+import Projects from "../components/Projects.astro";
+import Contact from "../components/Contact.astro";
+import Layout from "../layouts/Layout.astro";
+import Estudios from "../components/Estudios.astro";
+import Vision from "../components/Vision.astro";
+import Habilidades from "../components/Habilidades.astro";
+import Intereses from "../components/Intereses.astro";
+---
+
+<Layout>
+  <CLILoader />
+  <main id="main-content" style="display: none;">
+    <ParallaxHero />
+    <AboutMe />
+    <Estudios />
+    <Vision />
+    <Habilidades />
+    <Intereses />
+    <Technologies />
+    <Projects />
+    <Contact />
+  </main>
+</Layout>

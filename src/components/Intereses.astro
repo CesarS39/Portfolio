@@ -1,0 +1,43 @@
+---
+// src/components/Intereses.astro
+import BentoCard from './BentoCard.astro';
+---
+
+<section id="intereses" class="bg-neutral-950 py-20 px-4 sm:px-8 md:px-16 text-white">
+  <h2 class="text-3xl font-bold mb-12 text-center">Intereses y Pasatiempos</h2>
+
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 grid-rows-none lg:grid-rows-6 gap-4"
+  >
+    <BentoCard
+      title="Jugar Tenis"
+      description="Pasión por el deporte y la competencia."
+      image="/images/intereses/tennis2.heic"
+      className="lg:col-span-3 lg:row-span-2 min-h-[240px]"
+    />
+    <BentoCard
+      title="Explorar Tecnología"
+      description="Me gusta estar al día con lo último en software y hardware."
+      image="/images/intereses/serpiente.jpg"
+      className="lg:col-span-2 lg:row-span-2 lg:col-start-4 min-h-[240px]"
+    />
+    <BentoCard
+      title="Viajar"
+      description="Me encanta descubrir nuevos lugares y culturas."
+      image="/images/intereses/tennis2.heic"
+      className="lg:col-span-2 lg:row-span-2 lg:row-start-3 min-h-[240px]"
+    />
+    <BentoCard
+      title="Lectura"
+      description="Disfruto leer sobre tecnología, historia y ciencia ficción."
+      image="/images/intereses/lectura.jpg"
+      className="lg:col-span-2 lg:row-span-2 lg:col-start-3 lg:row-start-3 min-h-[240px]"
+    />
+    <BentoCard
+      title="Videojuegos"
+      description="Aventuras digitales en mundos fascinantes."
+      image="/images/intereses/tennis2.heic"
+      className="lg:row-span-2 lg:col-start-5 lg:row-start-3 min-h-[240px]"
+    />
+  </div>
+</section>

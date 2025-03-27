@@ -1,0 +1,68 @@
+<section
+  id="cli-loader"
+  class="w-full h-screen bg-black flex items-center justify-center fixed top-0 left-0 z-50"
+>
+  <div
+    class="relative bg-[#1a1a1a] text-[#0f0] font-mono text-sm px-4 py-6 min-w-[24em] max-w-[90vw] border border-[#333] rounded shadow-md overflow-hidden"
+  >
+    <!-- Terminal Header -->
+    <div
+      class="absolute top-0 left-0 right-0 h-6 bg-[#333] rounded-t px-2 flex items-center justify-between"
+    >
+      <div class="text-xs text-[#eee]">Status</div>
+      <div class="flex space-x-1">
+        <div class="w-[0.6em] h-[0.6em] rounded-full bg-red-600"></div>
+        <div class="w-[0.6em] h-[0.6em] rounded-full bg-yellow-400"></div>
+        <div class="w-[0.6em] h-[0.6em] rounded-full bg-green-600"></div>
+      </div>
+    </div>
+
+    <!-- Terminal Text -->
+    <div
+      class="text mt-6 inline-block whitespace-nowrap overflow-hidden border-r-2 border-green-500"
+    >
+      &gt; Cargando portafolio de César Enríquez...
+    </div>
+  </div>
+
+  <style>
+    @keyframes blinkCursor {
+      50% {
+        border-right-color: transparent;
+      }
+    }
+
+    @keyframes typeAndDelete {
+      0%,
+      10% {
+        width: 0;
+      }
+      100% {
+        width: 31ch;
+      }
+    }
+
+    .text {
+      animation:
+        typeAndDelete 2.5s steps(40, end) forwards,
+        blinkCursor 0.7s step-end infinite alternate;
+    }
+  </style>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        const loader = document.getElementById("cli-loader");
+        if (loader) {
+          loader.style.opacity = "0";
+          loader.style.transition = "opacity 0.5s ease-out";
+          setTimeout(() => loader.remove(), 500);
+        }
+        const main = document.getElementById("main-content");
+        if (main) {
+          main.style.display = "block";
+        }
+      }, 3000);
+    });
+  </script>
+</section>

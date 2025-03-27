@@ -1,0 +1,26 @@
+---
+// src/pages/projects.astro
+import ProjectCard from "../components/ProjectCard.astro";
+---
+
+<section id="projects" class="bg-neutral-950 py-20 px-6">
+  <h2 class="text-3xl font-bold text-center text-white mb-12">Proyectos</h2>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-4xl mx-auto">
+    <ProjectCard
+      title="Pockbit - Punto de Venta"
+      description="Sistema completo de punto de venta con control de productos, ventas, historial y reportes. Desarrollado con .NET Framework, Bootstrap, SQL y hospedado en Azure."
+      image="/images/projects/pockbit.jpg"
+      repo="https://github.com/CesarS39/Pockbit_v2"
+      link="https://pockbit.azurewebsites.net"
+    />
+    
+    <ProjectCard
+      title="ActiveHub - Control de Clases"
+      description="Aplicación web para gestión de asistencia, alumnos y clases. Incluye autenticación, historial de actividad y roles administrativos. Desarrollado en Laravel con MySQL y TailwindCSS."
+      image="/images/projects/controlclases.jpg"
+      repo="https://github.com/CesarS39/ActiveHub"
+      link="https://clases.cesarenriquez.dev"
+    />
+  </div>
+</section>
