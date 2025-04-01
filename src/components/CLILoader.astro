@@ -51,6 +51,19 @@
 
   <script is:inline>
     document.addEventListener("DOMContentLoaded", () => {
+      // Si viene del botón Home, no mostrar loader
+      if (sessionStorage.getItem("fromHomeButton") === "true") {
+        const loader = document.getElementById("cli-loader");
+        if (loader) loader.remove();
+
+        const main = document.getElementById("main-content");
+        if (main) main.style.display = "block";
+
+        // Limpia la marca
+        sessionStorage.removeItem("fromHomeButton");
+        return;
+      }
+
       setTimeout(() => {
         const loader = document.getElementById("cli-loader");
         if (loader) {
@@ -58,6 +71,7 @@
           loader.style.transition = "opacity 0.5s ease-out";
           setTimeout(() => loader.remove(), 500);
         }
+
         const main = document.getElementById("main-content");
         if (main) {
           main.style.display = "block";

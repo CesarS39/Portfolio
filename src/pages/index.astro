@@ -9,7 +9,9 @@ import Layout from "../layouts/Layout.astro";
 import Estudios from "../components/Estudios.astro";
 import Vision from "../components/Vision.astro";
 import Habilidades from "../components/Habilidades.astro";
+import SocialService from "../components/SocialService.astro";
 import Intereses from "../components/Intereses.astro";
+import WorkExperience from "../components/WorkExperience.astro";
 ---
 
 <Layout>
@@ -17,12 +19,14 @@ import Intereses from "../components/Intereses.astro";
   <main id="main-content" style="display: none;">
     <ParallaxHero />
     <AboutMe />
-    <Estudios />
-    <Vision />
     <Habilidades />
-    <Intereses />
     <Technologies />
+    <Vision />
+    <Estudios />
+    <SocialService />
+    <WorkExperience />
+    <Intereses />
     <Projects />
     <Contact />
-  </main>
+    </main>
 </Layout>

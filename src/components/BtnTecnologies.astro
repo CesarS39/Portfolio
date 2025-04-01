@@ -1,0 +1,11 @@
+---
+// src/components/BtnTecnologies.astro
+const { nombre, iconClass, gradient } = Astro.props;
+---
+
+<button class={`relative inline-flex items-center justify-center p-0.5 text-sm font-medium text-white rounded-lg group bg-transparent border border-white hover:border-0 ${gradient} transition duration-300`}>
+  <span class="relative px-4 py-2 flex items-center gap-2 bg-transparent rounded-md group-hover:bg-white group-hover:text-black transition-all duration-300">
+    <i class={`text-xl ${iconClass}`}></i>
+    {nombre}
+  </span>
+</button>

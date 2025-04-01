@@ -1,0 +1,204 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import GalleryComponent from "../../components/GalleryComponent.astro";
+
+const imagenes: string[] = [
+  "/images/intereses/serpiente.jpg",
+  "/images/intereses/tennis2.heic",
+  "/images/intereses/serpiente.jpg",
+];
+
+const screenshots: string[] = [
+  "/images/pockbit/panel1.png",
+  "/images/pockbit/panel2.png",
+  "/images/pockbit/panel3.png",
+];
+---
+
+<Layout>
+  <!-- Hero Title -->
+  <section
+    class="relative h-screen overflow-hidden bg-neutral-950 flex items-center justify-center"
+  >
+    <h1
+      class="text-[10vw] font-extrabold tracking-tight text-center z-10 gradient-text will-change-transform transition-transform duration-150 ease-out"
+      id="parallax-title"
+    >
+      POCKBIT
+    </h1>
+  </section>
+
+  <!-- Resolución del problema real -->
+  <section class="bg-neutral-950 px-6 py-10 text-white">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-12 text-center">
+        Resolución de un Problema Real
+      </h2>
+      <p class="text-neutral-300 text-center text-lg leading-relaxed">
+        Pockbit fue creado para resolver un problema real en una distribuidora
+        farmacéutica que operaba solo con un excel. Desarrollé una solución
+        integral que agiliza el proceso de compras y ventas junto con la
+        automatizacion de reportes e invetarios. Gracias al sistema, los socios
+        pueden operar de forma simultánea con información precisa, lo que
+        facilita decisiones estratégicas y reduce errores. Se implementaron
+        mecanismos de integridad como las validaciones,las cuales se diseñaron
+        para evitar los errores vistos en las pruebas con usuarios reales, esto
+        garantiza fiabilidad desde el primer uso.
+      </p>
+    </div>
+  </section>
+
+  <!-- Cards Grid -->
+  <section class="bg-neutral-950 text-white px-6 py-10">
+    <div class="max-w-5xl mx-auto grid gap-8 md:grid-cols-2">
+      <!-- Card 1 -->
+      <div
+        class="bg-neutral-800 rounded-2xl p-6 shadow-md hover:scale-105 transition duration-300 ease-in-out"
+      >
+        <h2 class="text-2xl font-bold mb-4 text-white text-center">
+          Núcleo del Sistema
+        </h2>
+        <p class="text-neutral-300 text-center text-md leading-relaxed">
+          Funciones clave diseñadas para un entorno farmacéutico:<br />
+          • Gestión de caducidades por lote<br />
+          • Control de precios máximos<br />
+          • Integración contable automática<br />
+          • Multi-sucursal (escalable)
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div
+        class="bg-neutral-800 rounded-2xl p-6 shadow-md hover:scale-105 transition duration-300 ease-in-out"
+      >
+        <h2 class="text-2xl font-bold mb-4 text-white text-center">
+          Stack Tecnológico
+        </h2>
+        <p class="text-neutral-300 text-center text-md leading-relaxed">
+          El sistema se desarrolló con herramientas confiables:<br />
+          <strong>• </strong>.NET Framework con C#<br />
+           <strong>• </strong>SQL Server Azure SQL para la base de datos<br />
+           <strong>• </strong>Bootstrap y JavaScript para la interfaz<br />
+           <strong>• </strong>Azure App Service para despliegue
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div
+        class="bg-neutral-800 rounded-2xl p-6 shadow-md hover:scale-105 transition duration-300 ease-in-out"
+      >
+        <h2 class="text-2xl font-bold mb-4 text-white text-center">
+          Arquitectura Clave
+        </h2>
+        <p class="text-neutral-300 text-center text-md leading-relaxed">
+          El diseño técnico garantiza rendimiento y mantenibilidad:<br />
+          • Transacciones ACID<br />
+          • Normalización en 3FN<br />
+          • CQRS para reportes<br />
+          • Capas separadas
+        </p>
+      </div>
+
+      <!-- Card 4 -->
+      <div
+        class="bg-neutral-800 rounded-2xl p-6 shadow-md hover:scale-105 transition duration-300 ease-in-out"
+      >
+        <h2 class="text-2xl font-bold mb-4 text-white text-center">
+          Proceso de Desarrollo
+        </h2>
+        <p class="text-neutral-300 text-center text-md leading-relaxed">
+          Desarrollo guiado por prácticas de ingeniería de software:<br />
+          • Análisis con el cliente<br />
+          • Modelado de datos y arquitectura<br />
+          • Pruebas constantes durante la implementación<br />
+          • Validación con usuarios reales
+        </p>
+      </div>
+
+      <!-- Card 5 -->
+      <div
+        class="bg-neutral-800 rounded-2xl p-6 shadow-md hover:scale-105 transition duration-300 ease-in-out"
+      >
+        <h2 class="text-2xl font-bold mb-4 text-white text-center">
+          Mecanismos de Integridad
+        </h2>
+        <p class="text-neutral-300 text-center text-md leading-relaxed">
+          Se incorporaron validaciones y transacciones para garantizar
+          consistencia:<br />
+          • Rollback automático ante errores<br />
+          • Validación desde interfaz hasta la base de datos
+        </p>
+      </div>
+
+      <!-- Card 6 -->
+      <div
+        class="bg-neutral-800 rounded-2xl p-6 shadow-md hover:scale-105 transition duration-300 ease-in-out"
+      >
+        <h2 class="text-2xl font-bold mb-4 text-white text-center">
+          Escalabilidad
+        </h2>
+        <p class="text-neutral-300 text-center text-md leading-relaxed">
+          Preparado para escalar sin necesidad de reestructurar:<br />
+          • Componentes desacoplados<br />
+          • Infraestructura lista para la nube<br />
+          • Diseño mantenible
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capturas del sistema -->
+  <section class="bg-neutral-950 py-10 px-4">
+    <div class="max-w-6xl mx-auto">
+      <GalleryComponent images={screenshots} />
+    </div>
+  </section>
+
+  <!-- Repositorio -->
+  <section class="bg-neutral-950 text-center py-10">
+    <a
+      href="https://github.com/CesarS39/Pockbit_v2"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <button
+        class="group relative inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white rounded-xl bg-gradient-to-br from-cyan-400 to-indigo-500 hover:scale-105 transition"
+      >
+        <svg
+          class="w-5 h-5 mr-2 text-white"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.262.82-.583 0-.288-.012-1.243-.018-2.253-3.338.725-4.042-1.612-4.042-1.612-.546-1.388-1.333-1.758-1.333-1.758-1.09-.745.083-.73.083-.73 1.205.087 1.838 1.24 1.838 1.24 1.07 1.833 2.807 1.303 3.492.996.107-.775.418-1.303.76-1.602-2.665-.304-5.466-1.332-5.466-5.933 0-1.31.467-2.382 1.235-3.222-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.47 11.47 0 0 1 3.003-.403c1.02.005 2.047.137 3.003.403 2.292-1.552 3.297-1.23 3.297-1.23.654 1.653.243 2.873.12 3.176.77.84 1.233 1.912 1.233 3.222 0 4.61-2.805 5.625-5.475 5.922.43.37.815 1.102.815 2.222 0 1.604-.015 2.898-.015 3.293 0 .324.216.7.825.58C20.565 22.296 24 17.796 24 12.5 24 5.87 18.627.5 12 .5z"
+          ></path>
+        </svg>
+        Ver en GitHub
+      </button>
+    </a>
+  </section>
+
+  <script is:inline>
+    window.addEventListener("scroll", () => {
+      const title = document.getElementById("parallax-title");
+      const scrollY = window.scrollY;
+      const offset = scrollY * 0.3;
+      const scale = 1 + scrollY * 0.0002;
+      title.style.transform = `translateY(${offset}px) scale(${scale})`;
+    });
+  </script>
+
+  <style>
+    .gradient-text {
+      display: inline-block;
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 1) 60%,
+        rgba(255, 255, 255, 0.3) 80%,
+        rgba(0, 0, 0, 0.2) 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</Layout>

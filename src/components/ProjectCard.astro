@@ -3,31 +3,44 @@
 const { title, description, image, link, repo } = Astro.props;
 ---
 
-<div class="bg-neutral-900 rounded-2xl overflow-hidden shadow-lg transform transition duration-300 hover:scale-[1.025]">
-  <img src={image} alt={title} class="w-full h-52 object-cover opacity-80 hover:opacity-60 transition duration-300" />
+<div
+  class="bg-neutral-800 rounded-2xl overflow-hidden shadow-lg transform transition duration-300 hover:scale-[1.025]"
+>
+  <img
+    loading="lazy"
+    src={image}
+    alt={title}
+    class="w-full h-52 object-cover opacity-80 hover:opacity-60 transition duration-300"
+  />
 
   <div class="p-6">
     <h3 class="text-xl font-semibold text-white mb-2">{title}</h3>
     <p class="text-sm text-neutral-300 mb-6 line-clamp-3">{description}</p>
 
     <div class="flex justify-between items-center pt-4">
-      {repo && (
-        <a href={repo} target="_blank" class="text-neutral-400 hover:underline text-sm">
-          Código
-        </a>
-      )}
-
-      {link && (
-        <a href={link} target="_blank" class="cursor-pointer">
-          <button
-            class="cursor-pointer relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-white rounded-lg group bg-gradient-to-br from-cyan-400 to-indigo-500 group-hover:from-cyan-400 group-hover:to-indigo-500 focus:ring-4 focus:outline-none focus:ring-indigo-200 dark:focus:ring-indigo-800"
+      {
+        repo && (
+          <a
+            href={repo}
+            target="_blank"
+            class="text-neutral-400 hover:underline text-sm"
           >
-            <span class="relative px-5 py-2 transition-all ease-in duration-75 bg-neutral-900 rounded-md group-hover:bg-transparent">
-              Ver Proyecto
-            </span>
-          </button>
-        </a>
-      )}
+            Código
+          </a>
+        )
+      }
+
+      {
+        link && (
+          <a href={link} class="cursor-pointer">
+            <button class="cursor-pointer relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-white rounded-lg group bg-gradient-to-br from-cyan-400 to-indigo-500 group-hover:from-cyan-400 group-hover:to-indigo-500 focus:ring-4 focus:outline-none focus:ring-indigo-200 dark:focus:ring-indigo-800">
+              <span class="relative px-5 py-2 transition-all ease-in duration-75 bg-neutral-900 rounded-md group-hover:bg-transparent">
+                Ver Proyecto
+              </span>
+            </button>
+          </a>
+        )
+      }
     </div>
   </div>
 </div>

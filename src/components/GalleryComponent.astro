@@ -1,0 +1,109 @@
+---
+const { images } = Astro.props;
+---
+
+<section class="bg-neutral-950 pt-4 pb-12 px-4">
+  <div class="max-w-5xl mx-auto">
+    <div id="indicators-carousel" class="relative w-full" data-carousel="static">
+      <!-- Carousel wrapper -->
+      <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+        {images.map((src: string, index: number) => (
+          <div
+            class="hidden opacity-0 transition-opacity duration-1000 ease-in-out"
+            data-carousel-item={index === 0 ? "active" : ""}
+          >
+            <img
+              loading="lazy"
+              src={src}
+              class="block w-full h-full object-cover rounded-lg"
+              alt={`Imagen ${index + 1}`}
+            />
+          </div>
+        ))}
+      </div>
+
+      <!-- Slider indicators -->
+      <div class="absolute z-30 flex -translate-x-1/2 space-x-3 bottom-5 left-1/2">
+        {images.map((src: string, index: number) => (
+          <button
+            type="button"
+            class="w-3 h-3 rounded-full"
+            aria-current={index === 0}
+            data-carousel-slide-to={index}
+          ></button>
+        ))}
+      </div>
+
+      <!-- Slider controls -->
+      <button
+        type="button"
+        class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group"
+        data-carousel-prev
+      >
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4">
+          <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"></path>
+          </svg>
+          <span class="sr-only">Anterior</span>
+        </span>
+      </button>
+      <button
+        type="button"
+        class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group"
+        data-carousel-next
+      >
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4">
+          <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"></path>
+          </svg>
+          <span class="sr-only">Siguiente</span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <script is:inline>
+    const carousel = document.getElementById("indicators-carousel");
+    const items = carousel.querySelectorAll("[data-carousel-item]");
+    const prevBtn = carousel.querySelector("[data-carousel-prev]");
+    const nextBtn = carousel.querySelector("[data-carousel-next]");
+    const indicators = carousel.querySelectorAll("[data-carousel-slide-to]");
+
+    let currentIndex = 0;
+
+    function showSlide(index) {
+      items.forEach((item, i) => {
+        if (i === index) {
+          item.classList.remove("hidden");
+          setTimeout(() => item.classList.add("opacity-100"), 10);
+        } else {
+          item.classList.remove("opacity-100");
+          setTimeout(() => item.classList.add("hidden"), 300);
+        }
+        item.setAttribute("data-carousel-item", i === index ? "active" : "");
+      });
+
+      indicators.forEach((dot, i) => {
+        dot.setAttribute("aria-current", i === index);
+      });
+
+      currentIndex = index;
+    }
+
+    prevBtn.addEventListener("click", () => {
+      const newIndex = (currentIndex - 1 + items.length) % items.length;
+      showSlide(newIndex);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      const newIndex = (currentIndex + 1) % items.length;
+      showSlide(newIndex);
+    });
+
+    indicators.forEach((dot, i) => {
+      dot.addEventListener("click", () => showSlide(i));
+    });
+
+    showSlide(0);
+  </script>
+</section>
