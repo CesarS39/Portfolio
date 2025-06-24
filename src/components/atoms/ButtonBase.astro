@@ -1,0 +1,8 @@
+<!-- atoms/ButtonBase.astro -->
+---
+const { className = "" } = Astro.props;
+---
+
+<button class={`rounded-lg font-medium transition ${className}`}>
+  <slot />
+</button>

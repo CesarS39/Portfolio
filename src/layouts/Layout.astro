@@ -1,5 +1,4 @@
 ---
-// src/layouts/Layout.astro
 import "../styles/global.css";
 ---
 
@@ -17,9 +16,8 @@ import "../styles/global.css";
   <body class="bg-neutral-950 text-white">
     <slot />
 
-    <!-- Botón flotante de Home con efecto vidrio centrado abajo -->
     <a
-      href="/"
+      href="https://cesars39.github.io/Portfolio/"
       class="fixed bottom-6 right-6 z-50 bg-white/10 backdrop-blur-md text-white p-3 rounded-full shadow-lg transition-all duration-300 group border border-white/20 hover:bg-white/20"
     >
       <svg
@@ -38,13 +36,14 @@ import "../styles/global.css";
     </a>
 
     <script is:inline>
-      const homeButton = document.querySelector('a[href="/"]');
+      const homeButton = document.querySelector(
+        'a[href="https://cesars39.github.io/Portfolio/"]'
+      );
       homeButton.addEventListener("click", (e) => {
-        if (window.location.pathname === "/") {
+        if (window.location.href === "https://cesars39.github.io/Portfolio/") {
           e.preventDefault();
           window.scrollTo({ top: 0, behavior: "smooth" });
         } else {
-          // Marca que se usó el botón de Home para navegar
           sessionStorage.setItem("fromHomeButton", "true");
         }
       });

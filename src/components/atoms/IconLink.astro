@@ -1,0 +1,13 @@
+<!-- atoms/IconLink.astro -->
+---
+const { href, icon, bg = "bg-neutral-700", hover = "", title } = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  class={`${bg} ${hover} text-white rounded-full p-3 transition`}
+  title={title}
+>
+  <img loading="lazy" src={icon} alt={title} class="w-6 h-6 invert" />
+</a>

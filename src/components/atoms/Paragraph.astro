@@ -1,0 +1,8 @@
+<!-- atoms/Paragraph.astro -->
+---
+const { className = "" } = Astro.props;
+---
+
+<p class={`text-neutral-300 text-lg leading-relaxed ${className}`}>
+  <slot />
+</p>

@@ -1,0 +1,11 @@
+<!-- atoms/ProfileImage.astro -->
+---
+const { src, alt } = Astro.props;
+---
+
+<img
+  loading="lazy"
+  src={src}
+  alt={alt}
+  class="shadow-xl rounded-full w-[180px] h-[180px] object-cover"
+/>

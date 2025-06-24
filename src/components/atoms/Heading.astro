@@ -1,0 +1,9 @@
+<!-- atoms/Heading.astro -->
+---
+const { level = "h2", className = "" } = Astro.props;
+const Tag = level;
+---
+
+<Tag class={`font-bold text-white text-center text-3xl ${className}`}>
+  <slot />
+</Tag>

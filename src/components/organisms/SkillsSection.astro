@@ -1,0 +1,50 @@
+---
+import BaseSection from "../atoms/BaseSection.astro";
+import Heading from "../atoms/Heading.astro";
+import SkillCard from "../molecules/SkillCard.astro";
+
+const skills = [
+  {
+    title: "Inglés (B1)",
+    description:
+      "Puedo leer documentación técnica, entender conferencias y comunicarme en inglés.",
+  },
+  {
+    title: "Trabajo en equipo",
+    description:
+      "Me adapto fácilmente a distintos roles y colaboro para sacar adelante un proyecto.",
+  },
+  {
+    title: "Organización y puntualidad",
+    description:
+      "Soy muy ordenado y me gusta cumplir con los tiempos de entrega.",
+  },
+  {
+    title: "Resolución de problemas",
+    description:
+      "Soy eficiente al buscar diferentes soluciones a un problema.",
+  },
+  {
+    title: "Comunicación clara",
+    description:
+      "Comunico información de manera clara ademas tengo habilidades de oratoria.",
+  },
+  {
+    title: "Aprendizaje autónomo",
+    description:
+      "Siempre estoy explorando nuevas tecnologías y buscando cómo mejorar en lo que hago, actualmente estoy aprendiendo más a fondo react.",
+  },
+];
+---
+
+<BaseSection id="habilidades" >
+  <Heading level="h2" className="mb-12">
+    Habilidades
+  </Heading>
+
+  <div class="max-w-5xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {skills.map((skill) => (
+      <SkillCard title={skill.title} description={skill.description} />
+    ))}
+  </div>
+</BaseSection>

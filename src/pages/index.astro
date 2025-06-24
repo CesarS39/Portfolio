@@ -1,32 +1,227 @@
 ---
 import CLILoader from "../components/CLILoader.astro";
 import ParallaxHero from "../components/ParallaxHero.astro";
-import AboutMe from "../components/AboutMe.astro";
-import Technologies from "../components/Technologies.astro";
-import Projects from "../components/Projects.astro";
-import Contact from "../components/Contact.astro";
 import Layout from "../layouts/Layout.astro";
-import Estudios from "../components/Estudios.astro";
-import Vision from "../components/Vision.astro";
-import Habilidades from "../components/Habilidades.astro";
-import SocialService from "../components/SocialService.astro";
-import Intereses from "../components/Intereses.astro";
-import WorkExperience from "../components/WorkExperience.astro";
+import AboutSection from "../components/organisms/AboutSection.astro";
+import SkillsSection from "../components/organisms/SkillsSection.astro";
+import TechStackSection from "../components/organisms/TechStackSection.astro";
+import VisionSection from "../components/organisms/VisionSection.astro";
+import StudiesSection from "../components/organisms/StudiesSection.astro";
+import ExperienceSection from "../components/organisms/ExperienceSection.astro";
+import InterestsSection from "../components/organisms/InterestsSection.astro";
+import ProjectsSection from "../components/organisms/ProjectsSection.astro";
+import ContactSection from "../components/organisms/ContactSection.astro";
+import SocialService from "../components/organisms/SocialServiceSection.astro";
 ---
 
 <Layout>
   <CLILoader />
   <main id="main-content" style="display: none;">
     <ParallaxHero />
-    <AboutMe />
-    <Habilidades />
-    <Technologies />
-    <Vision />
-    <Estudios />
+    <AboutSection />
+    <SkillsSection />
+    <TechStackSection
+      techs={[
+        {
+          label: "Astro",
+          icon: "devicon-astro-plain",
+          gradient: "bg-gradient-to-br from-purple-600 to-blue-500",
+        },
+        {
+          label: "React",
+          icon: "devicon-react-original",
+          gradient: "bg-gradient-to-br from-cyan-500 to-blue-500",
+        },
+        {
+          label: ".NET Framework",
+          icon: "devicon-dotnetcore-plain",
+          gradient: "bg-gradient-to-br from-indigo-500 to-sky-700",
+        },
+        {
+          label: "C#",
+          icon: "devicon-csharp-plain",
+          gradient: "bg-gradient-to-br from-indigo-600 to-purple-700",
+        },
+        {
+          label: "HTML",
+          icon: "devicon-html5-plain",
+          gradient: "bg-gradient-to-br from-orange-400 to-red-500",
+        },
+        {
+          label: "JavaScript",
+          icon: "devicon-javascript-plain",
+          gradient: "bg-gradient-to-br from-yellow-300 to-yellow-500",
+        },
+        {
+          label: "SQL",
+          icon: "devicon-mysql-plain",
+          gradient: "bg-gradient-to-br from-blue-500 to-cyan-500",
+        },
+        {
+          label: "Azure",
+          icon: "devicon-azure-plain",
+          gradient: "bg-gradient-to-br from-blue-600 to-blue-800",
+        },
+        {
+          label: "TailwindCSS",
+          icon: "devicon-tailwindcss-original",
+          gradient: "bg-gradient-to-br from-cyan-400 to-indigo-500",
+        },
+        {
+          label: "Figma",
+          icon: "devicon-figma-plain",
+          gradient: "bg-gradient-to-br from-fuchsia-600 to-purple-600",
+        },
+        {
+          label: "Java",
+          icon: "devicon-java-plain",
+          gradient: "bg-gradient-to-br from-red-600 to-orange-500",
+        },
+        {
+          label: "Git",
+          icon: "devicon-git-plain",
+          gradient: "bg-gradient-to-br from-orange-500 to-amber-600",
+        },
+        {
+          label: "Scrum",
+          icon: "📄",
+          gradient: "bg-gradient-to-br from-pink-500 to-red-500",
+          isEmoji: true,
+        },
+        {
+          label: "Python",
+          icon: "devicon-python-plain",
+          gradient: "bg-gradient-to-br from-yellow-300 to-yellow-500",
+        },
+      ]}
+    />
+    <VisionSection />
+
+    <StudiesSection
+      studies={[
+        {
+          image: "/Portfolio/images/ipn.webp",
+          alt: "CECyT 16",
+          title: "CECyT 16 “Hidalgo”",
+          subtitle: "Técnico en Administración",
+          date: "2019 - 2022",
+          glow: "glow-pink",
+        },
+        {
+          image: "/Portfolio/images/upp.webp",
+          alt: "UPP",
+          title: "Universidad Politécnica de Pachuca",
+          subtitle: "Ingeniería en Software",
+          date: "2023 - Actualidad",
+          extra: "Actualmente en 7º cuatrimestre",
+          glow: "glow-purple",
+        },
+      ]}
+    />
     <SocialService />
-    <WorkExperience />
-    <Intereses />
-    <Projects />
-    <Contact />
-    </main>
+    <ExperienceSection
+      experiences={[
+        {
+          company: "Impacto - Empresa de Publicidad",
+          role: "Auxiliar Administrativo",
+          year: "2022",
+          items: [
+            "Supervisión de personal y coordinación de actividades semanales.",
+            "Organización de proyectos y cumplimiento de tiempos de entrega.",
+            "Planeación estratégica del flujo de trabajo y asignación de recursos.",
+            "Realización de cotizaciones para clientes y seguimiento comercial.",
+            "Manejo de contabilidad básica y administración financiera interna.",
+          ],
+        },
+      ]}
+    />
+    <InterestsSection
+      interests={[
+        {
+          title: "Tennis",
+          description:
+            "Me encanta el deporte, realmente podría jugar durante horas. Fui campeón de mi universidad en 2024.",
+          image: "/Portfolio/images/intereses/tennis2.webp",
+          className: "lg:col-span-3 lg:row-span-2 min-h-[240px]",
+        },
+        {
+          title: "Aprender",
+          description:
+            "Investigo constantemente sobre software y hardware. Me gusta aplicar lo que aprendo en proyectos, como el servidor que monté con Debian.",
+          image: "/Portfolio/images/intereses/aprender.webp",
+          className: "lg:col-span-2 lg:row-span-2 lg:col-start-4 min-h-[240px]",
+        },
+        {
+          title: "Viajar",
+          description:
+            "Cuando tengo tiempo libre, me gusta viajar, descubrir nuevos lugares y probar la comida local.",
+          image: "/Portfolio/images/intereses/viajar.webp",
+          className: "lg:col-span-2 lg:row-span-2 lg:row-start-3 min-h-[240px]",
+        },
+        {
+          title: "YouTube y Twitch",
+          description:
+            "Durante la prepa creaba contenido: producía videos, hacía streams, editaba mis videos o incluso los de otros proyectos.",
+          image: "/Portfolio/images/intereses/FondoStream.webp",
+          className:
+            "lg:col-span-2 lg:row-span-2 lg:col-start-3 lg:row-start-3 min-h-[240px]",
+        },
+        {
+          title: "Videojuegos",
+          description:
+            "Juego seguido con mis amigos (Warzone). Aunque no soy el mejor, las risas de esos momentos valen oro.",
+          image: "/Portfolio/images/intereses/videojuegos.webp",
+          className:
+            "lg:row-span-2 lg:col-start-5 lg:row-start-3 min-h-[240px]",
+        },
+      ]}
+    />
+    <ProjectsSection
+      projects={[
+        {
+          title: "Pockbit - Punto de Venta",
+          description:
+            "Sistema completo de punto de venta con control de productos, ventas, historial y reportes. Desarrollado con .NET Framework, Bootstrap, SQL y hospedado en Azure.",
+          image: "/Portfolio/images/projects/pockbit/pockbit.webp",
+          repo: "https://github.com/CesarS39/Pockbit_v2",
+          link: "/Portfolio/projects/Pockbit/",
+        },
+      ]}
+    />
+    <ContactSection
+      data={{
+        name: "César Samuel Enriquez Bautista",
+        location: "Pachuca, Hidalgo",
+        role: "Desarrollador de Software",
+        prompt: "¿Tienes una idea o proyecto?",
+        image: "/images/memoji.webp",
+        icons: [
+          {
+            href: "mailto:cesarsamuel37@gmail.com",
+            title: "Email",
+            icon: "/icons/email.svg",
+            bgColor: "bg-neutral-700 hover:bg-neutral-600",
+          },
+          {
+            href: "https://wa.me/5217714108656",
+            title: "WhatsApp",
+            icon: "/icons/whatsapp.svg",
+            bgColor: "bg-green-600 hover:bg-green-500",
+          },
+          {
+            href: "https://github.com/CesarS39",
+            title: "GitHub",
+            icon: "/icons/github.svg",
+            bgColor: "bg-neutral-700 hover:bg-neutral-600",
+          },
+          {
+            href: "www.linkedin.com/in/cesar-samuel-enriquez-bautista-258b2324b",
+            title: "LinkedIn",
+            icon: "/icons/linkedin.svg",
+            bgColor: "bg-blue-700 hover:bg-blue-600",
+          },
+        ],
+      }}
+    />
+  </main>
 </Layout>

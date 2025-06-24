@@ -1,0 +1,13 @@
+<!-- atoms/BaseSection.astro -->
+---
+const { id = "", className = "" } = Astro.props;
+---
+
+<section
+  id={id}
+  class={`bg-neutral-950 py-12 px-6 text-white max-w-5xl mx-auto ${className}`}
+>
+  <div class="max-w-5xl mx-auto">
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,17 @@
+---
+import ButtonBase from "../atoms/ButtonBase.astro";
+
+const { icon, label, gradient = "", isEmoji = false } = Astro.props;
+---
+
+<ButtonBase
+  className={`group relative inline-flex items-center justify-center text-sm text-white border-2 border-transparent ${gradient} hover:text-white`}
+>
+  <span class="relative flex items-center gap-2 px-4 py-2 rounded-md bg-neutral-900 group-hover:bg-transparent transition-all duration-300">
+    {isEmoji
+      ? <span class="text-base">{icon}</span>
+      : <i class={`${icon} text-lg`} />
+    }
+    {label}
+  </span>
+</ButtonBase>

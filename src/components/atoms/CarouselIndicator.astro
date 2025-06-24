@@ -1,0 +1,11 @@
+<!-- atoms/CarouselIndicator.astro -->
+---
+const { index, isActive = false } = Astro.props;
+---
+
+<button
+  type="button"
+  class="w-3 h-3 rounded-full bg-white/30 hover:bg-white/60 transition"
+  aria-current={isActive}
+  data-carousel-slide-to={index}
+></button>

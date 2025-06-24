@@ -1,0 +1,87 @@
+---
+import GalleryItem from "../molecules/GalleryItem.astro";
+import CarouselIndicator from "../atoms/CarouselIndicator.astro";
+import CarouselControl from "../atoms/CarouselControl.astro";
+import BaseSection from "../atoms/BaseSection.astro";
+
+interface Props {
+  images: string[];
+}
+
+const { images } = Astro.props as Props;
+---
+
+<BaseSection id="experiencia">
+  <div class="max-w-5xl mx-auto">
+    <div id="indicators-carousel" class="relative w-full" data-carousel="static">
+      <!-- Carrusel -->
+      <div class="relative h-[28rem] overflow-hidden rounded-lg md:h-[32rem]">
+        {
+          images.map((src: string, index: number) => (
+            <GalleryItem
+              src={src}
+              alt={`Imagen ${index + 1}`}
+              isActive={index === 0}
+            />
+          ))
+        }
+      </div>
+
+      <div class="absolute z-30 flex -translate-x-1/2 space-x-3 bottom-5 left-1/2">
+        {
+          images.map((_: string, index: number) => (
+            <CarouselIndicator index={index} isActive={index === 0} />
+          ))
+        }
+      </div>
+
+      <CarouselControl direction="prev" />
+      <CarouselControl direction="next" />
+    </div>
+  </div>
+
+  <script is:inline>
+    const carousel = document.getElementById("indicators-carousel");
+    const items = carousel.querySelectorAll("[data-carousel-item]");
+    const prevBtn = carousel.querySelector("[data-carousel-prev]");
+    const nextBtn = carousel.querySelector("[data-carousel-next]");
+    const indicators = carousel.querySelectorAll("[data-carousel-slide-to]");
+
+    let currentIndex = 0;
+
+    function showSlide(index) {
+      items.forEach((item, i) => {
+        if (i === index) {
+          item.classList.remove("hidden");
+          setTimeout(() => item.classList.add("opacity-100"), 10);
+        } else {
+          item.classList.remove("opacity-100");
+          setTimeout(() => item.classList.add("hidden"), 300);
+        }
+        item.setAttribute("data-carousel-item", i === index ? "active" : "");
+      });
+
+      indicators.forEach((dot, i) => {
+        dot.setAttribute("aria-current", i === index);
+      });
+
+      currentIndex = index;
+    }
+
+    prevBtn.addEventListener("click", () => {
+      const newIndex = (currentIndex - 1 + items.length) % items.length;
+      showSlide(newIndex);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      const newIndex = (currentIndex + 1) % items.length;
+      showSlide(newIndex);
+    });
+
+    indicators.forEach((dot, i) => {
+      dot.addEventListener("click", () => showSlide(i));
+    });
+
+    showSlide(0);
+  </script>
+</BaseSection>

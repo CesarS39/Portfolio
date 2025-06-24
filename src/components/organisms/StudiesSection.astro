@@ -1,0 +1,29 @@
+---
+import BaseSection from "../atoms/BaseSection.astro";
+import Heading from "../atoms/Heading.astro";
+import StudyCard from "../molecules/StudyCard.astro";
+
+interface Study {
+  image: string;
+  alt: string;
+  title: string;
+  subtitle: string;
+  date: string;
+  extra?: string;
+  glow: string;
+}
+
+const { studies } = Astro.props as { studies: Study[] };
+---
+
+<BaseSection id="estudios" >
+  <Heading level="h2" className="mb-20 fade-up">
+    Formación Académica
+  </Heading>
+
+  <div class="max-w-5xl mx-auto grid gap-8 md:grid-cols-2">
+    {studies.map((study) => (
+      <StudyCard {...study} />
+    ))}
+  </div>
+</BaseSection>

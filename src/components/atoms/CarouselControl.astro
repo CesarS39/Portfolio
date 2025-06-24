@@ -1,0 +1,22 @@
+---
+const { direction = "next" } = Astro.props;
+
+const isPrev = direction === "prev";
+const iconPath = isPrev ? "M5 1 1 5l4 4" : "m1 9 4-4-4-4";
+const position = isPrev ? "left-0" : "right-0";
+const ariaLabel = isPrev ? "Anterior" : "Siguiente";
+const dataAttr = isPrev ? "data-carousel-prev" : "data-carousel-next";
+---
+
+<button
+  type="button"
+  class={`absolute top-0 ${position} z-30 flex items-center justify-center h-full px-4 cursor-pointer group`}
+  {...{ [dataAttr]: true }}
+>
+  <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4">
+    <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 6 10">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={iconPath}></path>
+    </svg>
+    <span class="sr-only">{ariaLabel}</span>
+  </span>
+</button>

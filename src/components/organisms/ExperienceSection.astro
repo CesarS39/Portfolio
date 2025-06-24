@@ -1,0 +1,36 @@
+---
+import BaseSection from "../atoms/BaseSection.astro";
+import Heading from "../atoms/Heading.astro";
+import CardBase from "../atoms/CardBase.astro";
+
+interface Experience {
+  company: string;
+  role: string;
+  year: string;
+  items: string[];
+}
+
+const { experiences } = Astro.props as { experiences: Experience[] };
+---
+
+<BaseSection id="experiencia">
+  <Heading level="h2" className="mb-12">
+    Experiencia Laboral
+  </Heading>
+
+  <div class="max-w-5xl mx-auto">
+    {experiences.map((exp) => (
+      <CardBase className="mb-8">
+        <h3 class="text-2xl font-semibold text-white mb-1">{exp.company}</h3>
+        <p class="text-sm text-neutral-400 italic mb-4">
+          {exp.role} ({exp.year})
+        </p>
+        <ul class="list-disc list-inside space-y-2 max-w-3xl mx-auto text-left text-md text-neutral-300">
+          {exp.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </CardBase>
+    ))}
+  </div>
+</BaseSection>
