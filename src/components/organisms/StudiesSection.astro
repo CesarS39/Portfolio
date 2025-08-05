@@ -1,7 +1,6 @@
 ---
 import BaseSection from "../atoms/BaseSection.astro";
 import Heading from "../atoms/Heading.astro";
-import StudyCard from "../molecules/StudyCard.astro";
 
 interface Study {
   image: string;
@@ -11,19 +10,169 @@ interface Study {
   date: string;
   extra?: string;
   glow: string;
+  status?: "completed" | "current" | "planned";
+  skills?: string[];
 }
 
 const { studies } = Astro.props as { studies: Study[] };
+
+// Mapeo de colores por tipo de glow
+const glowStyles = {
+  "glow-pink": "from-pink-500/20 to-purple-600/20",
+  "glow-blue": "from-blue-500/20 to-cyan-600/20",
+  "glow-green": "from-green-500/20 to-emerald-600/20",
+  "glow-orange": "from-orange-500/20 to-red-600/20",
+  "glow-purple": "from-purple-500/20 to-indigo-600/20",
+};
+
+// Indicadores de status
+const statusConfig = {
+  completed: { icon: "✅", text: "Completado", color: "text-green-400" },
+  current: { icon: "📚", text: "Cursando", color: "text-blue-400" },
+  planned: { icon: "🎯", text: "Planeado", color: "text-orange-400" },
+};
 ---
 
-<BaseSection id="estudios" >
-  <Heading level="h2" className="mb-20 fade-up">
-    Formación Académica
-  </Heading>
+<!-- ESTUDIOS MEJORADOS --><!-- organisms/StudiesSection.astro MEJORADO -->
+<BaseSection id="estudios" className="!max-w-6xl">
+  <!-- Header mejorado -->
+  <div class="text-center mb-20">
+    <Heading
+      level="h2"
+      className="text-4xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent fade-up"
+    >
+      Formación Académica
+    </Heading>
+    <div
+      class="w-24 h-1 bg-gradient-to-r from-indigo-400 to-purple-500 mx-auto mb-6"
+    >
+    </div>
+    <p class="text-neutral-300 max-w-2xl mx-auto">
+      Mi trayectoria educativa y desarrollo profesional continuo
+    </p>
+  </div>
 
-  <div class="max-w-5xl mx-auto grid gap-8 md:grid-cols-2">
-    {studies.map((study) => (
-      <StudyCard {...study} />
-    ))}
+  <!-- Timeline visual -->
+  <div class="relative max-w-5xl mx-auto">
+    <!-- Línea de tiempo (oculta en móvil) -->
+    <div
+      class="hidden lg:block absolute left-1/2 transform -translate-x-0.5 h-full w-1 bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500 opacity-30"
+    >
+    </div>
+
+    <div class="grid gap-12 lg:gap-16">
+      {
+        studies.map((study, index) => {
+          const isEven = index % 2 === 0;
+          const glowClass =
+            glowStyles[study.glow as keyof typeof glowStyles] ||
+            glowStyles["glow-blue"];
+          const status = study.status || "completed";
+          const statusInfo = statusConfig[status];
+
+          return (
+            <div
+              class={`relative flex items-center ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} fade-up`}
+            >
+              {/* Timeline dot */}
+              <div class="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full border-4 border-neutral-950 z-10" />
+
+              {/* Espaciador para centrar */}
+              <div class="hidden lg:block w-1/2" />
+
+              {/* Card de estudio */}
+              <div class="w-full lg:w-1/2 lg:px-8">
+                <div class="group relative bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700 hover:border-indigo-500/50 transition-all duration-500 hover:scale-[1.02] overflow-hidden">
+                  {/* Background glow effect */}
+                  <div
+                    class={`absolute inset-0 bg-gradient-to-br ${glowClass} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  />
+
+                  {/* Status badge */}
+                  <div class="absolute top-4 right-4 flex items-center space-x-1 px-3 py-1 bg-neutral-700/80 rounded-full text-xs font-medium">
+                    <span>{statusInfo.icon}</span>
+                    <span class={statusInfo.color}>{statusInfo.text}</span>
+                  </div>
+
+                  {/* Contenido */}
+                  <div class="relative z-10 text-center">
+                    {/* Logo/Imagen */}
+                    <div class="mb-6 flex justify-center">
+                      <div class="relative">
+                        <div
+                          class={`absolute inset-0 bg-gradient-to-br ${glowClass} rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity`}
+                        />
+                        <img
+                          loading="lazy"
+                          src={study.image}
+                          alt={study.alt}
+                          class="relative w-32 h-32 object-contain mx-auto group-hover:scale-110 transition-transform duration-500"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Información */}
+                    <div class="space-y-2">
+                      <h3 class="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors">
+                        {study.title}
+                      </h3>
+                      <p class="text-indigo-400 font-semibold">
+                        {study.subtitle}
+                      </p>
+                      <p class="text-neutral-400 text-sm font-medium">
+                        {study.date}
+                      </p>
+                      {study.extra && (
+                        <p class="text-neutral-500 text-xs italic">
+                          {study.extra}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Skills/Competencias */}
+                    {study.skills && study.skills.length > 0 && (
+                      <div class="mt-6 pt-4 border-t border-neutral-700">
+                        <h4 class="text-xs text-neutral-400 uppercase tracking-wider mb-3">
+                          Competencias
+                        </h4>
+                        <div class="flex flex-wrap justify-center gap-2">
+                          {study.skills.map((skill) => (
+                            <span class="px-2 py-1 bg-neutral-700 text-neutral-300 rounded-md text-xs font-medium">
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+
+  <!-- Resumen de formación -->
+  <div class="mt-20 text-center">
+    <div
+      class="inline-flex items-center space-x-8 bg-gradient-to-r from-neutral-800/50 to-neutral-900/50 rounded-2xl px-8 py-6 border border-neutral-700"
+    >
+      <div class="text-center">
+        <div class="text-2xl font-bold text-indigo-400">{studies.length}</div>
+        <div class="text-xs text-neutral-400">Instituciones</div>
+      </div>
+      <div class="w-px h-8 bg-neutral-700"></div>
+      <div class="text-center">
+        <div class="text-2xl font-bold text-purple-400">2023</div>
+        <div class="text-xs text-neutral-400">Inicio universitario</div>
+      </div>
+      <div class="w-px h-8 bg-neutral-700"></div>
+      <div class="text-center">
+        <div class="text-2xl font-bold text-pink-400">Actual</div>
+        <div class="text-xs text-neutral-400">En formación</div>
+      </div>
+    </div>
   </div>
 </BaseSection>

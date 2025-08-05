@@ -19,19 +19,9 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
   <main id="main-content" style="display: none;">
     <ParallaxHero />
     <AboutSection />
-    <SkillsSection />
     <TechStackSection
       techs={[
-        {
-          label: "Astro",
-          icon: "devicon-astro-plain",
-          gradient: "bg-gradient-to-br from-purple-600 to-blue-500",
-        },
-        {
-          label: "React",
-          icon: "devicon-react-original",
-          gradient: "bg-gradient-to-br from-cyan-500 to-blue-500",
-        },
+        // .NET Stack - Principal
         {
           label: ".NET Framework",
           icon: "devicon-dotnetcore-plain",
@@ -43,9 +33,51 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
           gradient: "bg-gradient-to-br from-indigo-600 to-purple-700",
         },
         {
-          label: "HTML",
-          icon: "devicon-html5-plain",
-          gradient: "bg-gradient-to-br from-orange-400 to-red-500",
+          label: "SQL Server",
+          icon: "devicon-microsoftsqlserver-plain",
+          gradient: "bg-gradient-to-br from-red-600 to-orange-500",
+        },
+        {
+          label: "Azure",
+          icon: "devicon-azure-plain",
+          gradient: "bg-gradient-to-br from-blue-600 to-blue-800",
+        },
+
+        // Mobile Development
+        {
+          label: "Flutter",
+          icon: "devicon-flutter-plain",
+          gradient: "bg-gradient-to-br from-blue-400 to-cyan-500",
+        },
+        {
+          label: "Dart",
+          icon: "devicon-dart-plain",
+          gradient: "bg-gradient-to-br from-cyan-500 to-blue-600",
+        },
+
+        // Backend APIs
+        {
+          label: "Python",
+          icon: "devicon-python-plain",
+          gradient: "bg-gradient-to-br from-yellow-300 to-blue-500",
+        },
+        {
+          label: "FastAPI",
+          icon: "🚀",
+          gradient: "bg-gradient-to-br from-green-500 to-teal-600",
+          isEmoji: true,
+        },
+
+        // Frontend Web
+        {
+          label: "React",
+          icon: "devicon-react-original",
+          gradient: "bg-gradient-to-br from-cyan-500 to-blue-500",
+        },
+        {
+          label: "Astro",
+          icon: "devicon-astro-plain",
+          gradient: "bg-gradient-to-br from-purple-600 to-blue-500",
         },
         {
           label: "JavaScript",
@@ -53,19 +85,40 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
           gradient: "bg-gradient-to-br from-yellow-300 to-yellow-500",
         },
         {
-          label: "SQL",
-          icon: "devicon-mysql-plain",
-          gradient: "bg-gradient-to-br from-blue-500 to-cyan-500",
+          label: "HTML",
+          icon: "devicon-html5-plain",
+          gradient: "bg-gradient-to-br from-orange-400 to-red-500",
         },
-        {
-          label: "Azure",
-          icon: "devicon-azure-plain",
-          gradient: "bg-gradient-to-br from-blue-600 to-blue-800",
-        },
+
+        // Styling & UI
         {
           label: "TailwindCSS",
           icon: "devicon-tailwindcss-original",
           gradient: "bg-gradient-to-br from-cyan-400 to-indigo-500",
+        },
+        {
+          label: "Bootstrap",
+          icon: "devicon-bootstrap-plain",
+          gradient: "bg-gradient-to-br from-purple-600 to-indigo-700",
+        },
+
+        // Databases & Cloud
+        {
+          label: "MongoDB",
+          icon: "devicon-mongodb-plain",
+          gradient: "bg-gradient-to-br from-green-500 to-green-700",
+        },
+        {
+          label: "Firebase",
+          icon: "devicon-firebase-plain",
+          gradient: "bg-gradient-to-br from-yellow-400 to-orange-500",
+        },
+
+        // Tools & Methodologies
+        {
+          label: "Git",
+          icon: "devicon-git-plain",
+          gradient: "bg-gradient-to-br from-orange-500 to-amber-600",
         },
         {
           label: "Figma",
@@ -73,48 +126,50 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
           gradient: "bg-gradient-to-br from-fuchsia-600 to-purple-600",
         },
         {
-          label: "Java",
-          icon: "devicon-java-plain",
-          gradient: "bg-gradient-to-br from-red-600 to-orange-500",
-        },
-        {
-          label: "Git",
-          icon: "devicon-git-plain",
-          gradient: "bg-gradient-to-br from-orange-500 to-amber-600",
-        },
-        {
           label: "Scrum",
-          icon: "📄",
+          icon: "📋",
           gradient: "bg-gradient-to-br from-pink-500 to-red-500",
           isEmoji: true,
         },
-        {
-          label: "Python",
-          icon: "devicon-python-plain",
-          gradient: "bg-gradient-to-br from-yellow-300 to-yellow-500",
-        },
       ]}
     />
+
+    <SkillsSection />
+
     <VisionSection />
 
     <StudiesSection
       studies={[
         {
-          image: "/Portfolio/images/ipn.webp",
-          alt: "CECyT 16",
-          title: "CECyT 16 “Hidalgo”",
-          subtitle: "Técnico en Administración",
-          date: "2019 - 2022",
-          glow: "glow-pink",
+          image: "../public/images/upp.webp",
+          alt: "Universidad Politécnica de Pachuca",
+          title: "Ingeniería en Software",
+          subtitle: "Universidad Politécnica de Pachuca",
+          date: "2023 - Actualidad",
+          extra: "7º cuatrimestre",
+          glow: "glow-blue",
+          status: "current",
+          skills: [
+            "Desarrollo Full-Stack",
+            "Arquitectura de Software",
+            "Bases de Datos",
+            "Metodologías Ágiles",
+          ],
         },
         {
-          image: "/Portfolio/images/upp.webp",
-          alt: "UPP",
-          title: "Universidad Politécnica de Pachuca",
-          subtitle: "Ingeniería en Software",
-          date: "2023 - Actualidad",
-          extra: "Actualmente en 7º cuatrimestre",
-          glow: "glow-purple",
+          image: "../public/images/ipn.webp",
+          alt: "IPN CECyT 16",
+          title: "Técnico en Administración",
+          subtitle: "CECyT 16 'Hidalgo' - IPN",
+          date: "2019 - 2022",
+          glow: "glow-green",
+          status: "completed",
+          skills: [
+            "Administración",
+            "Contabilidad",
+            "Recursos Humanos",
+            "Gestión Empresarial",
+          ],
         },
       ]}
     />
@@ -126,11 +181,9 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
           role: "Auxiliar Administrativo",
           year: "2022",
           items: [
-            "Supervisión de personal y coordinación de actividades semanales.",
-            "Organización de proyectos y cumplimiento de tiempos de entrega.",
-            "Planeación estratégica del flujo de trabajo y asignación de recursos.",
-            "Realización de cotizaciones para clientes y seguimiento comercial.",
-            "Manejo de contabilidad básica y administración financiera interna.",
+            "Coordinación de actividades semanales y supervisión de personal.",
+            "Gestión de proyectos, cotizaciones y tareas administrativas.",
+            "Apoyo en contabilidad básica y organización interna.",
           ],
         },
       ]}
@@ -179,12 +232,32 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
     <ProjectsSection
       projects={[
         {
-          title: "Pockbit - Punto de Venta",
+          title: "Pockbit - Sistema POS",
           description:
-            "Sistema completo de punto de venta con control de productos, ventas, historial y reportes. Desarrollado con .NET Framework, Bootstrap, SQL y hospedado en Azure.",
+            "Sistema completo de punto de venta especializado para distribuidoras farmacéuticas. Incluye control de inventario, gestión de caducidades, reportes automáticos y arquitectura escalable en la nube.",
           image: "/Portfolio/images/projects/pockbit/pockbit.webp",
           repo: "https://github.com/CesarS39/Pockbit_v2",
           link: "/Portfolio/projects/Pockbit/",
+          techStack: [".NET", "C#", "SQL", "Azure"],
+          featured: true,
+        },
+        {
+          title: "MySpot - Red Social",
+          description:
+            "Plataforma móvil para descubrir y compartir lugares favoritos. Desarrollada con Flutter, incluye autenticación, sistema de comentarios y mapas interactivos.",
+          image: "/Portfolio/images/projects/myspot/myspot.webp",
+          repo: "https://github.com/CesarS39/MySpot",
+          link: "/Portfolio/projects/MySpot/",
+          techStack: ["Flutter", "FastAPI", "MongoDB", "Firebase"],
+        },
+        {
+          title: "LigaSmart - Gestión Deportiva",
+          description:
+            "Sistema web para administrar torneos deportivos con registro de equipos, seguimiento de partidos y estadísticas avanzadas.",
+          image: "/Portfolio/images/projects/ligasmart/ligasmart.webp",
+          repo: "https://github.com/CesarS39/LigaSmart",
+          link: "/Portfolio/projects/LigaSmart/",
+          techStack: [".NET", "SQL", "Azure"],
         },
       ]}
     />

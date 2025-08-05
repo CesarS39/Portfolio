@@ -8,6 +8,7 @@ interface ContactIcon {
   icon: string;
   title: string;
   bgColor: string;
+  hoverColor?: string;
 }
 
 interface ContactData {
@@ -20,54 +21,167 @@ interface ContactData {
 }
 
 const { data } = Astro.props as { data: ContactData };
+
+// Mapeo de colores mejorados para los iconos
+const iconStyles = {
+  LinkedIn: "from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600",
+  GitHub: "from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700",
+  Email: "from-red-500 to-red-600 hover:from-red-400 hover:to-red-500",
+  WhatsApp:
+    "from-green-500 to-green-600 hover:from-green-400 hover:to-green-500",
+  Twitter: "from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400",
+  Portfolio:
+    "from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500",
+};
 ---
 
-<BaseSection id="contacto">
-  <Heading level="h2" className="mb-24">
-    Contacto
-  </Heading>
+<!-- organisms/ContactSection.astro MEJORADO -->
+<BaseSection id="contacto" className="!max-w-4xl">
+  <!-- Header mejorado -->
+  <div class="text-center mb-20">
+    <Heading
+      level="h2"
+      className="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-100 to-indigo-200 bg-clip-text text-transparent"
+    >
+      Contacto
+    </Heading>
+    <div
+      class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-6"
+    >
+    </div>
+    <p class="text-neutral-300 max-w-2xl mx-auto">
+      ¿Tienes un proyecto en mente? Me encantaría colaborar contigo y crear algo
+      increíble juntos.
+    </p>
+  </div>
 
-  <CardBase className="relative max-w-md mx-auto md:max-w-2xl pt-28 pb-10 px-6 hover:scale-[1.015]">
-    <!-- Imagen de perfil -->
-    <div class="absolute -top-24 left-1/2 transform -translate-x-1/2">
-      <img
-        loading="lazy"
-        src={`${import.meta.env.BASE_URL}${data.image}`}
-        alt="Contacto"
-        class="shadow-xl rounded-full w-[180px] h-[180px] object-cover"
-      />
+  <!-- Card de contacto rediseñada -->
+  <div class="relative max-w-2xl mx-auto">
+    <!-- Background decorativo -->
+    <div
+      class="absolute inset-0 bg-gradient-to-br from-indigo-300/10 to-blue-400/10 rounded-3xl blur-xl"
+    >
     </div>
 
-    <!-- Nombre y ubicación -->
-    <div class="text-center mb-4 mt-2">
-      <h3 class="text-2xl font-bold text-white leading-normal">{data.name}</h3>
-      <p class="text-xs text-neutral-400 font-bold uppercase">
-        {data.location} · {data.role}
-      </p>
-    </div>
+    <CardBase
+      class="bg-neutral-800 rounded-2xl shadow-md transition-all duration-300 ease-in-out hover:scale-[1.02] relative overflow-hidden border border-neutral-700 hover:border-indigo-500/50"
+    >
+      <!-- Header con gradiente -->
+      <div
+        class="bg-gradient-to-br from-neutral-800 to-neutral-900 px-8 pt-12 pb-6 relative"
+      >
+        <!-- Imagen de perfil flotante -->
+        <div class="absolute -top-16 left-1/2 transform -translate-x-1/2">
+          <div class="relative">
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-cyan-400 to-indigo-500 rounded-full blur-lg opacity-50"
+            >
+            </div>
+            <img
+              loading="lazy"
+              src={`${import.meta.env.BASE_URL}${data.image}`}
+              alt="Contacto"
+              class="relative w-32 h-32 rounded-full object-cover border-4 border-neutral-800 shadow-2xl"
+            />
+            <!-- Status indicator -->
+            <div
+              class="absolute -bottom-1 -right-1 w-8 h-8 bg-gradient-to-br from-green-400 to-green-500 rounded-full border-4 border-neutral-800 flex items-center justify-center"
+            >
+              <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+            </div>
+          </div>
+        </div>
 
-    <!-- Texto -->
-    <div class="text-center mt-6">
-      <p class="text-neutral-300">{data.prompt}</p>
-    </div>
+        <!-- Info personal -->
+        <div class="text-center mt-8">
+          <h3
+            class="text-3xl font-bold bg-gradient-to-r from-white to-neutral-300 bg-clip-text text-transparent mb-2"
+          >
+            {data.name}
+          </h3>
+          <div
+            class="flex items-center justify-center space-x-2 text-indigo-400 font-semibold"
+          >
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fill-rule="evenodd"
+                d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-sm">{data.location}</span>
+            <span class="text-neutral-500">•</span>
+            <span class="text-sm">{data.role}</span>
+          </div>
+        </div>
+      </div>
 
-    <!-- Iconos -->
-    <div class="mt-6 flex justify-center gap-4 flex-wrap">
-      {data.icons.map((icon) => (
-        <a
-          href={icon.href}
-          target="_blank"
-          title={icon.title}
-          class={`${icon.bgColor} text-white rounded-full p-3 transition`}
-        >
-          <img
-            loading="lazy"
-            src={`${import.meta.env.BASE_URL}${icon.icon}`}
-            alt={icon.title}
-            class="w-6 h-6 invert"
-          />
-        </a>
-      ))}
-    </div>
-  </CardBase>
+      <!-- Contenido principal -->
+      <div class="px-8 py-6">
+        <!-- Mensaje personal -->
+        <div class="text-center mb-8">
+          <p class="text-neutral-300 leading-relaxed text-lg">
+            {data.prompt}
+          </p>
+        </div>
+
+        <!-- Redes sociales mejoradas -->
+        <div class="space-y-4">
+          <h4
+            class="text-center text-neutral-400 font-semibold text-sm uppercase tracking-wider"
+          >
+            Encuéntrame en
+          </h4>
+
+          <div class="flex justify-center flex-wrap gap-3">
+            {
+              data.icons.map((icon) => {
+                const gradientClass =
+                  iconStyles[icon.title as keyof typeof iconStyles] ||
+                  "from-neutral-600 to-neutral-700 hover:from-neutral-500 hover:to-neutral-600";
+
+                return (
+                  <a
+                    href={icon.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={icon.title}
+                    class={`group flex items-center space-x-2 px-4 py-3 bg-gradient-to-r ${gradientClass} rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg text-white font-medium`}
+                  >
+                    <img
+                      loading="lazy"
+                      src={`${import.meta.env.BASE_URL}${icon.icon}`}
+                      alt={icon.title}
+                      class="w-5 h-5 invert group-hover:scale-110 transition-transform"
+                    />
+                    <span class="text-sm hidden sm:block">{icon.title}</span>
+                  </a>
+                );
+              })
+            }
+          </div>
+        </div>
+
+        <!-- Call to action -->
+        <div class="mt-8 text-center">
+          <div
+            class="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-cyan-400/10 to-indigo-500/10 border border-cyan-500/30 rounded-xl text-cyan-400"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            <span class="text-sm font-medium">Disponible para proyectos</span>
+          </div>
+        </div>
+      </div>
+    </CardBase>
+  </div>
 </BaseSection>

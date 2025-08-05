@@ -6,11 +6,13 @@ const {
   subtitle,
   date,
   extra,
-  glow = "glow-pink", 
+  glow = "glow-pink",
 } = Astro.props;
 ---
 
-<div class={`bg-neutral-800 p-8 rounded-2xl text-center glow-card ${glow} fade-up`}>
+<div
+  class={`bg-neutral-800 p-8 rounded-2xl text-center glow-card ${glow} fade-up`}
+>
   <img
     loading="lazy"
     src={image}
@@ -20,7 +22,5 @@ const {
   <h3 class="text-xl font-semibold text-white">{title}</h3>
   <p class="text-neutral-400 text-sm mt-1">{subtitle}</p>
   <p class="text-neutral-500 text-sm">{date}</p>
-  {extra && (
-    <p class="text-neutral-500 text-xs italic mt-1">{extra}</p>
-  )}
+  {extra && <p class="text-neutral-500 text-xs italic mt-1">{extra}</p>}
 </div>

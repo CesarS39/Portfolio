@@ -12,116 +12,315 @@ const screenshots: string[] = [
   "/Portfolio/images/projects/pockbit/laboratorios.webp",
   "/Portfolio/images/projects/pockbit/medicamentos.webp"
 ];
+
+const techStack = [
+  {
+    name: ".NET Framework",
+    icon: "🔷",
+    description: "Backend robusto con C#"
+  },
+  {
+    name: "SQL Server",
+    icon: "🗄️",
+    description: "Base de datos empresarial"
+  },
+  {
+    name: "Azure",
+    icon: "☁️",
+    description: "Cloud hosting y servicios"
+  },
+  {
+    name: "Bootstrap",
+    icon: "🎨",
+    description: "UI responsiva y moderna"
+  }
+];
+
+const features = [
+  {
+    title: "Gestión Farmacéutica Especializada",
+    description: "Control de caducidades por lote, precios máximos y trazabilidad completa de medicamentos",
+    icon: "💊",
+    gradient: "from-green-500 to-emerald-600"
+  },
+  {
+    title: "Arquitectura Empresarial",
+    description: "Transacciones ACID, normalización 3FN, CQRS para reportes y capas separadas",
+    icon: "🏗️",
+    gradient: "from-blue-500 to-cyan-600"
+  },
+  {
+    title: "Integridad de Datos",
+    description: "Validaciones multicapa, rollback automático y consistencia garantizada",
+    icon: "🛡️",
+    gradient: "from-purple-500 to-indigo-600"
+  },
+  {
+    title: "Escalabilidad Empresarial",
+    description: "Multi-sucursal, componentes desacoplados e infraestructura cloud-ready",
+    icon: "📈",
+    gradient: "from-orange-500 to-red-600"
+  }
+];
 ---
 
 <Layout>
   <HeroTitle text="POCKBIT" size="text-[10vw]" />
-
-  <BaseSection id="problems">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-12 text-center">
-        Resolución de un Problema Real
-      </h2>
-      <p class="text-neutral-300 text-center text-lg leading-relaxed">
-        Pockbit fue creado para resolver un problema real en una distribuidora
-        farmacéutica que operaba solo con un excel. Desarrollé una solución
-        integral que agiliza el proceso de compras y ventas junto con la
-        automatizacion de reportes e invetarios. Gracias al sistema, los socios
-        pueden operar de forma simultánea con información precisa, lo que
-        facilita decisiones estratégicas y reduce errores. Se implementaron
-        mecanismos de integridad como las validaciones,las cuales se diseñaron
-        para evitar los errores vistos en las pruebas con usuarios reales, esto
-        garantiza fiabilidad desde el primer uso.
+  <!-- Hero Section -->
+  <BaseSection className="text-center py-20">
+    
+    <div class="mt-8">
+      <p class="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
+        Sistema integral de punto de venta diseñado específicamente para distribuidoras farmacéuticas,
+        transformando operaciones manuales en procesos automatizados y eficientes.
       </p>
-    </div>
-  <BaseSection/>
-
-  <BaseSection>
-    <div class="max-w-5xl mx-auto grid gap-8 md:grid-cols-2">
-      <div class="bg-neutral-800 rounded-2xl p-6 shadow-md hover:scale-105 transition duration-300 ease-in-out">
-        <h2 class="text-2xl font-bold mb-4 text-white text-center">Núcleo del Sistema</h2>
-        <p class="text-neutral-300 text-center text-md leading-relaxed">
-          Funciones clave diseñadas para un entorno farmacéutico:<br />
-          • Gestión de caducidades por lote<br />
-          • Control de precios máximos<br />
-          • Integración contable automática<br />
-          • Multi-sucursal (escalable)
-        </p>
-      </div>
-
-      <div class="bg-neutral-800 rounded-2xl p-6 shadow-md hover:scale-105 transition duration-300 ease-in-out">
-        <h2 class="text-2xl font-bold mb-4 text-white text-center">Stack Tecnológico</h2>
-        <p class="text-neutral-300 text-center text-md leading-relaxed">
-          El sistema se desarrolló con herramientas confiables:<br />
-          • <strong>.NET Framework</strong> con C#<br />
-          • <strong>SQL Server</strong> y Azure SQL para la base de datos<br />
-          • <strong>Bootstrap</strong> y JavaScript para la interfaz<br />
-          • <strong>Azure App Service</strong> para despliegue
-        </p>
-      </div>
-
-      <div class="bg-neutral-800 rounded-2xl p-6 shadow-md hover:scale-105 transition duration-300 ease-in-out">
-        <h2 class="text-2xl font-bold mb-4 text-white text-center">Arquitectura Clave</h2>
-        <p class="text-neutral-300 text-center text-md leading-relaxed">
-          El diseño técnico garantiza rendimiento y mantenibilidad:<br />
-          • Transacciones ACID<br />
-          • Normalización en 3FN<br />
-          • CQRS para reportes<br />
-          • Capas separadas
-        </p>
-      </div>
-
-      <div class="bg-neutral-800 rounded-2xl p-6 shadow-md hover:scale-105 transition duration-300 ease-in-out">
-        <h2 class="text-2xl font-bold mb-4 text-white text-center">Proceso de Desarrollo</h2>
-        <p class="text-neutral-300 text-center text-md leading-relaxed">
-          Desarrollo guiado por prácticas de ingeniería de software:<br />
-          • Análisis con el cliente<br />
-          • Modelado de datos y arquitectura<br />
-          • Pruebas constantes durante la implementación<br />
-          • Validación con usuarios reales
-        </p>
-      </div>
-
-      <div class="bg-neutral-800 rounded-2xl p-6 shadow-md hover:scale-105 transition duration-300 ease-in-out">
-        <h2 class="text-2xl font-bold mb-4 text-white text-center">Mecanismos de Integridad</h2>
-        <p class="text-neutral-300 text-center text-md leading-relaxed">
-          Se incorporaron validaciones y transacciones para garantizar
-          consistencia:<br />
-          • Rollback automático ante errores<br />
-          • Validación desde interfaz hasta la base de datos
-        </p>
-      </div>
-
-      <div class="bg-neutral-800 rounded-2xl p-6 shadow-md hover:scale-105 transition duration-300 ease-in-out">
-        <h2 class="text-2xl font-bold mb-4 text-white text-center">Escalabilidad</h2>
-        <p class="text-neutral-300 text-center text-md leading-relaxed">
-          Preparado para escalar sin necesidad de reestructurar:<br />
-          • Componentes desacoplados<br />
-          • Infraestructura lista para la nube<br />
-          • Diseño mantenible
-        </p>
+      <div class="flex flex-wrap justify-center gap-3 mt-8">
+        <span class="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full text-sm font-semibold">
+          .NET Framework
+        </span>
+        <span class="px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-full text-sm font-semibold">
+          SQL Server
+        </span>
+        <span class="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full text-sm font-semibold">
+          Azure Cloud
+        </span>
+        <span class="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full text-sm font-semibold">
+          Bootstrap
+        </span>
       </div>
     </div>
   </BaseSection>
 
+  <!-- Problem Solution Section -->
   <BaseSection>
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
+          Transformando el Negocio Farmacéutico
+        </h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-8"></div>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-6">
+            <h3 class="text-xl font-bold text-red-400 mb-3">❌ Situación Anterior</h3>
+            <ul class="text-neutral-300 space-y-2">
+              <li>• Operación manual con Excel</li>
+              <li>• Errores frecuentes en inventario</li>
+              <li>• Información desactualizada</li>
+              <li>• Procesos lentos e ineficientes</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="space-y-6">
+          <div class="bg-green-500/10 border border-green-500/20 rounded-xl p-6">
+            <h3 class="text-xl font-bold text-green-400 mb-3">✅ Solución Pockbit</h3>
+            <ul class="text-neutral-300 space-y-2">
+              <li>• Automatización completa</li>
+              <li>• Operación simultánea multi-usuario</li>
+              <li>• Reportes automáticos en tiempo real</li>
+              <li>• Validaciones y controles de integridad</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </BaseSection>
+
+  <!-- Tech Stack Destacado -->
+  <BaseSection>
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">
+        Stack Tecnológico Empresarial
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-indigo-400 to-purple-500 mx-auto mb-8"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+      {techStack.map((tech) => (
+        <div class="group bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-6 border border-neutral-700 hover:border-indigo-500/50 hover:scale-105 transition-all duration-300">
+          <div class="text-4xl mb-4 text-center group-hover:scale-110 transition-transform">
+            {tech.icon}
+          </div>
+          <h3 class="text-lg font-bold text-center mb-2 text-white">
+            {tech.name}
+          </h3>
+          <p class="text-neutral-400 text-sm text-center">
+            {tech.description}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Detalles técnicos expandidos -->
+    <div class="mt-12 bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700">
+      <h3 class="text-2xl font-bold text-center mb-8 text-indigo-400">Arquitectura & Herramientas</h3>
+      <div class="grid md:grid-cols-3 gap-8 text-center">
+        <div>
+          <h4 class="font-semibold text-white mb-3">Backend</h4>
+          <div class="text-neutral-300 space-y-1">
+            <p>C# con .NET Framework</p>
+            <p>Patrón MVC</p>
+            <p>Lógica de negocio separada</p>
+            <p>DAOs y DTOs</p>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-3">Base de Datos</h4>
+          <div class="text-neutral-300 space-y-1">
+            <p>SQL Server</p>
+            <p>Azure SQL Database</p>
+            <p>Procedimientos almacenados</p>
+            <p>Vistas optimizadas</p>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-3">Frontend & Cloud</h4>
+          <div class="text-neutral-300 space-y-1">
+            <p>Bootstrap + JavaScript</p>
+            <p>Diseño responsivo</p>
+            <p>Azure App Service</p>
+            <p>Despliegue automático</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </BaseSection>
+
+  <!-- Features Section -->
+  <BaseSection>
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
+        Características Clave
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-8"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      {features.map((feature, index) => (
+        <div class={`group relative bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700 hover:scale-105 transition-all duration-300 overflow-hidden`}>
+          <div class={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
+          <div class="relative z-10">
+            <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">
+              {feature.icon}
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-white">
+              {feature.title}
+            </h3>
+            <p class="text-neutral-300 leading-relaxed">
+              {feature.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </BaseSection>
+
+  <!-- Development Process -->
+  <BaseSection>
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+        Proceso de Desarrollo
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-500 mx-auto mb-8"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <div class="relative">
+        <!-- Timeline line -->
+        <div class="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gradient-to-b from-purple-500 to-pink-500 hidden md:block"></div>
+        
+        <div class="space-y-8">
+          <!-- Step 1 -->
+          <div class="flex items-center md:justify-between">
+            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-purple-500/50 transition-colors">
+              <h3 class="font-bold text-lg mb-2 text-purple-400">1. Análisis con Cliente</h3>
+              <p class="text-neutral-300">Identificación de necesidades específicas del sector farmacéutico y mapeo de procesos existentes.</p>
+            </div>
+            <div class="hidden md:block w-2/12 text-center">
+              <div class="w-8 h-8 bg-purple-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">1</div>
+            </div>
+            <div class="hidden md:block md:w-5/12"></div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="flex items-center md:justify-between">
+            <div class="hidden md:block md:w-5/12"></div>
+            <div class="hidden md:block w-2/12 text-center">
+              <div class="w-8 h-8 bg-purple-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">2</div>
+            </div>
+            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-purple-500/50 transition-colors">
+              <h3 class="font-bold text-lg mb-2 text-purple-400">2. Diseño de Arquitectura</h3>
+              <p class="text-neutral-300">Modelado de datos, definición de capas y selección del stack tecnológico apropiado.</p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="flex items-center md:justify-between">
+            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-purple-500/50 transition-colors">
+              <h3 class="font-bold text-lg mb-2 text-purple-400">3. Desarrollo Iterativo</h3>
+              <p class="text-neutral-300">Implementación con pruebas continuas y validación constante de funcionalidades.</p>
+            </div>
+            <div class="hidden md:block w-2/12 text-center">
+              <div class="w-8 h-8 bg-purple-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">3</div>
+            </div>
+            <div class="hidden md:block md:w-5/12"></div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="flex items-center md:justify-between">
+            <div class="hidden md:block md:w-5/12"></div>
+            <div class="hidden md:block w-2/12 text-center">
+              <div class="w-8 h-8 bg-purple-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">4</div>
+            </div>
+            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-purple-500/50 transition-colors">
+              <h3 class="font-bold text-lg mb-2 text-purple-400">4. Validación y Despliegue</h3>
+              <p class="text-neutral-300">Pruebas con usuarios reales, ajustes finales y despliegue en Azure Cloud.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </BaseSection>
+
+  <!-- Gallery Section -->
+  <BaseSection>
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
+        Capturas del Sistema
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-8"></div>
+    </div>
+    
     <div class="max-w-6xl mx-auto">
-      <GalleryComponent images={screenshots} />
+      <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700">
+        <GalleryComponent images={screenshots} />
+      </div>
     </div>
   </BaseSection>
 
-  <BaseSection>
-    <div class="flex justify-center">
-      <a
-        href="https://github.com/CesarS39/Pockbit_v2"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <button
-          class="group relative inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white rounded-xl bg-gradient-to-br from-cyan-400 to-indigo-500 hover:scale-105 transition"
+  <!-- CTA Section -->
+  <BaseSection className="text-center">
+    <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-12 border border-neutral-700">
+      <h2 class="text-3xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
+        Explora el Código
+      </h2>
+      <p class="text-neutral-300 mb-8 max-w-2xl mx-auto">
+        Descubre la implementación completa en GitHub. El proyecto incluye documentación técnica, 
+        diagramas de arquitectura y guías de instalación.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a
+          href="https://github.com/CesarS39/Pockbit_v2"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white rounded-xl bg-gradient-to-br from-cyan-400 to-indigo-500 hover:scale-105 transition-all duration-300 shadow-lg shadow-cyan-500/25"
         >
           <svg
-            class="w-5 h-5 mr-2 text-white"
+            class="w-6 h-6 mr-3 text-white group-hover:rotate-12 transition-transform"
             fill="currentColor"
             viewBox="0 0 24 24"
           >
@@ -129,9 +328,13 @@ const screenshots: string[] = [
               d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.262.82-.583 0-.288-.012-1.243-.018-2.253-3.338.725-4.042-1.612-4.042-1.612-.546-1.388-1.333-1.758-1.333-1.758-1.09-.745.083-.73.083-.73 1.205.087 1.838 1.24 1.838 1.24 1.07 1.833 2.807 1.303 3.492.996.107-.775.418-1.303.76-1.602-2.665-.304-5.466-1.332-5.466-5.933 0-1.31.467-2.382 1.235-3.222-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.47 11.47 0 0 1 3.003-.403c1.02.005 2.047.137 3.003.403 2.292-1.552 3.297-1.23 3.297-1.23.654 1.653.243 2.873.12 3.176.77.84 1.233 1.912 1.233 3.222 0 4.61-2.805 5.625-5.475 5.922.43.37.815 1.102.815 2.222 0 1.604-.015 2.898-.015 3.293 0 .324.216.7.825.58C20.565 22.296 24 17.796 24 12.5 24 5.87 18.627.5 12 .5z"
             ></path>
           </svg>
-          Ver en GitHub
-        </button>
-      </a>
+          Ver Repositorio en GitHub
+        </a>
+        
+        <div class="flex items-center text-neutral-400">
+          <span class="text-sm">⭐ Proyecto destacado</span>
+        </div>
+      </div>
     </div>
   </BaseSection>
 </Layout>
