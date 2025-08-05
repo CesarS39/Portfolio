@@ -1,0 +1,570 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import GalleryComponent from "../../components/organisms/GalleryComponent.astro";
+import HeroTitle from "../../components/atoms/HeroTitle.astro";
+import BaseSection from "../../components/atoms/BaseSection.astro";
+
+const screenshots: string[] = [
+  "/Portfolio/images/projects/ligasmart/dashboard.webp",
+  "/Portfolio/images/projects/ligasmart/teams.webp",
+  "/Portfolio/images/projects/ligasmart/players.webp",
+  "/Portfolio/images/projects/ligasmart/matches.webp",
+  "/Portfolio/images/projects/ligasmart/statistics.webp",
+  "/Portfolio/images/projects/ligasmart/tournaments.webp"
+];
+
+const techStack = [
+  {
+    name: ".NET Framework",
+    icon: "🔷",
+    description: "Backend robusto con C#",
+    gradient: "from-indigo-500 to-purple-600"
+  },
+  {
+    name: "SQL Server",
+    icon: "🗄️",
+    description: "Base de datos empresarial",
+    gradient: "from-blue-500 to-cyan-600"
+  },
+  {
+    name: "Azure Web App",
+    icon: "☁️",
+    description: "Despliegue cloud escalable",
+    gradient: "from-cyan-500 to-blue-600"
+  },
+  {
+    name: "Bootstrap",
+    icon: "🎨",
+    description: "UI responsiva y profesional",
+    gradient: "from-purple-500 to-indigo-600"
+  }
+];
+
+const modules = [
+  {
+    title: "Gestión de Equipos",
+    description: "Registro completo de equipos con información detallada, plantillas y estadísticas históricas",
+    icon: "👥",
+    gradient: "from-blue-500 to-cyan-600",
+    features: ["Registro de equipos", "Gestión de plantillas", "Historial de participación", "Estadísticas por equipo"]
+  },
+  {
+    title: "Administración de Jugadores",
+    description: "Base de datos completa de jugadores con perfiles, estadísticas y seguimiento de rendimiento",
+    icon: "⚽",
+    gradient: "from-green-500 to-emerald-600",
+    features: ["Perfiles de jugadores", "Estadísticas individuales", "Historial de partidos", "Seguimiento de rendimiento"]
+  },
+  {
+    title: "Sistema de Partidos",
+    description: "Programación, seguimiento y gestión completa de encuentros deportivos con resultados en tiempo real",
+    icon: "🏆",
+    gradient: "from-yellow-500 to-orange-600",
+    features: ["Calendario de partidos", "Registro de resultados", "Árbitros asignados", "Incidencias del juego"]
+  },
+  {
+    title: "Centro de Estadísticas",
+    description: "Análisis profundo con reportes automáticos, gráficas y métricas de rendimiento avanzadas",
+    icon: "📊",
+    gradient: "from-purple-500 to-indigo-600",
+    features: ["Reportes automáticos", "Gráficas dinámicas", "Análisis de tendencias", "Exportación de datos"]
+  }
+];
+
+const architecture = [
+  {
+    layer: "Presentación",
+    icon: "🖥️",
+    description: "Bootstrap + Razor Views",
+    details: ["Diseño responsivo", "Componentes reutilizables", "UX optimizada", "Validación client-side"]
+  },
+  {
+    layer: "Lógica de Negocio",
+    icon: "⚙️",
+    description: "C# Business Logic Layer",
+    details: ["Reglas de torneos", "Validaciones complejas", "Cálculos estadísticos", "Procesamiento de datos"]
+  },
+  {
+    layer: "Acceso a Datos",
+    icon: "🔗",
+    description: "DAO Pattern + SQL Server",
+    details: ["Procedimientos almacenados", "Vistas optimizadas", "Transacciones ACID", "Logs de cambios"]
+  }
+];
+---
+
+<Layout>
+  <HeroTitle text="LIGASMART" size="text-[10vw]" />
+  
+  <!-- Hero Section -->
+  <BaseSection className="text-center py-20">
+    <div class="max-w-4xl mx-auto">
+      <!-- Status Badge -->
+      <div class="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-500/20 to-cyan-600/20 border border-blue-500/30 rounded-full mb-8">
+        <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+        <span class="text-blue-400 font-semibold text-sm">En Fase de Despliegue</span>
+      </div>
+
+      <p class="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed mb-8">
+        Sistema integral de administración de torneos deportivos que digitaliza y optimiza 
+        la gestión completa desde equipos hasta estadísticas avanzadas.
+      </p>
+
+      <!-- Tech Stack Pills -->
+      <div class="flex flex-wrap justify-center gap-3 mb-8">
+        <span class="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full text-sm font-semibold">
+          .NET Framework
+        </span>
+        <span class="px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-full text-sm font-semibold">
+          SQL Server
+        </span>
+        <span class="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full text-sm font-semibold">
+          Azure Web App
+        </span>
+        <span class="px-4 py-2 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full text-sm font-semibold">
+          Bootstrap
+        </span>
+      </div>
+
+      <!-- Deployment Status -->
+      <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-xl p-6 border border-neutral-700 max-w-md mx-auto">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center space-x-2">
+            <span class="text-2xl">☁️</span>
+            <span class="font-semibold text-white">Despliegue Azure</span>
+          </div>
+          <span class="text-xs text-blue-400">Testing & Final Implementation</span>
+        </div>
+        <div class="w-full bg-neutral-700 rounded-full h-3">
+          <div 
+            class="bg-gradient-to-r from-blue-400 to-cyan-500 h-3 rounded-full transition-all duration-500"
+            style="width: 92%"
+          ></div>
+        </div>
+        <div class="flex justify-between text-xs text-neutral-400 mt-2">
+          <span>Funcionalidades core completadas</span>
+          <span>92%</span>
+        </div>
+      </div>
+    </div>
+  </BaseSection>
+
+  <!-- Problem Solution Section -->
+  <BaseSection>
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent">
+          Revolucionando la Gestión Deportiva
+        </h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-500 mx-auto mb-8"></div>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-6">
+            <h3 class="text-xl font-bold text-red-400 mb-4">⚠️ Gestión Tradicional</h3>
+            <ul class="text-neutral-300 space-y-2 text-sm">
+              <li>• Administración manual con hojas de cálculo</li>
+              <li>• Datos dispersos e inconsistentes</li>
+              <li>• Estadísticas básicas y poco detalladas</li>
+              <li>• Proceso lento para generar reportes</li>
+              <li>• Comunicación fragmentada entre organizadores</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="space-y-6">
+          <div class="bg-green-500/10 border border-green-500/20 rounded-xl p-6">
+            <h3 class="text-xl font-bold text-green-400 mb-4">🚀 Solución LigaSmart</h3>
+            <ul class="text-neutral-300 space-y-2 text-sm">
+              <li>• Sistema centralizado y automatizado</li>
+              <li>• Base de datos normalizada y consistente</li>
+              <li>• Estadísticas avanzadas en tiempo real</li>
+              <li>• Reportes automáticos personalizables</li>
+              <li>• Panel unificado para administradores</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </BaseSection>
+
+  <!-- Tech Stack & Architecture -->
+  <BaseSection>
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">
+        Arquitectura Empresarial
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-indigo-400 to-purple-500 mx-auto mb-8"></div>
+    </div>
+
+    <!-- Tech Stack Cards -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-16">
+      {techStack.map((tech) => (
+        <div class="group bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-6 border border-neutral-700 hover:border-indigo-500/50 hover:scale-105 transition-all duration-300">
+          <div class="text-4xl mb-4 text-center group-hover:scale-110 transition-transform">
+            {tech.icon}
+          </div>
+          <h3 class="text-lg font-bold text-center mb-2 text-white">
+            {tech.name}
+          </h3>
+          <p class="text-neutral-400 text-sm text-center">
+            {tech.description}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Architecture Layers -->
+    <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700">
+      <h3 class="text-2xl font-bold text-center mb-8 text-indigo-400">Capas de Arquitectura</h3>
+      <div class="grid md:grid-cols-3 gap-8">
+        {architecture.map((layer, index) => (
+          <div class="text-center group">
+            <div class="mb-6">
+              <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">
+                {layer.icon}
+              </div>
+              <h4 class="font-semibold text-white mb-2 text-lg">
+                {layer.layer}
+              </h4>
+              <p class="text-indigo-400 font-medium text-sm mb-4">
+                {layer.description}
+              </p>
+            </div>
+            <div class="space-y-2">
+              {layer.details.map((detail) => (
+                <div class="flex items-center justify-center space-x-2 text-xs text-neutral-400">
+                  <div class="w-1.5 h-1.5 bg-indigo-400 rounded-full"></div>
+                  <span>{detail}</span>
+                </div>
+              ))}
+            </div>
+            {index < 2 && (
+              <div class="hidden md:block absolute right-0 top-1/2 transform translate-x-4 -translate-y-1/2">
+                <svg class="w-6 h-6 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </BaseSection>
+
+  <!-- Modules Section -->
+  <BaseSection>
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
+        Módulos del Sistema
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-8"></div>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      {modules.map((module, index) => (
+        <div class="group relative bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700 hover:scale-105 transition-all duration-300 overflow-hidden">
+          
+          {/* Background glow effect */}
+          <div class={`absolute inset-0 bg-gradient-to-br ${module.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
+          
+          <div class="relative z-10">
+            <div class="flex items-start space-x-4 mb-6">
+              <div class="text-4xl group-hover:scale-110 transition-transform">
+                {module.icon}
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl font-bold mb-3 text-white group-hover:text-cyan-400 transition-colors">
+                  {module.title}
+                </h3>
+                <p class="text-neutral-300 leading-relaxed mb-4">
+                  {module.description}
+                </p>
+              </div>
+            </div>
+
+            {/* Module features */}
+            <div class="grid grid-cols-2 gap-2">
+              {module.features.map((feature) => (
+                <div class="flex items-center space-x-2 text-sm text-neutral-400">
+                  <div class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></div>
+                  <span>{feature}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Completion indicator */}
+            <div class="mt-6 pt-4 border-t border-neutral-700">
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-xs text-neutral-400">Estado del módulo</span>
+                <span class="text-xs text-green-400 font-medium">Implementado</span>
+              </div>
+              <div class="w-full bg-neutral-700 rounded-full h-1.5">
+                <div class={`bg-gradient-to-r ${module.gradient} h-1.5 rounded-full`} style="width: 95%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </BaseSection>
+
+  <!-- Database & Business Logic -->
+  <BaseSection>
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+        Base de Datos y Lógica de Negocio
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-500 mx-auto mb-8"></div>
+    </div>
+
+    <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+      <!-- Database Design -->
+      <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700">
+        <div class="text-center mb-6">
+          <div class="text-4xl mb-3">🗄️</div>
+          <h3 class="text-xl font-bold text-white mb-2">Diseño de Base de Datos</h3>
+          <p class="text-neutral-400 text-sm">SQL Server con arquitectura optimizada</p>
+        </div>
+        
+        <div class="space-y-4">
+          <div class="bg-neutral-700/50 rounded-lg p-4">
+            <h4 class="font-semibold text-blue-400 mb-2">📋 Vistas Especializadas</h4>
+            <p class="text-neutral-300 text-sm">Consultas optimizadas para reportes y estadísticas complejas</p>
+          </div>
+          
+          <div class="bg-neutral-700/50 rounded-lg p-4">
+            <h4 class="font-semibold text-green-400 mb-2">⚡ Procedimientos Almacenados</h4>
+            <p class="text-neutral-300 text-sm">Lógica de negocio encapsulada con alta performance</p>
+          </div>
+          
+          <div class="bg-neutral-700/50 rounded-lg p-4">
+            <h4 class="font-semibold text-yellow-400 mb-2">📝 Logs de Cambios</h4>
+            <p class="text-neutral-300 text-sm">Auditoría completa y trazabilidad de modificaciones</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Business Logic -->
+      <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700">
+        <div class="text-center mb-6">
+          <div class="text-4xl mb-3">⚙️</div>
+          <h3 class="text-xl font-bold text-white mb-2">Lógica de Negocio</h3>
+          <p class="text-neutral-400 text-sm">Reglas deportivas y cálculos automatizados</p>
+        </div>
+        
+        <div class="space-y-4">
+          <div class="bg-neutral-700/50 rounded-lg p-4">
+            <h4 class="font-semibold text-purple-400 mb-2">🏆 Reglas de Torneos</h4>
+            <p class="text-neutral-300 text-sm">Sistemas de puntuación y clasificación configurables</p>
+          </div>
+          
+          <div class="bg-neutral-700/50 rounded-lg p-4">
+            <h4 class="font-semibold text-indigo-400 mb-2">📊 Cálculos Estadísticos</h4>
+            <p class="text-neutral-300 text-sm">Métricas automáticas de rendimiento individual y grupal</p>
+          </div>
+          
+          <div class="bg-neutral-700/50 rounded-lg p-4">
+            <h4 class="font-semibold text-cyan-400 mb-2">✅ Validaciones Complejas</h4>
+            <p class="text-neutral-300 text-sm">Integridad de datos y reglas de negocio estrictas</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </BaseSection>
+
+  <!-- Development Workflow -->
+  <BaseSection>
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
+        Proceso de Desarrollo
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-green-400 to-emerald-500 mx-auto mb-8"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <div class="relative">
+        <!-- Timeline line -->
+        <div class="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gradient-to-b from-green-500 to-emerald-500 hidden md:block"></div>
+        
+        <div class="space-y-8">
+          <!-- Step 1 -->
+          <div class="flex items-center md:justify-between">
+            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-green-500/50 transition-colors">
+              <div class="flex items-center space-x-3 mb-3">
+                <span class="text-2xl">📋</span>
+                <h3 class="font-bold text-lg text-green-400">Análisis y Diseño</h3>
+              </div>
+              <p class="text-neutral-300 text-sm">Modelado de entidades deportivas, casos de uso y arquitectura del sistema con Visual Studio.</p>
+            </div>
+            <div class="hidden md:block w-2/12 text-center">
+              <div class="w-8 h-8 bg-green-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">1</div>
+            </div>
+            <div class="hidden md:block md:w-5/12"></div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="flex items-center md:justify-between">
+            <div class="hidden md:block md:w-5/12"></div>
+            <div class="hidden md:block w-2/12 text-center">
+              <div class="w-8 h-8 bg-green-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">2</div>
+            </div>
+            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-green-500/50 transition-colors">
+              <div class="flex items-center space-x-3 mb-3">
+                <span class="text-2xl">🏗️</span>
+                <h3 class="font-bold text-lg text-green-400">Implementación Core</h3>
+              </div>
+              <p class="text-neutral-300 text-sm">Desarrollo de capas de presentación, lógica de negocio y acceso a datos con patrón MVC.</p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="flex items-center md:justify-between">
+            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-green-500/50 transition-colors">
+              <div class="flex items-center space-x-3 mb-3">
+                <span class="text-2xl">🔧</span>
+                <h3 class="font-bold text-lg text-green-400">Testing y Optimización</h3>
+              </div>
+              <p class="text-neutral-300 text-sm">Pruebas de integración, optimización de consultas y ajustes de rendimiento.</p>
+            </div>
+            <div class="hidden md:block w-2/12 text-center">
+              <div class="w-8 h-8 bg-green-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">3</div>
+            </div>
+            <div class="hidden md:block md:w-5/12"></div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="flex items-center md:justify-between">
+            <div class="hidden md:block md:w-5/12"></div>
+            <div class="hidden md:block w-2/12 text-center">
+              <div class="w-8 h-8 bg-blue-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">4</div>
+            </div>
+            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-blue-500/50 transition-colors">
+              <div class="flex items-center space-x-3 mb-3">
+                <span class="text-2xl">☁️</span>
+                <h3 class="font-bold text-lg text-blue-400">Despliegue Azure (Actual)</h3>
+              </div>
+              <p class="text-neutral-300 text-sm">Configuración de Azure Web App, pruebas de producción e implementaciones finales.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </BaseSection>
+
+  <!-- Screenshots/Gallery Section -->
+  <BaseSection>
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
+        Interfaces del Sistema
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-8"></div>
+      <p class="text-neutral-300 max-w-2xl mx-auto">
+        Capturas del sistema web responsive desarrollado con Bootstrap
+      </p>
+    </div>
+    
+    <div class="max-w-6xl mx-auto">
+      <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700">
+        <!-- Placeholder para gallery cuando tengas las imágenes -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            { name: "Dashboard Principal", icon: "📊" },
+            { name: "Gestión de Equipos", icon: "👥" },
+            { name: "Registro de Jugadores", icon: "⚽" },
+            { name: "Calendario de Partidos", icon: "📅" },
+            { name: "Centro de Estadísticas", icon: "📈" },
+            { name: "Panel Administrativo", icon: "⚙️" }
+          ].map((screen, i) => (
+            <div class="aspect-video bg-gradient-to-br from-neutral-700 to-neutral-800 rounded-xl border border-neutral-600 flex items-center justify-center group hover:scale-105 transition-transform">
+              <div class="text-center text-neutral-400 group-hover:text-neutral-300 transition-colors">
+                <div class="text-4xl mb-2">{screen.icon}</div>
+                <div class="text-sm font-medium">{screen.name}</div>
+                <div class="text-xs opacity-60">Sistema Web</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="text-center mt-8">
+          <div class="inline-flex items-center space-x-2 px-4 py-2 bg-blue-500/20 border border-blue-500/30 rounded-lg">
+            <span class="text-xl">🖥️</span>
+            <span class="text-blue-400 text-sm">Interfaz web completamente funcional</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </BaseSection>
+
+ <!-- Final Status & CTA -->
+<BaseSection className="text-center">
+  <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-12 border border-neutral-700">
+    <div class="mb-8">
+      <h2 class="text-3xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent">
+        Sistema Listo para Producción
+      </h2>
+      <p class="text-neutral-300 mb-8 max-w-2xl mx-auto">
+        LigaSmart está en sus fases finales de testing y despliegue en Azure. 
+        El sistema core está completamente funcional y listo para administrar torneos.
+      </p>
+    </div>
+
+    <!-- Final Status indicators -->
+    <div class="flex justify-between gap-6 mb-8 max-w-3xl mx-auto">
+      <div class="bg-neutral-700/50 rounded-lg p-4 w-1/4">
+        <div class="text-2xl mb-2">✅</div>
+        <div class="text-sm font-semibold text-white">Funcionalidades</div>
+        <div class="text-xs text-green-400">95% Completado</div>
+      </div>
+      <div class="bg-neutral-700/50 rounded-lg p-4 w-1/4">
+        <div class="text-2xl mb-2">🗄️</div>
+        <div class="text-sm font-semibold text-white">Base de Datos</div>
+        <div class="text-xs text-green-400">100% Lista</div>
+      </div>
+      <div class="bg-neutral-700/50 rounded-lg p-4 w-1/4">
+        <div class="text-2xl mb-2">🧪</div>
+        <div class="text-sm font-semibold text-white">Testing</div>
+        <div class="text-xs text-blue-400">En Proceso</div>
+      </div>
+      <div class="bg-neutral-700/50 rounded-lg p-4 w-1/4">
+        <div class="text-2xl mb-2">🌐</div>
+        <div class="text-sm font-semibold text-white">Despliegue en Azure</div>
+        <div class="text-xs text-yellow-400">En Proceso</div>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a
+          href="https://github.com/Voxewl/GestorDeTorneos"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white rounded-xl bg-gradient-to-br from-green-400 to-emerald-500 hover:scale-105 transition-all duration-300 shadow-lg shadow-green-500/25"
+        >
+          <svg
+            class="w-6 h-6 mr-3 text-white group-hover:rotate-12 transition-transform"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.262.82-.583 0-.288-.012-1.243-.018-2.253-3.338.725-4.042-1.612-4.042-1.612-.546-1.388-1.333-1.758-1.333-1.758-1.09-.745.083-.73.083-.73 1.205.087 1.838 1.24 1.838 1.24 1.07 1.833 2.807 1.303 3.492.996.107-.775.418-1.303.76-1.602-2.665-.304-5.466-1.332-5.466-5.933 0-1.31.467-2.382 1.235-3.222-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.47 11.47 0 0 1 3.003-.403c1.02.005 2.047.137 3.003.403 2.292-1.552 3.297-1.23 3.297-1.23.654 1.653.243 2.873.12 3.176.77.84 1.233 1.912 1.233 3.222 0 4.61-2.805 5.625-5.475 5.922.43.37.815 1.102.815 2.222 0 1.604-.015 2.898-.015 3.293 0 .324.216.7.825.58C20.565 22.296 24 17.796 24 12.5 24 5.87 18.627.5 12 .5z"
+            ></path>
+          </svg>
+          Repositorio en GitHub
+        </a>
+      </div>
+
+      <div class="flex items-center text-neutral-400">
+        <span class="text-sm">🚀 Launch estimado: Q3 2025</span>
+      </div>
+    </div>
+
+    <!-- Contact for collaboration -->
+    <div class="mt-8 pt-8 border-t border-neutral-700">
+      <p class="text-neutral-400 text-sm">
+        ¿Interesado en colaborar o conocer más detalles técnicos?
+        <span class="text-cyan-400">Contáctame para más información</span>
+      </p>
+    </div>
+  </div>
+</BaseSection>
