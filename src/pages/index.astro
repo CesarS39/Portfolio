@@ -146,7 +146,7 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
           title: "Ingeniería en Software",
           subtitle: "Universidad Politécnica de Pachuca",
           date: "2023 - Actualidad",
-          extra: "7º cuatrimestre",
+          extra: "8º cuatrimestre",
           glow: "glow-blue",
           status: "current",
           skills: [
@@ -173,7 +173,7 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
         },
       ]}
     />
-    <SocialService />
+    <!-- <SocialService /> -->
     <ExperienceSection
       experiences={[
         {
@@ -181,9 +181,10 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
           role: "Auxiliar Administrativo",
           year: "2022",
           items: [
-            "Coordinación de actividades semanales y supervisión de personal.",
-            "Gestión de proyectos, cotizaciones y tareas administrativas.",
-            "Apoyo en contabilidad básica y organización interna.",
+            "Coordinación de actividades semanales y supervisión del cumplimiento de tareas.",
+            "Organización del personal asignado a proyectos.",
+            "Gestión contable: elaboración de cotizaciones y manejo de contabilidad básica.",
+            "Comunicación directa con clientes para asegurar satisfacción y cumplimiento de requerimientos.",
           ],
         },
       ]}
@@ -239,7 +240,6 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
           repo: "https://github.com/CesarS39/Pockbit_v2",
           link: "/Portfolio/projects/Pockbit/",
           techStack: [".NET", "C#", "SQL", "Azure"],
-          featured: true,
         },
         {
           title: "MySpot - Red Social",
@@ -258,6 +258,15 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
           repo: "https://github.com/CesarS39/LigaSmart",
           link: "/Portfolio/projects/LigaSmart/",
           techStack: [".NET", "SQL", "Azure"],
+        },
+        {
+          title: "Sistema de Gestión Deportiva - UPP",
+          description:
+            "Sistemas no-code desarrollados en Notion para optimizar la gestión del extracurricular de tenis en la Universidad Politécnica de Pachuca. Automatización de asistencias, eventos, calificaciones y análisis estadístico para mejorar la toma de decisiones administrativas.",
+          image: "/Portfolio/images/projects/notion-tennis/notion-tennis.webp",
+          repo: false, // No tiene repositorio público por ser sistema interno
+          link: "/Portfolio/projects/NotionTennis/",
+          techStack: ["Notion", "No-Code", "Automatización", "Analytics"],
         },
       ]}
     />

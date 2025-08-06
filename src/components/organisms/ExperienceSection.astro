@@ -14,9 +14,12 @@ const { experiences } = Astro.props as { experiences: Experience[] };
 ---
 
 <BaseSection id="experiencia">
-  <Heading level="h2" className="mb-12">
-    Experiencia Laboral
-  </Heading>
+  <div class="text-center mb-16">
+    <Heading level="h2" className="text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+       Experiencia Laboral
+    </Heading>
+    <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-6"></div>
+  </div>
 
   <div class="max-w-5xl mx-auto">
     {experiences.map((exp) => (
