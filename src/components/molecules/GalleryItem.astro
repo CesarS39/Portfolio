@@ -5,13 +5,13 @@ const { src, alt, isActive = false } = Astro.props;
 <div
   class={`transition-opacity duration-1000 ease-in-out ${
     isActive ? "opacity-100" : "opacity-0 hidden"
-  }`}
+  } flex items-center justify-center bg-neutral-900 h-full w-full rounded-lg`}
   data-carousel-item={isActive ? "active" : ""}
 >
   <img
     loading="lazy"
     src={src}
     alt={alt}
-    class="block w-full h-full object-cover rounded-lg"
+    class="max-h-full max-w-full object-contain rounded-lg"
   />
 </div>

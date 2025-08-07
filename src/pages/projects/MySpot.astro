@@ -5,12 +5,12 @@ import HeroTitle from "../../components/atoms/HeroTitle.astro";
 import BaseSection from "../../components/atoms/BaseSection.astro";
 
 const screenshots: string[] = [
-  "/Portfolio/images/projects/myspot/login.webp",
-  "/Portfolio/images/projects/myspot/home.webp",
-  "/Portfolio/images/projects/myspot/categories.webp",
-  "/Portfolio/images/projects/myspot/place-detail.webp",
-  "/Portfolio/images/projects/myspot/profile.webp",
-  "/Portfolio/images/projects/myspot/badges.webp",
+  "/Portfolio/images/projects/myspot/IMG_5053.webp",
+  "/Portfolio/images/projects/myspot/IMG_5055.webp",
+  "/Portfolio/images/projects/myspot/IMG_5057.webp",
+  "/Portfolio/images/projects/myspot/IMG_5059.webp",
+  "/Portfolio/images/projects/myspot/IMG_5061.webp",
+  "/Portfolio/images/projects/myspot/IMG_5063.webp",
 ];
 
 const techStack = [
@@ -529,14 +529,14 @@ const platforms = [
       <h2
         class="text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent"
       >
-        Diseño en Desarrollo
+        Capturas de Pantalla
       </h2>
       <div
         class="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-500 mx-auto mb-8"
       >
       </div>
       <p class="text-neutral-300 max-w-2xl mx-auto">
-        Mockups y prototipos del diseño iOS nativo desarrollado en Figma
+        Capturas del funcionamiento actual de la aplicación en iOS.
       </p>
     </div>
 
@@ -545,19 +545,19 @@ const platforms = [
         class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700"
       >
         <!-- Placeholder para gallery cuando tengas las imágenes -->
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {
-            [1, 2, 3, 4, 5, 6].map((i) => (
-              <div class="aspect-[9/19] bg-gradient-to-br from-neutral-700 to-neutral-800 rounded-2xl border border-neutral-600 flex items-center justify-center group hover:scale-105 transition-transform">
-                <div class="text-center text-neutral-400 group-hover:text-neutral-300 transition-colors">
-                  <div class="text-4xl mb-2">📱</div>
-                  <div class="text-sm">Pantalla {i}</div>
-                  <div class="text-xs opacity-60">En desarrollo</div>
-                </div>
-              </div>
-            ))
-          }
-        </div>
+       <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+         {
+           screenshots.map((src, i) => (
+             <div class="aspect-[9/19] bg-neutral-900 rounded-2xl border border-neutral-600 overflow-hidden group hover:scale-105 transition-transform">
+               <img
+                 src={src}
+                 alt={`Pantalla ${i + 1}`}
+                 class="w-full h-full object-cover group-hover:brightness-102 transition duration-300"
+               />
+             </div>
+           ))
+         }
+       </div>
         <div class="text-center mt-8">
           <div
             class="inline-flex items-center space-x-2 px-4 py-2 bg-yellow-500/20 border border-yellow-500/30 rounded-lg"
@@ -595,17 +595,17 @@ const platforms = [
         <div class="bg-neutral-700/50 rounded-lg p-4">
           <div class="text-2xl mb-2">🎨</div>
           <div class="text-sm font-semibold text-white">Diseño UI/UX</div>
-          <div class="text-xs text-green-400">85% Completado</div>
+          <div class="text-xs text-green-400">86% Completado</div>
         </div>
         <div class="bg-neutral-700/50 rounded-lg p-4">
           <div class="text-2xl mb-2">⚡</div>
           <div class="text-sm font-semibold text-white">Backend API</div>
-          <div class="text-xs text-yellow-400">70% Completado</div>
+          <div class="text-xs text-yellow-400">50% Completado</div>
         </div>
         <div class="bg-neutral-700/50 rounded-lg p-4">
           <div class="text-2xl mb-2">📱</div>
           <div class="text-sm font-semibold text-white">App Móvil</div>
-          <div class="text-xs text-blue-400">75% Completado</div>
+          <div class="text-xs text-blue-400">55% Completado</div>
         </div>
       </div>
 
@@ -633,7 +633,7 @@ const platforms = [
         </div>
 
         <div class="flex items-center text-neutral-400">
-          <span class="text-sm">🚀 Launch estimado: Q3 2025</span>
+          <span class="text-sm">🚀 Launch estimado: Q1 2026</span>
         </div>
       </div>
 
