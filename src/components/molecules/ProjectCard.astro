@@ -14,20 +14,58 @@ const {
 } = Astro.props;
 
 const techColors = {
+  // Stack .NET - Colores azules/púrpuras
   ".NET": "from-indigo-500 to-purple-600",
   "C#": "from-indigo-600 to-purple-700",
-  Flutter: "from-blue-400 to-cyan-500",
-  React: "from-cyan-500 to-blue-500",
-  Azure: "from-blue-600 to-blue-800",
   SQL: "from-blue-500 to-cyan-500",
+  Azure: "from-blue-600 to-blue-800",
+  
+  // Stack Mobile - Colores azules/cyan
+  Flutter: "from-blue-400 to-cyan-500",
+  Dart: "from-cyan-500 to-blue-600",
+  
+  // Stack Backend APIs - Colores verdes/amarillos
   Python: "from-yellow-300 to-blue-500",
   FastAPI: "from-green-500 to-teal-600",
+  
+  // Stack Frontend Web - Colores cyan/azules
+  React: "from-cyan-500 to-blue-500",
+  Astro: "from-purple-600 to-blue-500",
+  JavaScript: "from-yellow-300 to-yellow-500",
+  HTML: "from-orange-400 to-red-500",
+  
+  // Stack Styling & UI - Colores cyan/púrpuras
+  TailwindCSS: "from-cyan-400 to-indigo-500",
+  Bootstrap: "from-purple-600 to-indigo-700",
+  
+  // Stack Databases & Cloud - Colores verdes/naranjas
   MongoDB: "from-green-500 to-green-700",
   Firebase: "from-yellow-400 to-orange-500",
+  
+  // Stack Tools & Methodologies - Colores naranjas/púrpuras
+  Git: "from-orange-500 to-amber-600",
+  Figma: "from-fuchsia-600 to-purple-600",
+  Scrum: "from-pink-500 to-red-500",
+  
+  // Stack No-Code/Automatización - Colores verdes/azules
   Notion: "from-green-500 to-blue-600",
   "No-Code": "from-pink-400 to-purple-500",
   Automatización: "from-orange-400 to-red-500",
   Analytics: "from-blue-400 to-indigo-600",
+  
+  // ⭐ NUEVAS TECNOLOGÍAS MIGANADO - Paleta Verde Especializada ⭐
+  "Machine Learning": "from-emerald-500 to-green-600",
+  "Regresión Lineal": "from-green-500 to-emerald-700", 
+  "SNIIM": "from-teal-500 to-green-600",
+  "Datos SNIIM": "from-lime-500 to-emerald-600",
+  "IA": "from-emerald-400 to-green-500",
+  "Inteligencia Artificial": "from-green-400 to-emerald-600",
+  "Estadística": "from-teal-400 to-green-500",
+  "Análisis de Datos": "from-lime-400 to-emerald-500",
+  "Algoritmos": "from-green-500 to-teal-600",
+  "Data Science": "from-emerald-500 to-teal-600",
+  "Predicción": "from-green-400 to-emerald-700",
+  "Modelado": "from-teal-500 to-emerald-600"
 };
 ---
 
