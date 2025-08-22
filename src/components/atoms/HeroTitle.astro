@@ -2,13 +2,15 @@
 const { text, id = "parallax-title", size = "text-[10vw]" } = Astro.props;
 ---
 
-<section class="relative h-screen overflow-hidden bg-neutral-950 flex items-center justify-center">
-  <h1
-    id={id}
-    class={`font-extrabold tracking-tight text-center z-10 gradient-text will-change-transform transition-transform duration-150 ease-out ${size}`}
-  >
-    {text}
-  </h1>
+<section class="relative h-screen overflow-hidden bg-neutral-950 flex items-center justify-center px-4">
+  <div class="w-full max-w-7xl mx-auto text-center">
+    <h1
+      id={id}
+      class={`font-extrabold tracking-tight text-center z-10 gradient-text will-change-transform transition-transform duration-150 ease-out ${size} leading-none`}
+    >
+      {text}
+    </h1>
+  </div>
 
   <script is:inline>
     window.addEventListener("scroll", () => {
@@ -28,11 +30,31 @@ const { text, id = "parallax-title", size = "text-[10vw]" } = Astro.props;
       background: linear-gradient(
         to bottom,
         rgba(255, 255, 255, 1) 70%,
-        rgba(160, 160, 160, 0.5) 90%,
+        rgba(160, 160, 160, 0.5) 95%,
         rgba(0, 0, 0, 0) 100%
       );
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      /* Mejoras para móvil */
+      word-break: keep-all;
+      hyphens: none;
+      white-space: nowrap;
+    }
+
+    /* Ajustes responsive para móvil */
+    @media (max-width: 640px) {
+      .gradient-text {
+        white-space: normal;
+        word-break: normal;
+        line-height: 0.9;
+      }
+    }
+    
+    /* Para pantallas muy pequeñas */
+    @media (max-width: 480px) {
+      .gradient-text {
+        line-height: 0.85;
+      }
     }
   </style>
 </section>

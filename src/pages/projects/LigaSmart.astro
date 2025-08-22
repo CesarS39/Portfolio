@@ -5,12 +5,12 @@ import HeroTitle from "../../components/atoms/HeroTitle.astro";
 import BaseSection from "../../components/atoms/BaseSection.astro";
 
 const screenshots: string[] = [
-  "/Portfolio/images/projects/ligasmart/dashboard.webp",
-  "/Portfolio/images/projects/ligasmart/teams.webp",
-  "/Portfolio/images/projects/ligasmart/players.webp",
-  "/Portfolio/images/projects/ligasmart/matches.webp",
-  "/Portfolio/images/projects/ligasmart/statistics.webp",
-  "/Portfolio/images/projects/ligasmart/tournaments.webp"
+  "/Portfolio/images/projects/ligasmart/Dashboard.webp",
+  "/Portfolio/images/projects/ligasmart/login.webp",
+  "/Portfolio/images/projects/ligasmart/Jugadores.webp",
+  "/Portfolio/images/projects/ligasmart/Torneos.webp",
+  "/Portfolio/images/projects/ligasmart/Asignar_torneo.webp",
+  "/Portfolio/images/projects/ligasmart/Agendar_partidos.webp"
 ];
 
 const techStack = [
@@ -453,48 +453,24 @@ const architecture = [
     </div>
   </BaseSection>
 
-  <!-- Screenshots/Gallery Section -->
-  <BaseSection>
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
-        Interfaces del Sistema
-      </h2>
-      <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-8"></div>
-      <p class="text-neutral-300 max-w-2xl mx-auto">
-        Capturas del sistema web responsive desarrollado con Bootstrap
-      </p>
+ <!-- Screenshots/Gallery Section -->
+<BaseSection>
+  <div class="text-center mb-16">
+    <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
+      Interfaces del Sistema
+    </h2>
+    <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-8"></div>
+    <p class="text-neutral-300 max-w-2xl mx-auto">
+      Capturas del sistema web responsive desarrollado con Bootstrap
+    </p>
+  </div>
+  
+  <div class="max-w-6xl mx-auto">
+    <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700">
+      <GalleryComponent images={screenshots} />
     </div>
-    
-    <div class="max-w-6xl mx-auto">
-      <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700">
-        <!-- Placeholder para gallery cuando tengas las imágenes -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            { name: "Dashboard Principal", icon: "📊" },
-            { name: "Gestión de Equipos", icon: "👥" },
-            { name: "Registro de Jugadores", icon: "⚽" },
-            { name: "Calendario de Partidos", icon: "📅" },
-            { name: "Centro de Estadísticas", icon: "📈" },
-            { name: "Panel Administrativo", icon: "⚙️" }
-          ].map((screen, i) => (
-            <div class="aspect-video bg-gradient-to-br from-neutral-700 to-neutral-800 rounded-xl border border-neutral-600 flex items-center justify-center group hover:scale-105 transition-transform">
-              <div class="text-center text-neutral-400 group-hover:text-neutral-300 transition-colors">
-                <div class="text-4xl mb-2">{screen.icon}</div>
-                <div class="text-sm font-medium">{screen.name}</div>
-                <div class="text-xs opacity-60">Sistema Web</div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div class="text-center mt-8">
-          <div class="inline-flex items-center space-x-2 px-4 py-2 bg-blue-500/20 border border-blue-500/30 rounded-lg">
-            <span class="text-xl">🖥️</span>
-            <span class="text-blue-400 text-sm">Interfaz web completamente funcional</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </BaseSection>
+  </div>
+</BaseSection>
 
  <!-- Final Status & CTA -->
 <BaseSection className="text-center">

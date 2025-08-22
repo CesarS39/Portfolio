@@ -1,7 +1,7 @@
 ---
 import BaseSection from "../atoms/BaseSection.astro";
 import Heading from "../atoms/Heading.astro";
-import TechnologyButton from "../molecules/TechnologyButton.astro";
+import SimpleTechnologyButton from "../molecules/TechnologyButton.astro";
 
 interface Technology {
   label: string;
@@ -13,22 +13,42 @@ interface Technology {
 const { techs } = Astro.props as { techs: Technology[] };
 ---
 
-<BaseSection id="tecnologias" >
+<BaseSection id="tecnologias">
   <div class="text-center mb-16">
-    <Heading level="h2" className="text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-       Tecnologías
+    <Heading level="h2" className="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
+       Stack Tecnológico
     </Heading>
     <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-6"></div>
+    <p class="text-neutral-300 max-w-2xl mx-auto">
+      Tecnologías que uso para crear soluciones completas
+    </p>
   </div>
 
-  <div class="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
-    {techs.map((tech) => (
-      <TechnologyButton
+  <!-- Grid unificado sin separaciones -->
+  <div class="flex flex-wrap justify-center gap-3 max-w-5xl mx-auto">
+    {techs.map((tech, index) => (
+      <SimpleTechnologyButton
         icon={tech.icon}
         label={tech.label}
         gradient={tech.gradient}
         isEmoji={tech.isEmoji}
+        delay={index * 50}
       />
     ))}
+  </div>
+
+  <!-- Stats mini centradas -->
+  <div class="mt-12 text-center">
+    <div class="inline-flex items-center space-x-6 bg-neutral-800/30 rounded-full px-6 py-3 border border-neutral-700">
+      <div class="flex items-center space-x-2">
+        <span class="text-cyan-400 font-bold">{techs.length}</span>
+        <span class="text-neutral-400 text-sm">tecnologías</span>
+      </div>
+      <div class="w-px h-4 bg-neutral-600"></div>
+      <div class="flex items-center space-x-2">
+        <span class="text-indigo-400 font-bold">Full</span>
+        <span class="text-neutral-400 text-sm">Stack</span>
+      </div>
+    </div>
   </div>
 </BaseSection>

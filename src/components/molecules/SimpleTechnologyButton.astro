@@ -1,0 +1,42 @@
+---
+const { 
+  icon, 
+  label, 
+  gradient = "", 
+  isEmoji = false, 
+  delay = 0 
+} = Astro.props;
+---
+
+<div 
+  class="group relative inline-flex items-center justify-center px-5 py-3 text-sm font-medium text-white rounded-xl border-2 border-transparent transition-all duration-300 hover:scale-105 cursor-pointer"
+  style={`animation-delay: ${delay}ms; background: linear-gradient(135deg, rgb(38, 38, 38), rgb(23, 23, 23)); border-image: linear-gradient(135deg, ${gradient.replace('from-', '').replace('to-', ', ')}) 1;`}
+>
+  <!-- Background gradient en hover -->
+  <div class={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl -z-10`}></div>
+  
+  <!-- Contenido -->
+  <div class="relative flex items-center space-x-2">
+    {isEmoji 
+      ? <span class="text-lg">{icon}</span>
+      : <i class={`${icon} text-lg`} />
+    }
+    <span>{label}</span>
+  </div>
+</div>
+
+<style>
+  /* Animación inicial */
+  div {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  @keyframes slideUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

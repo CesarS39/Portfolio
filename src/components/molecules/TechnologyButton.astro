@@ -4,14 +4,78 @@ import ButtonBase from "../atoms/ButtonBase.astro";
 const { icon, label, gradient = "", isEmoji = false } = Astro.props;
 ---
 
-<ButtonBase
-  className={`group relative inline-flex items-center justify-center text-sm text-white border-2 border-transparent ${gradient} hover:text-white`}
+<div 
+  class={`group relative inline-flex items-center justify-center text-sm font-medium text-white rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 cursor-pointer neon-button`}
 >
-  <span class="relative flex items-center gap-2 px-4 py-2 rounded-md bg-neutral-900 group-hover:bg-transparent transition-all duration-300">
+  <!-- Fondo base con color siempre visible -->
+  <div class={`absolute inset-0 bg-gradient-to-r ${gradient} transition-all duration-300`}></div>
+  
+  <!-- Contenido -->
+  <div class="relative z-10 flex items-center gap-2 px-4 py-2">
     {isEmoji
-      ? <span class="text-base">{icon}</span>
-      : <i class={`${icon} text-lg`} />
+      ? <span class="text-base transition-transform duration-300 group-hover:scale-110">{icon}</span>
+      : <i class={`${icon} text-lg transition-transform duration-300 group-hover:scale-110`} />
     }
-    {label}
-  </span>
-</ButtonBase>
+    <span class="transition-all duration-300">{label}</span>
+  </div>
+
+  <!-- Glow effect que se intensifica -->
+  <div class={`absolute inset-0 bg-gradient-to-r ${gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md`}></div>
+  
+  <!-- Shine effect con el mismo color del gradiente -->
+  <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/0 to-transparent shine-overlay -skew-x-12 transform translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
+  </div>
+
+  <!-- Partículas en hover -->
+  <div class="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+    <div class="absolute top-2 right-2 w-1 h-1 bg-white rounded-full animate-ping"></div>
+    <div class="absolute bottom-2 left-2 w-0.5 h-0.5 bg-white rounded-full animate-ping" style="animation-delay: 0.3s"></div>
+    <div class="absolute top-1/2 left-1/3 w-0.5 h-0.5 bg-white rounded-full animate-ping" style="animation-delay: 0.6s"></div>
+  </div>
+</div>
+
+<style>
+  .neon-button {
+    /* Glow base sutil */
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+  }
+  
+  .neon-button:hover {
+    /* Glow intenso en hover */
+    box-shadow: 
+      0 0 20px currentColor,
+      0 0 40px currentColor,
+      0 0 60px currentColor;
+    
+    /* Pulso suave */
+    animation: neon-pulse 1.5s ease-in-out infinite;
+  }
+
+  /* Shine effect que toma el color del gradiente padre */
+  .shine-overlay {
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255,255,255,0.1) 30%, 
+      rgba(255,255,255,0.4) 50%, 
+      rgba(255,255,255,0.1) 70%, 
+      transparent 100%
+    );
+    mix-blend-mode: overlay;
+  }
+
+  @keyframes neon-pulse {
+    0%, 100% {
+      box-shadow: 
+        0 0 20px currentColor,
+        0 0 40px currentColor,
+        0 0 60px currentColor;
+    }
+    50% {
+      box-shadow: 
+        0 0 15px currentColor,
+        0 0 30px currentColor,
+        0 0 45px currentColor;
+    }
+  }
+</style>

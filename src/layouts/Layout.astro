@@ -48,5 +48,80 @@ import "../styles/global.css";
         }
       });
     </script>
+    <style>
+      html,
+      body {
+        overflow-x: hidden;
+        max-width: 100vw;
+      }
+
+      /* Mejorar el centrado en móviles */
+      @media (max-width: 768px) {
+        /* Hero section ajustes */
+        .gradient-text {
+          font-size: clamp(2.5rem, 12vw, 6rem) !important;
+          line-height: 0.9;
+          word-spacing: -0.1em;
+          letter-spacing: -0.02em;
+        }
+
+        /* Secciones con mejor padding en móvil */
+        section {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        /* Cards responsivas */
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        /* Texto más legible en móvil */
+        h1,
+        h2,
+        h3 {
+          text-align: center;
+          word-wrap: break-word;
+          hyphens: auto;
+        }
+      }
+
+      /* Para pantallas muy pequeñas (menos de 375px) */
+      @media (max-width: 375px) {
+        .gradient-text {
+          font-size: clamp(2rem, 10vw, 4rem) !important;
+          line-height: 0.85;
+        }
+
+        /* Padding reducido en pantallas muy pequeñas */
+        section {
+          padding-left: 0.75rem;
+          padding-right: 0.75rem;
+        }
+      }
+
+      /* Mejoras para el parallax en móvil */
+      @media (max-width: 768px) {
+        [id*="parallax"] {
+          transform: none !important;
+        }
+      }
+
+      /* Fix para prevenir desbordamiento horizontal */
+      * {
+        box-sizing: border-box;
+      }
+
+      .container,
+      .max-w-4xl,
+      .max-w-5xl,
+      .max-w-6xl,
+      .max-w-7xl {
+        width: 100%;
+        max-width: calc(100vw - 2rem);
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
   </body>
 </html>
