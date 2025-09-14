@@ -1,0 +1,730 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import GalleryComponent from "../../components/organisms/GalleryComponent.astro";
+import HeroTitle from "../../components/atoms/HeroTitle.astro";
+import BaseSection from "../../components/atoms/BaseSection.astro";
+
+const screenshots: string[] = [
+  "/Portfolio/images/projects/sportCenter/menu1.png",
+  "/Portfolio/images/projects/sportCenter/menu2.png",
+  "/Portfolio/images/projects/sportCenter/menu3.png",
+  "/Portfolio/images/projects/sportCenter/login.png",
+  "/Portfolio/images/projects/sportCenter/userDashboard.png",
+  "/Portfolio/images/projects/sportCenter/reservar1.png",
+  "/Portfolio/images/projects/sportCenter/reservar2.png",
+  "/Portfolio/images/projects/sportCenter/reservar3.png",
+  "/Portfolio/images/projects/sportCenter/dashboardAdmin.png",
+  "/Portfolio/images/projects/sportCenter/adminCanchas.png",
+  "/Portfolio/images/projects/sportCenter/adminReservas.png",
+  "/Portfolio/images/projects/sportCenter/adminUsuarios.png"
+];
+
+const techStack = [
+  {
+    name: "Next.js 14",
+    icon: "⚛️",
+    description: "Framework React con App Router",
+    gradient: "from-emerald-500 to-teal-600"
+  },
+  {
+    name: "Supabase",
+    icon: "🗄️",
+    description: "Backend como servicio + PostgreSQL",
+    gradient: "from-teal-500 to-cyan-600"
+  },
+  {
+    name: "TypeScript",
+    icon: "🔷",
+    description: "Tipado estático para desarrollo",
+    gradient: "from-cyan-500 to-blue-600"
+  },
+  {
+    name: "Tailwind CSS",
+    icon: "🎨",
+    description: "Framework CSS utility-first",
+    gradient: "from-blue-500 to-indigo-600"
+  }
+];
+
+const features = [
+  {
+    title: "Sistema de Reservas Inteligente",
+    description: "Plataforma completa para reservar canchas deportivas en tiempo real con validación automática de disponibilidad",
+    icon: "📅",
+    gradient: "from-emerald-500 to-teal-600",
+    details: [
+      "Calendario interactivo",
+      "Validación en tiempo real",
+      "Reserva con 24h anticipación",
+      "Confirmación automática"
+    ]
+  },
+  {
+    title: "Gestión Premium de Instalaciones",
+    description: "Administración completa de canchas de tenis, pádel y fútbol 5 con precios diferenciados y características específicas",
+    icon: "🏆",
+    gradient: "from-teal-500 to-cyan-600",
+    details: [
+      "3 tipos de deportes",
+      "Precios por deporte",
+      "Gestión de disponibilidad",
+      "Instalaciones premium"
+    ]
+  },
+  {
+    title: "Autenticación y Roles",
+    description: "Sistema seguro con Supabase Auth que maneja usuarios, administradores y perfiles personalizados",
+    icon: "🔐",
+    gradient: "from-cyan-500 to-blue-600",
+    details: [
+      "Login/Registro seguro",
+      "Roles USER/ADMIN",
+      "Perfiles de usuario",
+      "Middleware de protección"
+    ]
+  },
+  {
+    title: "Dashboard Administrativo",
+    description: "Panel completo para administradores con gestión de canchas, usuarios, reservas y estadísticas del club",
+    icon: "📊",
+    gradient: "from-blue-500 to-indigo-600",
+    details: [
+      "Gestión de canchas",
+      "Control de reservas",
+      "Estadísticas en tiempo real",
+      "Panel de administración"
+    ]
+  }
+];
+
+const databaseSchema = [
+  {
+    table: "sport_types",
+    description: "Tipos de deportes disponibles",
+    fields: ["id", "name", "description", "max_people"]
+  },
+  {
+    table: "courts",
+    description: "Canchas deportivas del club",
+    fields: ["id", "name", "sport_type_id", "price_per_hour", "active"]
+  },
+  {
+    table: "user_profiles",
+    description: "Perfiles de usuarios",
+    fields: ["user_id", "name", "phone", "role"]
+  },
+  {
+    table: "reservations",
+    description: "Sistema de reservas",
+    fields: ["user_id", "court_id", "date", "start_time", "status"]
+  }
+];
+
+const impactMetrics = [
+  {
+    metric: "100%",
+    label: "Responsivo",
+    description: "Funciona en todos los dispositivos"
+  },
+  {
+    metric: "3",
+    label: "Deportes",
+    description: "Tenis, Pádel y Fútbol 5"
+  },
+  {
+    metric: "24/7",
+    label: "Disponible",
+    description: "Sistema online siempre activo"
+  },
+  {
+    metric: "Real-time",
+    label: "Sincronización",
+    description: "Actualizaciones en tiempo real"
+  }
+];
+---
+
+<Layout>
+  <HeroTitle text="SPORTCENTER" size="text-[10vw]" />
+  
+  <!-- Hero Section -->
+  <BaseSection className="text-center py-20 !max-w-5xl">
+    <div class="max-w-4xl mx-auto">
+      <!-- Status Badge -->
+      <div class="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-emerald-500/20 to-teal-600/20 border border-emerald-500/30 rounded-full mb-8 hover:from-emerald-500/30 hover:to-teal-600/30 hover:border-emerald-500/50 transition-all duration-300">
+        <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+        <span class="text-emerald-400 font-semibold text-sm">🏆 Club Deportivo Premium</span>
+      </div>
+
+      <p class="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed mb-8">
+        Plataforma completa de gestión para club deportivo premium con sistema de reservas online, 
+        autenticación segura y dashboard administrativo desarrollado con Next.js y Supabase.
+      </p>
+
+      <!-- Tech Stack Pills -->
+      <div class="flex flex-wrap justify-center gap-3 mb-10">
+        <span class="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full text-sm font-semibold text-white hover:from-emerald-400 hover:to-teal-500 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-emerald-500/25">
+          Next.js 14
+        </span>
+        <span class="px-4 py-2 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-full text-sm font-semibold text-white hover:from-teal-400 hover:to-cyan-500 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-teal-500/25">
+          Supabase
+        </span>
+        <span class="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full text-sm font-semibold text-white hover:from-cyan-400 hover:to-blue-500 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-cyan-500/25">
+          TypeScript
+        </span>
+        <span class="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full text-sm font-semibold text-white hover:from-blue-400 hover:to-indigo-500 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-blue-500/25">
+          Tailwind CSS
+        </span>
+      </div>
+
+      <!-- Demo Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+        <a
+          href="https://sport-center-eight.vercel.app"
+          class="group relative inline-flex items-center justify-center px-10 py-5 text-lg font-bold text-white rounded-2xl bg-gradient-to-br from-emerald-400 via-teal-500 to-emerald-600 hover:from-emerald-300 hover:via-teal-400 hover:to-emerald-500 transition-all duration-300 shadow-2xl hover:shadow-emerald-500/40 hover:scale-110 hover:-translate-y-1 transform border border-emerald-300/20 hover:border-emerald-300/40"
+        >
+          <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <svg
+            class="w-7 h-7 mr-3 text-white group-hover:scale-125 group-hover:rotate-12 transition-all duration-300"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <span class="relative z-10">Demo en Vivo</span>
+          <div class="absolute inset-0 rounded-2xl bg-gradient-to-r from-emerald-400 to-teal-500 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"></div>
+        </a>
+      </div>
+    </div>
+  </BaseSection>
+
+  <!-- Problem Solution Section -->
+  <BaseSection className="!max-w-5xl">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-emerald-400 to-teal-500 bg-clip-text text-transparent">
+          Modernizando la Gestión Deportiva
+        </h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-emerald-400 to-teal-500 mx-auto mb-8"></div>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-6 hover:bg-red-500/15 hover:border-red-500/30 hover:scale-105 transition-all duration-300 group">
+            <h3 class="text-xl font-bold text-red-400 mb-4 group-hover:text-red-300 transition-colors">🚫 Desafíos Identificados</h3>
+            <ul class="text-neutral-300 space-y-3 text-sm group-hover:text-neutral-200 transition-colors">
+              <li class="flex items-start space-x-2">
+                <span class="text-red-400 mt-1">•</span>
+                <span>Gestión manual de reservas propensa a errores</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <span class="text-red-400 mt-1">•</span>
+                <span>Falta de sistema digital para clubs deportivos</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <span class="text-red-400 mt-1">•</span>
+                <span>Ausencia de control de disponibilidad en tiempo real</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <span class="text-red-400 mt-1">•</span>
+                <span>Necesidad de interfaz moderna y responsive</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="space-y-6">
+          <div class="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-6 hover:bg-emerald-500/15 hover:border-emerald-500/30 hover:scale-105 transition-all duration-300 group">
+            <h3 class="text-xl font-bold text-emerald-400 mb-4 group-hover:text-emerald-300 transition-colors">✅ Solución SportCenter</h3>
+            <ul class="text-neutral-300 space-y-3 text-sm group-hover:text-neutral-200 transition-colors">
+              <li class="flex items-start space-x-2">
+                <span class="text-emerald-400 mt-1">•</span>
+                <span>Sistema automatizado de reservas online</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <span class="text-emerald-400 mt-1">•</span>
+                <span>Plataforma escalable con tecnologías modernas</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <span class="text-emerald-400 mt-1">•</span>
+                <span>Validación en tiempo real de disponibilidad</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <span class="text-emerald-400 mt-1">•</span>
+                <span>Experiencia de usuario premium y responsiva</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </BaseSection>
+
+  <!-- Tech Stack & Architecture -->
+  <BaseSection className="!max-w-5xl">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-teal-400 to-cyan-500 bg-clip-text text-transparent">
+        Stack Tecnológico Moderno
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-teal-400 to-cyan-500 mx-auto mb-8"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-16">
+      {techStack.map((tech) => (
+        <div class="group bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-6 border border-neutral-700 hover:border-emerald-500/50 hover:scale-110 hover:-translate-y-2 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-500/20">
+          <div class="text-4xl mb-4 text-center group-hover:scale-125 group-hover:rotate-6 transition-all duration-500">
+            {tech.icon}
+          </div>
+          <h3 class="text-lg font-bold text-center mb-2 text-white group-hover:text-emerald-400 transition-colors duration-300">
+            {tech.name}
+          </h3>
+          <p class="text-neutral-400 text-sm text-center group-hover:text-neutral-300 transition-colors duration-300">
+            {tech.description}
+          </p>
+          <div class={`mt-4 h-1 rounded bg-gradient-to-r ${tech.gradient} mx-auto w-0 group-hover:w-full transition-all duration-500`}></div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Database Schema -->
+    <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700 hover:border-emerald-500/30 hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300">
+      <h3 class="text-2xl font-bold text-center mb-8 text-emerald-400">Arquitectura de Base de Datos</h3>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {databaseSchema.map((table) => (
+          <div class="text-center bg-neutral-700/50 rounded-xl p-6 hover:bg-neutral-700/70 hover:scale-105 transition-all duration-300 group">
+            <h4 class="font-semibold text-white mb-3 group-hover:text-emerald-400 transition-colors">{table.table}</h4>
+            <p class="text-neutral-400 text-sm mb-4 group-hover:text-neutral-300 transition-colors">
+              {table.description}
+            </p>
+            <div class="space-y-1">
+              {table.fields.map((field) => (
+                <div class="text-xs text-neutral-500 font-mono bg-neutral-800/50 px-2 py-1 rounded">
+                  {field}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </BaseSection>
+
+  <!-- Features Section -->
+  <BaseSection className="!max-w-5xl">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+        Funcionalidades Principales
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto mb-8"></div>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      {features.map((feature, index) => (
+        <div class="group relative bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700 hover:border-emerald-500/50 hover:scale-105 hover:-translate-y-2 transition-all duration-500 overflow-hidden hover:shadow-2xl hover:shadow-emerald-500/20">
+          <div class={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-15 transition-opacity duration-500`}></div>
+          
+          <div class="relative z-10">
+            <div class="flex items-start space-x-4 mb-6">
+              <div class="text-4xl group-hover:scale-125 group-hover:rotate-12 transition-all duration-500">
+                {feature.icon}
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl font-bold mb-3 text-white group-hover:text-emerald-400 transition-colors duration-300">
+                  {feature.title}
+                </h3>
+                <p class="text-neutral-300 leading-relaxed mb-4 group-hover:text-neutral-200 transition-colors duration-300">
+                  {feature.description}
+                </p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+              {feature.details.map((detail) => (
+                <div class="flex items-center space-x-2 text-sm text-neutral-400 group-hover:text-neutral-300 transition-colors duration-300">
+                  <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full group-hover:bg-emerald-300 transition-colors"></div>
+                  <span>{detail}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </BaseSection>
+
+  <!-- Impact & Results -->
+  <BaseSection className="!max-w-5xl">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">
+        Métricas del Sistema
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-indigo-500 mx-auto mb-8"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-12">
+      {impactMetrics.map((metric) => (
+        <div class="text-center bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-6 border border-neutral-700 hover:border-emerald-500/50 hover:scale-110 hover:-translate-y-2 transition-all duration-500 group hover:shadow-xl hover:shadow-emerald-500/20">
+          <div class="text-3xl font-bold text-emerald-400 mb-2 group-hover:text-emerald-300 group-hover:scale-110 transition-all duration-300">{metric.metric}</div>
+          <div class="text-lg font-semibold text-white mb-2 group-hover:text-emerald-400 transition-colors">{metric.label}</div>
+          <div class="text-neutral-400 text-sm group-hover:text-neutral-300 transition-colors">{metric.description}</div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Architecture Overview -->
+    <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700 hover:border-emerald-500/30 hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300">
+      <h3 class="text-2xl font-bold text-center mb-8 text-emerald-400">Características del Sistema</h3>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="space-y-4">
+          <div class="flex items-start space-x-3 group hover:scale-105 transition-transform duration-300">
+            <div class="w-2 h-2 bg-emerald-400 rounded-full mt-2 flex-shrink-0 group-hover:bg-emerald-300 transition-colors"></div>
+            <p class="text-neutral-300 group-hover:text-neutral-200 transition-colors">Sistema de reservas con validación automática de conflictos</p>
+          </div>
+          <div class="flex items-start space-x-3 group hover:scale-105 transition-transform duration-300">
+            <div class="w-2 h-2 bg-emerald-400 rounded-full mt-2 flex-shrink-0 group-hover:bg-emerald-300 transition-colors"></div>
+            <p class="text-neutral-300 group-hover:text-neutral-200 transition-colors">Autenticación segura con Supabase Auth y middleware de protección</p>
+          </div>
+          <div class="flex items-start space-x-3 group hover:scale-105 transition-transform duration-300">
+            <div class="w-2 h-2 bg-emerald-400 rounded-full mt-2 flex-shrink-0 group-hover:bg-emerald-300 transition-colors"></div>
+            <p class="text-neutral-300 group-hover:text-neutral-200 transition-colors">Gestión de roles con permisos diferenciados (USER/ADMIN)</p>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-3 group hover:scale-105 transition-transform duration-300">
+            <div class="w-2 h-2 bg-teal-400 rounded-full mt-2 flex-shrink-0 group-hover:bg-teal-300 transition-colors"></div>
+            <p class="text-neutral-300 group-hover:text-neutral-200 transition-colors">Dashboard responsive optimizado para dispositivos móviles</p>
+          </div>
+          <div class="flex items-start space-x-3 group hover:scale-105 transition-transform duration-300">
+            <div class="w-2 h-2 bg-teal-400 rounded-full mt-2 flex-shrink-0 group-hover:bg-teal-300 transition-colors"></div>
+            <p class="text-neutral-300 group-hover:text-neutral-200 transition-colors">Panel administrativo para gestión completa del club</p>
+          </div>
+          <div class="flex items-start space-x-3 group hover:scale-105 transition-transform duration-300">
+            <div class="w-2 h-2 bg-teal-400 rounded-full mt-2 flex-shrink-0 group-hover:bg-teal-300 transition-colors"></div>
+            <p class="text-neutral-300 group-hover:text-neutral-200 transition-colors">Arquitectura escalable preparada para crecimiento futuro</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </BaseSection>
+
+  <!-- Technical Implementation -->
+  <BaseSection className="!max-w-5xl">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">
+        Implementación Técnica
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-indigo-400 to-purple-500 mx-auto mb-8"></div>
+    </div>
+
+    <div class="max-w-5xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-8 mb-12">
+        <!-- Frontend Architecture -->
+        <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700 hover:border-emerald-500/50 hover:scale-105 transition-all duration-300 group hover:shadow-xl hover:shadow-emerald-500/10">
+          <div class="text-center mb-6">
+            <div class="text-4xl mb-3 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">⚛️</div>
+            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">Frontend Moderno</h3>
+            <p class="text-neutral-400 text-sm group-hover:text-neutral-300 transition-colors">Next.js 14 con App Router</p>
+          </div>
+          
+          <div class="space-y-4">
+            <div class="bg-neutral-700/50 rounded-lg p-4 hover:bg-neutral-700/70 transition-colors duration-300 group/item">
+              <h4 class="font-semibold text-emerald-400 mb-2 group-hover/item:text-emerald-300 transition-colors">🚀 Server Components</h4>
+              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">React Server Components para mejor SEO y performance</p>
+            </div>
+            
+            <div class="bg-neutral-700/50 rounded-lg p-4 hover:bg-neutral-700/70 transition-colors duration-300 group/item">
+              <h4 class="font-semibold text-teal-400 mb-2 group-hover/item:text-teal-300 transition-colors">🔷 TypeScript</h4>
+              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Tipado estático completo para desarrollo seguro</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Backend Architecture -->
+        <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700 hover:border-emerald-500/50 hover:scale-105 transition-all duration-300 group hover:shadow-xl hover:shadow-emerald-500/10">
+          <div class="text-center mb-6">
+            <div class="text-4xl mb-3 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">🗄️</div>
+            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">Backend Escalable</h3>
+            <p class="text-neutral-400 text-sm group-hover:text-neutral-300 transition-colors">Supabase como Backend-as-a-Service</p>
+          </div>
+          
+          <div class="space-y-4">
+            <div class="bg-neutral-700/50 rounded-lg p-4 hover:bg-neutral-700/70 transition-colors duration-300 group/item">
+              <h4 class="font-semibold text-cyan-400 mb-2 group-hover/item:text-cyan-300 transition-colors">🐘 PostgreSQL</h4>
+              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Base de datos robusta con Row Level Security</p>
+            </div>
+            
+            <div class="bg-neutral-700/50 rounded-lg p-4 hover:bg-neutral-700/70 transition-colors duration-300 group/item">
+              <h4 class="font-semibold text-blue-400 mb-2 group-hover/item:text-blue-300 transition-colors">🔐 Auth Integrado</h4>
+              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Autenticación JWT con manejo automático de sesiones</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code Implementation Example -->
+      <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700 hover:border-emerald-500/30 hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300 group">
+        <h3 class="text-2xl font-bold text-center mb-8 text-emerald-400 group-hover:text-emerald-300 transition-colors">Ejemplo de Implementación</h3>
+        
+        <div class="bg-neutral-900 rounded-xl p-6 border border-neutral-700 hover:border-emerald-500/30 transition-colors duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-sm text-neutral-400">TypeScript + Supabase</span>
+            <span class="text-xs text-neutral-500">Sistema de reservas</span>
+          </div>
+          <pre class="text-sm text-neutral-300 overflow-x-auto"><code>{`// Validación de reserva con Supabase
+const handleReservation = async () => {
+  const { data: existingReservations, error } = await supabase
+    .from('reservations')
+    .select('*')
+    .eq('court_id', selectedCourt.id)
+    .eq('date', selectedDate.toISOString().split('T')[0])
+    .eq('status', 'ACTIVE')
+
+  // Validar conflictos de horario
+  const hasConflict = existingReservations?.some(reservation => 
+    timeOverlap(reservation.start_time, reservation.end_time, 
+                selectedTime, endTime))
+
+  if (!hasConflict) {
+    const { error } = await supabase
+      .from('reservations')
+      .insert({
+        user_id: user.id,
+        court_id: selectedCourt.id,
+        date: selectedDate,
+        start_time: selectedTime,
+        status: 'ACTIVE'
+      })
+  }
+}`}</code></pre>
+        </div>
+        
+        <div class="mt-6 text-center">
+          <div class="inline-flex items-center space-x-2 px-4 py-2 bg-emerald-500/20 border border-emerald-500/30 rounded-lg hover:bg-emerald-500/30 hover:border-emerald-500/50 transition-all duration-300">
+            <span class="text-xl">⚡</span>
+            <span class="text-emerald-400 text-sm">Validación en tiempo real</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </BaseSection>
+
+  <!-- Development Process -->
+  <BaseSection className="!max-w-5xl">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+        Proceso de Desarrollo
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-500 mx-auto mb-8"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <div class="relative">
+        <!-- Timeline line -->
+        <div class="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gradient-to-b from-emerald-500 to-teal-500 hidden md:block"></div>
+        
+        <div class="space-y-8">
+          <!-- Step 1 -->
+          <div class="flex items-center md:justify-between">
+            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-emerald-500/50 transition-colors">
+              <div class="flex items-center space-x-3 mb-3">
+                <span class="text-2xl">📋</span>
+                <h3 class="font-bold text-lg text-emerald-400">Análisis y Diseño</h3>
+              </div>
+              <p class="text-neutral-300 text-sm">Modelado de entidades deportivas, diseño de UX/UI y definición de la arquitectura del sistema con Next.js y Supabase.</p>
+            </div>
+            <div class="hidden md:block w-2/12 text-center">
+              <div class="w-8 h-8 bg-emerald-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">1</div>
+            </div>
+            <div class="hidden md:block md:w-5/12"></div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="flex items-center md:justify-between">
+            <div class="hidden md:block md:w-5/12"></div>
+            <div class="hidden md:block w-2/12 text-center">
+              <div class="w-8 h-8 bg-emerald-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">2</div>
+            </div>
+            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-emerald-500/50 transition-colors">
+              <div class="flex items-center space-x-3 mb-3">
+                <span class="text-2xl">🗄️</span>
+                <h3 class="font-bold text-lg text-emerald-400">Configuración Backend</h3>
+              </div>
+              <p class="text-neutral-300 text-sm">Diseño de esquema PostgreSQL, configuración de Supabase, implementación de Row Level Security y autenticación.</p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="flex items-center md:justify-between">
+            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-emerald-500/50 transition-colors">
+              <div class="flex items-center space-x-3 mb-3">
+                <span class="text-2xl">⚛️</span>
+                <h3 class="font-bold text-lg text-emerald-400">Desarrollo Frontend</h3>
+              </div>
+              <p class="text-neutral-300 text-sm">Implementación con Next.js 14, TypeScript y Tailwind CSS. Desarrollo de componentes reutilizables y páginas responsivas.</p>
+            </div>
+            <div class="hidden md:block w-2/12 text-center">
+              <div class="w-8 h-8 bg-emerald-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">3</div>
+            </div>
+            <div class="hidden md:block md:w-5/12"></div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="flex items-center md:justify-between">
+            <div class="hidden md:block md:w-5/12"></div>
+            <div class="hidden md:block w-2/12 text-center">
+              <div class="w-8 h-8 bg-emerald-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">4</div>
+            </div>
+            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-emerald-500/50 transition-colors">
+              <div class="flex items-center space-x-3 mb-3">
+                <span class="text-2xl">🚀</span>
+                <h3 class="font-bold text-lg text-emerald-400">Testing y Despliegue</h3>
+              </div>
+              <p class="text-neutral-300 text-sm">Pruebas de funcionalidad, validación de seguridad, optimización de performance y despliegue en Vercel.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </BaseSection>
+
+  <!-- Gallery Section -->
+  <BaseSection>
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-pink-400 to-rose-500 bg-clip-text text-transparent">
+        Capturas del Sistema
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-pink-400 to-rose-500 mx-auto mb-8"></div>
+    </div>
+    
+    <div class="max-w-6xl mx-auto">
+      <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700">
+        <GalleryComponent images={screenshots} />
+      </div>
+    </div>
+  </BaseSection>
+
+  <!-- Future Enhancements -->
+  <BaseSection className="!max-w-5xl">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-rose-400 to-orange-500 bg-clip-text text-transparent">
+        Futuras Mejoras y Escalabilidad
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-rose-400 to-orange-500 mx-auto mb-8"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700 hover:border-emerald-500/50 hover:scale-105 hover:-translate-y-2 transition-all duration-500 group hover:shadow-xl hover:shadow-emerald-500/20">
+          <h3 class="text-xl font-bold text-emerald-400 mb-6 group-hover:text-emerald-300 transition-colors">🚀 Mejoras Técnicas</h3>
+          <div class="space-y-4">
+            <div class="flex items-start space-x-3 group/item hover:scale-105 transition-transform duration-300">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mt-2 flex-shrink-0 group-hover/item:bg-emerald-300 transition-colors"></div>
+              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Sistema de pagos online con Stripe</p>
+            </div>
+            <div class="flex items-start space-x-3 group/item hover:scale-105 transition-transform duration-300">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mt-2 flex-shrink-0 group-hover/item:bg-emerald-300 transition-colors"></div>
+              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Aplicación móvil nativa con React Native</p>
+            </div>
+            <div class="flex items-start space-x-3 group/item hover:scale-105 transition-transform duration-300">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mt-2 flex-shrink-0 group-hover/item:bg-emerald-300 transition-colors"></div>
+              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Notificaciones push y recordatorios</p>
+            </div>
+            <div class="flex items-start space-x-3 group/item hover:scale-105 transition-transform duration-300">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mt-2 flex-shrink-0 group-hover/item:bg-emerald-300 transition-colors"></div>
+              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Analytics avanzados y reportes</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700 hover:border-teal-500/50 hover:scale-105 hover:-translate-y-2 transition-all duration-500 group hover:shadow-xl hover:shadow-teal-500/20">
+          <h3 class="text-xl font-bold text-teal-400 mb-6 group-hover:text-teal-300 transition-colors">🏆 Expansión del Negocio</h3>
+          <div class="space-y-4">
+            <div class="flex items-start space-x-3 group/item hover:scale-105 transition-transform duration-300">
+              <div class="w-2 h-2 bg-teal-400 rounded-full mt-2 flex-shrink-0 group-hover/item:bg-teal-300 transition-colors"></div>
+              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Sistema de membresías y suscripciones</p>
+            </div>
+            <div class="flex items-start space-x-3 group/item hover:scale-105 transition-transform duration-300">
+              <div class="w-2 h-2 bg-teal-400 rounded-full mt-2 flex-shrink-0 group-hover/item:bg-teal-300 transition-colors"></div>
+              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Integración con múltiples clubs deportivos</p>
+            </div>
+            <div class="flex items-start space-x-3 group/item hover:scale-105 transition-transform duration-300">
+              <div class="w-2 h-2 bg-teal-400 rounded-full mt-2 flex-shrink-0 group-hover/item:bg-teal-300 transition-colors"></div>
+              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Torneos y competencias online</p>
+            </div>
+            <div class="flex items-start space-x-3 group/item hover:scale-105 transition-transform duration-300">
+              <div class="w-2 h-2 bg-teal-400 rounded-full mt-2 flex-shrink-0 group-hover/item:bg-teal-300 transition-colors"></div>
+              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">API pública para integraciones</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </BaseSection>
+
+  <!-- CTA Section -->
+  <BaseSection className="text-center !max-w-5xl">
+    <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-12 border border-neutral-700 hover:border-emerald-500/30 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-500 group">
+      <h2 class="text-3xl font-bold mb-6 bg-gradient-to-r from-emerald-400 to-teal-500 bg-clip-text text-transparent group-hover:from-emerald-300 group-hover:to-teal-400 transition-all duration-300">
+        El Futuro de la Gestión Deportiva
+      </h2>
+      <p class="text-neutral-300 mb-8 max-w-2xl mx-auto group-hover:text-neutral-200 transition-colors duration-300">
+        SportCenter representa la evolución digital de los clubs deportivos, combinando tecnología moderna 
+        con experiencia de usuario premium para crear la plataforma definitiva de gestión deportiva.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+        <a
+          href="https://sport-center-eight.vercel.app"
+          class="group/btn relative inline-flex items-center justify-center px-10 py-5 text-lg font-bold text-white rounded-2xl bg-gradient-to-br from-emerald-400 via-teal-500 to-emerald-600 hover:from-emerald-300 hover:via-teal-400 hover:to-emerald-500 transition-all duration-300 shadow-2xl hover:shadow-emerald-500/50 hover:scale-110 hover:-translate-y-2 transform border border-emerald-300/20 hover:border-emerald-300/50"
+        >
+          <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-2xl opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+          <svg
+            class="w-7 h-7 mr-3 text-white group-hover/btn:scale-125 group-hover/btn:rotate-12 transition-all duration-300"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <span class="relative z-10">Ver Demo</span>
+          <div class="absolute inset-0 rounded-2xl bg-gradient-to-r from-emerald-400 to-teal-500 opacity-0 group-hover/btn:opacity-20 blur-xl transition-opacity duration-300"></div>
+        </a>
+        
+        <a
+          href="https://github.com/CesarS39/SportCenter"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group/btn relative inline-flex items-center justify-center px-10 py-5 text-lg font-bold text-white rounded-2xl bg-gradient-to-br from-neutral-600 via-neutral-700 to-neutral-800 hover:from-emerald-600 hover:via-teal-700 hover:to-emerald-800 transition-all duration-300 shadow-xl hover:shadow-emerald-500/30 hover:scale-110 hover:-translate-y-2 transform border border-neutral-500/20 hover:border-emerald-500/50"
+        >
+          <svg
+            class="w-7 h-7 mr-3 text-white group-hover/btn:rotate-12 group-hover/btn:scale-125 transition-all duration-300"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.262.82-.583 0-.288-.012-1.243-.018-2.253-3.338.725-4.042-1.612-4.042-1.612-.546-1.388-1.333-1.758-1.333-1.758-1.09-.745.083-.73.083-.73 1.205.087 1.838 1.24 1.838 1.24 1.07 1.833 2.807 1.303 3.492.996.107-.775.418-1.303.76-1.602-2.665-.304-5.466-1.332-5.466-5.933 0-1.31.467-2.382 1.235-3.222-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.47 11.47 0 0 1 3.003-.403c1.02.005 2.047.137 3.003.403 2.292-1.552 3.297-1.23 3.297-1.23.654 1.653.243 2.873.12 3.176.77.84 1.233 1.912 1.233 3.222 0 4.61-2.805 5.625-5.475 5.922.43.37.815 1.102.815 2.222 0 1.604-.015 2.898-.015 3.293 0 .324.216.7.825.58C20.565 22.296 24 17.796 24 12.5 24 5.87 18.627.5 12 .5z"
+            ></path>
+          </svg>
+          <span class="relative z-10">Ver Repositorio</span>
+        </a>
+      </div>
+
+      <!-- Tech Stack Summary -->
+      <div class="mt-8 pt-8 border-t border-neutral-700 group-hover:border-emerald-500/30 transition-colors duration-300">
+        <div class="flex items-center justify-center space-x-2 mb-3">
+          <svg class="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657 1.414 1.414L2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"/>
+          </svg>
+          <span class="text-emerald-400 text-sm font-semibold">Desplegado en Vercel</span>
+        </div>
+        <p class="text-neutral-400 text-sm group-hover:text-neutral-300 transition-colors duration-300">
+          <span class="text-emerald-400 group-hover:text-emerald-300 transition-colors">Next.js 14</span> • 
+          <span class="text-teal-400 group-hover:text-teal-300 transition-colors">Supabase</span> • 
+          <span class="text-cyan-400 group-hover:text-cyan-300 transition-colors">TypeScript</span> • 
+          <span class="text-blue-400 group-hover:text-blue-300 transition-colors">Tailwind + shadcn/ui</span>
+        </p>
+      </div>
+    </div>
+  </BaseSection>
+</Layout>

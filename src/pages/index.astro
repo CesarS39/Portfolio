@@ -20,135 +20,136 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
     <ParallaxHero />
     <AboutSection />
     <TechStackSection
-  techs={[
-    // Backend Stack - Principal
-    {
-      label: ".NET Framework",
-      icon: "devicon-dotnetcore-plain",
-      gradient: "from-indigo-500 to-sky-700",
-      category: "Backend"
-    },
-    {
-      label: "C#",
-      icon: "devicon-csharp-plain",
-      gradient: "from-indigo-600 to-purple-700",
-      category: "Backend"
-    },
-    {
-      label: "Python",
-      icon: "devicon-python-plain",
-      gradient: "from-yellow-300 to-blue-500",
-      category: "Backend"
-    },
-    {
-      label: "FastAPI",
-      icon: "🚀",
-      gradient: "from-green-500 to-teal-600",
-      isEmoji: true,
-      category: "Backend"
-    },
+      techs={[
+        // Backend Stack - Principal
+        {
+          label: ".NET Framework",
+          icon: "devicon-dotnetcore-plain",
+          gradient: "from-indigo-500 to-sky-700",
+          category: "Backend",
+        },
+        {
+          label: "C#",
+          icon: "devicon-csharp-plain",
+          gradient: "from-indigo-600 to-purple-700",
+          category: "Backend",
+        },
+        {
+          label: "Python",
+          icon: "devicon-python-plain",
+          gradient: "from-yellow-300 to-blue-500",
+          category: "Backend",
+        },
+        {
+          label: "FastAPI",
+          icon: "🚀",
+          gradient: "from-green-500 to-teal-600",
+          isEmoji: true,
+          category: "Backend",
+        },
 
-    // Frontend Web
-    {
-      label: "React",
-      icon: "devicon-react-original",
-      gradient: "from-cyan-500 to-blue-500",
-      category: "Frontend"
-    },
-    {
-      label: "Astro",
-      icon: "devicon-astro-plain",
-      gradient: "from-purple-600 to-blue-500",
-      category: "Frontend"
-    },
-    {
-      label: "JavaScript",
-      icon: "devicon-javascript-plain",
-      gradient: "from-yellow-300 to-yellow-500",
-      category: "Frontend"
-    },
-    {
-      label: "HTML",
-      icon: "devicon-html5-plain",
-      gradient: "from-orange-400 to-red-500",
-      category: "Frontend"
-    },
-    {
-      label: "TailwindCSS",
-      icon: "devicon-tailwindcss-original",
-      gradient: "from-cyan-400 to-indigo-500",
-      category: "Frontend"
-    },
-    {
-      label: "Bootstrap",
-      icon: "devicon-bootstrap-plain",
-      gradient: "from-purple-600 to-indigo-700",
-      category: "Frontend"
-    },
+        // Frontend Web
+        {
+          label: "React",
+          icon: "devicon-react-original",
+          gradient: "from-cyan-500 to-blue-500",
+          category: "Frontend",
+        },
+        {
+          label: "Astro",
+          icon: "devicon-astro-plain",
+          gradient: "from-purple-600 to-blue-500",
+          category: "Frontend",
+        },
+        {
+          label: "JavaScript",
+          icon: "devicon-javascript-plain",
+          gradient: "from-yellow-300 to-yellow-500",
+          category: "Frontend",
+        },
+        {
+          label: "HTML",
+          icon: "devicon-html5-plain",
+          gradient: "from-orange-400 to-red-500",
+          category: "Frontend",
+        },
+        {
+          label: "TailwindCSS",
+          icon: "devicon-tailwindcss-original",
+          gradient: "from-cyan-400 to-indigo-500",
+          category: "Frontend",
+        },
+        {
+          label: "Bootstrap",
+          icon: "devicon-bootstrap-plain",
+          gradient: "from-purple-600 to-indigo-700",
+          category: "Frontend",
+        },
 
-    // Mobile Development
-    {
-      label: "Flutter",
-      icon: "devicon-flutter-plain",
-      gradient: "from-blue-400 to-cyan-500",
-      category: "Mobile"
-    },
-    {
-      label: "Dart",
-      icon: "devicon-dart-plain",
-      gradient: "from-cyan-500 to-blue-600",
-      category: "Mobile"
-    },
+        // Mobile Development
+        {
+          label: "Flutter",
+          icon: "devicon-flutter-plain",
+          gradient: "from-blue-400 to-cyan-500",
+          category: "Mobile",
+        },
+        {
+          label: "Dart",
+          icon: "devicon-dart-plain",
+          gradient: "from-cyan-500 to-blue-600",
+          category: "Mobile",
+        },
 
-    // Databases
-    {
-      label: "SQL Server",
-      icon: "devicon-microsoftsqlserver-plain",
-      gradient: "from-red-600 to-orange-500",
-      category: "Data"
-    },
-    {
-      label: "MongoDB",
-      icon: "devicon-mongodb-plain",
-      gradient: "from-green-500 to-green-700",
-      category: "Data"
-    },
+        // Databases
+        {
+          label: "SQL Server",
+          icon: "devicon-microsoftsqlserver-plain",
+          gradient: "from-red-600 to-orange-500",
+          category: "Data",
+        },
+        {
+          label: "MongoDB",
+          icon: "devicon-mongodb-plain",
+          gradient: "from-green-500 to-green-700",
+          category: "Data",
+        },
 
-    // Cloud & Services
-    {
-      label: "Azure",
-      icon: "devicon-azure-plain",
-      gradient: "from-blue-600 to-blue-800",
-      category: "Cloud"
-    },
-    {
-      label: "Firebase",
-      icon: "devicon-firebase-plain",
-      gradient: "from-yellow-400 to-orange-500",
-      category: "Cloud"
-    },
+        // Cloud & Services
+        {
+          label: "Azure",
+          icon: "devicon-azure-plain",
+          gradient: "from-blue-600 to-blue-800",
+          category: "Cloud",
+        },
+        {
+          label: "Firebase",
+          icon: "devicon-firebase-plain",
+          gradient: "from-yellow-400 to-orange-500",
+          category: "Cloud",
+        },
 
-    // Tools & Methodologies
-    {
-      label: "Git",
-      icon: "devicon-git-plain",
-      gradient: "from-orange-500 to-amber-600",
-      category: "Tools"
-    },
-    {
-      label: "Figma",
-      icon: "devicon-figma-plain",
-      gradient: "from-fuchsia-600 to-purple-600",
-      category: "Tools"
-    },
-    {
-      label: "Scrum",
-      icon: "📋",
-      gradient: "from-pink-500 to-red-500",
-      isEmoji: true,
-      category: "Tools"
-    },
-  ]} />
+        // Tools & Methodologies
+        {
+          label: "Git",
+          icon: "devicon-git-plain",
+          gradient: "from-orange-500 to-amber-600",
+          category: "Tools",
+        },
+        {
+          label: "Figma",
+          icon: "devicon-figma-plain",
+          gradient: "from-fuchsia-600 to-purple-600",
+          category: "Tools",
+        },
+        {
+          label: "Scrum",
+          icon: "📋",
+          gradient: "from-pink-500 to-red-500",
+          isEmoji: true,
+          category: "Tools",
+        },
+      ]}
+    />
 
     <SkillsSection />
 
@@ -268,15 +269,6 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
           techStack: ["Flutter", "FastAPI", "MongoDB", "Firebase"],
         },
         {
-          title: "LigaSmart - Gestión Deportiva",
-          description:
-            "Sistema web para administrar torneos deportivos con registro de equipos, seguimiento de partidos y estadísticas avanzadas.",
-          image: "/Portfolio/images/projects/ligasmart/main.webp",
-          repo: "https://github.com/CesarS39/LigaSmart",
-          link: "/Portfolio/projects/LigaSmart/",
-          techStack: [".NET", "SQL", "Azure"],
-        },
-        {
           title: "MiGanado - IA para Ganadería",
           description:
             "Calculadora inteligente para estimación del precio de ganado bovino utilizando regresión lineal simple. Basada en datos oficiales del SNIIM con 93.9% de precisión.",
@@ -287,11 +279,36 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
           featured: true,
         },
         {
+          title: "SportCenter - Club Deportivo Premium",
+          description:
+            "Plataforma completa de gestión para club deportivo con sistema de reservas online, autenticación segura, dashboard administrativo y panel de control en tiempo real",
+          image: "/Portfolio/images/projects/sportCenter/userDashboard.png",
+          repo: "https://github.com/CesarS39/SportCenter",
+          demo: "https://sport-center-eight.vercel.app",
+          link: "/Portfolio/projects/SportCenter/",
+          techStack: [
+            "NextJS",
+            "TypeScript",
+            "TailwindCSS",
+            "Supabase",
+            "shadcn/ui",
+          ],
+        },
+        {
+          title: "LigaSmart - Gestión Deportiva",
+          description:
+            "Sistema web para administrar torneos deportivos con registro de equipos, seguimiento de partidos y estadísticas avanzadas.",
+          image: "/Portfolio/images/projects/ligasmart/main.webp",
+          repo: "https://github.com/CesarS39/LigaSmart",
+          link: "/Portfolio/projects/LigaSmart/",
+          techStack: [".NET", "SQL", "Azure"],
+        },
+        {
           title: "Sistema de Gestión Deportiva - UPP",
           description:
             "Sistemas no-code desarrollados en Notion para optimizar la gestión del extracurricular de tenis en la Universidad Politécnica de Pachuca. Automatización de asistencias, eventos, calificaciones y análisis estadístico para mejorar la toma de decisiones administrativas.",
           image: "/Portfolio/images/projects/notiontennis/main.webp",
-          repo: false, 
+          repo: false,
           link: "/Portfolio/projects/NotionTennis/",
           techStack: ["Notion", "No-Code", "Automatización", "Analytics"],
         },
