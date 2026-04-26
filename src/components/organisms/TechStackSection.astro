@@ -1,54 +1,227 @@
 ---
-import BaseSection from "../atoms/BaseSection.astro";
-import Heading from "../atoms/Heading.astro";
-import SimpleTechnologyButton from "../molecules/TechnologyButton.astro";
-
 interface Technology {
   label: string;
   icon: string;
-  gradient: string;    
+  gradient?: string;
   isEmoji?: boolean;
+  category?: string;
 }
 
 const { techs } = Astro.props as { techs: Technology[] };
+
+// Split into two rows for bidirectional marquee
+const mid = Math.ceil(techs.length / 2);
+const row1 = techs.slice(0, mid);
+const row2 = techs.slice(mid);
 ---
 
-<BaseSection id="tecnologias">
-  <div class="text-center mb-16">
-    <Heading level="h2" className="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
-       Stack Tecnológico
-    </Heading>
-    <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-6"></div>
-    <p class="text-neutral-300 max-w-2xl mx-auto">
-      Tecnologías que uso para crear soluciones completas
-    </p>
+<section id="tecnologias" class="reveal-section tech-section">
+
+  <div class="tech-inner">
+    <p class="tech-label">Stack</p>
+    <h2 class="tech-heading">Tecnologías</h2>
   </div>
 
-  <!-- Grid unificado sin separaciones -->
-  <div class="flex flex-wrap justify-center gap-3 max-w-5xl mx-auto">
-    {techs.map((tech, index) => (
-      <SimpleTechnologyButton
-        icon={tech.icon}
-        label={tech.label}
-        gradient={tech.gradient}
-        isEmoji={tech.isEmoji}
-        delay={index * 50}
-      />
-    ))}
-  </div>
+  <!-- Full-width marquee rows -->
+  <div class="marquee-wrap">
 
-  <!-- Stats mini centradas -->
-  <div class="mt-12 text-center">
-    <div class="inline-flex items-center space-x-6 bg-neutral-800/30 rounded-full px-6 py-3 border border-neutral-700">
-      <div class="flex items-center space-x-2">
-        <span class="text-cyan-400 font-bold">{techs.length}</span>
-        <span class="text-neutral-400 text-sm">tecnologías</span>
-      </div>
-      <div class="w-px h-4 bg-neutral-600"></div>
-      <div class="flex items-center space-x-2">
-        <span class="text-indigo-400 font-bold">Full</span>
-        <span class="text-neutral-400 text-sm">Stack</span>
+    <!-- Row 1 — scrolls left -->
+    <div class="marquee-viewport">
+      <div class="marquee-track marquee-left">
+        {[...row1, ...row1].map((tech) => (
+          <div class="tech-chip">
+            {tech.isEmoji
+              ? <span class="chip-emoji">{tech.icon}</span>
+              : <i class={`${tech.icon} chip-devicon`} />
+            }
+            <span class="chip-label">{tech.label}</span>
+          </div>
+        ))}
       </div>
     </div>
+
+    <!-- Row 2 — scrolls right -->
+    <div class="marquee-viewport">
+      <div class="marquee-track marquee-right">
+        {[...row2, ...row2].map((tech) => (
+          <div class="tech-chip">
+            {tech.isEmoji
+              ? <span class="chip-emoji">{tech.icon}</span>
+              : <i class={`${tech.icon} chip-devicon`} />
+            }
+            <span class="chip-label">{tech.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
   </div>
-</BaseSection>
+
+</section>
+
+<style>
+  .tech-section {
+    padding: 3rem 0 3.5rem;
+    background: #080808;
+    overflow: hidden;
+  }
+
+  .tech-inner {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .tech-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  .tech-heading {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    letter-spacing: -0.03em;
+    color: #f0f0f0;
+  }
+
+  /* ── Marquee container ── */
+  .marquee-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .marquee-viewport {
+    overflow: hidden;
+    /* Fade left and right edges */
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+  }
+
+  /* ── Scrolling tracks ── */
+  .marquee-track {
+    display: flex;
+    gap: 0.75rem;
+    width: max-content;
+    will-change: transform;
+  }
+
+  .marquee-left {
+    animation: scroll-left 38s linear infinite;
+  }
+
+  .marquee-right {
+    animation: scroll-right 42s linear infinite;
+  }
+
+  @keyframes scroll-left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  @keyframes scroll-right {
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0); }
+  }
+
+  /* Pause on hover */
+  .marquee-viewport:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  /* ── Individual chip ── */
+  .tech-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.55rem 1.1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+    white-space: nowrap;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+
+  /* Gradient border shimmer on hover */
+  .tech-chip::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.07) 50%,
+      transparent 70%
+    );
+    transform: translateX(-100%);
+    transition: transform 0s;
+  }
+
+  .tech-chip:hover {
+    border-color: rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.055);
+  }
+
+  .tech-chip:hover::before {
+    transform: translateX(200%);
+    transition: transform 0.5s ease;
+  }
+
+  /* ── Icon ── */
+  .chip-devicon {
+    font-size: 1.15rem;
+    color: #e2e8f0;
+    opacity: 0.55;
+    transition: opacity 0.25s ease;
+    flex-shrink: 0;
+  }
+
+  .tech-chip:hover .chip-devicon {
+    opacity: 1;
+  }
+
+  .chip-emoji {
+    font-size: 1rem;
+    opacity: 0.6;
+    transition: opacity 0.25s ease;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .tech-chip:hover .chip-emoji {
+    opacity: 1;
+  }
+
+  /* ── Label ── */
+  .chip-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #888;
+    letter-spacing: 0.02em;
+    transition: color 0.25s ease;
+  }
+
+  .tech-chip:hover .chip-label {
+    color: #d8dce4;
+  }
+
+  /* Respect reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-left, .marquee-right { animation: none; }
+  }
+</style>

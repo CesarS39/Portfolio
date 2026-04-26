@@ -1,20 +1,146 @@
 ---
-import BaseSection from "../atoms/BaseSection.astro";
-import Heading from "../atoms/Heading.astro";
-import Paragraph from "../atoms/Paragraph.astro";
 ---
 
-<BaseSection id="vision">
-  <div class="text-center mb-16">
-    <Heading level="h2" className="text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-       Visión Profesional
-    </Heading>
-    <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-6"></div>
-  </div>
+<section id="vision" class="reveal-section vision-section">
+  <div class="vision-inner">
 
-  <div class="max-w-5xl mx-auto text-center">
-    <Paragraph>
-      Mi objetivo es convertirme en un desarrollador de software full-stack, capaz de organizar proyectos de la mejor manera, combinando los conocimientos de mi carrera técnica con los de mi carrera profesional. Nunca dejar de aprender nuevas tecnologías o mejorar en mi especialidad.
-    </Paragraph>
+    <p class="vision-label">Visión</p>
+
+    <blockquote class="vision-quote">
+      Construir software que importa —<br />
+      del primer commit al último píxel.
+    </blockquote>
+
+    <div class="vision-stats">
+      <div class="vision-stat">
+        <span class="vision-stat-num" data-count="3" data-suffix="+">0+</span>
+        <span class="vision-stat-label">años de código</span>
+      </div>
+      <div class="vision-divider" aria-hidden="true"></div>
+      <div class="vision-stat">
+        <span class="vision-stat-num" data-count="6" data-suffix="">0</span>
+        <span class="vision-stat-label">proyectos reales</span>
+      </div>
+      <div class="vision-divider" aria-hidden="true"></div>
+      <div class="vision-stat">
+        <span class="vision-stat-num">Full</span>
+        <span class="vision-stat-label">Stack</span>
+      </div>
+    </div>
+
   </div>
-</BaseSection>
+</section>
+
+<style>
+  .vision-section {
+    padding: 3.5rem 1.5rem;
+    background: #080808;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .vision-inner {
+    max-width: 56rem;
+    margin: 0 auto;
+  }
+
+  .vision-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #444;
+    margin-bottom: 2rem;
+  }
+
+  .vision-quote {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.5vw, 2.6rem);
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: #f0f0f0;
+    margin: 0 0 2.5rem;
+    quotes: none;
+  }
+
+  .vision-stats {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .vision-divider {
+    width: 1px;
+    height: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .vision-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .vision-stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #e2e8f0;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .vision-stat-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: #444;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 640px) {
+    .vision-divider { display: none; }
+  }
+</style>
+
+<script>
+  function runCounters(container: Element) {
+    const nums = container.querySelectorAll<HTMLElement>('[data-count]');
+    nums.forEach((el) => {
+      const target = parseInt(el.dataset.count ?? '0', 10);
+      const suffix = el.dataset.suffix ?? '';
+      const duration = 900;
+      const start = performance.now();
+
+      const tick = (now: number) => {
+        const elapsed = Math.min(now - start, duration);
+        const progress = elapsed / duration;
+        // ease-out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = Math.round(eased * target);
+        el.textContent = value + suffix;
+        if (elapsed < duration) requestAnimationFrame(tick);
+      };
+
+      requestAnimationFrame(tick);
+    });
+  }
+
+  const section = document.querySelector('#vision');
+  if (section) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            runCounters(e.target);
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    io.observe(section);
+  }
+</script>

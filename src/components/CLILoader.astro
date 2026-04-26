@@ -1,99 +1,164 @@
 <section
   id="cli-loader"
-  class="w-full h-screen bg-black flex items-center justify-center fixed top-0 left-0 z-50"
+  aria-label="Cargando portafolio"
+  role="status"
 >
-  <div
-    class="relative bg-[#1a1a1a] text-[#0f0] font-mono text-sm px-4 py-6 min-w-[24em] max-w-[90vw] border border-[#333] rounded shadow-md overflow-hidden"
-  >
-    <!-- Terminal Header -->
-    <div
-      class="absolute top-0 left-0 right-0 h-6 bg-[#333] rounded-t px-2 flex items-center justify-between"
-    >
-      <div class="text-xs text-[#eee]">Status</div>
-      <div class="flex space-x-1">
-        <div class="w-[0.6em] h-[0.6em] rounded-full bg-red-600"></div>
-        <div class="w-[0.6em] h-[0.6em] rounded-full bg-yellow-400"></div>
-        <div class="w-[0.6em] h-[0.6em] rounded-full bg-green-600"></div>
-      </div>
+  <div class="cli-window">
+    <div class="cli-line cli-line-1">
+      <span class="cli-prompt">$</span>
+      <span class="cli-text">portfolio --init</span>
     </div>
 
-    <!-- Terminal Text -->
-    <div
-      class="text mt-6 inline-block whitespace-nowrap overflow-hidden border-r-2 border-green-500"
-    >
-      &gt; Cargando portafolio de César Enríquez...
+    <div class="cli-line cli-line-2">
+      <span class="cli-prompt cli-ok">✓</span>
+      <span class="cli-text">loading modules...</span>
+    </div>
+
+    <div class="cli-line cli-line-3">
+      <span class="cli-prompt cli-ok">✓</span>
+      <span class="cli-text">welcome, César.</span>
+      <span class="cli-cursor" aria-hidden="true"></span>
     </div>
   </div>
-
-  <style>
-    @keyframes blinkCursor {
-      50% {
-        border-right-color: transparent;
-      }
-    }
-
-    @keyframes typeAndDelete {
-      0%,
-      10% {
-        width: 0;
-      }
-      100% {
-        width: 31ch;
-      }
-    }
-
-    .text {
-      animation:
-        typeAndDelete 2.5s steps(40, end) forwards,
-        blinkCursor 0.7s step-end infinite alternate;
-    }
-  </style>
-
-  <script is:inline>
-    const preloadImages = [
-      "/Portfolio/images/intereses/tennis2.webp",
-      "/Portfolio/images/intereses/aprender.webp",
-      "/Portfolio/images/intereses/viajar.webp",
-      "/Portfolio/images/intereses/FondoStream.webp",
-      "/Portfolio/images/intereses/videojuegos.webp",
-      "/Portfolio/images/memoji.webp"
-      
-    ];
-
-    preloadImages.forEach(src => {
-      const img = new Image();
-      img.src = src;
-    });
-  </script>
-
-  <script is:inline>
-    document.addEventListener("DOMContentLoaded", () => {
-      // Si viene del botón Home, no mostrar loader
-      if (sessionStorage.getItem("fromHomeButton") === "true") {
-        const loader = document.getElementById("cli-loader");
-        if (loader) loader.remove();
-
-        const main = document.getElementById("main-content");
-        if (main) main.style.display = "block";
-
-        // Limpia la marca
-        sessionStorage.removeItem("fromHomeButton");
-        return;
-      }
-
-      setTimeout(() => {
-        const loader = document.getElementById("cli-loader");
-        if (loader) {
-          loader.style.opacity = "0";
-          loader.style.transition = "opacity 0.5s ease-out";
-          setTimeout(() => loader.remove(), 500);
-        }
-
-        const main = document.getElementById("main-content");
-        if (main) {
-          main.style.display = "block";
-        }
-      }, 3000);
-    });
-  </script>
 </section>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+  #cli-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    background: #080808;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.45s ease-out;
+  }
+
+  .cli-window {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  /* Each line: hidden by default, revealed by animation-delay */
+  .cli-line {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    opacity: 0;
+  }
+
+  .cli-line-1 { animation: line-appear 0s 0ms    forwards; }
+  .cli-line-2 { animation: line-appear 0s 520ms  forwards; }
+  .cli-line-3 { animation: line-appear 0s 1060ms forwards; }
+
+  @keyframes line-appear {
+    to { opacity: 1; }
+  }
+
+  /* Prompt symbol */
+  .cli-prompt {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+    color: #444;
+    user-select: none;
+    min-width: 1ch;
+  }
+
+  .cli-prompt.cli-ok {
+    color: #00ff41;
+  }
+
+  /* Typewriter text */
+  .cli-text {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+    font-weight: 400;
+    color: #f0f0f0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    letter-spacing: 0.01em;
+  }
+
+  .cli-line-1 .cli-text {
+    animation: type-1 0.42s steps(16, end) 0ms    forwards;
+  }
+  .cli-line-2 .cli-text {
+    animation: type-2 0.46s steps(19, end) 520ms  forwards;
+  }
+  .cli-line-3 .cli-text {
+    animation: type-3 0.38s steps(16, end) 1060ms forwards;
+  }
+
+  /* "$ portfolio --init" = 16 chars */
+  @keyframes type-1 { to { width: 16ch; } }
+  /* "loading modules..." = 19 chars */
+  @keyframes type-2 { to { width: 19ch; } }
+  /* "welcome, César." = 16 chars */
+  @keyframes type-3 { to { width: 16ch; } }
+
+  /* Blinking cursor — only visible on line 3 after it finishes typing */
+  .cli-cursor {
+    display: inline-block;
+    width: 0.5ch;
+    height: 1.1em;
+    background: #00ff41;
+    opacity: 0;
+    vertical-align: middle;
+    animation: cursor-appear 0s 1440ms forwards,
+               cursor-blink 0.65s step-end 1440ms infinite;
+  }
+
+  @keyframes cursor-appear { to { opacity: 1; } }
+  @keyframes cursor-blink  { 50% { opacity: 0; } }
+</style>
+
+<script is:inline>
+  // Preload key images in parallel with the loader
+  [
+    "/Portfolio/images/intereses/tennis2.webp",
+    "/Portfolio/images/intereses/aprender.webp",
+    "/Portfolio/images/intereses/viajar.webp",
+    "/Portfolio/images/intereses/FondoStream.webp",
+    "/Portfolio/images/intereses/videojuegos.webp",
+    "/Portfolio/images/memoji.webp"
+  ].forEach(function(src) {
+    var img = new Image();
+    img.src = src;
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var loader = document.getElementById("cli-loader");
+    var main   = document.getElementById("main-content");
+
+    // Skip loader when navigating back via home button
+    if (sessionStorage.getItem("fromHomeButton") === "true") {
+      sessionStorage.removeItem("fromHomeButton");
+      if (loader) loader.remove();
+      if (main)   { main.style.opacity = "1"; main.style.display = "block"; }
+      return;
+    }
+
+    // Fade out loader → fade in main at 2 s
+    setTimeout(function () {
+      if (loader) {
+        loader.style.opacity = "0";
+        // Remove from DOM after fade completes (450 ms)
+        setTimeout(function () { loader.remove(); }, 460);
+      }
+
+      if (main) {
+        main.style.display = "block";
+        // One frame delay so the browser registers display:block before transitioning opacity
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            main.style.opacity = "1";
+          });
+        });
+      }
+    }, 2000);
+  });
+</script>

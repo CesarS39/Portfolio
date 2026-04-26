@@ -1,26 +1,127 @@
 ---
-import BaseSection from "../atoms/BaseSection.astro";
-import Heading from "../atoms/Heading.astro";
-import Paragraph from "../atoms/Paragraph.astro";
+import RotatingCube from "../3d/RotatingCube.astro";
 ---
 
-<BaseSection id="sobre-mi">
-  <div class="text-center mb-16">
-    <Heading level="h2" className="text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-       Sobre mi
-    </Heading>
-    <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-6"></div>
-  </div>
-  <Paragraph className="text-center">
-    Mi nombre es César Samuel Enriquez Bautista (Desarrollador full stack), soy estudiante de Ingeniería en Software y me apasiona
-    crear aplicaciones y explorar nuevas tecnologías. Me atraen especialmente
-    los proyectos que resuelven problemas reales de los usuarios, donde puedo
-    involucrarme desde las primeras etapas hasta su implementación final.
-  </Paragraph>
+<section id="sobre-mi" class="reveal-section about-section">
+  <div class="about-inner">
 
-  <Paragraph className="text-center">
-    Me considero una persona metódica y organizada, siempre con curiosidad por
-    aprender cosas nuevas. En mi tiempo libre, disfruto viajar, entrenar tenis o
-    simplemente descubrir algo nuevo que me inspire.
-  </Paragraph>
-</BaseSection>
+    <!-- Left: text -->
+    <div class="about-text">
+      <p class="about-label">Sobre mí</p>
+      <h2 class="about-heading">
+        Construyo software<br />que importa.
+      </h2>
+
+      <p class="about-body">
+        Soy César Samuel Enríquez Bautista, estudiante de Ingeniería en Software
+        en la UPP. Me apasiona crear aplicaciones que resuelven problemas reales:
+        desde el diseño de la base de datos hasta el último pixel de la interfaz.
+      </p>
+
+      <p class="about-body">
+        Metódico por naturaleza, curioso por elección. Cuando no estoy
+        programando, estoy en la cancha de tenis, viajando o explorando algo
+        nuevo que me inspire.
+      </p>
+
+      <ul class="about-tags">
+        <li>Full-Stack</li>
+        <li>Mobile (Flutter)</li>
+        <li>Machine Learning</li>
+        <li>Cloud (Azure)</li>
+      </ul>
+    </div>
+
+    <!-- Right: 3D scene -->
+    <div class="about-visual" aria-hidden="true">
+      <RotatingCube />
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .about-section {
+    padding: 3rem 1.5rem;
+    background: #080808;
+  }
+
+  .about-inner {
+    max-width: 64rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  /* ── Text column ── */
+  .about-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 1.25rem;
+  }
+
+  .about-heading {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    color: #e2e8f0;
+    margin-bottom: 2rem;
+  }
+
+  .about-body {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #999;
+    margin-bottom: 1.25rem;
+  }
+
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+  }
+
+  .about-tags li {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 0.3rem 0.85rem;
+    border-radius: 2px;
+  }
+
+  /* ── 3D column ── */
+  .about-visual {
+    position: relative;
+    height: 380px;
+  }
+
+  .about-visual > * {
+    position: absolute;
+    inset: 0;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    .about-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .about-visual {
+      height: 240px;
+    }
+  }
+</style>

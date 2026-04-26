@@ -1,8 +1,232 @@
 ---
-import HeroTitle from "../components/atoms/HeroTitle.astro";
+import HeroScene from "./3d/HeroScene.astro";
 ---
 
-<HeroTitle 
-  text="César Enríquez" 
-  size="text-[12vw] sm:text-[10vw] md:text-[8vw] lg:text-[10vw]" 
-/>
+<section class="hero">
+  <!-- Three.js canvas fills the section -->
+  <div class="hero__canvas" aria-hidden="true">
+    <HeroScene />
+  </div>
+
+  <!-- Text content sits above the canvas -->
+  <div class="hero__content">
+    <p class="hero__eyebrow">Hola, soy</p>
+
+    <h1 class="hero__name gradient-text">
+      César<br />Enríquez
+    </h1>
+
+    <p class="hero__role">Desarrollador de Software</p>
+
+    <p class="hero__sub">
+      Construyo interfaces y sistemas que importan —<br class="hidden sm:block" />
+      del backend al pixel.
+    </p>
+
+    <div class="hero__cta">
+      <a href="#projects" class="btn-primary">Ver proyectos</a>
+      <a href="#contact" class="btn-ghost">Hablemos</a>
+    </div>
+  </div>
+
+  <!-- Subtle scroll indicator -->
+  <div class="hero__scroll" aria-hidden="true">
+    <span class="hero__scroll-line"></span>
+    <span class="hero__scroll-label">scroll</span>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #080808;
+  }
+
+  /* ── Canvas layer ── */
+  .hero__canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero__canvas > * {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* ── Text layer ── */
+  .hero__content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    max-width: 56rem;
+    pointer-events: none;
+    isolation: isolate;
+  }
+
+  /* Dark radial scrim so text always reads against the 3D animation */
+  .hero__content::before {
+    content: '';
+    position: absolute;
+    inset: -4rem -8rem;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(8,8,8,0.6) 0%, transparent 100%);
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .hero__eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  .hero__name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(4rem, 13vw, 10rem);
+    line-height: 0.88;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+
+    display: inline-block;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 1) 60%,
+      rgba(180, 180, 180, 0.5) 90%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero__role {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 500;
+    color: #e2e8f0;
+    letter-spacing: 0.04em;
+    margin-bottom: 1rem;
+  }
+
+  .hero__sub {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(0.85rem, 1.6vw, 1rem);
+    color: #888;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    text-shadow: 0 0 24px rgba(8, 8, 8, 0.9);
+  }
+
+  /* ── CTA buttons ── */
+  .hero__cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    pointer-events: all;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 2rem;
+    background: #e2e8f0;
+    color: #080808;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 2rem;
+    background: transparent;
+    color: #e2e8f0;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+    text-decoration: none;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .btn-ghost:hover {
+    border-color: rgba(226, 232, 240, 0.5);
+    transform: translateY(-2px);
+  }
+
+  /* ── Scroll indicator ── */
+  .hero__scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 10;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .hero__scroll-line {
+    display: block;
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, transparent, #666);
+  }
+
+  .hero__scroll-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #444;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ── Entrance: CSS animations so content shows regardless of JS timing ── */
+  @keyframes hero-in {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .hero__eyebrow { animation: hero-in 0.6s ease-out 0.15s both; }
+  .hero__name    { animation: hero-in 0.7s ease-out 0.30s both; }
+  .hero__role    { animation: hero-in 0.6s ease-out 0.50s both; }
+  .hero__sub     { animation: hero-in 0.6s ease-out 0.65s both; }
+  .hero__cta     { animation: hero-in 0.6s ease-out 0.80s both; }
+  .hero__scroll  { animation: hero-in 0.6s ease-out 0.95s both; }
+
+  /* ── Mobile ── */
+  @media (max-width: 640px) {
+    .hero__scroll { display: none; }
+    .hero__name { line-height: 0.9; }
+  }
+</style>

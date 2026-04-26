@@ -1,8 +1,4 @@
 ---
-import BaseSection from "../atoms/BaseSection.astro";
-import Heading from "../atoms/Heading.astro";
-import CardBase from "../atoms/CardBase.astro";
-
 interface Experience {
   company: string;
   role: string;
@@ -13,27 +9,160 @@ interface Experience {
 const { experiences } = Astro.props as { experiences: Experience[] };
 ---
 
-<BaseSection id="experiencia">
-  <div class="text-center mb-16">
-    <Heading level="h2" className="text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-       Experiencia Laboral
-    </Heading>
-    <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-6"></div>
-  </div>
+<section id="experiencia" class="reveal-section timeline-section">
+  <div class="timeline-inner">
 
-  <div class="max-w-5xl mx-auto">
-    {experiences.map((exp) => (
-      <CardBase className="mb-8">
-        <h3 class="text-2xl font-semibold text-white mb-1">{exp.company}</h3>
-        <p class="text-sm text-neutral-400 italic mb-4">
-          {exp.role} ({exp.year})
-        </p>
-        <ul class="list-disc list-inside space-y-2 max-w-3xl mx-auto text-left text-md text-neutral-300">
-          {exp.items.map((item) => (
-            <li>{item}</li>
-          ))}
-        </ul>
-      </CardBase>
-    ))}
+    <div class="timeline-header">
+      <p class="timeline-label">Trayectoria</p>
+      <h2 class="timeline-heading">Experiencia</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-line" aria-hidden="true"></div>
+
+      {experiences.map((exp) => (
+        <div class="timeline-item">
+          <div class="timeline-dot" aria-hidden="true"></div>
+
+          <div class="timeline-meta">
+            <span class="timeline-date">{exp.year}</span>
+          </div>
+
+          <div class="timeline-body">
+            <h3 class="timeline-title">{exp.company}</h3>
+            <p class="timeline-subtitle">{exp.role}</p>
+
+            <ul class="timeline-items">
+              {exp.items.map((item) => (
+                <li class="timeline-bullet">{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+
   </div>
-</BaseSection>
+</section>
+
+<style>
+  .timeline-section {
+    padding: 3rem 1.5rem;
+    background: #080808;
+  }
+
+  .timeline-inner {
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  .timeline-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  .timeline-heading {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    letter-spacing: -0.03em;
+    color: #f0f0f0;
+    margin-bottom: 2rem;
+  }
+
+  /* ── Timeline shell ── */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline-line {
+    position: absolute;
+    left: 0;
+    top: 0.45rem;
+    bottom: 0;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  /* ── Single item ── */
+  .timeline-item {
+    position: relative;
+    padding-bottom: 2rem;
+  }
+
+  .timeline-item:last-child {
+    padding-bottom: 0;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -2.3rem;
+    top: 0.45rem;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    opacity: 0.5;
+  }
+
+  /* ── Meta ── */
+  .timeline-meta {
+    margin-bottom: 0.6rem;
+  }
+
+  .timeline-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    color: #555;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Body ── */
+  .timeline-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #f0f0f0;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 1rem;
+  }
+
+  /* ── Bullet list ── */
+  .timeline-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .timeline-bullet {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    color: #666;
+    line-height: 1.65;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .timeline-bullet::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: #444;
+  }
+</style>

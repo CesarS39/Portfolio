@@ -16,12 +16,20 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
 
 <Layout>
   <CLILoader />
-  <main id="main-content" style="display: none;">
+  <main
+    id="main-content"
+    style="display: none; opacity: 0; transition: opacity 0.5s ease-out"
+  >
     <ParallaxHero />
     <AboutSection />
     <TechStackSection
       techs={[
-        // Backend Stack - Principal
+        {
+          label: "Node.js",
+          icon: "devicon-nodejs-plain",
+          gradient: "from-green-600 to-green-800",
+          category: "Backend",
+        },
         {
           label: ".NET Framework",
           icon: "devicon-dotnetcore-plain",
@@ -42,13 +50,22 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
         },
         {
           label: "FastAPI",
-          icon: "🚀",
+          icon: "devicon-python-plain",
           gradient: "from-green-500 to-teal-600",
-          isEmoji: true,
           category: "Backend",
         },
-
-        // Frontend Web
+        {
+          label: "Angular",
+          icon: "devicon-angular-plain",
+          gradient: "from-red-600 to-rose-700",
+          category: "Frontend",
+        },
+        {
+          label: "TypeScript",
+          icon: "devicon-typescript-plain",
+          gradient: "from-blue-500 to-blue-700",
+          category: "Frontend",
+        },
         {
           label: "React",
           icon: "devicon-react-original",
@@ -85,8 +102,6 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
           gradient: "from-purple-600 to-indigo-700",
           category: "Frontend",
         },
-
-        // Mobile Development
         {
           label: "Flutter",
           icon: "devicon-flutter-plain",
@@ -99,12 +114,16 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
           gradient: "from-cyan-500 to-blue-600",
           category: "Mobile",
         },
-
-        // Databases
         {
           label: "SQL Server",
           icon: "devicon-microsoftsqlserver-plain",
           gradient: "from-red-600 to-orange-500",
+          category: "Data",
+        },
+        {
+          label: "PostgreSQL",
+          icon: "devicon-postgresql-plain",
+          gradient: "from-blue-700 to-indigo-800",
           category: "Data",
         },
         {
@@ -113,12 +132,28 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
           gradient: "from-green-500 to-green-700",
           category: "Data",
         },
-
-        // Cloud & Services
+        {
+          label: "Prisma",
+          icon: "devicon-prisma-plain",
+          gradient: "from-slate-600 to-slate-800",
+          category: "Data",
+        },
+        {
+          label: "AWS",
+          icon: "devicon-amazonwebservices-plain-wordmark",
+          gradient: "from-orange-500 to-amber-600",
+          category: "Cloud",
+        },
         {
           label: "Azure",
           icon: "devicon-azure-plain",
           gradient: "from-blue-600 to-blue-800",
+          category: "Cloud",
+        },
+        {
+          label: "Terraform",
+          icon: "devicon-terraform-plain",
+          gradient: "from-violet-600 to-purple-800",
           category: "Cloud",
         },
         {
@@ -127,8 +162,6 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
           gradient: "from-yellow-400 to-orange-500",
           category: "Cloud",
         },
-
-        // Tools & Methodologies
         {
           label: "Git",
           icon: "devicon-git-plain",
@@ -163,7 +196,7 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
           title: "Ingeniería en Software",
           subtitle: "Universidad Politécnica de Pachuca",
           date: "2023 - Actualidad",
-          extra: "8º cuatrimestre",
+          extra: "En tramite de titulación",
           glow: "glow-blue",
           status: "current",
           skills: [
@@ -193,6 +226,19 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
     <!-- <SocialService /> -->
     <ExperienceSection
       experiences={[
+        {
+          company: "Desarrollador Full Stack",
+          role: "Desarrollo de sistemas completos con Angular, Node.js y AWS",
+          year: "2025 – Presente",
+          items: [
+            "Módulos de autenticación con AWS Cognito, formularios reactivos, route guards y componentes standalone en Angular.",
+            "Backend en Node.js / TypeScript con Prisma ORM sobre PostgreSQL.",
+            "Infraestructura cloud en AWS (Lambda, API Gateway, S3, RDS) provisionada con Terraform como IaC.",
+            "Integración de IA generativa con Google Gemini API.",
+            "Desarrollo móvil multiplataforma con Flutter para Web, iOS y Android.",
+            "Certificaciones: Azure AZ-900 · AWS Technical Essentials Professional.",
+          ],
+        },
         {
           company: "Impacto - Empresa de Publicidad",
           role: "Auxiliar Administrativo",

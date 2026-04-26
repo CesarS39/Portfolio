@@ -1,7 +1,4 @@
 ---
-import BaseSection from "../atoms/BaseSection.astro";
-import Heading from "../atoms/Heading.astro";
-
 interface Study {
   image: string;
   alt: string;
@@ -9,176 +6,195 @@ interface Study {
   subtitle: string;
   date: string;
   extra?: string;
-  glow: string;
   status?: "completed" | "current" | "planned";
   skills?: string[];
+  glow?: string;
 }
 
 const { studies } = Astro.props as { studies: Study[] };
 
-// Mapeo de colores por tipo de glow
-const glowStyles = {
-  "glow-pink": "from-pink-500/20 to-purple-600/20",
-  "glow-blue": "from-blue-500/20 to-cyan-600/20",
-  "glow-green": "from-green-500/20 to-emerald-600/20",
-  "glow-orange": "from-orange-500/20 to-red-600/20",
-  "glow-purple": "from-purple-500/20 to-indigo-600/20",
-};
-
-// Indicadores de status
-const statusConfig = {
-  completed: { icon: "✅", text: "Completado", color: "text-green-400" },
-  current: { icon: "📚", text: "Cursando", color: "text-blue-400" },
-  planned: { icon: "🎯", text: "Planeado", color: "text-orange-400" },
+const statusLabel = {
+  completed: "Completado",
+  current: "En curso",
+  planned: "Planeado",
 };
 ---
 
-<BaseSection id="estudios" className="!max-w-6xl">
-  <div class="text-center mb-20">
-    <Heading
-      level="h2"
-      className="text-4xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent fade-up"
-    >
-      Formación Académica
-    </Heading>
-    <div
-      class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-6"
-    >
-    </div>
-    <p class="text-neutral-300 max-w-2xl mx-auto">
-      Mi trayectoria educativa y desarrollo profesional continuo
-    </p>
-  </div>
+<section id="estudios" class="reveal-section timeline-section">
+  <div class="timeline-inner">
 
-  <!-- Timeline visual -->
-  <div class="relative max-w-5xl mx-auto">
-    <!-- Línea de tiempo (oculta en móvil) -->
-    <div
-      class="hidden lg:block absolute left-1/2 transform -translate-x-0.5 h-full w-1 bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500 opacity-30"
-    >
+    <div class="timeline-header">
+      <p class="timeline-label">Formación</p>
+      <h2 class="timeline-heading">Educación</h2>
     </div>
 
-    <div class="grid gap-12 lg:gap-16">
-      {
-        studies.map((study, index) => {
-          const isEven = index % 2 === 0;
-          const glowClass =
-            glowStyles[study.glow as keyof typeof glowStyles] ||
-            glowStyles["glow-blue"];
-          const status = study.status || "completed";
-          const statusInfo = statusConfig[status];
+    <div class="timeline">
+      <!-- vertical line -->
+      <div class="timeline-line" aria-hidden="true"></div>
 
-          return (
-            <div
-              class={`relative flex items-center ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} fade-up`}
-            >
-              {/* Timeline dot */}
-              <div class="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full border-4 border-neutral-950 z-10" />
+      {studies.map((study) => {
+        const status = study.status ?? "completed";
+        return (
+          <div class="timeline-item">
+            <div class="timeline-dot" aria-hidden="true"></div>
 
-              {/* Espaciador para centrar */}
-              <div class="hidden lg:block w-1/2" />
-
-              {/* Card de estudio */}
-              <div class="w-full lg:w-1/2 lg:px-8">
-                <div class="group relative bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700 hover:border-indigo-500/50 transition-all duration-500 hover:scale-[1.02] overflow-hidden">
-                  {/* Background glow effect */}
-                  <div
-                    class={`absolute inset-0 bg-gradient-to-br ${glowClass} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-                  />
-
-                  {/* Status badge */}
-                  <div class="absolute top-4 right-4 flex items-center space-x-1 px-3 py-1 bg-neutral-700/80 rounded-full text-xs font-medium">
-                    <span>{statusInfo.icon}</span>
-                    <span class={statusInfo.color}>{statusInfo.text}</span>
-                  </div>
-
-                  {/* Contenido */}
-                  <div class="relative z-10 text-center">
-                    {/* Logo/Imagen */}
-                    <div class="mb-6 flex justify-center">
-                      <div class="relative">
-                        <div
-                          class={`absolute inset-0 bg-gradient-to-br ${glowClass} rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity`}
-                        />
-                        <img
-                          loading="lazy"
-                          src={study.image}
-                          alt={study.alt}
-                          class="relative w-32 h-32 object-contain mx-auto group-hover:scale-110 transition-transform duration-500"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Información */}
-                    <div class="space-y-2">
-                      <h3 class="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors">
-                        {study.title}
-                      </h3>
-                      <p class="text-indigo-400 font-semibold">
-                        {study.subtitle}
-                      </p>
-                      <p class="text-neutral-400 text-sm font-medium">
-                        {study.date}
-                      </p>
-                      {study.extra && (
-                        <p class="text-neutral-500 text-xs italic">
-                          {study.extra}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Skills/Competencias */}
-                    {study.skills && study.skills.length > 0 && (
-                      <div class="mt-6 pt-4 border-t border-neutral-700">
-                        <h4 class="text-xs text-neutral-400 uppercase tracking-wider mb-3">
-                          Competencias
-                        </h4>
-                        <div class="flex flex-wrap justify-center gap-2">
-                          {study.skills.map((skill) => (
-                            <span class="px-2 py-1 bg-neutral-700 text-neutral-300 rounded-md text-xs font-medium">
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
+            <div class="timeline-meta">
+              <span class="timeline-date">{study.date}</span>
+              {study.extra && <span class="timeline-extra">{study.extra}</span>}
+              <span class="timeline-status">{statusLabel[status]}</span>
             </div>
-          );
-        })
-      }
-    </div>
-  </div>
 
-  <!-- Resumen de formación - RESPONSIVE BALANCEADO -->
-  <div class="mt-20 text-center">
-    <div class="inline-flex flex-col sm:flex-row items-center sm:space-x-8 space-y-4 sm:space-y-0 bg-gradient-to-r from-neutral-800/50 to-neutral-900/50 rounded-2xl px-4 sm:px-8 py-6 border border-neutral-700 w-full max-w-sm sm:max-w-2xl mx-auto">
-      
-      <!-- Stat 1 -->
-      <div class="text-center min-w-0 flex-1">
-        <div class="text-xl sm:text-2xl font-bold text-indigo-400">{studies.length}</div>
-        <div class="text-xs text-neutral-400 whitespace-nowrap">Instituciones</div>
-      </div>
-      
-      <!-- Separador - solo visible en desktop -->
-      <div class="hidden sm:block w-px h-8 bg-neutral-700 flex-shrink-0"></div>
-      
-      <!-- Stat 2 -->
-      <div class="text-center min-w-0 flex-1">
-        <div class="text-xl sm:text-2xl font-bold text-purple-400">2023</div>
-        <div class="text-xs text-neutral-400 whitespace-nowrap">Inicio universitario</div>
-      </div>
-      
-      <!-- Separador - solo visible en desktop -->
-      <div class="hidden sm:block w-px h-8 bg-neutral-700 flex-shrink-0"></div>
-      
-      <!-- Stat 3 -->
-      <div class="text-center min-w-0 flex-1">
-        <div class="text-xl sm:text-2xl font-bold text-pink-400">Actual</div>
-        <div class="text-xs text-neutral-400 whitespace-nowrap">En formación</div>
-      </div>
+            <div class="timeline-body">
+              <h3 class="timeline-title">{study.title}</h3>
+              <p class="timeline-subtitle">{study.subtitle}</p>
+
+              {study.skills && study.skills.length > 0 && (
+                <ul class="timeline-skills">
+                  {study.skills.map((s) => (
+                    <li class="timeline-skill-tag">{s}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        );
+      })}
     </div>
+
   </div>
-</BaseSection>
+</section>
+
+<style>
+  .timeline-section {
+    padding: 3rem 1.5rem;
+    background: #080808;
+  }
+
+  .timeline-inner {
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  .timeline-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  .timeline-heading {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    letter-spacing: -0.03em;
+    color: #f0f0f0;
+    margin-bottom: 2rem;
+  }
+
+  /* ── Timeline shell ── */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline-line {
+    position: absolute;
+    left: 0;
+    top: 0.45rem;
+    bottom: 0;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  /* ── Single item ── */
+  .timeline-item {
+    position: relative;
+    padding-bottom: 3rem;
+  }
+
+  .timeline-item:last-child {
+    padding-bottom: 0;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -2.3rem;
+    top: 0.45rem;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    opacity: 0.5;
+  }
+
+  /* ── Meta row (date / status) ── */
+  .timeline-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .timeline-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    color: #555;
+    letter-spacing: 0.04em;
+  }
+
+  .timeline-extra {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    color: #444;
+  }
+
+  .timeline-status {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #e2e8f0;
+    opacity: 0.45;
+    margin-left: auto;
+  }
+
+  /* ── Body ── */
+  .timeline-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #f0f0f0;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 0.85rem;
+  }
+
+  /* ── Skill tags ── */
+  .timeline-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .timeline-skill-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: #666;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+  }
+</style>

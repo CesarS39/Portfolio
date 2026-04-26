@@ -1,13 +1,25 @@
-<!-- atoms/BaseSection.astro -->
 ---
 const { id = "", className = "" } = Astro.props;
 ---
 
 <section
   id={id}
-  class={`bg-neutral-950 py-12 px-6 text-white max-w-5xl mx-auto ${className}`}
+  class={`reveal-section section-base ${className}`}
 >
-  <div class="max-w-5xl mx-auto">
+  <div class="section-inner">
     <slot />
   </div>
 </section>
+
+<style>
+  .section-base {
+    background: #080808;
+    padding: 3rem 1.5rem;
+    color: #f0f0f0;
+  }
+
+  .section-inner {
+    max-width: 64rem;
+    margin: 0 auto;
+  }
+</style>

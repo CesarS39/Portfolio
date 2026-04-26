@@ -1,187 +1,411 @@
 ---
-import BaseSection from "../atoms/BaseSection.astro";
-import Heading from "../atoms/Heading.astro";
-import CardBase from "../atoms/CardBase.astro";
-
 interface ContactIcon {
   href: string;
   icon: string;
   title: string;
-  bgColor: string;
-  hoverColor?: string;
+  bgColor?: string;
 }
-
 interface ContactData {
-  name: string;
-  location: string;
-  role: string;
-  prompt: string;
-  image: string;
+  name: string; location: string; role: string; prompt: string; image: string;
   icons: ContactIcon[];
 }
 
 const { data } = Astro.props as { data: ContactData };
-
-// Mapeo de colores mejorados para los iconos
-const iconStyles = {
-  LinkedIn: "from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600",
-  GitHub: "from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700",
-  Email: "from-red-500 to-red-600 hover:from-red-400 hover:to-red-500",
-  WhatsApp:
-    "from-green-500 to-green-600 hover:from-green-400 hover:to-green-500",
-  Twitter: "from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400",
-  Portfolio:
-    "from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500",
-};
+const emailIcon = data.icons.find(i => i.title === "Email");
+const email = emailIcon?.href?.replace("mailto:", "") ?? "cesarsamuel37@gmail.com";
+const socials = data.icons.filter(i => i.title !== "Email");
 ---
 
-<!-- organisms/ContactSection.astro MEJORADO -->
-<BaseSection id="contacto" className="!max-w-4xl">
-  <!-- Header mejorado -->
-  <div class="text-center mb-20">
-    <Heading
-      level="h2"
-      className="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-100 to-indigo-200 bg-clip-text text-transparent"
-    >
-      Contacto
-    </Heading>
-    <div
-      class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-6"
-    >
-    </div>
-    <p class="text-neutral-300 max-w-2xl mx-auto">
-      ¿Tienes un proyecto en mente? Me encantaría colaborar contigo y crear algo
-      increíble juntos.
-    </p>
-  </div>
+<section id="contact" class="reveal-section contact-section">
 
-  <!-- Card de contacto rediseñada -->
-  <div class="relative max-w-2xl mx-auto">
-    <!-- Background decorativo -->
-    <div
-      class="absolute inset-0 bg-gradient-to-br from-indigo-300/10 to-blue-400/10 rounded-3xl blur-xl"
-    >
+  <!-- Three.js wave grid background -->
+  <canvas id="contact-canvas" aria-hidden="true" class="contact-canvas"></canvas>
+
+  <!-- Content -->
+  <div class="contact-inner">
+    <p class="contact-label">Contacto</p>
+
+    <div class="contact-email-block">
+      <button class="contact-email-btn" id="contact-copy-btn" title="Copiar email">
+        <span class="contact-email-text">{email}</span>
+        <span class="contact-email-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="9" y="9" width="13" height="13" rx="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+        </span>
+      </button>
+      <p class="contact-copy-hint" id="contact-copy-hint">clic para copiar</p>
     </div>
 
-    <CardBase
-      class="bg-neutral-800 rounded-2xl shadow-md transition-all duration-300 ease-in-out hover:scale-[1.02] relative overflow-hidden border border-neutral-700 hover:border-indigo-500/50"
-    >
-      <!-- Header con gradiente -->
-      <div
-        class="bg-gradient-to-br from-neutral-800 to-neutral-900 px-8 pt-12 pb-6 relative"
-      >
-        <!-- Imagen de perfil flotante -->
-        <div class="absolute -top-16 left-1/2 transform -translate-x-1/2">
-          <div class="relative">
-            <div
-              class="absolute inset-0 bg-gradient-to-br from-cyan-400 to-indigo-500 rounded-full blur-lg opacity-50"
-            >
-            </div>
-            <img
-              loading="lazy"
-              src={`${import.meta.env.BASE_URL}${data.image}`}
-              alt="Contacto"
-              class="relative w-32 h-32 rounded-full object-cover border-4 border-neutral-800 shadow-2xl"
-            />
-            <!-- Status indicator -->
-            <div
-              class="absolute -bottom-1 -right-1 w-8 h-8 bg-gradient-to-br from-green-400 to-green-500 rounded-full border-4 border-neutral-800 flex items-center justify-center"
-            >
-              <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Info personal -->
-        <div class="text-center mt-8">
-          <h3
-            class="text-3xl font-bold bg-gradient-to-r from-white to-neutral-300 bg-clip-text text-transparent mb-2"
-          >
-            {data.name}
-          </h3>
-          <div
-            class="flex items-center justify-center space-x-2 text-indigo-400 font-semibold"
-          >
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fill-rule="evenodd"
-                d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                clip-rule="evenodd"></path>
-            </svg>
-            <span class="text-sm">{data.location}</span>
-            <span class="text-neutral-500">•</span>
-            <span class="text-sm">{data.role}</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Contenido principal -->
-      <div class="px-8 py-6">
-        <!-- Mensaje personal -->
-        <div class="text-center mb-8">
-          <p class="text-neutral-300 leading-relaxed text-lg">
-            {data.prompt}
-          </p>
-        </div>
-
-        <!-- Redes sociales mejoradas -->
-        <div class="space-y-4">
-          <h4
-            class="text-center text-neutral-400 font-semibold text-sm uppercase tracking-wider"
-          >
-            Encuéntrame en
-          </h4>
-
-          <div class="flex justify-center flex-wrap gap-3">
-            {
-              data.icons.map((icon) => {
-                const gradientClass =
-                  iconStyles[icon.title as keyof typeof iconStyles] ||
-                  "from-neutral-600 to-neutral-700 hover:from-neutral-500 hover:to-neutral-600";
-
-                return (
-                  <a
-                    href={icon.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title={icon.title}
-                    class={`group flex items-center space-x-2 px-4 py-3 bg-gradient-to-r ${gradientClass} rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg text-white font-medium`}
-                  >
-                    <img
-                      loading="lazy"
-                      src={`${import.meta.env.BASE_URL}${icon.icon}`}
-                      alt={icon.title}
-                      class="w-5 h-5 invert group-hover:scale-110 transition-transform"
-                    />
-                    <span class="text-sm hidden sm:block">{icon.title}</span>
-                  </a>
-                );
-              })
-            }
-          </div>
-        </div>
-
-        <!-- Call to action -->
-        <div class="mt-8 text-center">
-          <div
-            class="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-cyan-400/10 to-indigo-500/10 border border-cyan-500/30 rounded-xl text-cyan-400"
-          >
-            <svg
-              class="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            <span class="text-sm font-medium">Disponible para proyectos</span>
-          </div>
-        </div>
-      </div>
-    </CardBase>
+    <div class="contact-socials">
+      {socials.map((icon) => (
+        <a href={icon.href} target="_blank" rel="noopener noreferrer"
+           class="contact-social" title={icon.title}>
+          <img src={`${import.meta.env.BASE_URL}${icon.icon.replace(/^\//, "")}`}
+               alt={icon.title} class="contact-social-img" loading="lazy" />
+          <span class="contact-social-name">{icon.title}</span>
+        </a>
+      ))}
+    </div>
   </div>
-</BaseSection>
+
+  <footer class="contact-footer">
+    <span>{data.name}</span><span aria-hidden="true">·</span>
+    <span>2026</span><span aria-hidden="true">·</span>
+    <span>Astro · Three.js · GSAP</span>
+  </footer>
+</section>
+
+<script>
+  /* ── Copy email ─────────────────────────────────────────── */
+  const btn  = document.getElementById("contact-copy-btn");
+  const hint = document.getElementById("contact-copy-hint");
+  btn?.addEventListener("click", () => {
+    const email = btn.querySelector(".contact-email-text")?.textContent?.trim() ?? "";
+    navigator.clipboard.writeText(email).then(() => {
+      if (hint) { hint.textContent = "¡copiado!"; hint.classList.add("copied"); }
+      setTimeout(() => {
+        if (hint) { hint.textContent = "clic para copiar"; hint.classList.remove("copied"); }
+      }, 2000);
+    });
+  });
+
+  /* ── Wave-grid Three.js background ─────────────────────── */
+  import * as THREE from "three";
+
+  const canvas = document.getElementById("contact-canvas") as HTMLCanvasElement;
+
+  function onVisible(cb: () => void) {
+    const main = document.getElementById("main-content");
+    if (!main || main.style.display === "block") { setTimeout(cb, 50); return; }
+    let done = false;
+    const fire = () => { if (done) return; done = true; setTimeout(cb, 80); };
+    const obs = new MutationObserver(() => {
+      if (main.style.display === "block") { obs.disconnect(); fire(); }
+    });
+    obs.observe(main, { attributes: true, attributeFilter: ["style"] });
+    setTimeout(() => { obs.disconnect(); fire(); }, 2700);
+  }
+
+  onVisible(() => {
+    const W = canvas.offsetWidth  || window.innerWidth;
+    const H = canvas.offsetHeight || 480;
+
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    renderer.setSize(W, H, false);
+    renderer.setClearColor(0x000000, 0);
+
+    const scene  = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(55, W / H, 0.1, 100);
+    camera.position.set(0, 7.5, 9.5);
+    camera.lookAt(0, 0, -2);
+
+    function resize() {
+      const rw = canvas.offsetWidth || window.innerWidth;
+      const rh = canvas.offsetHeight || 480;
+      if (!rw || !rh) return;
+      renderer.setSize(rw, rh, false);
+      camera.aspect = rw / rh;
+      camera.updateProjectionMatrix();
+    }
+    new ResizeObserver(resize).observe(canvas);
+
+    /* ── Wave grid ───────────────────────────────────────── */
+    const COLS = 28, ROWS = 22, STEP = 0.70;
+    const verts = new Float32Array(COLS * ROWS * 3);
+
+    const lineIdx: number[] = [];
+    const vi = (c: number, r: number) => r * COLS + c;
+    for (let r = 0; r < ROWS; r++)
+      for (let c = 0; c < COLS - 1; c++)
+        lineIdx.push(vi(c, r), vi(c + 1, r));
+    for (let r = 0; r < ROWS - 1; r++)
+      for (let c = 0; c < COLS; c++)
+        lineIdx.push(vi(c, r), vi(c, r + 1));
+
+    const gridGeo = new THREE.BufferGeometry();
+    const posAttr = new THREE.BufferAttribute(verts, 3);
+    gridGeo.setAttribute("position", posAttr);
+    gridGeo.setIndex(lineIdx);
+
+    const gridMat = new THREE.LineBasicMaterial({
+      color: 0xe2e8f0, transparent: true, opacity: 0.18
+    });
+    scene.add(new THREE.LineSegments(gridGeo, gridMat));
+
+    function updateGrid(t: number) {
+      for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+          const x = (c - (COLS - 1) / 2) * STEP;
+          const z = (r - (ROWS - 1) / 2) * STEP;
+          const y =
+            Math.sin(x * 0.55 + t * 0.85) * Math.cos(z * 0.45 + t * 0.65) * 1.2 +
+            Math.sin((x + z) * 0.38 + t * 1.1) * 0.5 +
+            Math.cos(x * 0.28 - z * 0.42 + t * 0.55) * 0.35;
+          const i = (r * COLS + c) * 3;
+          verts[i] = x; verts[i + 1] = y; verts[i + 2] = z;
+        }
+      }
+      posAttr.needsUpdate = true;
+    }
+
+    /* ── Floating data nodes above grid ─────────────────── */
+    interface Node { mesh: THREE.Mesh; vel: THREE.Vector3 }
+    const nodes: Node[] = [];
+    for (let i = 0; i < 18; i++) {
+      const node = new THREE.Mesh(
+        new THREE.SphereGeometry(0.045, 5, 5),
+        new THREE.MeshBasicMaterial({ color: 0xe2e8f0, transparent: true, opacity: 0.55 + Math.random() * 0.3 })
+      );
+      node.position.set(
+        (Math.random() - 0.5) * 16,
+        0.8 + Math.random() * 2.5,
+        (Math.random() - 0.5) * 12
+      );
+      const speed = 0.25 + Math.random() * 0.35;
+      const vel = new THREE.Vector3(
+        (Math.random() - 0.5) * speed,
+        (Math.random() - 0.5) * speed * 0.3,
+        (Math.random() - 0.5) * speed
+      );
+      scene.add(node);
+      nodes.push({ mesh: node, vel });
+    }
+
+    /* ── Transmission pulses (expanding rings) ───────────── */
+    interface Pulse { mesh: THREE.Mesh; life: number; dur: number }
+    const pulses: Pulse[] = [];
+    let pulseCD = 2.0;
+
+    function spawnPulse() {
+      // Random grid position (near center)
+      const px = (Math.random() - 0.5) * 8;
+      const pz = (Math.random() - 0.5) * 6;
+      const ring = new THREE.Mesh(
+        new THREE.TorusGeometry(0.08, 0.022, 5, 48),
+        new THREE.MeshBasicMaterial({ color: 0xe2e8f0, transparent: true, opacity: 0.0 })
+      );
+      ring.position.set(px, 0, pz);
+      ring.rotation.x = Math.PI / 2;
+      scene.add(ring);
+      pulses.push({ mesh: ring, life: 0, dur: 2.8 });
+    }
+
+    /* ── Shooting stars (horizontal streaks) ─────────────── */
+    interface Star { mesh: THREE.Mesh; vel: THREE.Vector3; life: number }
+    const stars: Star[] = [];
+    let starCD = 1.8;
+
+    function spawnStar() {
+      const star = new THREE.Mesh(
+        new THREE.SphereGeometry(0.035, 4, 4),
+        new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.9 })
+      );
+      // Start from random edge
+      const side = Math.random() > 0.5 ? -1 : 1;
+      star.position.set(side * 10, 1 + Math.random() * 3, (Math.random() - 0.5) * 10);
+      const spd = (1.5 + Math.random() * 2) * -side;
+      stars.push({ mesh: star, vel: new THREE.Vector3(spd, (Math.random() - 0.5) * 0.3, 0), life: 0 });
+      scene.add(star);
+    }
+
+    const clock = new THREE.Clock();
+
+    (function animate() {
+      requestAnimationFrame(animate);
+      const d = clock.getDelta();
+      const t = clock.elapsedTime;
+
+      /* wave grid */
+      updateGrid(t);
+
+      /* floating nodes */
+      nodes.forEach(n => {
+        n.mesh.position.addScaledVector(n.vel, d);
+        if (Math.abs(n.mesh.position.x) > 9)  n.vel.x *= -1;
+        if (Math.abs(n.mesh.position.z) > 7)  n.vel.z *= -1;
+        if (n.mesh.position.y < 0.5 || n.mesh.position.y > 3.5) n.vel.y *= -1;
+      });
+
+      /* pulses */
+      pulseCD -= d;
+      if (pulseCD <= 0) { pulseCD = 2.2 + Math.random() * 2; spawnPulse(); }
+      for (let i = pulses.length - 1; i >= 0; i--) {
+        const p = pulses[i]; p.life += d;
+        const prog = p.life / p.dur;
+        if (prog >= 1) { scene.remove(p.mesh); pulses.splice(i, 1); continue; }
+        p.mesh.scale.setScalar(1 + prog * 22);
+        // Fade in then out: peak at 20%
+        const fade = prog < 0.2 ? prog / 0.2 : 1 - (prog - 0.2) / 0.8;
+        (p.mesh.material as THREE.MeshBasicMaterial).opacity = 0.65 * fade;
+        // Move with wave: adjust Y each frame
+        const wx = p.mesh.position.x, wz = p.mesh.position.z;
+        p.mesh.position.y =
+          Math.sin(wx * 0.55 + t * 0.85) * Math.cos(wz * 0.45 + t * 0.65) * 1.2 +
+          Math.sin((wx + wz) * 0.38 + t * 1.1) * 0.5 + 0.05;
+      }
+
+      /* shooting stars */
+      starCD -= d;
+      if (starCD <= 0) { starCD = 2.5 + Math.random() * 3; spawnStar(); }
+      for (let i = stars.length - 1; i >= 0; i--) {
+        const s = stars[i]; s.life += d;
+        s.mesh.position.addScaledVector(s.vel, d);
+        (s.mesh.material as THREE.MeshBasicMaterial).opacity = Math.max(0, 0.9 - s.life * 0.6);
+        if (s.life > 1.5 || Math.abs(s.mesh.position.x) > 12) {
+          scene.remove(s.mesh); stars.splice(i, 1);
+        }
+      }
+
+      renderer.render(scene, camera);
+    })();
+  });
+</script>
+
+<style>
+  .contact-section {
+    position: relative;
+    padding: 5rem 1.5rem 0;
+    background: #080808;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+  }
+
+  /* ── Background canvas ── */
+  .contact-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ── Content above canvas ── */
+  .contact-inner {
+    position: relative;
+    z-index: 10;
+    max-width: 52rem;
+    margin: 0 auto;
+    padding-bottom: 4.5rem;
+  }
+
+  .contact-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #444;
+    margin-bottom: 1.75rem;
+  }
+
+  /* ── Email block ── */
+  .contact-email-block { margin-bottom: 3.5rem; }
+
+  .contact-email-btn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .contact-email-text {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 5vw, 4rem);
+    letter-spacing: -0.04em;
+    color: #f0f0f0;
+    transition: color 0.2s ease;
+    line-height: 1;
+    /* Keep legible over the animated grid */
+    text-shadow: 0 0 40px rgba(8, 8, 8, 0.95), 0 2px 12px rgba(8, 8, 8, 0.8);
+  }
+
+  .contact-email-btn:hover .contact-email-text { color: #e2e8f0; }
+
+  .contact-email-icon {
+    color: #333;
+    flex-shrink: 0;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  .contact-email-btn:hover .contact-email-icon {
+    color: #888;
+    transform: scale(1.1);
+  }
+
+  .contact-copy-hint {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #333;
+    margin-top: 0.75rem;
+    transition: color 0.2s ease;
+  }
+  .contact-copy-hint.copied { color: #4ade80; }
+
+  /* ── Social links ── */
+  .contact-socials {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-social {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    color: #404040;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 0.6rem 1.1rem;
+    border-radius: 2px;
+    background: rgba(8, 8, 8, 0.6);
+    backdrop-filter: blur(4px);
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  }
+  .contact-social:hover {
+    color: #c8d0dc;
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .contact-social-img {
+    width: 15px; height: 15px;
+    filter: invert(1) opacity(0.3);
+    transition: opacity 0.2s ease;
+  }
+  .contact-social:hover .contact-social-img { filter: invert(1) opacity(0.7); }
+
+  .contact-social-name { letter-spacing: 0.02em; }
+
+  /* ── Footer ── */
+  .contact-footer {
+    position: relative;
+    z-index: 10;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: #262626;
+  }
+
+  @media (max-width: 640px) {
+    .contact-email-text { font-size: clamp(1.4rem, 8vw, 2.5rem); }
+    .contact-socials { gap: 0.65rem; }
+  }
+</style>

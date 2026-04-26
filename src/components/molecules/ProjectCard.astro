@@ -1,8 +1,4 @@
 ---
-// molecules/ProjectCard.astro VERSIÓN COMPACTA
-import CardBase from "../atoms/CardBase.astro";
-import ButtonBase from "../atoms/ButtonBase.astro";
-
 const {
   title,
   description,
@@ -11,196 +7,277 @@ const {
   repo,
   techStack = [],
   featured = false,
+  demo,
 } = Astro.props;
-
-const techColors = {
-  // Stack .NET - Colores azules/púrpuras
-  ".NET": "from-indigo-500 to-purple-600",
-  "C#": "from-indigo-600 to-purple-700",
-  SQL: "from-blue-500 to-cyan-500",
-  Azure: "from-blue-600 to-blue-800",
-  
-  // Stack Mobile - Colores azules/cyan
-  Flutter: "from-blue-400 to-cyan-500",
-  Dart: "from-cyan-500 to-blue-600",
-  
-  // Stack Backend APIs - Colores verdes/amarillos
-  Python: "from-yellow-300 to-blue-500",
-  FastAPI: "from-green-500 to-teal-600",
-  
-  // Stack Frontend Web - Colores cyan/azules
-  React: "from-cyan-500 to-blue-500",
-  Astro: "from-purple-600 to-blue-500",
-  JavaScript: "from-yellow-300 to-yellow-500",
-  HTML: "from-orange-400 to-red-500",
-  
-  // Stack Styling & UI - Colores cyan/púrpuras
-  TailwindCSS: "from-cyan-400 to-indigo-500",
-  Bootstrap: "from-purple-600 to-indigo-700",
-  
-  // Stack Databases & Cloud - Colores verdes/naranjas
-  MongoDB: "from-green-500 to-green-700",
-  Firebase: "from-yellow-400 to-orange-500",
-  
-  // Stack Tools & Methodologies - Colores naranjas/púrpuras
-  Git: "from-orange-500 to-amber-600",
-  Figma: "from-fuchsia-600 to-purple-600",
-  Scrum: "from-pink-500 to-red-500",
-  
-  // Stack No-Code/Automatización - Colores verdes/azules
-  Notion: "from-green-500 to-blue-600",
-  "No-Code": "from-pink-400 to-purple-500",
-  Automatización: "from-orange-400 to-red-500",
-  Analytics: "from-blue-400 to-indigo-600",
-  
-  //  MIGANADO - Paleta Verde Especializada 
-  "Machine Learning": "from-emerald-500 to-green-600",
-  "Regresión Lineal": "from-green-500 to-emerald-700", 
-  "SNIIM": "from-teal-500 to-green-600",
-  "Datos SNIIM": "from-lime-500 to-emerald-600",
-  "IA": "from-emerald-400 to-green-500",
-  "Inteligencia Artificial": "from-green-400 to-emerald-600",
-  "Estadística": "from-teal-400 to-green-500",
-  "Análisis de Datos": "from-lime-400 to-emerald-500",
-  "Algoritmos": "from-green-500 to-teal-600",
-  "Data Science": "from-emerald-500 to-teal-600",
-  "Predicción": "from-green-400 to-emerald-700",
-  "Modelado": "from-teal-500 to-emerald-600",
-
-  // SPORTCENTER - Paleta Emerald/Teal Deportiva 
-  "NextJS": "from-emerald-500 to-teal-600",
-  "Next.js": "from-emerald-500 to-teal-600",
-  "TypeScript": "from-teal-500 to-cyan-600",
-  "Supabase": "from-cyan-500 to-blue-600",
-  "PostgreSQL": "from-blue-500 to-indigo-600",
-  "shadcn/ui": "from-indigo-500 to-purple-600",
-  "Auth": "from-purple-500 to-pink-600",
-  "JWT": "from-pink-500 to-rose-600",
-  "Middleware": "from-rose-500 to-red-600",
-  "Row Level Security": "from-red-500 to-orange-600",
-  "Real-time": "from-orange-500 to-amber-600",
-  "Vercel": "from-amber-500 to-yellow-600",
-  "Server Components": "from-yellow-500 to-lime-600",
-  "App Router": "from-lime-500 to-green-600",
-  "BaaS": "from-green-500 to-emerald-600",
-  "Prisma": "from-emerald-600 to-teal-700",
-  "Database": "from-teal-600 to-cyan-700"
-};
 ---
 
-<div
-  class={`bg-neutral-800 rounded-2xl overflow-hidden group transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-indigo-500/10 ${featured ? "ring-2 ring-indigo-500/50" : ""}`}
->
-  <div class="relative overflow-hidden">
-    <img
-      loading="lazy"
-      src={image}
-      alt={title}
-      class="w-full h-48 object-cover transition-all duration-300 group-hover:scale-105"
-    />
+<article class="project-card">
+  <a
+    href={link ?? repo ?? "#"}
+    class="project-card-link"
+    target={link ? "_self" : "_blank"}
+    rel={link ? "" : "noopener noreferrer"}
+  >
+    <!-- Full-bleed image -->
+    <img loading="lazy" src={image} alt={title} class="project-img" />
 
-    <!-- Gradient Overlay -->
-    <div
-      class="absolute inset-0 bg-gradient-to-t from-neutral-900/60 via-transparent to-transparent"
-    >
+    <!-- Always-on scrim so tags & title bar are legible -->
+    <div class="project-scrim" aria-hidden="true"></div>
+
+    <!-- Tech tags — top-left, always visible -->
+    {techStack.length > 0 && (
+      <div class="project-tags">
+        {techStack.slice(0, 3).map((t: string) => (
+          <span class="project-tag">{t}</span>
+        ))}
+      </div>
+    )}
+
+    <!-- Title bar — always visible at bottom -->
+    <div class="project-title-bar">
+      <span class="project-title-static">{title}</span>
     </div>
 
-    <!-- Featured Badge -->
-    {
-      featured && (
-        <div class="absolute top-3 left-3 px-2 py-1 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full text-xs font-bold text-black">
-          ⭐ Destacado
+    <!-- Hover panel — slides up over the image -->
+    <div class="project-panel">
+      <h3 class="project-panel-title">{title}</h3>
+      <p class="project-panel-desc">{description}</p>
+      <div class="project-panel-footer">
+        <span class="project-cta">Ver proyecto →</span>
+        <div class="project-links">
+          {repo && typeof repo === "string" && (
+            <a
+              href={repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-link"
+              onclick="event.stopPropagation()"
+            >GitHub</a>
+          )}
+          {demo && (
+            <a
+              href={demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-link"
+              onclick="event.stopPropagation()"
+            >Demo</a>
+          )}
         </div>
-      )
-    }
-
-    <!-- Tech Stack más pequeño -->
-    {
-      techStack && techStack.length > 0 && (
-        <div class="absolute bottom-3 left-3 right-3">
-          <div class="flex flex-wrap gap-1">
-            {techStack.slice(0, 3).map((tech: string) => (
-              <span
-                class={`px-2 py-0.5 text-xs font-medium rounded bg-gradient-to-r ${techColors[tech as keyof typeof techColors] || "from-gray-500 to-gray-600"} text-white`}
-              >
-                {tech}
-              </span>
-            ))}
-            {techStack.length > 3 && (
-              <span class="px-2 py-0.5 text-xs font-medium rounded bg-neutral-800/80 text-neutral-300">
-                +{techStack.length - 3}
-              </span>
-            )}
-          </div>
-        </div>
-      )
-    }
-  </div>
-
-  <!-- Content más compacto -->
-  <div class="p-5 space-y-3">
-    <!-- Title -->
-    <div class="space-y-1">
-      <h3
-        class="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors"
-      >
-        {title}
-      </h3>
-      <div
-        class="w-8 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 group-hover:w-16 transition-all duration-300"
-      >
       </div>
     </div>
+  </a>
+</article>
 
-    <!-- Description más corta -->
-    <p class="text-sm text-neutral-300 leading-relaxed line-clamp-2">
-      {description}
-    </p>
+<style>
+  /* ── Card shell ── */
+  .project-card {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #0d0d0d;
+    transition: border-color 0.35s ease;
+  }
 
-    <!-- Actions compactas -->
-    <div class="flex justify-between items-center pt-3">
-      {
-        repo && (
-          <a
-            href={repo}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex items-center space-x-1 text-neutral-400 hover:text-indigo-400 text-sm transition-colors"
-          >
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fill-rule="evenodd"
-                d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            <span>Código</span>
-          </a>
-        )
-      }
+  .project-card:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+  }
 
-      {
-        link && (
-          <a href={link} class="cursor-pointer">
-            <button class="px-4 py-2 text-sm font-medium text-white rounded-lg bg-gradient-to-r from-cyan-400 to-indigo-500 hover:from-cyan-300 hover:to-indigo-400 transition-all duration-200 flex items-center space-x-1">
-              <span>Ver Proyecto</span>
-              <svg
-                class="w-3 h-3"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
-          </a>
-        )
-      }
-    </div>
-  </div>
-</div>
+  .project-card-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+  }
+
+  /* ── Image ── */
+  .project-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.75;
+    transition: opacity 0.5s ease, transform 0.6s ease;
+    will-change: transform, opacity;
+  }
+
+  .project-card:hover .project-img {
+    opacity: 0.35;
+    transform: translateY(-4px);
+  }
+
+  /* ── Base scrim ── */
+  .project-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 40%,
+      rgba(8, 8, 8, 0.72) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ── Tags ── */
+  .project-tags {
+    position: absolute;
+    top: 0.85rem;
+    left: 0.85rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    z-index: 3;
+  }
+
+  .project-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.57rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: rgba(226, 232, 240, 0.55);
+    background: rgba(8, 8, 8, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.15rem 0.55rem;
+    backdrop-filter: blur(6px);
+  }
+
+  /* ── Static title bar (always visible) ── */
+  .project-title-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.9rem 1.1rem;
+    z-index: 2;
+    transition: opacity 0.25s ease;
+  }
+
+  .project-card:hover .project-title-bar {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .project-title-static {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #e2e8f0;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  /* ── Hover panel ── */
+  .project-panel {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(8, 8, 8, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 1.25rem 1.25rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    z-index: 4;
+    transform: translateY(100%);
+    transition: transform 0.38s cubic-bezier(0.33, 1, 0.68, 1);
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .project-card:hover .project-panel {
+    transform: translateY(0);
+  }
+
+  .project-panel-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #f0f0f0;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .project-panel-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    color: #888;
+    line-height: 1.65;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  /* ── Panel footer ── */
+  .project-panel-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.6rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .project-cta {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: #e2e8f0;
+    transition: opacity 0.2s ease;
+  }
+
+  .project-card:hover .project-cta {
+    opacity: 0.85;
+  }
+
+  .project-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .project-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #555;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    position: relative;
+    z-index: 5;
+  }
+
+  .project-link:hover {
+    color: #e2e8f0;
+  }
+
+  /* ── Mobile: keep simpler (no hover on touch) ── */
+  @media (max-width: 560px) {
+    .project-card {
+      aspect-ratio: 4 / 3;
+    }
+
+    .project-panel {
+      transform: translateY(0);
+    }
+
+    .project-title-bar {
+      display: none;
+    }
+
+    .project-card:hover .project-img {
+      opacity: 0.75;
+      transform: none;
+    }
+  }
+</style>

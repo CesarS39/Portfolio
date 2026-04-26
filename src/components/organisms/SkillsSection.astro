@@ -1,131 +1,143 @@
 ---
-import BaseSection from "../atoms/BaseSection.astro";
-import Heading from "../atoms/Heading.astro";
-
 const skills = [
   {
-    title: "Inglés (B2)",
-    description: "Puedo leer documentación técnica, entender conferencias y comunicarme en inglés.",
-    icon: "🌐",
-    level: 80,
-    gradient: "from-blue-500 to-cyan-500"
+    name: "Inglés",
+    detail: "B2 — documentación técnica y comunicación profesional",
   },
   {
-    title: "Trabajo en equipo",
-    description: "Me adapto fácilmente a distintos roles y colaboro para sacar adelante un proyecto.",
-    icon: "🤝",
-    level: 90,
-    gradient: "from-green-500 to-emerald-500"
+    name: "Trabajo en equipo",
+    detail: "Adaptación a distintos roles dentro de un equipo de desarrollo",
   },
   {
-    title: "Organización y puntualidad",
-    description: "Soy muy ordenado y me gusta cumplir con los tiempos de entrega.",
-    icon: "⏰",
-    level: 95,
-    gradient: "from-purple-500 to-indigo-500"
+    name: "Organización",
+    detail: "Gestión de tiempos y cumplimiento consistente de entregas",
   },
   {
-    title: "Resolución de problemas",
-    description: "Soy eficiente al buscar diferentes soluciones a un problema.",
-    icon: "🧩",
-    level: 95,
-    gradient: "from-orange-500 to-red-500"
+    name: "Resolución de problemas",
+    detail: "Análisis sistemático y búsqueda de soluciones efectivas",
   },
   {
-    title: "Comunicación clara",
-    description: "Comunico información de manera clara además tengo habilidades de oratoria.",
-    icon: "💬",
-    level: 85,
-    gradient: "from-cyan-500 to-blue-500"
+    name: "Comunicación",
+    detail: "Claridad técnica y habilidades de presentación y oratoria",
   },
   {
-    title: "Aprendizaje autónomo",
-    description: "Siempre estoy explorando nuevas tecnologías y buscando cómo mejorar en lo que hago, actualmente estoy aprendiendo más a fondo flutter.",
-    icon: "📚",
-    level: 90,
-    gradient: "from-pink-500 to-purple-500"
+    name: "Aprendizaje autónomo",
+    detail: "Exploración continua de nuevas tecnologías y metodologías",
   },
 ];
 ---
 
-<BaseSection id="habilidades" className="!max-w-6xl">
-  <!-- Header mejorado -->
-  <div class="text-center mb-16">
-    <Heading level="h2" className="text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-      Habilidades Blandas
-    </Heading>
-    <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-6"></div>
-    <p class="text-neutral-300 max-w-2xl mx-auto">
-      Más allá del código, estas son las competencias que me permiten trabajar efectivamente y adaptarme a cualquier equipo.
-    </p>
-  </div>
+<section id="habilidades" class="reveal-section skills-section">
+  <div class="skills-inner">
 
-  <!-- Grid de habilidades mejorado -->
-  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-    {skills.map((skill, index) => (
-      <div class="group bg-gradient-to-br from-neutral-800 to-neutral-900 p-6 rounded-2xl border border-neutral-700 hover:border-purple-500/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-purple-500/10">
-        <!-- Header con icono -->
-        <div class="flex items-center space-x-3 mb-4">
-          <div class={`w-12 h-12 rounded-xl bg-gradient-to-br ${skill.gradient} flex items-center justify-center text-2xl group-hover:scale-110 transition-transform`}>
-            {skill.icon}
-          </div>
-          <div class="flex-1">
-            <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition-colors">
-              {skill.title}
-            </h3>
-            <!-- Barra de progreso -->
-            <div class="mt-2 bg-neutral-700 rounded-full h-2 overflow-hidden">
-              <div 
-                class={`h-full bg-gradient-to-r ${skill.gradient} rounded-full transition-all duration-1000 group-hover:animate-pulse`}
-                style={`width: ${skill.level}%`}
-              ></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Descripción -->
-        <p class="text-neutral-300 text-sm leading-relaxed group-hover:text-neutral-200 transition-colors">
-          {skill.description}
-        </p>
-
-        <!-- Indicador de nivel -->
-        <div class="mt-4 flex justify-between items-center text-xs">
-          <span class="text-neutral-500">Competencia</span>
-          <span class={`font-bold bg-gradient-to-r ${skill.gradient} bg-clip-text text-transparent`}>
-            {skill.level}%
-          </span>
-        </div>
-      </div>
-    ))}
-  </div>
-
-  <!-- Stats adicionales - RESPONSIVE BALANCEADO -->
-  <div class="mt-16 text-center">
-    <div class="inline-flex flex-col sm:flex-row items-center sm:space-x-8 space-y-4 sm:space-y-0 bg-gradient-to-r from-neutral-800/50 to-neutral-900/50 rounded-2xl px-4 sm:px-8 py-6 border border-neutral-700 w-full max-w-sm sm:max-w-2xl mx-auto">
-      
-      <!-- Stat 1 -->
-      <div class="text-center min-w-0 flex-1">
-        <div class="text-xl sm:text-2xl font-bold text-purple-400">3+</div>
-        <div class="text-xs text-neutral-400 whitespace-nowrap">Años desarrollando</div>
-      </div>
-      
-      <!-- Separador - solo visible en desktop -->
-      <div class="hidden sm:block w-px h-8 bg-neutral-700 flex-shrink-0"></div>
-      
-      <!-- Stat 2 -->
-      <div class="text-center min-w-0 flex-1">
-        <div class="text-xl sm:text-2xl font-bold text-pink-400">10+</div>
-        <div class="text-xs text-neutral-400 whitespace-nowrap">Proyectos colaborativos</div>
-      </div>
-      
-      <!-- Separador - solo visible en desktop -->
-      <div class="hidden sm:block w-px h-8 bg-neutral-700 flex-shrink-0"></div>
-      
-      <!-- Stat 3 -->
-      <div class="text-center min-w-0 flex-1">
-        <div class="text-xl sm:text-2xl font-bold text-indigo-400">100%</div>
-        <div class="text-xs text-neutral-400 whitespace-nowrap">Puntualidad</div>
-      </div>
+    <div class="skills-header">
+      <p class="skills-label">Competencias</p>
+      <h2 class="skills-heading">Habilidades blandas</h2>
     </div>
+
+    <ul class="skills-list">
+      {skills.map((skill, i) => (
+        <li class="skills-item">
+          <span class="skills-index">{String(i + 1).padStart(2, "0")}</span>
+          <span class="skills-name">{skill.name}</span>
+          <span class="skills-detail">{skill.detail}</span>
+        </li>
+      ))}
+    </ul>
+
   </div>
-</BaseSection>
+</section>
+
+<style>
+  .skills-section {
+    padding: 3rem 1.5rem;
+    background: #080808;
+  }
+
+  .skills-inner {
+    max-width: 56rem;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  .skills-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  .skills-heading {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    letter-spacing: -0.03em;
+    color: #f0f0f0;
+    margin-bottom: 2rem;
+  }
+
+  /* ── List ── */
+  .skills-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .skills-item {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr auto;
+    align-items: baseline;
+    gap: 1.25rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: border-color 0.2s ease;
+  }
+
+  .skills-item:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .skills-item:hover {
+    border-bottom-color: rgba(226, 232, 240, 0.2);
+  }
+
+  .skills-index {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    color: #444;
+    letter-spacing: 0.05em;
+  }
+
+  .skills-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #f0f0f0;
+    letter-spacing: -0.01em;
+  }
+
+  .skills-detail {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: #555;
+    text-align: right;
+    max-width: 24rem;
+    line-height: 1.5;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 640px) {
+    .skills-item {
+      grid-template-columns: 2rem 1fr;
+      grid-template-rows: auto auto;
+    }
+
+    .skills-detail {
+      grid-column: 2;
+      text-align: left;
+      color: #555;
+    }
+  }
+</style>

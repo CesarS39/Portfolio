@@ -1,114 +1,169 @@
 ---
-import BaseSection from "../atoms/BaseSection.astro";
-import Heading from "../atoms/Heading.astro";
-
 interface Interest {
   title: string;
   description: string;
   image: string;
   className?: string;
-  icon?: string;
-  gradient?: string;
 }
 
 const { interests } = Astro.props as { interests: Interest[] };
-
-// Gradientes temáticos para cada interés
-const defaultGradients = [
-  "from-purple-500/20 to-indigo-600/20",
-  "from-cyan-500/20 to-blue-600/20", 
-  "from-green-500/20 to-emerald-600/20",
-  "from-cyan-500/20 to-blue-600/20",
-  "from-green-500/20 to-emerald-600/20"
-];
 ---
 
-<BaseSection id="intereses" className="!max-w-6xl">
-  <!-- Header mejorado -->
-  <div class="text-center mb-20">
-    <Heading
-      level="h2"
-      className="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent fade-up"
-    >
-      Intereses y Pasatiempos
-    </Heading>
-    <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-6"></div>
-    <p class="text-neutral-300 max-w-2xl mx-auto">
-      Explorando el mundo más allá del código
-    </p>
-  </div>
+<section id="intereses" class="reveal-section interests-section">
+  <div class="interests-inner">
 
-  <!-- Grid Bento Mejorado -->
-  <div class="max-w-6xl mx-auto">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-6">
-      {interests.map((item, index) => {
-        const gradientClass = item.gradient || defaultGradients[index % defaultGradients.length];
-        
-        return (
-          <div class={`group relative overflow-hidden rounded-2xl bg-gradient-to-br from-neutral-800 to-neutral-900 border border-neutral-700 hover:border-cyan-500/50 transition-all duration-500 hover:scale-[1.02] ${item.className || ''}`}>
-            
-            {/* Background Image con overlay mejorado */}
-            <div class="absolute inset-0">
-              <img
-                loading="lazy"
-                src={item.image}
-                alt={item.title}
-                class="w-full h-full object-cover transition-all duration-700 opacity-70 group-hover:opacity-20 group-hover:scale-110"
-              />
-              
-              {/* Gradient overlay dinámico */}
-              <div class={`absolute inset-0 bg-gradient-to-br ${gradientClass} opacity-60 group-hover:opacity-80 transition-opacity duration-500`}></div>
-              
-              {/* Overlay oscuro base */}
-              <div class="absolute inset-0 bg-gradient-to-t from-neutral-900/90 via-neutral-900/50 to-transparent"></div>
-            </div>
+    <div class="interests-header">
+      <p class="interests-label">Más allá del código</p>
+      <h2 class="interests-heading">Intereses</h2>
+    </div>
 
-            {/* Contenido */}
-            <div class="relative p-6 h-full flex flex-col justify-between min-h-[200px] lg:min-h-[250px]">
-              
-              {/* Icono opcional */}
-              {item.icon && (
-                <div class="absolute top-4 right-4 text-2xl opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
-                  {item.icon}
-                </div>
-              )}
-
-              <div class="space-y-3">
-                <h3 class="text-xl lg:text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">
-                  {item.title}
-                </h3>
-                
-                {/* Línea decorativa */}
-                <div class="w-8 h-0.5 bg-gradient-to-r from-cyan-400 to-indigo-500 group-hover:w-16 transition-all duration-300"></div>
-              </div>
-
-              <div class="mt-auto">
-                <p class="text-neutral-300 text-sm lg:text-base leading-relaxed transition-all duration-500 opacity-90 lg:opacity-0 lg:translate-y-2 lg:group-hover:opacity-100 lg:group-hover:translate-y-0">
-                  {item.description}
-                </p>
-              </div>
-
-              {/* Efecto de brillo en hover */}
-              <div class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 transform translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
-            </div>
+    <div class="bento-grid">
+      {interests.map((item, i) => (
+        <div class={`bento-card bento-card--${i}`}>
+          <img
+            loading="lazy"
+            src={item.image}
+            alt={item.title}
+            class="bento-img"
+          />
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <h3 class="bento-title">{item.title}</h3>
+            <p class="bento-desc">{item.description}</p>
           </div>
-        );
-      })}
+        </div>
+      ))}
     </div>
-  </div>
 
-  <!-- Estadística opcional -->
-  <div class="mt-16 text-center">
-    <div class="inline-flex items-center space-x-8 bg-gradient-to-r from-neutral-800/50 to-neutral-900/50 rounded-2xl px-8 py-6 border border-neutral-700">
-      <div class="text-center">
-        <div class="text-2xl font-bold text-cyan-400">{interests.length}</div>
-        <div class="text-xs text-neutral-400">Pasatiempos</div>
-      </div>
-      <div class="w-px h-8 bg-neutral-700"></div>
-      <div class="text-center">
-        <div class="text-2xl font-bold text-indigo-400">∞</div>
-        <div class="text-xs text-neutral-400">Curiosidad</div>
-      </div>
-    </div>
   </div>
-</BaseSection>
+</section>
+
+<style>
+  .interests-section {
+    padding: 3rem 1.5rem;
+    background: #080808;
+  }
+
+  .interests-inner {
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+
+  .interests-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  .interests-heading {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    letter-spacing: -0.03em;
+    color: #f0f0f0;
+    margin-bottom: 2rem;
+  }
+
+  /* ── Bento grid: 3 columns ── */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 180px;
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  /* First card wide, second and third normal */
+  .bento-card--0 { grid-column: span 2; }
+  /* Cards 1, 2 are 1 col each — default */
+
+  /* Fourth card wide on second row */
+  .bento-card--3 { grid-column: span 2; grid-column-start: 2; }
+  /* Fifth card 1 col — default */
+
+  .bento-card {
+    position: relative;
+    overflow: hidden;
+    background: #0f0f0f;
+    min-height: 180px;
+  }
+
+  /* ── Image ── */
+  .bento-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.4s ease;
+    opacity: 0.7;
+  }
+
+  .bento-card:hover .bento-img {
+    opacity: 0.3;
+  }
+
+  /* ── Dark gradient overlay ── */
+  .bento-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, rgba(8,8,8,0.1) 50%, transparent 100%);
+  }
+
+  /* ── Content ── */
+  .bento-content {
+    position: absolute;
+    inset: 0;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .bento-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #f0f0f0;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.25rem;
+  }
+
+  .bento-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    color: #777;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .bento-card:hover .bento-desc {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Mobile: single column ── */
+  @media (max-width: 640px) {
+    .bento-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: 150px;
+    }
+
+    .bento-card--0,
+    .bento-card--3 {
+      grid-column: span 2;
+      grid-column-start: auto;
+    }
+
+    .bento-desc { opacity: 1; transform: translateY(0); }
+  }
+</style>
