@@ -3,6 +3,9 @@ import Layout from "../../layouts/Layout.astro";
 import GalleryComponent from "../../components/organisms/GalleryComponent.astro";
 import HeroTitle from "../../components/atoms/HeroTitle.astro";
 import BaseSection from "../../components/atoms/BaseSection.astro";
+import TechnologyButton from "../../components/molecules/TechnologyButton.astro";
+import FeatureCard from "../../components/molecules/FeatureCard.astro";
+import ProjectCTA from "../../components/molecules/ProjectCTA.astro";
 
 const screenshots: string[] = [
   "/Portfolio/images/projects/pockbit/pockbit.webp",
@@ -14,327 +17,281 @@ const screenshots: string[] = [
 ];
 
 const techStack = [
-  {
-    name: ".NET Framework",
-    icon: "🔷",
-    description: "Backend robusto con C#"
-  },
-  {
-    name: "SQL Server",
-    icon: "🗄️",
-    description: "Base de datos empresarial"
-  },
-  {
-    name: "Azure",
-    icon: "☁️",
-    description: "Cloud hosting y servicios"
-  },
-  {
-    name: "Bootstrap",
-    icon: "🎨",
-    description: "UI responsiva y moderna"
-  }
+  { name: ".NET Framework", icon: "devicon-dotnetcore-plain" },
+  { name: "C#", icon: "devicon-csharp-plain" },
+  { name: "SQL Server", icon: "devicon-microsoftsqlserver-plain" },
+  { name: "Azure", icon: "devicon-azure-plain" },
+  { name: "Bootstrap", icon: "devicon-bootstrap-plain" },
 ];
 
 const features = [
   {
-    title: "Gestión Farmacéutica Especializada",
-    description: "Control de caducidades por lote, precios máximos y trazabilidad completa de medicamentos",
-    icon: "💊",
-    gradient: "from-green-500 to-emerald-600"
+    title: "Gestión farmacéutica especializada",
+    description: "Control de caducidades por lote, precios máximos y trazabilidad completa de medicamentos.",
   },
   {
-    title: "Arquitectura Empresarial",
-    description: "Transacciones ACID, normalización 3FN, CQRS para reportes y capas separadas",
-    icon: "🏗️",
-    gradient: "from-blue-500 to-cyan-600"
+    title: "Arquitectura empresarial",
+    description: "Transacciones ACID, normalización 3FN, CQRS para reportes y capas separadas.",
   },
   {
-    title: "Integridad de Datos",
-    description: "Validaciones multicapa, rollback automático y consistencia garantizada",
-    icon: "🛡️",
-    gradient: "from-purple-500 to-indigo-600"
+    title: "Integridad de datos",
+    description: "Validaciones multicapa, rollback automático y consistencia garantizada.",
   },
   {
-    title: "Escalabilidad Empresarial",
-    description: "Multi-sucursal, componentes desacoplados e infraestructura cloud-ready",
-    icon: "📈",
-    gradient: "from-orange-500 to-red-600"
-  }
+    title: "Escalabilidad empresarial",
+    description: "Multi-sucursal, componentes desacoplados e infraestructura cloud-ready.",
+  },
+];
+
+const before = [
+  "Operación manual con Excel",
+  "Errores frecuentes en inventario",
+  "Información desactualizada",
+  "Procesos lentos e ineficientes",
+];
+const after = [
+  "Automatización completa",
+  "Operación simultánea multi-usuario",
+  "Reportes automáticos en tiempo real",
+  "Validaciones y controles de integridad",
+];
+
+const process = [
+  { title: "Análisis con cliente", desc: "Identificación de necesidades del sector farmacéutico y mapeo de procesos existentes." },
+  { title: "Diseño de arquitectura", desc: "Modelado de datos, definición de capas y selección del stack tecnológico." },
+  { title: "Desarrollo iterativo", desc: "Implementación con pruebas continuas y validación constante de funcionalidades." },
+  { title: "Validación y despliegue", desc: "Pruebas con usuarios reales, ajustes finales y despliegue en Azure Cloud." },
 ];
 ---
 
 <Layout>
   <HeroTitle text="POCKBIT" size="text-[10vw]" />
-  <!-- Hero Section -->
+
+  <!-- Summary -->
   <BaseSection className="text-center py-20">
-    
-    <div class="mt-8">
-      <p class="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
-        Sistema integral de punto de venta diseñado específicamente para distribuidoras farmacéuticas,
-        transformando operaciones manuales en procesos automatizados y eficientes.
-      </p>
-      <div class="flex flex-wrap justify-center gap-3 mt-8">
-        <span class="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full text-sm font-semibold">
-          .NET Framework
-        </span>
-        <span class="px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-full text-sm font-semibold">
-          SQL Server
-        </span>
-        <span class="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full text-sm font-semibold">
-          Azure Cloud
-        </span>
-        <span class="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full text-sm font-semibold">
-          Bootstrap
-        </span>
+    <p class="lead">
+      Sistema integral de punto de venta diseñado específicamente para distribuidoras farmacéuticas,
+      transformando operaciones manuales en procesos automatizados y eficientes.
+    </p>
+    <div class="pill-row">
+      {techStack.map((t) => <TechnologyButton icon={t.icon} label={t.name} />)}
+    </div>
+    <ProjectCTA repo="https://github.com/CesarS39/Pockbit_v2" />
+  </BaseSection>
+
+  <!-- Problem / Solution -->
+  <BaseSection>
+    <p class="eyebrow">El reto</p>
+    <h2 class="section-title">Transformando el negocio farmacéutico</h2>
+
+    <div class="compare-grid">
+      <div class="compare-col">
+        <h3 class="compare-label">Situación anterior</h3>
+        <ul class="compare-list">
+          {before.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+      <div class="compare-col">
+        <h3 class="compare-label compare-label--accent">Solución Pockbit</h3>
+        <ul class="compare-list">
+          {after.map((item) => <li>{item}</li>)}
+        </ul>
       </div>
     </div>
   </BaseSection>
 
-  <!-- Problem Solution Section -->
+  <!-- Architecture -->
   <BaseSection>
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
-          Transformando el Negocio Farmacéutico
-        </h2>
-        <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-8"></div>
+    <p class="eyebrow">Arquitectura</p>
+    <h2 class="section-title">Stack y herramientas</h2>
+
+    <div class="arch-grid">
+      <div class="arch-col">
+        <h4 class="arch-label">Backend</h4>
+        <p>C# con .NET Framework · patrón MVC · lógica de negocio separada · DAOs y DTOs</p>
       </div>
-      
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="space-y-6">
-          <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-6">
-            <h3 class="text-xl font-bold text-red-400 mb-3">❌ Situación Anterior</h3>
-            <ul class="text-neutral-300 space-y-2">
-              <li>• Operación manual con Excel</li>
-              <li>• Errores frecuentes en inventario</li>
-              <li>• Información desactualizada</li>
-              <li>• Procesos lentos e ineficientes</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="space-y-6">
-          <div class="bg-green-500/10 border border-green-500/20 rounded-xl p-6">
-            <h3 class="text-xl font-bold text-green-400 mb-3">✅ Solución Pockbit</h3>
-            <ul class="text-neutral-300 space-y-2">
-              <li>• Automatización completa</li>
-              <li>• Operación simultánea multi-usuario</li>
-              <li>• Reportes automáticos en tiempo real</li>
-              <li>• Validaciones y controles de integridad</li>
-            </ul>
-          </div>
-        </div>
+      <div class="arch-col">
+        <h4 class="arch-label">Base de datos</h4>
+        <p>SQL Server · Azure SQL Database · procedimientos almacenados · vistas optimizadas</p>
+      </div>
+      <div class="arch-col">
+        <h4 class="arch-label">Frontend & cloud</h4>
+        <p>Bootstrap + JavaScript · diseño responsivo · Azure App Service · despliegue automático</p>
       </div>
     </div>
   </BaseSection>
 
-  <!-- Tech Stack Destacado -->
+  <!-- Features -->
   <BaseSection>
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">
-        Stack Tecnológico Empresarial
-      </h2>
-      <div class="w-24 h-1 bg-gradient-to-r from-indigo-400 to-purple-500 mx-auto mb-8"></div>
-    </div>
+    <p class="eyebrow">Características</p>
+    <h2 class="section-title">Lo más relevante</h2>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-      {techStack.map((tech) => (
-        <div class="group bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-6 border border-neutral-700 hover:border-indigo-500/50 hover:scale-105 transition-all duration-300">
-          <div class="text-4xl mb-4 text-center group-hover:scale-110 transition-transform">
-            {tech.icon}
-          </div>
-          <h3 class="text-lg font-bold text-center mb-2 text-white">
-            {tech.name}
-          </h3>
-          <p class="text-neutral-400 text-sm text-center">
-            {tech.description}
-          </p>
-        </div>
+    <div class="feature-grid">
+      {features.map((f, i) => (
+        <FeatureCard index={i + 1} title={f.title} description={f.description} />
       ))}
     </div>
-
-    <!-- Detalles técnicos expandidos -->
-    <div class="mt-12 bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700">
-      <h3 class="text-2xl font-bold text-center mb-8 text-indigo-400">Arquitectura & Herramientas</h3>
-      <div class="grid md:grid-cols-3 gap-8 text-center">
-        <div>
-          <h4 class="font-semibold text-white mb-3">Backend</h4>
-          <div class="text-neutral-300 space-y-1">
-            <p>C# con .NET Framework</p>
-            <p>Patrón MVC</p>
-            <p>Lógica de negocio separada</p>
-            <p>DAOs y DTOs</p>
-          </div>
-        </div>
-        <div>
-          <h4 class="font-semibold text-white mb-3">Base de Datos</h4>
-          <div class="text-neutral-300 space-y-1">
-            <p>SQL Server</p>
-            <p>Azure SQL Database</p>
-            <p>Procedimientos almacenados</p>
-            <p>Vistas optimizadas</p>
-          </div>
-        </div>
-        <div>
-          <h4 class="font-semibold text-white mb-3">Frontend & Cloud</h4>
-          <div class="text-neutral-300 space-y-1">
-            <p>Bootstrap + JavaScript</p>
-            <p>Diseño responsivo</p>
-            <p>Azure App Service</p>
-            <p>Despliegue automático</p>
-          </div>
-        </div>
-      </div>
-    </div>
   </BaseSection>
 
-  <!-- Features Section -->
+  <!-- Process -->
   <BaseSection>
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
-        Características Clave
-      </h2>
-      <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-8"></div>
-    </div>
+    <p class="eyebrow">Proceso</p>
+    <h2 class="section-title">Cómo se construyó</h2>
 
-    <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-      {features.map((feature, index) => (
-        <div class={`group relative bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700 hover:scale-105 transition-all duration-300 overflow-hidden`}>
-          <div class={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
-          <div class="relative z-10">
-            <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">
-              {feature.icon}
-            </div>
-            <h3 class="text-xl font-bold mb-4 text-white">
-              {feature.title}
-            </h3>
-            <p class="text-neutral-300 leading-relaxed">
-              {feature.description}
-            </p>
+    <div class="process-list">
+      {process.map((step, i) => (
+        <div class="process-item">
+          <span class="process-num">{String(i + 1).padStart(2, "0")}</span>
+          <div>
+            <h3 class="process-title">{step.title}</h3>
+            <p class="process-desc">{step.desc}</p>
           </div>
         </div>
       ))}
     </div>
   </BaseSection>
 
-  <!-- Development Process -->
+  <!-- Gallery -->
   <BaseSection>
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-        Proceso de Desarrollo
-      </h2>
-      <div class="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-500 mx-auto mb-8"></div>
-    </div>
-
-    <div class="max-w-4xl mx-auto">
-      <div class="relative">
-        <!-- Timeline line -->
-        <div class="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gradient-to-b from-purple-500 to-pink-500 hidden md:block"></div>
-        
-        <div class="space-y-8">
-          <!-- Step 1 -->
-          <div class="flex items-center md:justify-between">
-            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-purple-500/50 transition-colors">
-              <h3 class="font-bold text-lg mb-2 text-purple-400">1. Análisis con Cliente</h3>
-              <p class="text-neutral-300">Identificación de necesidades específicas del sector farmacéutico y mapeo de procesos existentes.</p>
-            </div>
-            <div class="hidden md:block w-2/12 text-center">
-              <div class="w-8 h-8 bg-purple-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">1</div>
-            </div>
-            <div class="hidden md:block md:w-5/12"></div>
-          </div>
-
-          <!-- Step 2 -->
-          <div class="flex items-center md:justify-between">
-            <div class="hidden md:block md:w-5/12"></div>
-            <div class="hidden md:block w-2/12 text-center">
-              <div class="w-8 h-8 bg-purple-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">2</div>
-            </div>
-            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-purple-500/50 transition-colors">
-              <h3 class="font-bold text-lg mb-2 text-purple-400">2. Diseño de Arquitectura</h3>
-              <p class="text-neutral-300">Modelado de datos, definición de capas y selección del stack tecnológico apropiado.</p>
-            </div>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="flex items-center md:justify-between">
-            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-purple-500/50 transition-colors">
-              <h3 class="font-bold text-lg mb-2 text-purple-400">3. Desarrollo Iterativo</h3>
-              <p class="text-neutral-300">Implementación con pruebas continuas y validación constante de funcionalidades.</p>
-            </div>
-            <div class="hidden md:block w-2/12 text-center">
-              <div class="w-8 h-8 bg-purple-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">3</div>
-            </div>
-            <div class="hidden md:block md:w-5/12"></div>
-          </div>
-
-          <!-- Step 4 -->
-          <div class="flex items-center md:justify-between">
-            <div class="hidden md:block md:w-5/12"></div>
-            <div class="hidden md:block w-2/12 text-center">
-              <div class="w-8 h-8 bg-purple-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">4</div>
-            </div>
-            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-purple-500/50 transition-colors">
-              <h3 class="font-bold text-lg mb-2 text-purple-400">4. Validación y Despliegue</h3>
-              <p class="text-neutral-300">Pruebas con usuarios reales, ajustes finales y despliegue en Azure Cloud.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <p class="eyebrow">Capturas</p>
+    <h2 class="section-title">El sistema en uso</h2>
+    <GalleryComponent images={screenshots} />
   </BaseSection>
 
-  <!-- Gallery Section -->
-  <BaseSection>
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
-        Capturas del Sistema
-      </h2>
-      <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-8"></div>
-    </div>
-    
-    <div class="max-w-6xl mx-auto">
-      <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700">
-        <GalleryComponent images={screenshots} />
-      </div>
-    </div>
-  </BaseSection>
+  <style>
+    .lead {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #999;
+      max-width: 42rem;
+      margin: 0 auto 2rem;
+    }
 
-  <!-- CTA Section -->
-  <BaseSection className="text-center">
-    <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-12 border border-neutral-700">
-      <h2 class="text-3xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
-        Explora el Código
-      </h2>
-      <p class="text-neutral-300 mb-8 max-w-2xl mx-auto">
-        Descubre la implementación completa en GitHub. El proyecto incluye documentación técnica, 
-        diagramas de arquitectura y guías de instalación.
-      </p>
-      
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a
-          href="https://github.com/CesarS39/Pockbit_v2"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white rounded-xl bg-gradient-to-br from-cyan-400 to-indigo-500 hover:scale-105 transition-all duration-300 shadow-lg shadow-cyan-500/25"
-        >
-          <svg
-            class="w-6 h-6 mr-3 text-white group-hover:rotate-12 transition-transform"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.262.82-.583 0-.288-.012-1.243-.018-2.253-3.338.725-4.042-1.612-4.042-1.612-.546-1.388-1.333-1.758-1.333-1.758-1.09-.745.083-.73.083-.73 1.205.087 1.838 1.24 1.838 1.24 1.07 1.833 2.807 1.303 3.492.996.107-.775.418-1.303.76-1.602-2.665-.304-5.466-1.332-5.466-5.933 0-1.31.467-2.382 1.235-3.222-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.47 11.47 0 0 1 3.003-.403c1.02.005 2.047.137 3.003.403 2.292-1.552 3.297-1.23 3.297-1.23.654 1.653.243 2.873.12 3.176.77.84 1.233 1.912 1.233 3.222 0 4.61-2.805 5.625-5.475 5.922.43.37.815 1.102.815 2.222 0 1.604-.015 2.898-.015 3.293 0 .324.216.7.825.58C20.565 22.296 24 17.796 24 12.5 24 5.87 18.627.5 12 .5z"
-            ></path>
-          </svg>
-          Ver Repositorio en GitHub
-        </a>
-        
-        <div class="flex items-center text-neutral-400">
-          <span class="text-sm">⭐ Proyecto destacado</span>
-        </div>
-      </div>
-    </div>
-  </BaseSection>
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      letter-spacing: -0.03em;
+      color: #f0f0f0;
+      margin-bottom: 2.5rem;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .compare-label {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #888;
+      margin-bottom: 1rem;
+    }
+    .compare-label--accent { color: #e2e8f0; }
+
+    .compare-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .compare-list li {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      color: #888;
+      padding-left: 1.1rem;
+      position: relative;
+      line-height: 1.5;
+    }
+    .compare-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: #444;
+    }
+
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .arch-label {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      margin-bottom: 0.6rem;
+    }
+    .arch-col p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: #777;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .process-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .process-item {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .process-item:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.07); }
+    .process-num {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #333;
+      flex-shrink: 0;
+      width: 2rem;
+    }
+    .process-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #f0f0f0;
+      margin-bottom: 0.4rem;
+    }
+    .process-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: #888;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 640px) {
+      .compare-grid, .arch-grid, .feature-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </Layout>

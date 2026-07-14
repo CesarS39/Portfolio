@@ -32,28 +32,31 @@ function onMainVisible(cb) {
 
 onMainVisible(() => {
   // ── Hero parallax: content drifts + fades as hero scrolls out ────────────
-  gsap.to(".hero__content", {
-    y: 120,
-    opacity: 0,
-    ease: "none",
-    scrollTrigger: {
-      trigger: ".hero",
-      start: "top top",
-      end: "80% top",
-      scrub: 0.6,
-    },
-  });
+  // Only present on the homepage — guard so project sub-pages (no `.hero`) don't warn.
+  if (document.querySelector(".hero")) {
+    gsap.to(".hero__content", {
+      y: 120,
+      opacity: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "80% top",
+        scrub: 0.6,
+      },
+    });
 
-  gsap.to(".hero__canvas", {
-    y: -50,
-    ease: "none",
-    scrollTrigger: {
-      trigger: ".hero",
-      start: "top top",
-      end: "bottom top",
-      scrub: 0.4,
-    },
-  });
+    gsap.to(".hero__canvas", {
+      y: -50,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: 0.4,
+      },
+    });
+  }
 
   // ── Section reveal: fade-up on scroll ────────────────────────────────────
   gsap.utils.toArray(".reveal-section").forEach((el) => {
@@ -70,23 +73,6 @@ onMainVisible(() => {
     });
   });
 
-  // ── TechStack: stagger badges ─────────────────────────────────────────────
-  const techItems = gsap.utils.toArray(".tech-item");
-  if (techItems.length) {
-    gsap.from(techItems, {
-      opacity: 0,
-      y: 18,
-      duration: 0.4,
-      ease: "power2.out",
-      stagger: 0.04,
-      scrollTrigger: {
-        trigger: ".tech-grid",
-        start: "top 82%",
-        once: true,
-      },
-    });
-  }
-
   // ── Project cards: stagger on scroll ─────────────────────────────────────
   const projectCards = gsap.utils.toArray(".project-card");
   if (projectCards.length) {
@@ -97,7 +83,7 @@ onMainVisible(() => {
       ease: "power2.out",
       stagger: 0.08,
       scrollTrigger: {
-        trigger: ".projects-grid",
+        trigger: ".pjs-track",
         start: "top 85%",
         once: true,
       },

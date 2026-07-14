@@ -1,0 +1,62 @@
+---
+interface Props {
+  demo?: string;
+  repo?: string;
+}
+
+const { demo, repo } = Astro.props as Props;
+---
+
+<div class="cta-row">
+  {demo && (
+    <a href={demo} target="_blank" rel="noopener noreferrer" class="cta-btn cta-btn--primary">
+      Ver demo en vivo
+    </a>
+  )}
+  {repo && (
+    <a href={repo} target="_blank" rel="noopener noreferrer" class="cta-btn cta-btn--ghost">
+      Ver código
+    </a>
+  )}
+</div>
+
+<style>
+  .cta-row {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 2rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .cta-btn--primary {
+    background: #e2e8f0;
+    color: #080808;
+  }
+  .cta-btn--primary:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+  }
+
+  .cta-btn--ghost {
+    background: transparent;
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .cta-btn--ghost:hover {
+    border-color: rgba(226, 232, 240, 0.5);
+    transform: translateY(-2px);
+  }
+</style>

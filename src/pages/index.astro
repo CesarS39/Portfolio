@@ -11,7 +11,6 @@ import ExperienceSection from "../components/organisms/ExperienceSection.astro";
 import InterestsSection from "../components/organisms/InterestsSection.astro";
 import ProjectsSection from "../components/organisms/ProjectsSection.astro";
 import ContactSection from "../components/organisms/ContactSection.astro";
-import SocialService from "../components/organisms/SocialServiceSection.astro";
 ---
 
 <Layout>
@@ -227,9 +226,20 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
     <ExperienceSection
       experiences={[
         {
-          company: "Desarrollador Full Stack",
+          company: "Project Manager - GURAGU",
+          role: "Gestión de proyectos, planificación estratégica y coordinación de equipos de desarrollo",
+          year: "2026 – Presente",
+          items: [
+            "Planificación y ejecución de proyectos de software utilizando metodologías ágiles (Scrum/Kanban).",
+            "Coordinación de equipos de desarrollo, definición de alcance y gestión de tiempos de entrega.",
+            "Comunicación directa con stakeholders para alinear expectativas y priorizar requisitos.",
+            "Seguimiento de métricas de productividad y calidad del producto.",
+          ],
+        },
+        {
+          company: "Desarrollador Full Stack - GURAGU",
           role: "Desarrollo de sistemas completos con Angular, Node.js y AWS",
-          year: "2025 – Presente",
+          year: "2025 – 2026",
           items: [
             "Módulos de autenticación con AWS Cognito, formularios reactivos, route guards y componentes standalone en Angular.",
             "Backend en Node.js / TypeScript con Prisma ORM sobre PostgreSQL.",
@@ -387,7 +397,7 @@ import SocialService from "../components/organisms/SocialServiceSection.astro";
             bgColor: "bg-neutral-700 hover:bg-neutral-600",
           },
           {
-            href: "www.linkedin.com/in/cesar-samuel-enriquez-bautista-258b2324b",
+            href: "https://www.linkedin.com/in/cesar-samuel-enriquez-bautista-258b2324b",
             title: "LinkedIn",
             icon: "/icons/linkedin.svg",
             bgColor: "bg-blue-700 hover:bg-blue-600",

@@ -1,6 +1,17 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #080808;
+  --color-surface: #0f0f0f;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-accent: #e2e8f0;
+  --color-accent-glow: rgba(226, 232, 240, 0.15);
+  --color-text-base: #f0f0f0;
+  --color-text-muted: #666666;
+
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
 
 @keyframes fade-up {
     0% {

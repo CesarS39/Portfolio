@@ -26,8 +26,8 @@ const row2 = techs.slice(mid);
   <div class="marquee-wrap">
 
     <!-- Row 1 — scrolls left -->
-    <div class="marquee-viewport">
-      <div class="marquee-track marquee-left">
+    <div class="marquee-viewport" data-dir="-1" data-speed="24">
+      <div class="marquee-track">
         {[...row1, ...row1].map((tech) => (
           <div class="tech-chip">
             {tech.isEmoji
@@ -41,8 +41,8 @@ const row2 = techs.slice(mid);
     </div>
 
     <!-- Row 2 — scrolls right -->
-    <div class="marquee-viewport">
-      <div class="marquee-track marquee-right">
+    <div class="marquee-viewport" data-dir="1" data-speed="21">
+      <div class="marquee-track">
         {[...row2, ...row2].map((tech) => (
           <div class="tech-chip">
             {tech.isEmoji
@@ -109,35 +109,26 @@ const row2 = techs.slice(mid);
     );
   }
 
-  /* ── Scrolling tracks ── */
+  /* Chips are relatively wider than the viewport on phones, so an 8%
+     fade left them hard-cropped mid-word at the edges. Widen it. */
+  @media (max-width: 640px) {
+    .marquee-viewport {
+      mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 18%,
+        black 82%,
+        transparent 100%
+      );
+    }
+  }
+
+  /* ── Scrolling tracks (driven by JS rAF, see script below) ── */
   .marquee-track {
     display: flex;
     gap: 0.75rem;
     width: max-content;
     will-change: transform;
-  }
-
-  .marquee-left {
-    animation: scroll-left 38s linear infinite;
-  }
-
-  .marquee-right {
-    animation: scroll-right 42s linear infinite;
-  }
-
-  @keyframes scroll-left {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-
-  @keyframes scroll-right {
-    from { transform: translateX(-50%); }
-    to   { transform: translateX(0); }
-  }
-
-  /* Pause on hover */
-  .marquee-viewport:hover .marquee-track {
-    animation-play-state: paused;
   }
 
   /* ── Individual chip ── */
@@ -220,8 +211,48 @@ const row2 = techs.slice(mid);
     color: #d8dce4;
   }
 
-  /* Respect reduced-motion */
-  @media (prefers-reduced-motion: reduce) {
-    .marquee-left, .marquee-right { animation: none; }
-  }
+  /* Respect reduced-motion: JS ticker below skips animating when this matches */
 </style>
+
+<script>
+  // JS-driven marquee: pausing on hover just stops incrementing the offset,
+  // so there is no jump like animation-play-state can cause when it resumes
+  // mid-cycle (a known issue when a CSS transform-driven keyframe animation
+  // is paused/resumed rapidly on hover).
+  (function () {
+    const viewports = document.querySelectorAll<HTMLElement>(".marquee-viewport");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    viewports.forEach((viewport) => {
+      const track = viewport.querySelector<HTMLElement>(".marquee-track");
+      if (!track) return;
+
+      const dir = Number(viewport.dataset.dir) || -1;
+      const speed = Number(viewport.dataset.speed) || 24; // px/s
+      let offset = dir === -1 ? 0 : -track.scrollWidth / 2;
+      let paused = false;
+      let lastT: number | null = null;
+
+      viewport.addEventListener("mouseenter", () => (paused = true));
+      viewport.addEventListener("mouseleave", () => (paused = false));
+
+      if (reduceMotion) return;
+
+      function tick(t: number) {
+        if (lastT === null) lastT = t;
+        const dt = (t - lastT) / 1000;
+        lastT = t;
+
+        if (!paused && track) {
+          const half = track.scrollWidth / 2;
+          offset += dir * speed * dt;
+          if (offset <= -half) offset += half;
+          if (offset > 0) offset -= half;
+          track.style.transform = `translateX(${offset}px)`;
+        }
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  })();
+</script>

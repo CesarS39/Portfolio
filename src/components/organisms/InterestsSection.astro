@@ -164,6 +164,14 @@ const { interests } = Astro.props as { interests: Interest[] };
       grid-column-start: auto;
     }
 
-    .bento-desc { opacity: 1; transform: translateY(0); }
+    .bento-card { min-height: 150px; }
+
+    .bento-content { padding: 1rem; }
+
+    .bento-desc {
+      opacity: 1;
+      transform: translateY(0);
+      -webkit-line-clamp: 1;
+    }
   }
 </style>

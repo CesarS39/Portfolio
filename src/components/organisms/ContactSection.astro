@@ -323,6 +323,7 @@ const socials = data.icons.filter(i => i.title !== "Email");
     color: #f0f0f0;
     transition: color 0.2s ease;
     line-height: 1;
+    overflow-wrap: anywhere;
     /* Keep legible over the animated grid */
     text-shadow: 0 0 40px rgba(8, 8, 8, 0.95), 0 2px 12px rgba(8, 8, 8, 0.8);
   }
@@ -405,7 +406,8 @@ const socials = data.icons.filter(i => i.title !== "Email");
   }
 
   @media (max-width: 640px) {
-    .contact-email-text { font-size: clamp(1.4rem, 8vw, 2.5rem); }
+    .contact-email-btn { align-items: flex-start; }
+    .contact-email-text { font-size: clamp(1.15rem, 6.5vw, 2.5rem); }
     .contact-socials { gap: 0.65rem; }
   }
 </style>

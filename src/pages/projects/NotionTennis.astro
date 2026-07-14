@@ -3,6 +3,8 @@ import Layout from "../../layouts/Layout.astro";
 import GalleryComponent from "../../components/organisms/GalleryComponent.astro";
 import HeroTitle from "../../components/atoms/HeroTitle.astro";
 import BaseSection from "../../components/atoms/BaseSection.astro";
+import TechnologyButton from "../../components/molecules/TechnologyButton.astro";
+import FeatureCard from "../../components/molecules/FeatureCard.astro";
 
 const screenshots: string[] = [
   "/Portfolio/images/projects/notiontennis/main.webp",
@@ -14,386 +16,329 @@ const screenshots: string[] = [
 ];
 
 const techStack = [
-  {
-    name: "Notion",
-    icon: "🗃️",
-    description: "Plataforma principal no-code"
-  },
-  {
-    name: "Automation",
-    icon: "⚡",
-    description: "Flujos de trabajo automáticos"
-  },
-  {
-    name: "Templates",
-    icon: "📋",
-    description: "Plantillas personalizadas"
-  },
-  {
-    name: "Analytics",
-    icon: "📊",
-    description: "Análisis de datos avanzado"
-  }
+  { name: "Notion" },
+  { name: "No-Code" },
+  { name: "Automatización" },
+  { name: "Analytics" },
 ];
 
 const features = [
   {
-    title: "Gestión de Asistencias Automatizada",
-    description: "Sistema de pase de lista digital con seguimiento en tiempo real, notificaciones automáticas y reportes de participación estudiantil",
-    icon: "✅",
-    gradient: "from-green-500 to-emerald-600"
+    title: "Gestión de asistencias automatizada",
+    description: "Pase de lista digital con seguimiento en tiempo real, notificaciones automáticas y reportes de participación estudiantil.",
   },
   {
-    title: "Administración de Eventos",
-    description: "Organización completa de torneos, entrenamientos y actividades especiales con calendario integrado y gestión de participantes",
-    icon: "🏆",
-    gradient: "from-blue-500 to-cyan-600"
+    title: "Administración de eventos",
+    description: "Organización de torneos, entrenamientos y actividades especiales con calendario integrado y gestión de participantes.",
   },
   {
-    title: "Sistema de Calificaciones",
-    description: "Evaluación integral del rendimiento deportivo con métricas personalizadas y seguimiento del progreso individual",
-    icon: "📈",
-    gradient: "from-purple-500 to-indigo-600"
+    title: "Sistema de calificaciones",
+    description: "Evaluación del rendimiento deportivo con métricas personalizadas y seguimiento del progreso individual.",
   },
   {
-    title: "Análisis Estadístico Avanzado",
-    description: "Dashboard con KPIs clave, tendencias de participación y métricas para la toma de decisiones estratégicas",
-    icon: "📊",
-    gradient: "from-orange-500 to-red-600"
-  }
+    title: "Análisis estadístico avanzado",
+    description: "Dashboard con KPIs clave, tendencias de participación y métricas para la toma de decisiones.",
+  },
+];
+
+const impactMetrics = [
+  { metric: "85%", label: "Reducción de tiempo en procesos administrativos" },
+  { metric: "100%", label: "Automatización del pase de lista y reportes" },
+  { metric: "100+", label: "Estudiantes beneficiados directamente" },
+];
+
+const process = [
+  { title: "Análisis de necesidades", desc: "Identificación de procesos manuales existentes y requerimientos específicos del programa de tenis universitario." },
+  { title: "Diseño de arquitectura", desc: "Estructuración de bases de datos, definición de flujos de trabajo y diseño de interfaces en Notion." },
+  { title: "Desarrollo e integración", desc: "Implementación de módulos, configuración de automatizaciones y creación de dashboards para análisis de datos." },
+  { title: "Capacitación y puesta en marcha", desc: "Entrenamiento del personal, pruebas piloto y ajustes finales basados en retroalimentación de usuarios." },
 ];
 ---
 
 <Layout>
   <HeroTitle text="NOTION TENNIS UPP" size="text-[8vw]" />
-  <!-- Hero Section -->
+
+  <!-- Summary -->
   <BaseSection className="text-center py-20">
-    
-    <div class="mt-8">
-      <p class="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
-        Sistemas no-code desarrollados durante el servicio social para optimizar la gestión del extracurricular de tenis 
-        en la Universidad Politécnica de Pachuca, transformando procesos manuales en flujos automatizados eficientes.
-      </p>
-      <div class="flex flex-wrap justify-center gap-3 mt-8">
-        <span class="px-4 py-2 bg-gradient-to-r from-slate-500 to-gray-600 rounded-full text-sm font-semibold">
-          Notion
-        </span>
-        <span class="px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-full text-sm font-semibold">
-          No-Code
-        </span>
-        <span class="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full text-sm font-semibold">
-          Automatización
-        </span>
-        <span class="px-4 py-2 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full text-sm font-semibold">
-          Analytics
-        </span>
+    <p class="lead">
+      Sistemas no-code desarrollados durante el servicio social para optimizar la gestión del
+      extracurricular de tenis en la Universidad Politécnica de Pachuca, transformando procesos
+      manuales en flujos automatizados eficientes.
+    </p>
+    <div class="pill-row">
+      {techStack.map((t) => <TechnologyButton icon={t.icon} label={t.name} />)}
+    </div>
+  </BaseSection>
+
+  <!-- Problem / Solution -->
+  <BaseSection>
+    <p class="eyebrow">El reto</p>
+    <h2 class="section-title">Modernizando la gestión deportiva universitaria</h2>
+
+    <div class="compare-grid">
+      <div class="compare-col">
+        <h3 class="compare-label">Situación anterior</h3>
+        <ul class="compare-list">
+          <li>Pase de lista manual con papel</li>
+          <li>Registro desorganizado de eventos</li>
+          <li>Calificaciones en hojas dispersas</li>
+          <li>Sin análisis de datos ni métricas</li>
+          <li>Toma de decisiones sin base estadística</li>
+        </ul>
+      </div>
+      <div class="compare-col">
+        <h3 class="compare-label compare-label--accent">Solución no-code</h3>
+        <ul class="compare-list">
+          <li>Sistema digital automatizado</li>
+          <li>Gestión centralizada de información</li>
+          <li>Reportes automáticos en tiempo real</li>
+          <li>Dashboard con métricas clave</li>
+          <li>Decisiones basadas en datos</li>
+        </ul>
       </div>
     </div>
   </BaseSection>
 
-  <!-- Problem Solution Section -->
+  <!-- Architecture -->
   <BaseSection>
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
-          Modernizando la Gestión Deportiva Universitaria
-        </h2>
-        <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-8"></div>
+    <p class="eyebrow">Arquitectura</p>
+    <h2 class="section-title">Componentes y funcionalidades</h2>
+
+    <div class="arch-grid">
+      <div class="arch-col">
+        <h4 class="arch-label">Gestión de datos</h4>
+        <p>Bases de datos relacionales · formularios personalizados · validación automática · backup y sincronización</p>
       </div>
-      
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="space-y-6">
-          <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-6">
-            <h3 class="text-xl font-bold text-red-400 mb-3">❌ Situación Anterior</h3>
-            <ul class="text-neutral-300 space-y-2">
-              <li>• Pase de lista manual con papel</li>
-              <li>• Registro desorganizado de eventos</li>
-              <li>• Calificaciones en hojas dispersas</li>
-              <li>• Sin análisis de datos ni métricas</li>
-              <li>• Toma de decisiones sin base estadística</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="space-y-6">
-          <div class="bg-green-500/10 border border-green-500/20 rounded-xl p-6">
-            <h3 class="text-xl font-bold text-green-400 mb-3">✅ Solución No-Code</h3>
-            <ul class="text-neutral-300 space-y-2">
-              <li>• Sistema digital automatizado</li>
-              <li>• Gestión centralizada de información</li>
-              <li>• Reportes automáticos en tiempo real</li>
-              <li>• Dashboard con métricas clave</li>
-              <li>• Decisiones basadas en datos</li>
-            </ul>
-          </div>
-        </div>
+      <div class="arch-col">
+        <h4 class="arch-label">Automatización</h4>
+        <p>Flujos de trabajo automáticos · notificaciones inteligentes · recordatorios programados · actualizaciones en tiempo real</p>
+      </div>
+      <div class="arch-col">
+        <h4 class="arch-label">Análisis &amp; reportes</h4>
+        <p>Dashboard interactivo · gráficos y métricas · reportes automáticos · exportación de datos</p>
       </div>
     </div>
   </BaseSection>
 
-  <!-- Tech Stack Destacado -->
+  <!-- Features -->
   <BaseSection>
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">
-        Stack No-Code Especializado
-      </h2>
-      <div class="w-24 h-1 bg-gradient-to-r from-indigo-400 to-purple-500 mx-auto mb-8"></div>
-    </div>
+    <p class="eyebrow">Módulos</p>
+    <h2 class="section-title">El sistema en detalle</h2>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-      {techStack.map((tech) => (
-        <div class="group bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-6 border border-neutral-700 hover:border-indigo-500/50 hover:scale-105 transition-all duration-300">
-          <div class="text-4xl mb-4 text-center group-hover:scale-110 transition-transform">
-            {tech.icon}
-          </div>
-          <h3 class="text-lg font-bold text-center mb-2 text-white">
-            {tech.name}
-          </h3>
-          <p class="text-neutral-400 text-sm text-center">
-            {tech.description}
-          </p>
+    <div class="feature-grid">
+      {features.map((f, i) => (
+        <FeatureCard index={i + 1} title={f.title} description={f.description} />
+      ))}
+    </div>
+  </BaseSection>
+
+  <!-- Impact -->
+  <BaseSection>
+    <p class="eyebrow">Impacto</p>
+    <h2 class="section-title">Resultados obtenidos</h2>
+
+    <div class="stat-grid">
+      {impactMetrics.map((m) => (
+        <div class="stat-item">
+          <span class="stat-value">{m.metric}</span>
+          <span class="stat-label">{m.label}</span>
         </div>
       ))}
     </div>
-
-    <!-- Detalles técnicos expandidos -->
-    <div class="mt-12 bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700">
-      <h3 class="text-2xl font-bold text-center mb-8 text-indigo-400">Componentes & Funcionalidades</h3>
-      <div class="grid md:grid-cols-3 gap-8 text-center">
-        <div>
-          <h4 class="font-semibold text-white mb-3">Gestión de Datos</h4>
-          <div class="text-neutral-300 space-y-1">
-            <p>Bases de datos relacionales</p>
-            <p>Formularios personalizados</p>
-            <p>Validación de datos automática</p>
-            <p>Backup y sincronización</p>
-          </div>
-        </div>
-        <div>
-          <h4 class="font-semibold text-white mb-3">Automatización</h4>
-          <div class="text-neutral-300 space-y-1">
-            <p>Flujos de trabajo automáticos</p>
-            <p>Notificaciones inteligentes</p>
-            <p>Recordatorios programados</p>
-            <p>Actualizaciones en tiempo real</p>
-          </div>
-        </div>
-        <div>
-          <h4 class="font-semibold text-white mb-3">Análisis & Reportes</h4>
-          <div class="text-neutral-300 space-y-1">
-            <p>Dashboard interactivo</p>
-            <p>Gráficos y métricas</p>
-            <p>Reportes automáticos</p>
-            <p>Exportación de datos</p>
-          </div>
-        </div>
-      </div>
-    </div>
   </BaseSection>
 
-  <!-- Features Section -->
+  <!-- Process -->
   <BaseSection>
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
-        Módulos del Sistema
-      </h2>
-      <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-8"></div>
-    </div>
+    <p class="eyebrow">Proceso</p>
+    <h2 class="section-title">Cómo se implementó</h2>
 
-    <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-      {features.map((feature, index) => (
-        <div class={`group relative bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700 hover:scale-105 transition-all duration-300 overflow-hidden`}>
-          <div class={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
-          <div class="relative z-10">
-            <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">
-              {feature.icon}
-            </div>
-            <h3 class="text-xl font-bold mb-4 text-white">
-              {feature.title}
-            </h3>
-            <p class="text-neutral-300 leading-relaxed">
-              {feature.description}
-            </p>
+    <div class="process-list">
+      {process.map((step, i) => (
+        <div class="process-item">
+          <span class="process-num">{String(i + 1).padStart(2, "0")}</span>
+          <div>
+            <h3 class="process-title">{step.title}</h3>
+            <p class="process-desc">{step.desc}</p>
           </div>
         </div>
       ))}
     </div>
   </BaseSection>
 
-  <!-- Impact & Results Section -->
+  <!-- Gallery -->
   <BaseSection>
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-emerald-400 to-cyan-500 bg-clip-text text-transparent">
-        Impacto y Resultados
-      </h2>
-      <div class="w-24 h-1 bg-gradient-to-r from-emerald-400 to-cyan-500 mx-auto mb-8"></div>
-    </div>
-
-    <div class="max-w-6xl mx-auto">
-      <div class="grid md:grid-cols-3 gap-8 mb-12">
-        <div class="text-center bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700">
-          <div class="text-4xl font-bold text-emerald-400 mb-2">85%</div>
-          <div class="text-lg font-semibold text-white mb-2">Reducción de Tiempo</div>
-          <div class="text-neutral-300">en procesos administrativos</div>
-        </div>
-        <div class="text-center bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700">
-          <div class="text-4xl font-bold text-cyan-400 mb-2">100%</div>
-          <div class="text-lg font-semibold text-white mb-2">Automatización</div>
-          <div class="text-neutral-300">del pase de lista y reportes</div>
-        </div>
-        <div class="text-center bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700">
-          <div class="text-4xl font-bold text-indigo-400 mb-2">100+</div>
-          <div class="text-lg font-semibold text-white mb-2">Estudiantes</div>
-          <div class="text-neutral-300">beneficiados directamente</div>
-        </div>
-      </div>
-
-      <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700">
-        <h3 class="text-2xl font-bold text-center mb-6 text-emerald-400">Beneficios Clave Obtenidos</h3>
-        <div class="grid md:grid-cols-2 gap-6">
-          <div class="space-y-4">
-            <div class="flex items-start space-x-3">
-              <div class="w-2 h-2 bg-emerald-400 rounded-full mt-2 flex-shrink-0"></div>
-              <p class="text-neutral-300">Eliminación completa del papeleo manual en el control de asistencias</p>
-            </div>
-            <div class="flex items-start space-x-3">
-              <div class="w-2 h-2 bg-emerald-400 rounded-full mt-2 flex-shrink-0"></div>
-              <p class="text-neutral-300">Mejora significativa en la precisión de datos y reducción de errores humanos</p>
-            </div>
-            <div class="flex items-start space-x-3">
-              <div class="w-2 h-2 bg-emerald-400 rounded-full mt-2 flex-shrink-0"></div>
-              <p class="text-neutral-300">Acceso instantáneo a métricas de participación y rendimiento estudiantil</p>
-            </div>
-          </div>
-          <div class="space-y-4">
-            <div class="flex items-start space-x-3">
-              <div class="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
-              <p class="text-neutral-300">Facilita la toma de decisiones basada en datos históricos y tendencias</p>
-            </div>
-            <div class="flex items-start space-x-3">
-              <div class="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
-              <p class="text-neutral-300">Mayor organización y profesionalización del programa deportivo</p>
-            </div>
-            <div class="flex items-start space-x-3">
-              <div class="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
-              <p class="text-neutral-300">Sistema escalable y replicable para otras actividades extracurriculares</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <p class="eyebrow">Capturas</p>
+    <h2 class="section-title">El sistema en uso</h2>
+    <GalleryComponent images={screenshots} />
   </BaseSection>
 
-  <!-- Development Process -->
-  <BaseSection>
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-        Proceso de Implementación
-      </h2>
-      <div class="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-500 mx-auto mb-8"></div>
-    </div>
-
-    <div class="max-w-4xl mx-auto">
-      <div class="relative">
-        <!-- Timeline line -->
-        <div class="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gradient-to-b from-purple-500 to-pink-500 hidden md:block"></div>
-        
-        <div class="space-y-8">
-          <!-- Step 1 -->
-          <div class="flex items-center md:justify-between">
-            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-purple-500/50 transition-colors">
-              <h3 class="font-bold text-lg mb-2 text-purple-400">1. Análisis de Necesidades</h3>
-              <p class="text-neutral-300">Identificación de procesos manuales existentes y requerimientos específicos del programa de tenis universitario.</p>
-            </div>
-            <div class="hidden md:block w-2/12 text-center">
-              <div class="w-8 h-8 bg-purple-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">1</div>
-            </div>
-            <div class="hidden md:block md:w-5/12"></div>
-          </div>
-
-          <!-- Step 2 -->
-          <div class="flex items-center md:justify-between">
-            <div class="hidden md:block md:w-5/12"></div>
-            <div class="hidden md:block w-2/12 text-center">
-              <div class="w-8 h-8 bg-purple-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">2</div>
-            </div>
-            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-purple-500/50 transition-colors">
-              <h3 class="font-bold text-lg mb-2 text-purple-400">2. Diseño de Arquitectura</h3>
-              <p class="text-neutral-300">Estructuración de bases de datos, definición de flujos de trabajo y diseño de interfaces de usuario en Notion.</p>
-            </div>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="flex items-center md:justify-between">
-            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-purple-500/50 transition-colors">
-              <h3 class="font-bold text-lg mb-2 text-purple-400">3. Desarrollo e Integración</h3>
-              <p class="text-neutral-300">Implementación de módulos, configuración de automatizaciones y creación de dashboards para análisis de datos.</p>
-            </div>
-            <div class="hidden md:block w-2/12 text-center">
-              <div class="w-8 h-8 bg-purple-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">3</div>
-            </div>
-            <div class="hidden md:block md:w-5/12"></div>
-          </div>
-
-          <!-- Step 4 -->
-          <div class="flex items-center md:justify-between">
-            <div class="hidden md:block md:w-5/12"></div>
-            <div class="hidden md:block w-2/12 text-center">
-              <div class="w-8 h-8 bg-purple-500 rounded-full mx-auto flex items-center justify-center text-white font-bold">4</div>
-            </div>
-            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-purple-500/50 transition-colors">
-              <h3 class="font-bold text-lg mb-2 text-purple-400">4. Capacitación y Puesta en Marcha</h3>
-              <p class="text-neutral-300">Entrenamiento del personal, pruebas piloto y ajustes finales basados en retroalimentación de usuarios.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </BaseSection>
-
-  <!-- Gallery Section -->
-  <BaseSection>
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
-        Capturas del Sistema
-      </h2>
-      <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-8"></div>
-    </div>
-    
-    <div class="max-w-6xl mx-auto">
-      <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700">
-        <GalleryComponent images={screenshots} />
-      </div>
-    </div>
-  </BaseSection>
-
-  <!-- CTA Section -->
+  <!-- Closing note -->
   <BaseSection className="text-center">
-    <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-12 border border-neutral-700">
-      <h2 class="text-3xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
-        Proyecto de Servicio Social
-      </h2>
-      <p class="text-neutral-300 mb-8 max-w-2xl mx-auto">
-        Este proyecto fue desarrollado como parte del servicio social en la Universidad Politécnica de Pachuca,
-        demostrando el potencial de las soluciones no-code para resolver problemas reales en entornos educativos.
-      </p>
-      
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <div class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white rounded-xl bg-gradient-to-br from-green-400 to-emerald-500 shadow-lg shadow-slate-500/25">
-          <svg
-            class="w-6 h-6 mr-3 text-white"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-          </svg>
-          Sistema Implementado Exitosamente
-        </div>
-        
-        <div class="flex items-center text-neutral-400">
-          <span class="text-sm">🏆 Servicio Social UPP</span>
-        </div>
-      </div>
-    </div>
+    <p class="lead">
+      Proyecto desarrollado como parte del servicio social en la Universidad Politécnica de
+      Pachuca, demostrando el potencial de las soluciones no-code para resolver problemas
+      reales en entornos educativos.
+    </p>
   </BaseSection>
+
+  <style>
+    .lead {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #999;
+      max-width: 42rem;
+      margin: 0 auto 2rem;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      letter-spacing: -0.03em;
+      color: #f0f0f0;
+      margin-bottom: 2.5rem;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .compare-label {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #888;
+      margin-bottom: 1rem;
+    }
+    .compare-label--accent { color: #e2e8f0; }
+
+    .compare-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .compare-list li {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      color: #888;
+      padding-left: 1.1rem;
+      position: relative;
+      line-height: 1.5;
+    }
+    .compare-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: #444;
+    }
+
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .arch-label {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      margin-bottom: 0.6rem;
+    }
+    .arch-col p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: #777;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1rem;
+    }
+    .stat-value {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: #f0f0f0;
+    }
+    .stat-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    .process-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .process-item {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .process-item:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.07); }
+    .process-num {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #333;
+      flex-shrink: 0;
+      width: 2rem;
+    }
+    .process-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #f0f0f0;
+      margin-bottom: 0.4rem;
+    }
+    .process-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: #888;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 640px) {
+      .compare-grid, .arch-grid, .feature-grid, .stat-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </Layout>

@@ -3,10 +3,10 @@ const { icon, label, isEmoji = false } = Astro.props;
 ---
 
 <div class="tech-pill">
-  {isEmoji
+  {icon && (isEmoji
     ? <span class="tech-icon-emoji">{icon}</span>
     : <i class={`${icon} tech-icon-dev`} />
-  }
+  )}
   <span class="tech-label">{label}</span>
 </div>
 

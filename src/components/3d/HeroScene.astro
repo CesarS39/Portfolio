@@ -53,19 +53,24 @@
     }
     new ResizeObserver(resize).observe(canvas);
 
-    // ── Torus knot — dominant hero element ──────────────────────────────
+    // ── Torus knot — background accent. Skipped on narrow phones, where its
+    // world-space size reads as oversized against the shorter name text and
+    // was reported as visually competing with/underneath the name. ──
+    const showKnot = window.innerWidth >= 640;
     const knot = new THREE.Mesh(
-      new THREE.TorusKnotGeometry(1.2, 0.38, 200, 20),
-      new THREE.MeshBasicMaterial({ color: 0xdde3ec, wireframe: true, transparent: true, opacity: 0.72 })
+      new THREE.TorusKnotGeometry(1.2, 0.3, 200, 20),
+      new THREE.MeshBasicMaterial({ color: 0xdde3ec, wireframe: true, transparent: true, opacity: 0.22 })
     );
-    scene.add(knot);
+    knot.position.z = -3.2;
+    if (showKnot) scene.add(knot);
 
     // ── Solid knot underneath for glow illusion ──────────────────────────
     const knotSolid = new THREE.Mesh(
-      new THREE.TorusKnotGeometry(1.2, 0.38, 200, 20),
-      new THREE.MeshBasicMaterial({ color: 0x222836, transparent: true, opacity: 0.55 })
+      new THREE.TorusKnotGeometry(1.2, 0.3, 200, 20),
+      new THREE.MeshBasicMaterial({ color: 0x222836, transparent: true, opacity: 0.18 })
     );
-    scene.add(knotSolid);
+    knotSolid.position.z = -3.2;
+    if (showKnot) scene.add(knotSolid);
 
     // ── Icosahedra ────────────────────────────────────────────────────────
     const ico = new THREE.Mesh(

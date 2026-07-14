@@ -9,7 +9,6 @@ interface Project {
   demo?: string;
   link?: string;
   techStack?: string[];
-  featured?: boolean;
 }
 
 const { projects } = Astro.props as { projects: Project[] };
@@ -44,11 +43,10 @@ const { projects } = Astro.props as { projects: Project[] };
             title={project.title}
             description={project.description}
             image={project.image}
-            repo={project.repo && project.repo !== false ? String(project.repo) : undefined}
+            repo={typeof project.repo === "string" ? project.repo : undefined}
             demo={project.demo}
             link={project.link}
             techStack={project.techStack}
-            featured={project.featured}
           />
         </div>
       ))}
@@ -266,6 +264,24 @@ const { projects } = Astro.props as { projects: Project[] };
   @media (max-width: 900px)  { .pjs-slide { flex: 0 0 320px; } }
   @media (max-width: 600px)  { .pjs-slide { flex: 0 0 260px; } }
   @media (max-width: 400px)  { .pjs-slide { flex: 0 0 220px; } }
+
+  /*
+    Mobile: min-height:100vh left a huge dead gap below the carousel
+    because the (short) content was vertically centered inside a full
+    viewport-height section. Let the section hug its content instead.
+    Neighbor-card peeks also read as glitchy/misaligned fragments at this
+    width, so the vignette is widened to hide them almost entirely.
+  */
+  @media (max-width: 640px) {
+    .pjs {
+      min-height: 0;
+      padding: 4rem 0 3rem;
+    }
+    .pjs-wrap::before,
+    .pjs-wrap::after {
+      width: 30vw;
+    }
+  }
 </style>
 
 <script>
@@ -287,8 +303,8 @@ const { projects } = Astro.props as { projects: Project[] };
     var dots   = Array.prototype.slice.call(dotWrap.querySelectorAll(".pjs-dot"));
     var N      = slides.length;
     var cur    = 0;
-    var autoId = null;
-    var reId   = null;
+    var autoId: ReturnType<typeof setInterval> | null = null;
+    var reId: ReturnType<typeof setTimeout> | null = null;
 
     /* Read slide width and gap from the actual layout */
     function measure() {
@@ -306,22 +322,39 @@ const { projects } = Astro.props as { projects: Project[] };
       var m     = measure();
       var cw    = m.cw;
       var gap   = m.gap;
-      var wrapW = wrap.offsetWidth;
+      var wrapW = wrap!.offsetWidth;
+
+      /* Narrow phones: neighbor peeks with 3D tilt read as glitchy
+         fragments rather than a carousel, so show only the active card. */
+      var isMobile = window.innerWidth <= 640;
+      var maxAbs   = isMobile ? 1 : 3;
 
       /* Center the active slide in the wrapper */
       var offset = Math.round(wrapW / 2 - cw / 2 - cur * (cw + gap));
-      track.style.transform = "translateX(" + offset + "px)";
+      track!.style.transform = "translateX(" + offset + "px)";
 
       slides.forEach(function (el, i) {
         var dist = i - cur;
         var abs  = Math.abs(dist);
 
-        /* Hide slides beyond ±3 positions */
-        if (abs > 3) {
+        /* Hide slides beyond the visible range */
+        if (abs > maxAbs) {
           el.style.opacity       = "0";
           el.style.filter        = "brightness(0)";
           el.style.transform     = "";
           el.style.pointerEvents = "none";
+          return;
+        }
+
+        if (isMobile) {
+          /* No rotateY tilt on mobile — flat fade/scale only, since the
+             3D tilt at narrow slide widths looked skewed/offset. */
+          var mScale = abs === 0 ? 1 : 0.86;
+          var mOp    = abs === 0 ? 1 : 0.25;
+          el.style.transform     = "scale(" + mScale + ")";
+          el.style.filter        = "none";
+          el.style.opacity       = String(mOp);
+          el.style.pointerEvents = abs === 0 ? "all" : "none";
           return;
         }
 
@@ -352,7 +385,7 @@ const { projects } = Astro.props as { projects: Project[] };
       if (counter) counter.textContent = (cur + 1) + " / " + N;
     }
 
-    function goTo(idx) {
+    function goTo(idx: number) {
       cur = ((idx % N) + N) % N;
       render();
     }
@@ -360,12 +393,12 @@ const { projects } = Astro.props as { projects: Project[] };
     function goPrev() { goTo(cur - 1); }
 
     function startAuto() {
-      clearInterval(autoId);
+      if (autoId) clearInterval(autoId);
       autoId = setInterval(goNext, 4500);
     }
-    function stopAuto()  { clearInterval(autoId); }
+    function stopAuto()  { if (autoId) clearInterval(autoId); }
     function restartAuto() {
-      clearTimeout(reId);
+      if (reId) clearTimeout(reId);
       reId = setTimeout(startAuto, 3800);
     }
 
@@ -395,7 +428,7 @@ const { projects } = Astro.props as { projects: Project[] };
     /* Pause when section scrolled away */
     new IntersectionObserver(function (entries) {
       entries[0].isIntersecting ? startAuto() : stopAuto();
-    }, { threshold: 0.2 }).observe(section);
+    }, { threshold: 0.2 }).observe(section!);
 
     /* Rerender on resize (card width changes at breakpoints) */
     new ResizeObserver(function () { render(); }).observe(wrap);
@@ -425,11 +458,11 @@ const { projects } = Astro.props as { projects: Project[] };
       }
     }, { threshold: 0.05 }).observe(section);
 
-    function boot(THREE) {
-      var W = canvas.offsetWidth  || window.innerWidth;
-      var H = canvas.offsetHeight || window.innerHeight;
+    function boot(THREE: typeof import("three")) {
+      var W = canvas!.offsetWidth  || window.innerWidth;
+      var H = canvas!.offsetHeight || window.innerHeight;
 
-      var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: false });
+      var renderer = new THREE.WebGLRenderer({ canvas: canvas as HTMLCanvasElement, alpha: true, antialias: false });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.4));
       renderer.setSize(W, H, false);
       renderer.setClearColor(0x000000, 0);
@@ -439,12 +472,12 @@ const { projects } = Astro.props as { projects: Project[] };
       camera.position.set(0, 0, 6.5);
 
       new ResizeObserver(function () {
-        var w = canvas.offsetWidth || window.innerWidth;
-        var h = canvas.offsetHeight || window.innerHeight;
+        var w = canvas!.offsetWidth || window.innerWidth;
+        var h = canvas!.offsetHeight || window.innerHeight;
         renderer.setSize(w, h, false);
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
-      }).observe(canvas);
+      }).observe(canvas!);
 
       /* Particles */
       var COUNT = 130;
@@ -492,7 +525,7 @@ const { projects } = Astro.props as { projects: Project[] };
       }
 
       /* Background wireframe accents */
-      function mkWire(geo, pos, op) {
+      function mkWire(geo: import("three").BufferGeometry, pos: number[], op: number) {
         var m = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({
           color: 0xdde3ec, wireframe: true, transparent: true, opacity: op,
         }));

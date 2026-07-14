@@ -6,7 +6,6 @@ const {
   link,
   repo,
   techStack = [],
-  featured = false,
   demo,
 } = Astro.props;
 ---
@@ -261,23 +260,19 @@ const {
     color: #e2e8f0;
   }
 
-  /* ── Mobile: keep simpler (no hover on touch) ── */
+  /*
+    Mobile: no hover on touch, so keep the image fully visible with just
+    the always-on title bar (like desktop's resting state). Forcing the
+    hover panel open here previously buried the image under an
+    unconstrained-height text panel, reading as "no image at all".
+  */
   @media (max-width: 560px) {
     .project-card {
       aspect-ratio: 4 / 3;
     }
 
-    .project-panel {
-      transform: translateY(0);
-    }
-
-    .project-title-bar {
-      display: none;
-    }
-
-    .project-card:hover .project-img {
-      opacity: 0.75;
-      transform: none;
+    .project-img {
+      opacity: 0.85;
     }
   }
 </style>

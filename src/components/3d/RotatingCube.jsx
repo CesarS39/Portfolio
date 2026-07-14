@@ -1,10 +1,10 @@
 import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 
-function Cube({ mouse }) {
+function Cube() {
   const ref = useRef();
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     ref.current.rotation.x += delta * 0.25;
     ref.current.rotation.y += delta * 0.35;
   });

@@ -1,8 +1,7 @@
-<!-- atoms/CardBase.astro -->
 ---
 const { className = "" } = Astro.props;
 ---
 
-<div class={`bg-neutral-800 rounded-2xl p-6 shadow-md transition duration-300 ease-in-out hover:scale-105 ${className}`}>
+<div class={`bg-surface border border-border rounded-sm p-6 transition-transform duration-300 ease-out hover:-translate-y-1 ${className}`}>
   <slot />
 </div>

@@ -3,6 +3,9 @@ import Layout from "../../layouts/Layout.astro";
 import GalleryComponent from "../../components/organisms/GalleryComponent.astro";
 import HeroTitle from "../../components/atoms/HeroTitle.astro";
 import BaseSection from "../../components/atoms/BaseSection.astro";
+import TechnologyButton from "../../components/molecules/TechnologyButton.astro";
+import FeatureCard from "../../components/molecules/FeatureCard.astro";
+import ProjectCTA from "../../components/molecules/ProjectCTA.astro";
 
 const screenshots: string[] = [
   "/Portfolio/images/projects/myspot/IMG_5053.webp",
@@ -14,627 +17,282 @@ const screenshots: string[] = [
 ];
 
 const techStack = [
-  {
-    name: "Flutter",
-    icon: "📱",
-    description: "UI nativa multiplataforma",
-    gradient: "from-blue-400 to-cyan-500",
-  },
-  {
-    name: "Firebase",
-    icon: "🔥",
-    description: "Auth y servicios en tiempo real",
-    gradient: "from-yellow-400 to-orange-500",
-  },
-  {
-    name: "FastAPI",
-    icon: "⚡",
-    description: "Microservicios con Python",
-    gradient: "from-green-400 to-emerald-500",
-  },
-  {
-    name: "MongoDB",
-    icon: "🍃",
-    description: "Base de datos NoSQL",
-    gradient: "from-green-500 to-green-700",
-  },
+  { name: "Flutter", icon: "devicon-flutter-plain" },
+  { name: "Firebase", icon: "devicon-firebase-plain" },
+  { name: "FastAPI" },
+  { name: "MongoDB", icon: "devicon-mongodb-plain" },
 ];
 
 const features = [
   {
-    title: "Descubrimiento Social de Lugares",
-    description:
-      "Explora lugares por categorías con calificaciones reales de usuarios y reseñas tipo red social",
-    icon: "🗺️",
-    gradient: "from-purple-500 to-indigo-600",
-    details: [
-      "Categorización inteligente",
-      "Filtros avanzados",
-      "Geolocalización",
-      "Búsqueda predictiva",
-    ],
+    title: "Descubrimiento social de lugares",
+    description: "Explora lugares por categorías con calificaciones reales de usuarios y reseñas tipo red social, geolocalización y búsqueda predictiva.",
   },
   {
-    title: "Experiencia iOS Nativa",
-    description:
-      "Diseño cuidadosamente crafteado siguiendo Human Interface Guidelines con Flutter",
-    icon: "📱",
-    gradient: "from-blue-500 to-cyan-600",
-    details: [
-      "Animaciones fluidas",
-      "Componentes nativos",
-      "Gestos intuitivos",
-      "Adaptación dark/light",
-    ],
+    title: "Experiencia iOS nativa",
+    description: "Diseño crafteado siguiendo Human Interface Guidelines con Flutter: animaciones fluidas, gestos intuitivos y adaptación dark/light.",
   },
   {
-    title: "Sistema de Gamificación",
-    description:
-      "Insignias automáticas que reconocen la participación activa y contribuciones de calidad",
-    icon: "🏆",
-    gradient: "from-yellow-500 to-orange-600",
-    details: [
-      "Insignias dinámicas",
-      "Logros por actividad",
-      "Rankings locales",
-      "Recompensas por calidad",
-    ],
+    title: "Sistema de gamificación",
+    description: "Insignias dinámicas que reconocen la participación activa, logros por actividad y rankings locales.",
   },
   {
-    title: "Arquitectura Escalable",
-    description:
-      "Backend híbrido Firebase + FastAPI optimizado para crecimiento y funcionalidades avanzadas",
-    icon: "🏗️",
-    gradient: "from-green-500 to-emerald-600",
-    details: [
-      "Microservicios",
-      "NoSQL optimizado",
-      "CDN para imágenes",
-      "Auto-scaling",
-    ],
+    title: "Arquitectura escalable",
+    description: "Backend híbrido Firebase + FastAPI con microservicios, NoSQL optimizado y CDN para imágenes.",
   },
 ];
 
-const platforms = [
-  { name: "iOS", icon: "🍎", status: "En desarrollo", progress: "60%" },
-  { name: "Android", icon: "🤖", status: "En desarrollo", progress: "60%" },
+const process = [
+  { title: "Registro rápido", desc: "Login con Google/Apple en segundos, sin formularios complejos, directo a explorar." },
+  { title: "Explorar y descubrir", desc: "Navega por categorías, descubre lugares cercanos y lee reseñas auténticas de la comunidad." },
+  { title: "Participar y calificar", desc: "Comparte tu experiencia, sube fotos, califica lugares y participa en discusiones tipo red social." },
+  { title: "Ganar reconocimiento", desc: "Obtén insignias por tu participación activa y conviértete en un referente local de confianza." },
 ];
 ---
 
 <Layout>
   <HeroTitle text="MYSPOT" size="text-[10vw]" />
 
-  <!-- Hero Section -->
+  <!-- Summary -->
   <BaseSection className="text-center py-20">
-    <div class="max-w-4xl mx-auto">
-      <!-- Status Badge -->
-      <div
-        class="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-green-500/20 to-emerald-600/20 border border-green-500/30 rounded-full mb-8"
-      >
-        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-        <span class="text-green-400 font-semibold text-sm"
-          >En Desarrollo Activo</span
-        >
-      </div>
-
-      <p
-        class="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed mb-8"
-      >
-        Plataforma social móvil que conecta usuarios con los mejores lugares de
-        su ciudad. Descubre, califica y comparte experiencias con una comunidad
-        local activa.
-      </p>
-
-      <!-- Tech Stack Pills -->
-      <div class="flex flex-wrap justify-center gap-3 mb-8">
-        <span
-          class="px-4 py-2 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full text-sm font-semibold"
-        >
-          Flutter
-        </span>
-        <span
-          class="px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full text-sm font-semibold"
-        >
-          Firebase
-        </span>
-        <span
-          class="px-4 py-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full text-sm font-semibold"
-        >
-          FastAPI
-        </span>
-        <span
-          class="px-4 py-2 bg-gradient-to-r from-green-500 to-green-700 rounded-full text-sm font-semibold"
-        >
-          MongoDB
-        </span>
-      </div>
-
-      <!-- Platform Status -->
-      <div class="grid sm:grid-cols-2 gap-4 max-w-md mx-auto">
-        {
-          platforms.map((platform) => (
-            <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-xl p-4 border border-neutral-700">
-              <div class="flex items-center justify-between mb-2">
-                <div class="flex items-center space-x-2">
-                  <span class="text-2xl">{platform.icon}</span>
-                  <span class="font-semibold text-white">{platform.name}</span>
-                </div>
-                <span class="text-xs text-green-400">{platform.status}</span>
-              </div>
-              <div class="w-full bg-neutral-700 rounded-full h-2">
-                <div
-                  class="bg-gradient-to-r from-green-400 to-emerald-500 h-2 rounded-full transition-all duration-500"
-                  style={`width: ${platform.progress}`}
-                />
-              </div>
-              <div class="text-right text-xs text-neutral-400 mt-1">
-                {platform.progress}
-              </div>
-            </div>
-          ))
-        }
-      </div>
+    <p class="lead">
+      Plataforma social móvil que conecta usuarios con los mejores lugares de su ciudad.
+      Descubre, califica y comparte experiencias con una comunidad local activa.
+    </p>
+    <div class="pill-row">
+      {techStack.map((t) => <TechnologyButton icon={t.icon} label={t.name} />)}
     </div>
+    <p class="status-note">En desarrollo activo — iOS y Android al 60%. Launch estimado Q1 2026.</p>
+    <ProjectCTA repo="https://github.com/CesarS39/MySpot_App" />
   </BaseSection>
 
-  <!-- Problem Solution Section -->
+  <!-- Problem / Solution -->
   <BaseSection>
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-16">
-        <h2
-          class="text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent"
-        >
-          Conectando Comunidades Locales
-        </h2>
-        <div
-          class="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-500 mx-auto mb-8"
-        >
-        </div>
+    <p class="eyebrow">El reto</p>
+    <h2 class="section-title">Conectando comunidades locales</h2>
+
+    <div class="compare-grid">
+      <div class="compare-col">
+        <h3 class="compare-label">Problema identificado</h3>
+        <ul class="compare-list">
+          <li>Información dispersa sobre lugares locales</li>
+          <li>Reseñas poco confiables en plataformas generales</li>
+          <li>Falta de comunidad local organizada</li>
+          <li>Descubrimiento limitado de nuevos lugares</li>
+        </ul>
       </div>
-
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="space-y-6">
-          <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-6">
-            <h3 class="text-xl font-bold text-red-400 mb-3">
-              🔍 Problema Identificado
-            </h3>
-            <ul class="text-neutral-300 space-y-2 text-sm">
-              <li>• Información dispersa sobre lugares locales</li>
-              <li>• Reseñas poco confiables en plataformas generales</li>
-              <li>• Falta de comunidad local organizada</li>
-              <li>• Descubrimiento limitado de nuevos lugares</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="space-y-6">
-          <div
-            class="bg-green-500/10 border border-green-500/20 rounded-xl p-6"
-          >
-            <h3 class="text-xl font-bold text-green-400 mb-3">
-              ✨ Solución MySpot
-            </h3>
-            <ul class="text-neutral-300 space-y-2 text-sm">
-              <li>• Plataforma centralizada y especializada</li>
-              <li>• Sistema de reputación con insignias</li>
-              <li>• Comunidad verificada y activa</li>
-              <li>• Descubrimiento inteligente por categorías</li>
-            </ul>
-          </div>
-        </div>
+      <div class="compare-col">
+        <h3 class="compare-label compare-label--accent">Solución MySpot</h3>
+        <ul class="compare-list">
+          <li>Plataforma centralizada y especializada</li>
+          <li>Sistema de reputación con insignias</li>
+          <li>Comunidad verificada y activa</li>
+          <li>Descubrimiento inteligente por categorías</li>
+        </ul>
       </div>
     </div>
   </BaseSection>
 
-  <!-- Tech Stack Section -->
+  <!-- Architecture -->
   <BaseSection>
-    <div class="text-center mb-16">
-      <h2
-        class="text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent"
-      >
-        Stack Tecnológico Moderno
-      </h2>
-      <div
-        class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-indigo-500 mx-auto mb-8"
-      >
+    <p class="eyebrow">Arquitectura</p>
+    <h2 class="section-title">Stack híbrido</h2>
+
+    <div class="arch-grid">
+      <div class="arch-col">
+        <h4 class="arch-label">Frontend móvil</h4>
+        <p>Flutter con diseño iOS nativo · Figma para prototipado · gestión de estado avanzada · animaciones fluidas</p>
       </div>
-    </div>
-
-    <div
-      class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-12"
-    >
-      {
-        techStack.map((tech) => (
-          <div class="group bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-6 border border-neutral-700 hover:border-indigo-500/50 hover:scale-105 transition-all duration-300">
-            <div class="text-4xl mb-4 text-center group-hover:scale-110 transition-transform">
-              {tech.icon}
-            </div>
-            <h3 class="text-lg font-bold text-center mb-2 text-white">
-              {tech.name}
-            </h3>
-            <p class="text-neutral-400 text-sm text-center">
-              {tech.description}
-            </p>
-            <div
-              class={`mt-4 h-1 rounded bg-gradient-to-r ${tech.gradient} mx-auto w-0 group-hover:w-full transition-all duration-500`}
-            />
-          </div>
-        ))
-      }
-    </div>
-
-    <!-- Arquitectura detallada -->
-    <div
-      class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700"
-    >
-      <h3 class="text-2xl font-bold text-center mb-8 text-indigo-400">
-        Arquitectura Híbrida
-      </h3>
-      <div class="grid md:grid-cols-3 gap-8 text-center">
-        <div>
-          <h4
-            class="font-semibold text-white mb-3 flex items-center justify-center"
-          >
-            <span class="text-2xl mr-2">📱</span>
-            Frontend Móvil
-          </h4>
-          <div class="text-neutral-300 space-y-1 text-sm">
-            <p>Flutter con diseño iOS nativo</p>
-            <p>Figma para prototipado</p>
-            <p>Gestión de estado avanzada</p>
-            <p>Animaciones fluidas</p>
-          </div>
-        </div>
-        <div>
-          <h4
-            class="font-semibold text-white mb-3 flex items-center justify-center"
-          >
-            <span class="text-2xl mr-2">⚡</span>
-            Backend Híbrido
-          </h4>
-          <div class="text-neutral-300 space-y-1 text-sm">
-            <p>Firebase para Auth y Realtime</p>
-            <p>FastAPI para lógica compleja</p>
-            <p>MongoDB para datos NoSQL</p>
-            <p>Supabase Storage para media</p>
-          </div>
-        </div>
-        <div>
-          <h4
-            class="font-semibold text-white mb-3 flex items-center justify-center"
-          >
-            <span class="text-2xl mr-2">🔧</span>
-            DevOps & Tools
-          </h4>
-          <div class="text-neutral-300 space-y-1 text-sm">
-            <p>GitHub con repositorio privado</p>
-            <p>Gestión de tareas por usuario</p>
-            <p>CI/CD para deployment</p>
-            <p>Monitoring y analytics</p>
-          </div>
-        </div>
+      <div class="arch-col">
+        <h4 class="arch-label">Backend híbrido</h4>
+        <p>Firebase para auth y realtime · FastAPI para lógica compleja · MongoDB para datos NoSQL · Supabase Storage para media</p>
+      </div>
+      <div class="arch-col">
+        <h4 class="arch-label">DevOps &amp; tools</h4>
+        <p>GitHub con repositorio privado · gestión de tareas por usuario · CI/CD para deployment · monitoring y analytics</p>
       </div>
     </div>
   </BaseSection>
 
-  <!-- Features Section -->
+  <!-- Features -->
   <BaseSection>
-    <div class="text-center mb-16">
-      <h2
-        class="text-4xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent"
-      >
-        Características Principales
-      </h2>
-      <div
-        class="w-24 h-1 bg-gradient-to-r from-indigo-400 to-purple-500 mx-auto mb-8"
-      >
-      </div>
-    </div>
+    <p class="eyebrow">Características</p>
+    <h2 class="section-title">Lo más relevante</h2>
 
-    <div class="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-      {
-        features.map((feature, index) => (
-          <div class="group relative bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700 hover:scale-105 transition-all duration-300 overflow-hidden">
-            {/* Background glow effect */}
-            <div
-              class={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
-            />
-
-            <div class="relative z-10">
-              <div class="flex items-start space-x-4 mb-6">
-                <div class="text-4xl group-hover:scale-110 transition-transform">
-                  {feature.icon}
-                </div>
-                <div class="flex-1">
-                  <h3 class="text-xl font-bold mb-3 text-white group-hover:text-indigo-400 transition-colors">
-                    {feature.title}
-                  </h3>
-                  <p class="text-neutral-300 leading-relaxed mb-4">
-                    {feature.description}
-                  </p>
-                </div>
-              </div>
-
-              {/* Feature details */}
-              <div class="grid grid-cols-2 gap-2">
-                {feature.details.map((detail) => (
-                  <div class="flex items-center space-x-2 text-sm text-neutral-400">
-                    <div class="w-1.5 h-1.5 bg-indigo-400 rounded-full" />
-                    <span>{detail}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))
-      }
+    <div class="feature-grid">
+      {features.map((f, i) => (
+        <FeatureCard index={i + 1} title={f.title} description={f.description} />
+      ))}
     </div>
   </BaseSection>
 
-  <!-- User Flow Section -->
+  <!-- Process / user flow -->
   <BaseSection>
-    <div class="text-center mb-16">
-      <h2
-        class="text-4xl font-bold mb-6 bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent"
-      >
-        Experiencia de Usuario
-      </h2>
-      <div
-        class="w-24 h-1 bg-gradient-to-r from-green-400 to-emerald-500 mx-auto mb-8"
-      >
-      </div>
-    </div>
+    <p class="eyebrow">Experiencia</p>
+    <h2 class="section-title">Flujo de usuario</h2>
 
-    <div class="max-w-5xl mx-auto">
-      <div class="relative">
-        <!-- Timeline line móvil -->
-        <div
-          class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-green-500 to-emerald-500 md:hidden"
-        >
-        </div>
-        <!-- Timeline line desktop -->
-        <div
-          class="hidden md:block absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gradient-to-b from-green-500 to-emerald-500"
-        >
-        </div>
-
-        <div class="space-y-12">
-          <!-- Paso 1 -->
-          <div class="flex items-center md:justify-between">
-            <div
-              class="flex md:hidden absolute left-6 w-4 h-4 bg-green-500 rounded-full border-4 border-neutral-950"
-            >
-            </div>
-            <div
-              class="md:w-5/12 ml-16 md:ml-0 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-green-500/50 transition-colors"
-            >
-              <div class="flex items-center space-x-3 mb-3">
-                <span class="text-2xl">🚀</span>
-                <h3 class="font-bold text-lg text-green-400">
-                  Registro Rápido
-                </h3>
-              </div>
-              <p class="text-neutral-300 text-sm">
-                Login con Google/Apple en segundos. Sin formularios complejos,
-                directo a explorar.
-              </p>
-            </div>
-            <div class="hidden md:block w-2/12 text-center">
-              <div
-                class="w-8 h-8 bg-green-500 rounded-full mx-auto flex items-center justify-center text-white font-bold"
-              >
-                1
-              </div>
-            </div>
-            <div class="hidden md:block md:w-5/12"></div>
-          </div>
-
-          <!-- Paso 2 -->
-          <div class="flex items-center md:justify-between">
-            <div class="hidden md:block md:w-5/12"></div>
-            <div class="hidden md:block w-2/12 text-center">
-              <div
-                class="w-8 h-8 bg-green-500 rounded-full mx-auto flex items-center justify-center text-white font-bold"
-              >
-                2
-              </div>
-            </div>
-            <div
-              class="flex md:hidden absolute left-6 w-4 h-4 bg-green-500 rounded-full border-4 border-neutral-950"
-            >
-            </div>
-            <div
-              class="md:w-5/12 ml-16 md:ml-0 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-green-500/50 transition-colors"
-            >
-              <div class="flex items-center space-x-3 mb-3">
-                <span class="text-2xl">🗺️</span>
-                <h3 class="font-bold text-lg text-green-400">
-                  Explorar y Descubrir
-                </h3>
-              </div>
-              <p class="text-neutral-300 text-sm">
-                Navega por categorías, descubre lugares cercanos y lee reseñas
-                auténticas de la comunidad.
-              </p>
-            </div>
-          </div>
-
-          <!-- Paso 3 -->
-          <div class="flex items-center md:justify-between">
-            <div
-              class="flex md:hidden absolute left-6 w-4 h-4 bg-green-500 rounded-full border-4 border-neutral-950"
-            >
-            </div>
-            <div
-              class="md:w-5/12 ml-16 md:ml-0 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-green-500/50 transition-colors"
-            >
-              <div class="flex items-center space-x-3 mb-3">
-                <span class="text-2xl">💬</span>
-                <h3 class="font-bold text-lg text-green-400">
-                  Participar y Calificar
-                </h3>
-              </div>
-              <p class="text-neutral-300 text-sm">
-                Comparte tu experiencia, sube fotos, califica lugares y
-                participa en discusiones tipo red social.
-              </p>
-            </div>
-            <div class="hidden md:block w-2/12 text-center">
-              <div
-                class="w-8 h-8 bg-green-500 rounded-full mx-auto flex items-center justify-center text-white font-bold"
-              >
-                3
-              </div>
-            </div>
-            <div class="hidden md:block md:w-5/12"></div>
-          </div>
-
-          <!-- Paso 4 -->
-          <div class="flex items-center md:justify-between">
-            <div class="hidden md:block md:w-5/12"></div>
-            <div class="hidden md:block w-2/12 text-center">
-              <div
-                class="w-8 h-8 bg-green-500 rounded-full mx-auto flex items-center justify-center text-white font-bold"
-              >
-                4
-              </div>
-            </div>
-            <div
-              class="flex md:hidden absolute left-6 w-4 h-4 bg-green-500 rounded-full border-4 border-neutral-950"
-            >
-            </div>
-            <div
-              class="md:w-5/12 ml-16 md:ml-0 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-green-500/50 transition-colors"
-            >
-              <div class="flex items-center space-x-3 mb-3">
-                <span class="text-2xl">🏆</span>
-                <h3 class="font-bold text-lg text-green-400">
-                  Ganar Reconocimiento
-                </h3>
-              </div>
-              <p class="text-neutral-300 text-sm">
-                Obtén insignias por tu participación activa y conviértete en un
-                referente local de confianza.
-              </p>
-            </div>
+    <div class="process-list">
+      {process.map((step, i) => (
+        <div class="process-item">
+          <span class="process-num">{String(i + 1).padStart(2, "0")}</span>
+          <div>
+            <h3 class="process-title">{step.title}</h3>
+            <p class="process-desc">{step.desc}</p>
           </div>
         </div>
-      </div>
+      ))}
     </div>
   </BaseSection>
 
-  <!-- Screenshots/Gallery Section -->
+  <!-- Gallery -->
   <BaseSection>
-    <div class="text-center mb-16">
-      <h2
-        class="text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent"
-      >
-        Capturas de Pantalla
-      </h2>
-      <div
-        class="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-500 mx-auto mb-8"
-      >
-      </div>
-      <p class="text-neutral-300 max-w-2xl mx-auto">
-        Capturas del funcionamiento actual de la aplicación en iOS.
-      </p>
-    </div>
-
-    <div class="max-w-6xl mx-auto">
-      <div
-        class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700"
-      >
-        <!-- Placeholder para gallery cuando tengas las imágenes -->
-       <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-         {
-           screenshots.map((src, i) => (
-             <div class="aspect-[9/19] bg-neutral-900 rounded-2xl border border-neutral-600 overflow-hidden group hover:scale-105 transition-transform">
-               <img
-                 src={src}
-                 alt={`Pantalla ${i + 1}`}
-                 class="w-full h-full object-cover group-hover:brightness-102 transition duration-300"
-               />
-             </div>
-           ))
-         }
-       </div>
-        
-      </div>
-    </div>
+    <p class="eyebrow">Capturas</p>
+    <h2 class="section-title">La app en desarrollo</h2>
+    <GalleryComponent images={screenshots} />
   </BaseSection>
 
-  <!-- Development Status & CTA -->
-  <BaseSection className="text-center">
-    <div
-      class="bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-12 border border-neutral-700"
-    >
-      <div class="mb-8">
-        <h2
-          class="text-3xl font-bold mb-6 bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent"
-        >
-          Proyecto en Desarrollo Activo
-        </h2>
-        <p class="text-neutral-300 mb-8 max-w-2xl mx-auto">
-          MySpot está siendo desarrollado con las mejores prácticas y
-          tecnologías modernas. El código fuente estará disponible una vez
-          completada la versión beta.
-        </p>
-      </div>
+  <style>
+    .lead {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #999;
+      max-width: 42rem;
+      margin: 0 auto 2rem;
+    }
 
-      <!-- Progress indicators -->
-      <div class="grid sm:grid-cols-3 gap-6 mb-8 max-w-2xl mx-auto">
-        <div class="bg-neutral-700/50 rounded-lg p-4">
-          <div class="text-2xl mb-2">🎨</div>
-          <div class="text-sm font-semibold text-white">Diseño UI/UX</div>
-          <div class="text-xs text-green-400">70% Completado</div>
-        </div>
-        <div class="bg-neutral-700/50 rounded-lg p-4">
-          <div class="text-2xl mb-2">⚡</div>
-          <div class="text-sm font-semibold text-white">Backend API</div>
-          <div class="text-xs text-yellow-400">50% Completado</div>
-        </div>
-        <div class="bg-neutral-700/50 rounded-lg p-4">
-          <div class="text-2xl mb-2">📱</div>
-          <div class="text-sm font-semibold text-white">App Móvil</div>
-          <div class="text-xs text-blue-400">55% Completado</div>
-        </div>
-      </div>
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
 
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <div
-          class="flex flex-col sm:flex-row gap-4 justify-center items-center"
-        >
-          <a
-            href="https://github.com/CesarS39/MySpot_App"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white rounded-xl bg-gradient-to-br from-green-400 to-emerald-500 hover:scale-105 transition-all duration-300 shadow-lg shadow-green-500/25"
-          >
-            <svg
-              class="w-6 h-6 mr-3 text-white group-hover:rotate-12 transition-transform"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.262.82-.583 0-.288-.012-1.243-.018-2.253-3.338.725-4.042-1.612-4.042-1.612-.546-1.388-1.333-1.758-1.333-1.758-1.09-.745.083-.73.083-.73 1.205.087 1.838 1.24 1.838 1.24 1.07 1.833 2.807 1.303 3.492.996.107-.775.418-1.303.76-1.602-2.665-.304-5.466-1.332-5.466-5.933 0-1.31.467-2.382 1.235-3.222-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.47 11.47 0 0 1 3.003-.403c1.02.005 2.047.137 3.003.403 2.292-1.552 3.297-1.23 3.297-1.23.654 1.653.243 2.873.12 3.176.77.84 1.233 1.912 1.233 3.222 0 4.61-2.805 5.625-5.475 5.922.43.37.815 1.102.815 2.222 0 1.604-.015 2.898-.015 3.293 0 .324.216.7.825.58C20.565 22.296 24 17.796 24 12.5 24 5.87 18.627.5 12 .5z"
-              ></path>
-            </svg>
-            Repositorio App
-          </a>
-        </div>
+    .status-note {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: #777;
+      max-width: 32rem;
+      margin: 0 auto 2rem;
+    }
 
-        <div class="flex items-center text-neutral-400">
-          <span class="text-sm">🚀 Launch estimado: Q1 2026</span>
-        </div>
-      </div>
+    .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 0.75rem;
+    }
 
-      <!-- Contact for collaboration -->
-      <div class="mt-8 pt-8 border-t border-neutral-700">
-        <p class="text-neutral-400 text-sm">
-          Interesado en colaborar o conocer más detalles técnicos?
-          <span class="text-cyan-400">Contáctame para más información</span>
-        </p>
-      </div>
-    </div>
-  </BaseSection>
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      letter-spacing: -0.03em;
+      color: #f0f0f0;
+      margin-bottom: 2.5rem;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .compare-label {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #888;
+      margin-bottom: 1rem;
+    }
+    .compare-label--accent { color: #e2e8f0; }
+
+    .compare-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .compare-list li {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      color: #888;
+      padding-left: 1.1rem;
+      position: relative;
+      line-height: 1.5;
+    }
+    .compare-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: #444;
+    }
+
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .arch-label {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      margin-bottom: 0.6rem;
+    }
+    .arch-col p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: #777;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .process-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .process-item {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .process-item:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.07); }
+    .process-num {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #333;
+      flex-shrink: 0;
+      width: 2rem;
+    }
+    .process-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #f0f0f0;
+      margin-bottom: 0.4rem;
+    }
+    .process-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: #888;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 640px) {
+      .compare-grid, .arch-grid, .feature-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </Layout>

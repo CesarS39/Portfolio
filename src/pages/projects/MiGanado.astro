@@ -2,454 +2,170 @@
 import Layout from "../../layouts/Layout.astro";
 import HeroTitle from "../../components/atoms/HeroTitle.astro";
 import BaseSection from "../../components/atoms/BaseSection.astro";
+import TechnologyButton from "../../components/molecules/TechnologyButton.astro";
+import FeatureCard from "../../components/molecules/FeatureCard.astro";
+import ProjectCTA from "../../components/molecules/ProjectCTA.astro";
 
 const techStack = [
-  {
-    name: "Regresión Lineal Simple",
-    icon: "📊",
-    description: "Algoritmo de machine learning",
-    gradient: "from-emerald-500 to-green-600"
-  },
-  {
-    name: "Vanilla JavaScript",
-    icon: "⚡",
-    description: "Lógica frontend sin frameworks",
-    gradient: "from-yellow-400 to-green-500"
-  },
-  {
-    name: "TailwindCSS",
-    icon: "🎨",
-    description: "Diseño responsivo moderno",
-    gradient: "from-teal-500 to-emerald-600"
-  },
-  {
-    name: "SNIIM Data",
-    icon: "🗄️",
-    description: "Datos oficiales mexicanos",
-    gradient: "from-green-500 to-emerald-700"
-  }
+  { name: "Regresión Lineal Simple" },
+  { name: "JavaScript", icon: "devicon-javascript-plain" },
+  { name: "TailwindCSS", icon: "devicon-tailwindcss-original" },
+  { name: "Datos SNIIM" },
 ];
 
 const features = [
   {
-    title: "Modelo Estadístico Robusto",
-    description: "Algoritmo de regresión lineal con R² = 0.939, entrenado con 1,119 registros del SNIIM de enero-julio 2025",
-    icon: "📈",
-    gradient: "from-emerald-500 to-green-600",
-    details: [
-      "Precisión del 93.9%",
-      "1,119 registros SNIIM",
-      "Datos oficiales actualizados",
-      "Validación estadística"
-    ]
+    title: "Modelo estadístico robusto",
+    description: "Regresión lineal con R² = 0.939, entrenada con 1,119 registros del SNIIM de enero-julio 2025.",
   },
   {
-    title: "Acceso Universal Gratuito",
-    description: "Herramienta completamente gratuita y accesible desde cualquier dispositivo, eliminando barreras tecnológicas",
-    icon: "🌐",
-    gradient: "from-green-500 to-teal-600",
-    details: [
-      "Sin costo alguno",
-      "Acceso desde móviles",
-      "Sin registro requerido",
-      "Disponible 24/7"
-    ]
+    title: "Acceso universal gratuito",
+    description: "Herramienta gratuita y accesible desde cualquier dispositivo, sin registro requerido.",
   },
   {
-    title: "Cálculo Instantáneo",
-    description: "Estimación del precio total del ganado en tiempo real basada en el peso ingresado por el usuario",
-    icon: "⚡",
-    gradient: "from-lime-500 to-emerald-600",
-    details: [
-      "Respuesta inmediata",
-      "Algoritmo optimizado",
-      "Interfaz intuitiva",
-      "Resultados precisos"
-    ]
+    title: "Cálculo instantáneo",
+    description: "Estimación del precio total del ganado en tiempo real a partir del peso ingresado.",
   },
   {
-    title: "Transparencia Total",
-    description: "Código abierto con metodología explicable, mostrando exactamente cómo se calculan los precios",
-    icon: "🔍",
-    gradient: "from-teal-500 to-green-600",
-    details: [
-      "Algoritmo explicable",
-      "Código open source",
-      "Metodología clara",
-      "Disclaimers incluidos"
-    ]
-  }
+    title: "Transparencia total",
+    description: "Código abierto con metodología explicable: se muestra exactamente cómo se calculan los precios.",
+  },
 ];
 
 const regressionDetails = [
   {
-    concept: "Ecuación del Modelo",
+    concept: "Ecuación del modelo",
     formula: "Precio = 102.53 × Peso_canal + 3,774.92",
-    explanation: "Por cada kilogramo adicional, el precio aumenta $102.53 MXN"
+    explanation: "Por cada kilogramo adicional, el precio aumenta $102.53 MXN.",
   },
   {
-    concept: "Coeficiente de Determinación",
+    concept: "Coeficiente de determinación",
     formula: "R² = 0.939",
-    explanation: "El modelo explica el 93.9% de la variabilidad en los precios"
+    explanation: "El modelo explica el 93.9% de la variabilidad en los precios.",
   },
   {
     concept: "Intercepto",
     formula: "b = 3,774.92",
-    explanation: "Costos fijos del mercado (manejo, transporte, márgenes)"
-  }
+    explanation: "Costos fijos del mercado (manejo, transporte, márgenes).",
+  },
 ];
 
 const impactMetrics = [
-  {
-    metric: "93.9%",
-    label: "Precisión del Modelo",
-    description: "Coeficiente R² obtenido"
-  },
-  {
-    metric: "1,119",
-    label: "Registros Analizados",
-    description: "Datos del SNIIM procesados"
-  },
-  {
-    metric: "100%",
-    label: "Acceso Gratuito",
-    description: "Sin costo para productores"
-  },
-  {
-    metric: "0.000s",
-    label: "Tiempo de Cálculo",
-    description: "Estimación instantánea"
-  }
+  { metric: "93.9%", label: "Precisión del modelo" },
+  { metric: "1,119", label: "Registros analizados" },
+  { metric: "100%", label: "Acceso gratuito" },
+  { metric: "0.000s", label: "Tiempo de cálculo" },
 ];
 ---
 
 <Layout>
   <HeroTitle text="MIGANADO" size="text-[10vw]" />
-  
-  <!-- Hero Section -->
-  <BaseSection className="text-center py-20 !max-w-5xl">
-    <div class="max-w-4xl mx-auto">
-      <!-- Status Badge -->
-      <div class="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-green-500/20 to-emerald-600/20 border border-green-500/30 rounded-full mb-8 hover:from-green-500/30 hover:to-emerald-600/30 hover:border-green-500/50 transition-all duration-300">
-        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-        <span class="text-green-400 font-semibold text-sm">Sistema Operativo</span>
+
+  <!-- Summary -->
+  <BaseSection className="text-center py-20">
+    <p class="lead">
+      Calculadora inteligente para la estimación del precio de ganado bovino, basada en
+      regresión lineal simple entrenada con datos oficiales del SNIIM.
+    </p>
+    <div class="pill-row">
+      {techStack.map((t) => <TechnologyButton icon={t.icon} label={t.name} />)}
+    </div>
+    <ProjectCTA demo="https://cesars39.github.io/MiGanado/" repo="https://github.com/CesarS39/MiGanado" />
+  </BaseSection>
+
+  <!-- Problem / Solution -->
+  <BaseSection>
+    <p class="eyebrow">El reto</p>
+    <h2 class="section-title">Democratizando la información ganadera</h2>
+
+    <div class="compare-grid">
+      <div class="compare-col">
+        <h3 class="compare-label">Problema identificado</h3>
+        <ul class="compare-list">
+          <li>Asimetría de información en el sector ganadero</li>
+          <li>Dependencia de intermediarios para conocer precios</li>
+          <li>Falta de acceso a herramientas de valoración</li>
+          <li>Riesgo de negociar por debajo del precio justo</li>
+        </ul>
       </div>
-
-      <p class="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed mb-8">
-        Calculadora inteligente para la estimación del precio de ganado bovino utilizando 
-        regresión lineal simple basada en datos oficiales del SNIIM.
-      </p>
-
-      <!-- Tech Stack Pills -->
-      <div class="flex flex-wrap justify-center gap-3 mb-10">
-        <span class="px-4 py-2 bg-gradient-to-r from-emerald-500 to-green-600 rounded-full text-sm font-semibold text-white hover:from-emerald-400 hover:to-green-500 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-emerald-500/25">
-          Machine Learning
-        </span>
-        <span class="px-4 py-2 bg-gradient-to-r from-lime-500 to-emerald-600 rounded-full text-sm font-semibold text-white hover:from-lime-400 hover:to-emerald-500 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-lime-500/25">
-          JavaScript
-        </span>
-        <span class="px-4 py-2 bg-gradient-to-r from-teal-500 to-green-600 rounded-full text-sm font-semibold text-white hover:from-teal-400 hover:to-green-500 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-teal-500/25">
-          TailwindCSS
-        </span>
-        <span class="px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-700 rounded-full text-sm font-semibold text-white hover:from-green-500 hover:to-emerald-600 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-green-500/25">
-          Datos SNIIM
-        </span>
-      </div>
-
-      <!-- Live Demo Button - Mejorado -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-        <a
-          href="https://cesars39.github.io/MiGanado/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="group relative inline-flex items-center justify-center px-10 py-5 text-lg font-bold text-white rounded-2xl bg-gradient-to-br from-green-400 via-emerald-500 to-green-600 hover:from-green-300 hover:via-emerald-400 hover:to-green-500 transition-all duration-300 shadow-2xl hover:shadow-green-500/40 hover:scale-110 hover:-translate-y-1 transform border border-green-300/20 hover:border-green-300/40"
-        >
-          <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          <svg
-            class="w-7 h-7 mr-3 text-white group-hover:scale-125 group-hover:rotate-12 transition-all duration-300"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <span class="relative z-10">Probar Calculadora en Vivo</span>
-          <div class="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-400 to-emerald-500 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"></div>
-        </a>
+      <div class="compare-col">
+        <h3 class="compare-label compare-label--accent">Solución MiGanado</h3>
+        <ul class="compare-list">
+          <li>Herramienta gratuita y accesible</li>
+          <li>Estimación basada en datos oficiales</li>
+          <li>Cálculo instantáneo y transparente</li>
+          <li>Empoderamiento del productor ganadero</li>
+        </ul>
       </div>
     </div>
   </BaseSection>
 
-  <!-- Problem Solution Section -->
-  <BaseSection className="!max-w-5xl">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
-          Democratizando la Información Ganadera
-        </h2>
-        <div class="w-24 h-1 bg-gradient-to-r from-green-400 to-emerald-500 mx-auto mb-8"></div>
-      </div>
-      
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="space-y-6">
-          <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-6 hover:bg-red-500/15 hover:border-red-500/30 hover:scale-105 transition-all duration-300 group">
-            <h3 class="text-xl font-bold text-red-400 mb-4 group-hover:text-red-300 transition-colors">🚫 Problema Identificado</h3>
-            <ul class="text-neutral-300 space-y-3 text-sm group-hover:text-neutral-200 transition-colors">
-              <li class="flex items-start space-x-2">
-                <span class="text-red-400 mt-1">•</span>
-                <span>Asimetría de información en el sector ganadero</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-red-400 mt-1">•</span>
-                <span>Dependencia de intermediarios para conocer precios</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-red-400 mt-1">•</span>
-                <span>Falta de acceso a herramientas de valoración</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-red-400 mt-1">•</span>
-                <span>Riesgo de negociar por debajo del precio justo</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="space-y-6">
-          <div class="bg-green-500/10 border border-green-500/20 rounded-xl p-6 hover:bg-green-500/15 hover:border-green-500/30 hover:scale-105 transition-all duration-300 group">
-            <h3 class="text-xl font-bold text-green-400 mb-4 group-hover:text-green-300 transition-colors">✅ Solución MiGanado</h3>
-            <ul class="text-neutral-300 space-y-3 text-sm group-hover:text-neutral-200 transition-colors">
-              <li class="flex items-start space-x-2">
-                <span class="text-green-400 mt-1">•</span>
-                <span>Herramienta gratuita y accesible</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-green-400 mt-1">•</span>
-                <span>Estimación basada en datos oficiales</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-green-400 mt-1">•</span>
-                <span>Cálculo instantáneo y transparente</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-green-400 mt-1">•</span>
-                <span>Empoderamiento del productor ganadero</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </BaseSection>
+  <!-- Regression model -->
+  <BaseSection>
+    <p class="eyebrow">Modelo</p>
+    <h2 class="section-title">Regresión lineal simple</h2>
 
-  <!-- Tech Stack & AI Model -->
-  <BaseSection className="!max-w-5xl">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
-        Inteligencia Artificial Aplicada
-      </h2>
-      <div class="w-24 h-1 bg-gradient-to-r from-emerald-400 to-green-500 mx-auto mb-8"></div>
-    </div>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-16">
-      {techStack.map((tech) => (
-        <div class="group bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-6 border border-neutral-700 hover:border-green-500/50 hover:scale-110 hover:-translate-y-2 transition-all duration-500 hover:shadow-2xl hover:shadow-green-500/20">
-          <div class="text-4xl mb-4 text-center group-hover:scale-125 group-hover:rotate-6 transition-all duration-500">
-            {tech.icon}
-          </div>
-          <h3 class="text-lg font-bold text-center mb-2 text-white group-hover:text-green-400 transition-colors duration-300">
-            {tech.name}
-          </h3>
-          <p class="text-neutral-400 text-sm text-center group-hover:text-neutral-300 transition-colors duration-300">
-            {tech.description}
-          </p>
-          <div class={`mt-4 h-1 rounded bg-gradient-to-r ${tech.gradient} mx-auto w-0 group-hover:w-full transition-all duration-500`}></div>
-        </div>
-      ))}
-    </div>
-
-    <!-- Regression Model Details -->
-    <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700 hover:border-green-500/30 hover:shadow-xl hover:shadow-green-500/10 transition-all duration-300">
-      <h3 class="text-2xl font-bold text-center mb-8 text-green-400">Modelo de Regresión Lineal Simple</h3>
-      <div class="grid md:grid-cols-3 gap-8">
-        {regressionDetails.map((detail) => (
-          <div class="text-center bg-neutral-700/50 rounded-xl p-6 hover:bg-neutral-700/70 hover:scale-105 transition-all duration-300 group">
-            <h4 class="font-semibold text-white mb-3 group-hover:text-green-400 transition-colors">{detail.concept}</h4>
-            <div class="font-mono text-emerald-400 font-bold text-lg mb-3 group-hover:text-emerald-300 transition-colors">
-              {detail.formula}
-            </div>
-            <p class="text-neutral-300 text-sm group-hover:text-neutral-200 transition-colors">
-              {detail.explanation}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </BaseSection>
-
-  <!-- Features Section -->
-  <BaseSection className="!max-w-5xl">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
-        Características Principales
-      </h2>
-      <div class="w-24 h-1 bg-gradient-to-r from-green-400 to-emerald-500 mx-auto mb-8"></div>
-    </div>
-
-    <div class="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-      {features.map((feature, index) => (
-        <div class="group relative bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700 hover:border-green-500/50 hover:scale-105 hover:-translate-y-2 transition-all duration-500 overflow-hidden hover:shadow-2xl hover:shadow-green-500/20">
-          <div class={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-15 transition-opacity duration-500`}></div>
-          
-          <div class="relative z-10">
-            <div class="flex items-start space-x-4 mb-6">
-              <div class="text-4xl group-hover:scale-125 group-hover:rotate-12 transition-all duration-500">
-                {feature.icon}
-              </div>
-              <div class="flex-1">
-                <h3 class="text-xl font-bold mb-3 text-white group-hover:text-green-400 transition-colors duration-300">
-                  {feature.title}
-                </h3>
-                <p class="text-neutral-300 leading-relaxed mb-4 group-hover:text-neutral-200 transition-colors duration-300">
-                  {feature.description}
-                </p>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-2">
-              {feature.details.map((detail) => (
-                <div class="flex items-center space-x-2 text-sm text-neutral-400 group-hover:text-neutral-300 transition-colors duration-300">
-                  <div class="w-1.5 h-1.5 bg-green-400 rounded-full group-hover:bg-green-300 transition-colors"></div>
-                  <span>{detail}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+    <div class="arch-grid">
+      {regressionDetails.map((d) => (
+        <div class="arch-col">
+          <h4 class="arch-label">{d.concept}</h4>
+          <p class="formula">{d.formula}</p>
+          <p>{d.explanation}</p>
         </div>
       ))}
     </div>
   </BaseSection>
 
-  <!-- Impact & Results -->
-  <BaseSection className="!max-w-5xl">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
-        Impacto y Métricas del Sistema
-      </h2>
-      <div class="w-24 h-1 bg-gradient-to-r from-emerald-400 to-green-500 mx-auto mb-8"></div>
-    </div>
+  <!-- Features -->
+  <BaseSection>
+    <p class="eyebrow">Características</p>
+    <h2 class="section-title">Lo más relevante</h2>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-12">
-      {impactMetrics.map((metric) => (
-        <div class="text-center bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-6 border border-neutral-700 hover:border-green-500/50 hover:scale-110 hover:-translate-y-2 transition-all duration-500 group hover:shadow-xl hover:shadow-green-500/20">
-          <div class="text-3xl font-bold text-green-400 mb-2 group-hover:text-green-300 group-hover:scale-110 transition-all duration-300">{metric.metric}</div>
-          <div class="text-lg font-semibold text-white mb-2 group-hover:text-green-400 transition-colors">{metric.label}</div>
-          <div class="text-neutral-400 text-sm group-hover:text-neutral-300 transition-colors">{metric.description}</div>
-        </div>
+    <div class="feature-grid">
+      {features.map((f, i) => (
+        <FeatureCard index={i + 1} title={f.title} description={f.description} />
       ))}
-    </div>
-
-    <!-- Real World Impact -->
-    <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700 hover:border-green-500/30 hover:shadow-xl hover:shadow-green-500/10 transition-all duration-300">
-      <h3 class="text-2xl font-bold text-center mb-8 text-green-400">Beneficios para el Sector Ganadero</h3>
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="space-y-4">
-          <div class="flex items-start space-x-3 group hover:scale-105 transition-transform duration-300">
-            <div class="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0 group-hover:bg-green-300 transition-colors"></div>
-            <p class="text-neutral-300 group-hover:text-neutral-200 transition-colors">Eliminación de asimetrías de información entre productores e intermediarios</p>
-          </div>
-          <div class="flex items-start space-x-3 group hover:scale-105 transition-transform duration-300">
-            <div class="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0 group-hover:bg-green-300 transition-colors"></div>
-            <p class="text-neutral-300 group-hover:text-neutral-200 transition-colors">Herramienta de referencia para negociaciones más justas</p>
-          </div>
-          <div class="flex items-start space-x-3 group hover:scale-105 transition-transform duration-300">
-            <div class="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0 group-hover:bg-green-300 transition-colors"></div>
-            <p class="text-neutral-300 group-hover:text-neutral-200 transition-colors">Acceso democrático a tecnología de valoración ganadera</p>
-          </div>
-        </div>
-        <div class="space-y-4">
-          <div class="flex items-start space-x-3 group hover:scale-105 transition-transform duration-300">
-            <div class="w-2 h-2 bg-emerald-400 rounded-full mt-2 flex-shrink-0 group-hover:bg-emerald-300 transition-colors"></div>
-            <p class="text-neutral-300 group-hover:text-neutral-200 transition-colors">Estimaciones basadas en datos oficiales del gobierno mexicano</p>
-          </div>
-          <div class="flex items-start space-x-3 group hover:scale-105 transition-transform duration-300">
-            <div class="w-2 h-2 bg-emerald-400 rounded-full mt-2 flex-shrink-0 group-hover:bg-emerald-300 transition-colors"></div>
-            <p class="text-neutral-300 group-hover:text-neutral-200 transition-colors">Interfaz simple diseñada para usuarios no técnicos</p>
-          </div>
-          <div class="flex items-start space-x-3 group hover:scale-105 transition-transform duration-300">
-            <div class="w-2 h-2 bg-emerald-400 rounded-full mt-2 flex-shrink-0 group-hover:bg-emerald-300 transition-colors"></div>
-            <p class="text-neutral-300 group-hover:text-neutral-200 transition-colors">Contribución al desarrollo tecnológico del sector agropecuario</p>
-          </div>
-        </div>
-      </div>
     </div>
   </BaseSection>
 
-  <!-- Technical Implementation -->
-  <BaseSection className="!max-w-5xl">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-teal-400 to-green-500 bg-clip-text text-transparent">
-        Implementación Técnica
-      </h2>
-      <div class="w-24 h-1 bg-gradient-to-r from-teal-400 to-green-500 mx-auto mb-8"></div>
+  <!-- Impact -->
+  <BaseSection>
+    <p class="eyebrow">Impacto</p>
+    <h2 class="section-title">Métricas del sistema</h2>
+
+    <div class="stat-grid">
+      {impactMetrics.map((m) => (
+        <div class="stat-item">
+          <span class="stat-value">{m.metric}</span>
+          <span class="stat-label">{m.label}</span>
+        </div>
+      ))}
+    </div>
+  </BaseSection>
+
+  <!-- Technical implementation -->
+  <BaseSection>
+    <p class="eyebrow">Implementación</p>
+    <h2 class="section-title">Fuente de datos y algoritmo</h2>
+
+    <div class="arch-grid arch-grid--2">
+      <div class="arch-col">
+        <h4 class="arch-label">Fuente de datos</h4>
+        <p>Sistema Nacional de Información de Mercados (SNIIM) · 1,119 registros de ganado bovino en canal (enero-julio 2025) · Variable X: peso en canal (kg) · Variable Y: precio total (MXN)</p>
+      </div>
+      <div class="arch-col">
+        <h4 class="arch-label">Algoritmo de ML</h4>
+        <p>Regresión lineal simple por método de mínimos cuadrados · implementación directa en el frontend, sin dependencias externas</p>
+      </div>
     </div>
 
-    <div class="max-w-5xl mx-auto">
-      <div class="grid md:grid-cols-2 gap-8 mb-12">
-        <!-- Data Source -->
-        <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700 hover:border-green-500/50 hover:scale-105 transition-all duration-300 group hover:shadow-xl hover:shadow-green-500/10">
-          <div class="text-center mb-6">
-            <div class="text-4xl mb-3 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">🗄️</div>
-            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-green-400 transition-colors">Fuente de Datos</h3>
-            <p class="text-neutral-400 text-sm group-hover:text-neutral-300 transition-colors">Sistema Nacional de Información (SNIIM)</p>
-          </div>
-          
-          <div class="space-y-4">
-            <div class="bg-neutral-700/50 rounded-lg p-4 hover:bg-neutral-700/70 transition-colors duration-300 group/item">
-              <h4 class="font-semibold text-teal-400 mb-2 group-hover/item:text-teal-300 transition-colors">📊 Dataset Utilizado</h4>
-              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">1,119 registros de ganado bovino en canal (enero-julio 2025)</p>
-            </div>
-            
-            <div class="bg-neutral-700/50 rounded-lg p-4 hover:bg-neutral-700/70 transition-colors duration-300 group/item">
-              <h4 class="font-semibold text-green-400 mb-2 group-hover/item:text-green-300 transition-colors">🎯 Variables del Modelo</h4>
-              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Variable X: Peso en canal (kg) | Variable Y: Precio total (MXN)</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Algorithm -->
-        <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700 hover:border-green-500/50 hover:scale-105 transition-all duration-300 group hover:shadow-xl hover:shadow-green-500/10">
-          <div class="text-center mb-6">
-            <div class="text-4xl mb-3 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">🤖</div>
-            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-green-400 transition-colors">Algoritmo de ML</h3>
-            <p class="text-neutral-400 text-sm group-hover:text-neutral-300 transition-colors">Regresión Lineal Simple optimizada</p>
-          </div>
-          
-          <div class="space-y-4">
-            <div class="bg-neutral-700/50 rounded-lg p-4 hover:bg-neutral-700/70 transition-colors duration-300 group/item">
-              <h4 class="font-semibold text-emerald-400 mb-2 group-hover/item:text-emerald-300 transition-colors">📈 Método de Mínimos Cuadrados</h4>
-              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Encuentra la línea que minimiza la suma de errores cuadráticos</p>
-            </div>
-            
-            <div class="bg-neutral-700/50 rounded-lg p-4 hover:bg-neutral-700/70 transition-colors duration-300 group/item">
-              <h4 class="font-semibold text-lime-400 mb-2 group-hover/item:text-lime-300 transition-colors">⚡ Implementación JavaScript</h4>
-              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Cálculo directo en el frontend sin dependencias externas</p>
-            </div>
-          </div>
-        </div>
+    <div class="code-block">
+      <div class="code-header">
+        <span>JavaScript</span>
+        <span>Función de predicción</span>
       </div>
-
-      <!-- Code Implementation -->
-      <div class="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700 hover:border-green-500/30 hover:shadow-xl hover:shadow-green-500/10 transition-all duration-300 group">
-        <h3 class="text-2xl font-bold text-center mb-8 text-green-400 group-hover:text-green-300 transition-colors">Implementación del Algoritmo</h3>
-        
-        <div class="bg-neutral-900 rounded-xl p-6 border border-neutral-700 hover:border-green-500/30 transition-colors duration-300">
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-sm text-neutral-400">JavaScript</span>
-            <span class="text-xs text-neutral-500">Función de predicción</span>
-          </div>
-          <pre class="text-sm text-neutral-300 overflow-x-auto"><code>{`// Parámetros del modelo de regresión lineal
-const REGRESSION_SLOPE = 102.53;     // Pendiente (m)
+      <pre><code>{`// Parámetros del modelo de regresión lineal
+const REGRESSION_SLOPE = 102.53;      // Pendiente (m)
 const REGRESSION_INTERCEPT = 3774.92; // Intercepto (b)
 
 // Función de predicción: y = mx + b
@@ -461,134 +177,194 @@ function calculateTotalPrice(weight) {
 function calculatePricePerKg(totalPrice, weight) {
   return totalPrice / weight;
 }`}</code></pre>
-        </div>
-        
-        <div class="mt-6 text-center">
-          <div class="inline-flex items-center space-x-2 px-4 py-2 bg-green-500/20 border border-green-500/30 rounded-lg hover:bg-green-500/30 hover:border-green-500/50 transition-all duration-300">
-            <span class="text-xl">📝</span>
-            <span class="text-green-400 text-sm">Implementación simple y eficiente</span>
-          </div>
-        </div>
+    </div>
+  </BaseSection>
+
+  <!-- Future scalability -->
+  <BaseSection>
+    <p class="eyebrow">Roadmap</p>
+    <h2 class="section-title">Escalabilidad y futuras mejoras</h2>
+
+    <div class="compare-grid">
+      <div class="compare-col">
+        <h3 class="compare-label">Mejoras técnicas</h3>
+        <ul class="compare-list">
+          <li>Modelo multivariable (raza, región, edad)</li>
+          <li>API para integración con otros sistemas</li>
+          <li>Base de datos en tiempo real</li>
+          <li>Machine learning más avanzado</li>
+        </ul>
+      </div>
+      <div class="compare-col">
+        <h3 class="compare-label compare-label--accent">Expansión del negocio</h3>
+        <ul class="compare-list">
+          <li>Otros tipos de ganado (porcino, ovino)</li>
+          <li>Mercados agrícolas adicionales</li>
+          <li>Plataforma integral para productores</li>
+          <li>Expansión internacional</li>
+        </ul>
       </div>
     </div>
   </BaseSection>
 
-  <!-- Future Scalability -->
-  <BaseSection className="!max-w-5xl">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-lime-400 to-green-500 bg-clip-text text-transparent">
-        Escalabilidad y Futuras Mejoras
-      </h2>
-      <div class="w-24 h-1 bg-gradient-to-r from-lime-400 to-green-500 mx-auto mb-8"></div>
-    </div>
+  <style>
+    .lead {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #999;
+      max-width: 42rem;
+      margin: 0 auto 2rem;
+    }
 
-    <div class="max-w-4xl mx-auto">
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700 hover:border-green-500/50 hover:scale-105 hover:-translate-y-2 transition-all duration-500 group hover:shadow-xl hover:shadow-green-500/20">
-          <h3 class="text-xl font-bold text-green-400 mb-6 group-hover:text-green-300 transition-colors">🔮 Mejoras Técnicas</h3>
-          <div class="space-y-4">
-            <div class="flex items-start space-x-3 group/item hover:scale-105 transition-transform duration-300">
-              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0 group-hover/item:bg-green-300 transition-colors"></div>
-              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Modelo multivariable (raza, región, edad)</p>
-            </div>
-            <div class="flex items-start space-x-3 group/item hover:scale-105 transition-transform duration-300">
-              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0 group-hover/item:bg-green-300 transition-colors"></div>
-              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">API para integración con otros sistemas</p>
-            </div>
-            <div class="flex items-start space-x-3 group/item hover:scale-105 transition-transform duration-300">
-              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0 group-hover/item:bg-green-300 transition-colors"></div>
-              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Base de datos en tiempo real</p>
-            </div>
-            <div class="flex items-start space-x-3 group/item hover:scale-105 transition-transform duration-300">
-              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0 group-hover/item:bg-green-300 transition-colors"></div>
-              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Machine Learning más avanzado</p>
-            </div>
-          </div>
-        </div>
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
 
-        <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700 hover:border-green-500/50 hover:scale-105 hover:-translate-y-2 transition-all duration-500 group hover:shadow-xl hover:shadow-green-500/20">
-          <h3 class="text-xl font-bold text-emerald-400 mb-6 group-hover:text-emerald-300 transition-colors">🚀 Expansión del Negocio</h3>
-          <div class="space-y-4">
-            <div class="flex items-start space-x-3 group/item hover:scale-105 transition-transform duration-300">
-              <div class="w-2 h-2 bg-emerald-400 rounded-full mt-2 flex-shrink-0 group-hover/item:bg-emerald-300 transition-colors"></div>
-              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Otros tipos de ganado (porcino, ovino)</p>
-            </div>
-            <div class="flex items-start space-x-3 group/item hover:scale-105 transition-transform duration-300">
-              <div class="w-2 h-2 bg-emerald-400 rounded-full mt-2 flex-shrink-0 group-hover/item:bg-emerald-300 transition-colors"></div>
-              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Mercados agrícolas adicionales</p>
-            </div>
-            <div class="flex items-start space-x-3 group/item hover:scale-105 transition-transform duration-300">
-              <div class="w-2 h-2 bg-emerald-400 rounded-full mt-2 flex-shrink-0 group-hover/item:bg-emerald-300 transition-colors"></div>
-              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Plataforma integral para productores</p>
-            </div>
-            <div class="flex items-start space-x-3 group/item hover:scale-105 transition-transform duration-300">
-              <div class="w-2 h-2 bg-emerald-400 rounded-full mt-2 flex-shrink-0 group-hover/item:bg-emerald-300 transition-colors"></div>
-              <p class="text-neutral-300 text-sm group-hover/item:text-neutral-200 transition-colors">Expansión internacional</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </BaseSection>
+    .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 0.75rem;
+    }
 
-  <!-- CTA Section -->
-  <BaseSection className="text-center !max-w-5xl">
-    <div class="bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-2xl p-12 border border-neutral-700 hover:border-green-500/30 hover:shadow-2xl hover:shadow-green-500/20 transition-all duration-500 group">
-      <h2 class="text-3xl font-bold mb-6 bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent group-hover:from-green-300 group-hover:to-emerald-400 transition-all duration-300">
-        Tecnología al Servicio del Campo
-      </h2>
-      <p class="text-neutral-300 mb-8 max-w-2xl mx-auto group-hover:text-neutral-200 transition-colors duration-300">
-        MiGanado demuestra que la inteligencia artificial puede y debe servir a todos los sectores de nuestra sociedad. 
-        Una herramienta que busca democratizar el acceso a la información y empoderar al productor ganadero.
-      </p>
-      
-      <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-        <a
-          href="https://cesars39.github.io/MiGanado/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="group/btn relative inline-flex items-center justify-center px-10 py-5 text-lg font-bold text-white rounded-2xl bg-gradient-to-br from-green-400 via-emerald-500 to-green-600 hover:from-green-300 hover:via-emerald-400 hover:to-green-500 transition-all duration-300 shadow-2xl hover:shadow-green-500/50 hover:scale-110 hover:-translate-y-2 transform border border-green-300/20 hover:border-green-300/50"
-        >
-          <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-2xl opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-          <svg
-            class="w-7 h-7 mr-3 text-white group-hover/btn:scale-125 group-hover/btn:rotate-12 transition-all duration-300"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <span class="relative z-10">Usar Calculadora</span>
-          <div class="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-400 to-emerald-500 opacity-0 group-hover/btn:opacity-20 blur-xl transition-opacity duration-300"></div>
-        </a>
-        
-        <a
-          href="https://github.com/CesarS39/MiGanado"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="group/btn relative inline-flex items-center justify-center px-10 py-5 text-lg font-bold text-white rounded-2xl bg-gradient-to-br from-neutral-600 via-neutral-700 to-neutral-800 hover:from-green-600 hover:via-green-700 hover:to-green-800 transition-all duration-300 shadow-xl hover:shadow-green-500/30 hover:scale-110 hover:-translate-y-2 transform border border-neutral-500/20 hover:border-green-500/50"
-        >
-          <svg
-            class="w-7 h-7 mr-3 text-white group-hover/btn:rotate-12 group-hover/btn:scale-125 transition-all duration-300"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.262.82-.583 0-.288-.012-1.243-.018-2.253-3.338.725-4.042-1.612-4.042-1.612-.546-1.388-1.333-1.758-1.333-1.758-1.09-.745.083-.73.083-.73 1.205.087 1.838 1.24 1.838 1.24 1.07 1.833 2.807 1.303 3.492.996.107-.775.418-1.303.76-1.602-2.665-.304-5.466-1.332-5.466-5.933 0-1.31.467-2.382 1.235-3.222-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.47 11.47 0 0 1 3.003-.403c1.02.005 2.047.137 3.003.403 2.292-1.552 3.297-1.23 3.297-1.23.654 1.653.243 2.873.12 3.176.77.84 1.233 1.912 1.233 3.222 0 4.61-2.805 5.625-5.475 5.922.43.37.815 1.102.815 2.222 0 1.604-.015 2.898-.015 3.293 0 .324.216.7.825.58C20.565 22.296 24 17.796 24 12.5 24 5.87 18.627.5 12 .5z"
-            ></path>
-          </svg>
-          <span class="relative z-10">Ver Código</span>
-        </a>
-      </div>
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      letter-spacing: -0.03em;
+      color: #f0f0f0;
+      margin-bottom: 2.5rem;
+    }
 
-      <!-- Open Source Badge -->
-      <div class="mt-8 pt-8 border-t border-neutral-700 group-hover:border-green-500/30 transition-colors duration-300">
-        <p class="text-neutral-400 text-sm group-hover:text-neutral-300 transition-colors duration-300">
-          <span class="text-green-400 group-hover:text-green-300 transition-colors">Código abierto</span> • 
-          <span class="text-emerald-400 group-hover:text-emerald-300 transition-colors">Datos oficiales SNIIM</span> • 
-          <span class="text-teal-400 group-hover:text-teal-300 transition-colors">IA explicable</span>
-        </p>
-      </div>
-    </div>
-  </BaseSection>
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .compare-label {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #888;
+      margin-bottom: 1rem;
+    }
+    .compare-label--accent { color: #e2e8f0; }
+
+    .compare-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .compare-list li {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      color: #888;
+      padding-left: 1.1rem;
+      position: relative;
+      line-height: 1.5;
+    }
+    .compare-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: #444;
+    }
+
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .arch-grid--2 {
+      grid-template-columns: repeat(2, 1fr);
+      margin-bottom: 2rem;
+    }
+    .arch-label {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      margin-bottom: 0.6rem;
+    }
+    .arch-col p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: #777;
+    }
+    .formula {
+      font-family: 'Inter', monospace;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #c0c0c0 !important;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1rem;
+    }
+    .stat-value {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: #f0f0f0;
+    }
+    .stat-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    .code-block {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 1.5rem;
+    }
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+    .code-block pre {
+      font-family: 'SF Mono', 'Consolas', monospace;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: #b0b0b0;
+      overflow-x: auto;
+    }
+
+    @media (max-width: 640px) {
+      .compare-grid, .arch-grid, .feature-grid { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
 </Layout>
