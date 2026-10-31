@@ -4,13 +4,12 @@ const {
   description,
   image,
   link,
-  repo,
   techStack = [],
   featured = false,
   demo,
 } = Astro.props;
 
-const projectHref = link ?? (typeof repo === "string" ? repo : undefined);
+const projectHref = link;
 ---
 
 <article class:list={["project-card", { "project-card--featured": featured }]}>
@@ -35,7 +34,6 @@ const projectHref = link ?? (typeof repo === "string" ? repo : undefined);
     </div>
     <p>{description}</p>
     <div class="project-card__actions">
-      {repo && typeof repo === "string" && <a href={repo} target="_blank" rel="noopener noreferrer">Código en GitHub <span aria-hidden="true">↗</span></a>}
       {demo && <a href={demo} target="_blank" rel="noopener noreferrer">Abrir demo <span aria-hidden="true">↗</span></a>}
     </div>
   </div>

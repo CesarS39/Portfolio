@@ -1,8 +1,10 @@
 ---
-interface ContactIcon { href: string; icon: string; title: string; bgColor?: string }
+interface ContactIcon { href: string; title: string }
 interface ContactData { name: string; location: string; role: string; prompt: string; image: string; icons: ContactIcon[] }
 const { data } = Astro.props as { data: ContactData };
-const email = data.icons.find((item) => item.title === "Email")?.href?.replace("mailto:", "") ?? "cesarsamuel37@gmail.com";
+import Icon from "../atoms/Icon.astro";
+
+const email = data.icons.find((item) => item.title === "Email")?.href?.replace("mailto:", "") ?? "cesar@kanek.net";
 const socials = data.icons.filter((item) => item.title !== "Email");
 ---
 
@@ -20,7 +22,7 @@ const socials = data.icons.filter((item) => item.title !== "Email");
       <div class="contact-socials">
         {socials.map((item) => (
           <a href={item.href} target="_blank" rel="noopener noreferrer" aria-label={item.title}>
-            <img src={`${import.meta.env.BASE_URL}${item.icon.replace(/^\//, "")}`} alt="" width="20" height="20" loading="lazy" />
+            <Icon name={item.title.toLowerCase()} size={20} class="contact-social-icon" />
             <span>{item.title}</span>
           </a>
         ))}
@@ -59,6 +61,6 @@ const socials = data.icons.filter((item) => item.title !== "Email");
   .contact-socials { display: flex; flex-wrap: wrap; gap: .65rem; }
   .contact-socials a { display: inline-flex; min-height: 2.75rem; align-items: center; gap: .5rem; padding: .55rem .75rem; border: 1px solid var(--line); border-radius: var(--radius); color: var(--muted); font-size: .78rem; text-decoration: none; transition: color .18s ease, border-color .18s ease; }
   .contact-socials a:hover { color: var(--text); border-color: var(--accent-strong); }
-  .contact-socials img { opacity: .95; }
+  .contact-socials :global(.contact-social-icon) { color: currentColor; }
   @media (max-width: 700px) { .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; } }
 </style>

@@ -5,7 +5,6 @@ interface Project {
   title: string;
   description: string;
   image: string;
-  repo?: string | boolean;
   demo?: string;
   link?: string;
   techStack?: string[];
@@ -30,7 +29,6 @@ const { projects } = Astro.props as { projects: Project[] };
           title={project.title}
           description={project.description}
           image={project.image}
-          repo={project.repo && project.repo !== false ? String(project.repo) : undefined}
           demo={project.demo}
           link={project.link}
           techStack={project.techStack}
