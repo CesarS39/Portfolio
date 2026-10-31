@@ -13,22 +13,22 @@ import RotatingCube from "../3d/RotatingCube.astro";
       </h2>
 
       <p class="about-body">
-        Soy César Samuel Enríquez Bautista, estudiante de Ingeniería en Software
-        en la UPP. Me apasiona crear aplicaciones que resuelven problemas reales:
-        desde el diseño de la base de datos hasta el último pixel de la interfaz.
+        Soy César Enríquez, desarrollador de software en Pachuca. Diseño y
+        construyo productos digitales y sistemas que resuelven problemas reales,
+        desde sus datos y servicios hasta la experiencia de quien los usa.
       </p>
 
       <p class="about-body">
-        Metódico por naturaleza, curioso por elección. Cuando no estoy
-        programando, estoy en la cancha de tenis, viajando o explorando algo
-        nuevo que me inspire.
+        Me gusta entender el problema completo, trabajar en equipo y convertir
+        lo aprendido en software útil. Fuera del código, suelo estar en la
+        cancha de tenis o conociendo algún lugar nuevo.
       </p>
 
       <ul class="about-tags">
         <li>Full-Stack</li>
         <li>Mobile (Flutter)</li>
-        <li>Machine Learning</li>
-        <li>Cloud (Azure)</li>
+        <li>Producto digital</li>
+        <li>Cloud</li>
       </ul>
     </div>
 
@@ -42,8 +42,8 @@ import RotatingCube from "../3d/RotatingCube.astro";
 
 <style>
   .about-section {
-    padding: 3rem 1.5rem;
-    background: #080808;
+    padding: clamp(4.5rem, 9vw, 7.5rem) var(--page-gutter);
+    background: var(--bg);
   }
 
   .about-inner {
@@ -61,7 +61,7 @@ import RotatingCube from "../3d/RotatingCube.astro";
     font-size: 0.75rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #666;
+    color: var(--muted);
     margin-bottom: 1.25rem;
   }
 
@@ -71,7 +71,7 @@ import RotatingCube from "../3d/RotatingCube.astro";
     font-size: clamp(1.6rem, 3vw, 2.25rem);
     line-height: 1.2;
     letter-spacing: -0.025em;
-    color: #e2e8f0;
+    color: var(--text);
     margin-bottom: 2rem;
   }
 
@@ -79,7 +79,7 @@ import RotatingCube from "../3d/RotatingCube.astro";
     font-family: 'Inter', sans-serif;
     font-size: 0.95rem;
     line-height: 1.8;
-    color: #999;
+    color: var(--muted);
     margin-bottom: 1.25rem;
   }
 
@@ -96,8 +96,8 @@ import RotatingCube from "../3d/RotatingCube.astro";
     font-family: 'Inter', sans-serif;
     font-size: 0.75rem;
     letter-spacing: 0.08em;
-    color: #e2e8f0;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text);
+    border: 1px solid var(--line);
     padding: 0.3rem 0.85rem;
     border-radius: 2px;
   }

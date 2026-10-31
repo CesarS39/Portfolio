@@ -1,5 +1,4 @@
 ---
-import CLILoader from "../components/CLILoader.astro";
 import ParallaxHero from "../components/ParallaxHero.astro";
 import Layout from "../layouts/Layout.astro";
 import AboutSection from "../components/organisms/AboutSection.astro";
@@ -13,12 +12,7 @@ import ProjectsSection from "../components/organisms/ProjectsSection.astro";
 import ContactSection from "../components/organisms/ContactSection.astro";
 ---
 
-<Layout>
-  <CLILoader />
-  <main
-    id="main-content"
-    style="display: none; opacity: 0; transition: opacity 0.5s ease-out"
-  >
+<Layout title="César Enríquez | Desarrollador de Software" description="Conoce la experiencia, proyectos y habilidades de César Enríquez, desarrollador de software en Pachuca, Hidalgo.">
     <ParallaxHero />
     <AboutSection />
     <TechStackSection
@@ -72,6 +66,12 @@ import ContactSection from "../components/organisms/ContactSection.astro";
           category: "Frontend",
         },
         {
+          label: "Vite",
+          icon: "devicon-vitejs-plain",
+          gradient: "from-purple-500 to-yellow-400",
+          category: "Frontend",
+        },
+        {
           label: "Astro",
           icon: "devicon-astro-plain",
           gradient: "from-purple-600 to-blue-500",
@@ -105,80 +105,73 @@ import ContactSection from "../components/organisms/ContactSection.astro";
           label: "Flutter",
           icon: "devicon-flutter-plain",
           gradient: "from-blue-400 to-cyan-500",
-          category: "Mobile",
+          category: "Móvil",
         },
         {
           label: "Dart",
           icon: "devicon-dart-plain",
           gradient: "from-cyan-500 to-blue-600",
-          category: "Mobile",
+          category: "Móvil",
         },
         {
           label: "SQL Server",
           icon: "devicon-microsoftsqlserver-plain",
           gradient: "from-red-600 to-orange-500",
-          category: "Data",
+          category: "Datos",
         },
         {
           label: "PostgreSQL",
           icon: "devicon-postgresql-plain",
           gradient: "from-blue-700 to-indigo-800",
-          category: "Data",
+          category: "Datos",
         },
         {
           label: "MongoDB",
           icon: "devicon-mongodb-plain",
           gradient: "from-green-500 to-green-700",
-          category: "Data",
+          category: "Datos",
         },
         {
           label: "Prisma",
           icon: "devicon-prisma-plain",
           gradient: "from-slate-600 to-slate-800",
-          category: "Data",
+          category: "Datos",
         },
         {
           label: "AWS",
           icon: "devicon-amazonwebservices-plain-wordmark",
           gradient: "from-orange-500 to-amber-600",
-          category: "Cloud",
+          category: "Nube",
         },
         {
           label: "Azure",
           icon: "devicon-azure-plain",
           gradient: "from-blue-600 to-blue-800",
-          category: "Cloud",
+          category: "Nube",
         },
         {
           label: "Terraform",
           icon: "devicon-terraform-plain",
           gradient: "from-violet-600 to-purple-800",
-          category: "Cloud",
+          category: "Nube",
         },
         {
           label: "Firebase",
           icon: "devicon-firebase-plain",
           gradient: "from-yellow-400 to-orange-500",
-          category: "Cloud",
+          category: "Nube",
         },
         {
           label: "Git",
           icon: "devicon-git-plain",
           gradient: "from-orange-500 to-amber-600",
-          category: "Tools",
+          category: "Herramientas",
         },
         {
           label: "Figma",
           icon: "devicon-figma-plain",
           gradient: "from-fuchsia-600 to-purple-600",
-          category: "Tools",
-        },
-        {
-          label: "Scrum",
-          icon: "📋",
-          gradient: "from-pink-500 to-red-500",
-          isEmoji: true,
-          category: "Tools",
+          category: "Herramientas",
         },
       ]}
     />
@@ -195,7 +188,6 @@ import ContactSection from "../components/organisms/ContactSection.astro";
           title: "Ingeniería en Software",
           subtitle: "Universidad Politécnica de Pachuca",
           date: "2023 - Actualidad",
-          extra: "En tramite de titulación",
           glow: "glow-blue",
           status: "current",
           skills: [
@@ -226,26 +218,15 @@ import ContactSection from "../components/organisms/ContactSection.astro";
     <ExperienceSection
       experiences={[
         {
-          company: "Project Manager - GURAGU",
-          role: "Gestión de proyectos, planificación estratégica y coordinación de equipos de desarrollo",
-          year: "2026 – Presente",
+          company: "Producto digital y sistemas empresariales",
+          role: "Desarrollo full-stack, móvil y cloud · 2025 – Actualidad",
+          year: "2025 – Actualidad",
           items: [
-            "Planificación y ejecución de proyectos de software utilizando metodologías ágiles (Scrum/Kanban).",
-            "Coordinación de equipos de desarrollo, definición de alcance y gestión de tiempos de entrega.",
-            "Comunicación directa con stakeholders para alinear expectativas y priorizar requisitos.",
-            "Seguimiento de métricas de productividad y calidad del producto.",
-          ],
-        },
-        {
-          company: "Desarrollador Full Stack - GURAGU",
-          role: "Desarrollo de sistemas completos con Angular, Node.js y AWS",
-          year: "2025 – 2026",
-          items: [
-            "Módulos de autenticación con AWS Cognito, formularios reactivos, route guards y componentes standalone en Angular.",
-            "Backend en Node.js / TypeScript con Prisma ORM sobre PostgreSQL.",
-            "Infraestructura cloud en AWS (Lambda, API Gateway, S3, RDS) provisionada con Terraform como IaC.",
-            "Integración de IA generativa con Google Gemini API.",
-            "Desarrollo móvil multiplataforma con Flutter para Web, iOS y Android.",
+            "Guragu ERP, CISEF y Facturagu: desarrollo de herramientas de gestión y procesos de negocio.",
+            "PetGuard y Nuvio: trabajo de producto en plataformas digitales y servicios web.",
+            "MuySaludable: desarrollo de aplicación móvil con Flutter para iOS.",
+            "Berkley: soporte a reportes y flujos de información para análisis operativo.",
+            "Experiencia sólida con React y Vite, Flutter, Angular y AWS, además de Node.js, TypeScript, PostgreSQL y Terraform.",
             "Certificaciones: Azure AZ-900 · AWS Technical Essentials Professional.",
           ],
         },
@@ -265,10 +246,11 @@ import ContactSection from "../components/organisms/ContactSection.astro";
     <InterestsSection
       interests={[
         {
-          title: "Tennis",
+          title: "Tenis",
           description:
-            "Me encanta el deporte, realmente podría jugar durante horas. Fui campeón de mi universidad en 2024.",
+            "Es mi forma favorita de desconectarme. Fui campeón de tenis de mi universidad en 2024.",
           image: "/Portfolio/images/intereses/tennis2.webp",
+          link: "/Portfolio/projects/Tennis/",
           className: "lg:col-span-3 lg:row-span-2 min-h-[240px]",
         },
         {
@@ -305,6 +287,14 @@ import ContactSection from "../components/organisms/ContactSection.astro";
     />
     <ProjectsSection
       projects={[
+        {
+          title: "ActiveHub - Plataforma de aprendizaje",
+          description:
+            "Experiencia digital con una propuesta centrada en que cada persona elija cómo, con quién y cuándo aprender.",
+          image: "/Portfolio/images/projects/activehub/ActiveHub.png",
+          link: "/Portfolio/projects/ActiveHub/",
+          techStack: [],
+        },
         {
           title: "Pockbit - Sistema POS",
           description:
@@ -372,7 +362,7 @@ import ContactSection from "../components/organisms/ContactSection.astro";
     />
     <ContactSection
       data={{
-        name: "César Samuel Enriquez Bautista",
+        name: "César Samuel Enríquez Bautista",
         location: "Pachuca, Hidalgo",
         role: "Desarrollador de Software",
         prompt: "¿Tienes una idea o proyecto?",
@@ -397,7 +387,7 @@ import ContactSection from "../components/organisms/ContactSection.astro";
             bgColor: "bg-neutral-700 hover:bg-neutral-600",
           },
           {
-            href: "https://www.linkedin.com/in/cesar-samuel-enriquez-bautista-258b2324b",
+            href: "https://www.linkedin.com/in/cesar-samuel-enriquez-bautista-258b2324b/",
             title: "LinkedIn",
             icon: "/icons/linkedin.svg",
             bgColor: "bg-blue-700 hover:bg-blue-600",
@@ -405,5 +395,7 @@ import ContactSection from "../components/organisms/ContactSection.astro";
         ],
       }}
     />
-  </main>
+  <script>
+    import "../scripts/animations.js";
+  </script>
 </Layout>

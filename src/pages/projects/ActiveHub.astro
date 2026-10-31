@@ -1,0 +1,35 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import BaseSection from "../../components/atoms/BaseSection.astro";
+import HeroTitle from "../../components/atoms/HeroTitle.astro";
+const base = import.meta.env.BASE_URL;
+const screenshot = `${base}images/projects/activehub/ActiveHub.png`;
+---
+
+<Layout title="ActiveHub | Proyecto de aprendizaje" description="Explora la propuesta visual de ActiveHub, una plataforma que permite elegir cómo, con quién y cuándo aprender.">
+  <HeroTitle text="ActiveHub" />
+  <BaseSection>
+    <div class="activehub-intro">
+      <div>
+        <p class="activehub-kicker">Plataforma de aprendizaje</p>
+        <h2>Aprender a tu manera</h2>
+        <p class="activehub-copy">ActiveHub presenta una idea sencilla: cada persona elige cómo aprender, con quién y cuándo.</p>
+      </div>
+      <img src={screenshot} alt="Portada de ActiveHub con su invitación a elegir cómo, con quién y cuándo aprender" width="2604" height="1418" loading="lazy" />
+    </div>
+  </BaseSection>
+  <BaseSection className="activehub-note">
+    <h2>La experiencia parte de la elección</h2>
+    <p>La portada comunica la propuesta y ofrece dos siguientes pasos: empezar o conocer más. El material disponible para este proyecto es una captura de su página de inicio.</p>
+  </BaseSection>
+</Layout>
+
+<style>
+  .activehub-intro { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+  .activehub-kicker { margin: 0 0 .7rem; color: var(--muted); font-size: .8rem; }
+  .activehub-intro h2, .activehub-note h2 { margin: 0 0 1rem; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1; letter-spacing: -.06em; }
+  .activehub-copy, .activehub-note p { max-width: 42rem; margin: 0; color: var(--muted); }
+  .activehub-intro img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+  .activehub-note { background: var(--surface); }
+  @media (max-width: 720px) { .activehub-intro { grid-template-columns: 1fr; } }
+</style>

@@ -1,3 +1,7 @@
+---
+import Icon from "./atoms/Icon.astro";
+---
+
 <section
   id="cli-loader"
   aria-label="Cargando portafolio"
@@ -10,12 +14,12 @@
     </div>
 
     <div class="cli-line cli-line-2">
-      <span class="cli-prompt cli-ok">✓</span>
+      <span class="cli-prompt cli-ok" aria-label="Completado"><Icon name="check" size={14} /></span>
       <span class="cli-text">loading modules...</span>
     </div>
 
     <div class="cli-line cli-line-3">
-      <span class="cli-prompt cli-ok">✓</span>
+      <span class="cli-prompt cli-ok" aria-label="Completado"><Icon name="check" size={14} /></span>
       <span class="cli-text">welcome, César.</span>
       <span class="cli-cursor" aria-hidden="true"></span>
     </div>
@@ -29,7 +33,7 @@
     position: fixed;
     inset: 0;
     z-index: 9000;
-    background: #080808;
+    background: var(--bg);
     display: flex;
     align-items: center;
     justify-content: center;

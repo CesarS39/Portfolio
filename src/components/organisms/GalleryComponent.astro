@@ -1,87 +1,277 @@
 ---
-import GalleryItem from "../molecules/GalleryItem.astro";
-import CarouselIndicator from "../atoms/CarouselIndicator.astro";
-import CarouselControl from "../atoms/CarouselControl.astro";
-import BaseSection from "../atoms/BaseSection.astro";
-
-interface Props {
-  images: string[];
+interface GalleryImage {
+  src: string;
+  alt: string;
+  orientation?: "portrait" | "landscape";
 }
 
-const { images } = Astro.props as Props;
+interface Props {
+  images: Array<string | GalleryImage>;
+  label?: string;
+  title?: string;
+}
+
+const { images, label = "Recorrido visual del proyecto", title } = Astro.props as Props;
+const slides = images.map((image) => {
+  const src = typeof image === "string" ? image : image.src;
+  const suppliedAlt = typeof image === "string" ? undefined : image.alt;
+  const orientation = typeof image === "string" ? "landscape" : image.orientation ?? "landscape";
+  const filename = src.split("/").pop()?.replace(/\.[^.]+$/, "") ?? "";
+  const alt = suppliedAlt ?? filename.replace(/[_-]+/g, " ").replace(/\s+/g, " ").trim();
+  return { src, alt: alt || "Captura del proyecto", orientation };
+});
+const projectName = title ?? label
+  .replace(/^(Capturas (?:del|de)|Pantallas de la aplicación)\s*/i, "")
+  .trim();
+const total = String(slides.length).padStart(2, "0");
 ---
 
-<BaseSection id="experiencia">
-  <div class="max-w-5xl mx-auto">
-    <div id="indicators-carousel" class="relative w-full" data-carousel="static">
-      <!-- Carrusel -->
-      <div class="relative h-[28rem] overflow-hidden rounded-lg md:h-[32rem]">
-        {
-          images.map((src: string, index: number) => (
-            <GalleryItem
-              src={src}
-              alt={`Imagen ${index + 1}`}
-              isActive={index === 0}
+{slides.length > 0 && (
+  <section class="gallery-section" aria-label={label}>
+    <div class="gallery-story" data-scroll-gallery>
+      <aside
+        class="gallery-visual"
+        data-gallery-visual
+        data-orientation={slides[0]?.orientation ?? "landscape"}
+        data-tone="light"
+        role="region"
+        aria-label={label}
+        aria-roledescription="recorrido visual"
+      >
+        <div class="gallery-visual__surface">
+          {slides.map((slide, index) => (
+            <img
+              class:list={["gallery-image", { "is-active": index === 0 }]}
+              src={index === 0 ? slide.src : undefined}
+              data-src={index > 0 ? slide.src : undefined}
+              data-gallery-image
+              data-index={index}
+              alt={slide.alt}
+              aria-hidden={index === 0 ? "false" : "true"}
+              loading={index === 0 ? "eager" : "lazy"}
+              decoding="async"
+              fetchpriority={index === 0 ? "high" : "auto"}
             />
-          ))
-        }
-      </div>
+          ))}
+          <div class="gallery-visual__shade" aria-hidden="true"></div>
+          <div class="gallery-caption" data-gallery-caption>
+            <p class="gallery-caption__eyebrow"><span>{projectName}</span><span>Recorrido visual</span></p>
+            <h2 data-gallery-title aria-live="polite">{slides[0]?.alt}</h2>
+            <div class="gallery-controls" role="group" aria-label="Controles de capturas">
+              <button class="gallery-control gallery-control--arrow" type="button" data-gallery-previous aria-label="Captura anterior">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7M8 12h12" /></svg>
+              </button>
+              <input
+                class="gallery-control__range"
+                type="range"
+                min="0"
+                max={slides.length - 1}
+                value="0"
+                step="1"
+                data-gallery-range
+                aria-label={`Explorar las capturas de ${projectName}`}
+              />
+              <p class="gallery-counter" data-gallery-counter aria-live="polite">
+                <span>01</span><span>/</span><span>{total}</span>
+              </p>
+              <button class="gallery-control gallery-control--arrow" type="button" data-gallery-next aria-label="Captura siguiente">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5 7 7-7 7M16 12H4" /></svg>
+              </button>
+            </div>
+          </div>
+          <p class="gallery-scroll-hint"><span aria-hidden="true"></span> Desplázate para explorar</p>
+        </div>
+      </aside>
 
-      <div class="absolute z-30 flex -translate-x-1/2 space-x-3 bottom-5 left-1/2">
-        {
-          images.map((_: string, index: number) => (
-            <CarouselIndicator index={index} isActive={index === 0} />
-          ))
-        }
+      <div class="gallery-steps" aria-label="Pasos del recorrido">
+        {slides.map((slide, index) => (
+          <article
+            class:list={["gallery-step", { "is-active": index === 0 }]}
+            data-gallery-step
+            data-index={index}
+            aria-label={`${String(index + 1).padStart(2, "0")}: ${slide.alt}`}
+            aria-current={index === 0 ? "step" : undefined}
+          ></article>
+        ))}
       </div>
-
-      <CarouselControl direction="prev" />
-      <CarouselControl direction="next" />
     </div>
-  </div>
+  </section>
+)}
 
-  <script is:inline>
-    const carousel = document.getElementById("indicators-carousel");
-    const items = carousel.querySelectorAll("[data-carousel-item]");
-    const prevBtn = carousel.querySelector("[data-carousel-prev]");
-    const nextBtn = carousel.querySelector("[data-carousel-next]");
-    const indicators = carousel.querySelectorAll("[data-carousel-slide-to]");
+<script>
+  const stories = document.querySelectorAll<HTMLElement>("[data-scroll-gallery]");
 
-    let currentIndex = 0;
+  for (const story of stories) {
+    const visual = story.querySelector<HTMLElement>("[data-gallery-visual]");
+    const title = story.querySelector<HTMLElement>("[data-gallery-title]");
+    const counter = story.querySelector<HTMLElement>("[data-gallery-counter]");
+    const range = story.querySelector<HTMLInputElement>("[data-gallery-range]");
+    const previous = story.querySelector<HTMLButtonElement>("[data-gallery-previous]");
+    const next = story.querySelector<HTMLButtonElement>("[data-gallery-next]");
+    const steps = [...story.querySelectorAll<HTMLElement>("[data-gallery-step]")];
+    const images = [...story.querySelectorAll<HTMLImageElement>("[data-gallery-image]")];
+    if (!visual || !title || !steps.length || !images.length) continue;
 
-    function showSlide(index) {
-      items.forEach((item, i) => {
-        if (i === index) {
-          item.classList.remove("hidden");
-          setTimeout(() => item.classList.add("opacity-100"), 10);
-        } else {
-          item.classList.remove("opacity-100");
-          setTimeout(() => item.classList.add("hidden"), 300);
+    let activeIndex = 0;
+
+    const setToneFromImage = (image: HTMLImageElement) => {
+      if (!image.naturalWidth || !image.naturalHeight) return;
+      try {
+        const canvas = document.createElement("canvas");
+        canvas.width = 24;
+        canvas.height = 24;
+        const context = canvas.getContext("2d", { willReadFrequently: true });
+        if (!context) return;
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        const pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+        let luminance = 0;
+        let samples = 0;
+        for (let index = 0; index < pixels.length; index += 16) {
+          const red = pixels[index] / 255;
+          const green = pixels[index + 1] / 255;
+          const blue = pixels[index + 2] / 255;
+          luminance += .2126 * red + .7152 * green + .0722 * blue;
+          samples++;
         }
-        item.setAttribute("data-carousel-item", i === index ? "active" : "");
+        visual.dataset.tone = luminance / Math.max(samples, 1) > .52 ? "dark" : "light";
+      } catch {
+        visual.dataset.tone = "light";
+      }
+    };
+
+    const setActive = (index: number, scrollToStep = false) => {
+      const normalizedIndex = (index + images.length) % images.length;
+      const image = images[normalizedIndex];
+      if (!image) return;
+      activeIndex = normalizedIndex;
+
+      if (!image.getAttribute("src") && image.dataset.src) {
+        image.src = image.dataset.src;
+        image.removeAttribute("data-src");
+      }
+      if (image.complete) setToneFromImage(image);
+      else image.addEventListener("load", () => {
+        if (activeIndex === normalizedIndex) setToneFromImage(image);
+      }, { once: true });
+
+      images.forEach((item, itemIndex) => {
+        const active = itemIndex === normalizedIndex;
+        item.classList.toggle("is-active", active);
+        item.setAttribute("aria-hidden", String(!active));
+      });
+      steps.forEach((step, itemIndex) => {
+        const active = itemIndex === normalizedIndex;
+        step.classList.toggle("is-active", active);
+        if (active) step.setAttribute("aria-current", "step");
+        else step.removeAttribute("aria-current");
       });
 
-      indicators.forEach((dot, i) => {
-        dot.setAttribute("aria-current", i === index);
-      });
+      title.textContent = image.alt;
+      if (counter) {
+        counter.innerHTML = `<span>${String(normalizedIndex + 1).padStart(2, "0")}</span><span>/</span><span>${String(images.length).padStart(2, "0")}</span>`;
+      }
+      if (range && Number(range.value) !== normalizedIndex) range.value = String(normalizedIndex);
+      if (scrollToStep) steps[normalizedIndex]?.scrollIntoView({ behavior: "smooth", block: "center" });
+    };
 
-      currentIndex = index;
+    images[0]?.addEventListener("load", () => setToneFromImage(images[0]));
+    if (images[0]?.complete) setToneFromImage(images[0]);
+    previous?.addEventListener("click", () => setActive(activeIndex - 1, true));
+    next?.addEventListener("click", () => setActive(activeIndex + 1, true));
+    range?.addEventListener("change", () => setActive(Number(range.value), true));
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        const current = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => Math.abs(a.boundingClientRect.top + a.boundingClientRect.height / 2 - innerHeight / 2)
+            - Math.abs(b.boundingClientRect.top + b.boundingClientRect.height / 2 - innerHeight / 2))[0];
+        if (current) setActive(Number((current.target as HTMLElement).dataset.index));
+      }, { rootMargin: "-42% 0px -42% 0px", threshold: 0 });
+      steps.forEach((step) => observer.observe(step));
     }
+  }
+</script>
 
-    prevBtn.addEventListener("click", () => {
-      const newIndex = (currentIndex - 1 + items.length) % items.length;
-      showSlide(newIndex);
-    });
-
-    nextBtn.addEventListener("click", () => {
-      const newIndex = (currentIndex + 1) % items.length;
-      showSlide(newIndex);
-    });
-
-    indicators.forEach((dot, i) => {
-      dot.addEventListener("click", () => showSlide(i));
-    });
-
-    showSlide(0);
-  </script>
-</BaseSection>
+<style>
+  .gallery-section {
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    padding: 0;
+    background: #08090b;
+  }
+  .gallery-story { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); width: 100%; }
+  .gallery-visual {
+    position: sticky;
+    top: var(--site-header-height, 5.5rem);
+    z-index: 2;
+    grid-area: 1 / 1;
+    width: 100%;
+    height: calc(100svh - var(--site-header-height, 5.5rem));
+    align-self: start;
+    overflow: hidden;
+    background: #08090b;
+  }
+  .gallery-visual__surface { position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden; background: #08090b; }
+  .gallery-image {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: clamp(.35rem, 1.5vw, 1.5rem);
+    object-fit: contain;
+    object-position: center;
+    opacity: 0;
+    transform: scale(.99);
+    transition: opacity .42s ease, transform .6s cubic-bezier(.2,.7,.2,1);
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  .gallery-image.is-active { z-index: 1; opacity: 1; transform: scale(1); }
+  .gallery-visual__shade { position: absolute; inset: 42% 0 0; z-index: 2; pointer-events: none; background: linear-gradient(180deg, transparent, rgba(5, 8, 15, .76)); }
+  .gallery-caption {
+    position: absolute;
+    left: clamp(1.25rem, 5vw, 5rem);
+    bottom: clamp(1.25rem, 5vh, 4rem);
+    z-index: 3;
+    width: min(42rem, calc(100% - 2.5rem));
+    padding: clamp(1rem, 2.4vw, 1.65rem);
+    border: 1px solid rgba(255, 255, 255, .22);
+    border-radius: 1rem;
+    backdrop-filter: blur(18px);
+    transition: color .25s ease, background-color .25s ease, border-color .25s ease;
+  }
+  .gallery-visual[data-tone="light"] .gallery-caption { color: #f8fafc; background: rgba(8, 9, 11, .78); border-color: rgba(255, 255, 255, .2); }
+  .gallery-visual[data-tone="dark"] .gallery-caption { color: #111317; background: rgba(255, 255, 255, .84); border-color: rgba(15, 17, 20, .12); }
+  .gallery-visual[data-tone="dark"] .gallery-control__range { accent-color: #252a30; }
+  .gallery-visual[data-tone="dark"] .gallery-scroll-hint { color: #111317; text-shadow: none; }
+  .gallery-caption__eyebrow { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1rem; margin: 0 0 .55rem; font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .72; }
+  .gallery-caption h2 { max-width: 26ch; margin: 0; font: 600 clamp(1.3rem, 3vw, 2.25rem)/1.08 Syne, sans-serif; letter-spacing: -.045em; }
+  .gallery-controls { display: flex; align-items: center; gap: .75rem; margin-top: 1rem; }
+  .gallery-control--arrow { display: grid; width: 2.75rem; height: 2.75rem; flex: none; place-items: center; border: 1px solid currentColor; border-radius: 50%; color: inherit; background: transparent; cursor: pointer; transition: background-color .18s ease, transform .18s ease; }
+  .gallery-control--arrow:hover { transform: scale(1.05); background: rgba(127, 140, 160, .18); }
+  .gallery-control--arrow svg { width: 1.1rem; height: 1.1rem; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.7; }
+  .gallery-control__range { width: min(100%, 13rem); height: 2.75rem; margin: 0; accent-color: var(--accent); cursor: pointer; }
+  .gallery-counter { display: flex; gap: .3rem; align-items: center; margin: 0 0 0 auto; font-size: .78rem; font-variant-numeric: tabular-nums; }
+  .gallery-scroll-hint { position: absolute; right: clamp(1.25rem, 4vw, 3rem); bottom: clamp(1.25rem, 5vh, 4rem); z-index: 3; display: flex; align-items: center; gap: .5rem; margin: 0; color: white; font-size: .72rem; text-shadow: 0 1px 12px #000; }
+  .gallery-scroll-hint span { width: .45rem; height: .45rem; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor; transform: rotate(45deg) translateY(-2px); }
+  .gallery-steps { grid-area: 1 / 1; z-index: 1; }
+  .gallery-step { min-height: calc(100svh - var(--site-header-height, 5.5rem)); pointer-events: none; }
+  .gallery-step.is-active { pointer-events: auto; }
+  .gallery-visual[data-orientation="portrait"] .gallery-image { padding-block: clamp(.25rem, 1vh, .75rem); }
+  @media (max-width: 760px) {
+    .gallery-visual { top: var(--site-header-height, 4.5rem); height: calc(100svh - var(--site-header-height, 4.5rem)); }
+    .gallery-image { padding: .3rem; }
+    .gallery-caption { left: 1rem; bottom: 1rem; width: calc(100% - 2rem); padding: 1rem; border-radius: .8rem; }
+    .gallery-caption__eyebrow { font-size: .62rem; }
+    .gallery-caption h2 { font-size: clamp(1.25rem, 6vw, 1.8rem); }
+    .gallery-controls { gap: .45rem; margin-top: .75rem; }
+    .gallery-control--arrow { width: 2.4rem; height: 2.4rem; }
+    .gallery-control__range { min-width: 3rem; flex: 1; }
+    .gallery-scroll-hint { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-image, .gallery-caption, .gallery-control--arrow { transition-duration: .01ms; }
+  }
+</style>

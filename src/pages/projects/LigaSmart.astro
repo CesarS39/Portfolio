@@ -3,305 +3,433 @@ import Layout from "../../layouts/Layout.astro";
 import GalleryComponent from "../../components/organisms/GalleryComponent.astro";
 import HeroTitle from "../../components/atoms/HeroTitle.astro";
 import BaseSection from "../../components/atoms/BaseSection.astro";
-import TechnologyButton from "../../components/molecules/TechnologyButton.astro";
-import FeatureCard from "../../components/molecules/FeatureCard.astro";
-import ProjectCTA from "../../components/molecules/ProjectCTA.astro";
 
-const screenshots: string[] = [
-  "/Portfolio/images/projects/ligasmart/Dashboard.webp",
-  "/Portfolio/images/projects/ligasmart/login.webp",
-  "/Portfolio/images/projects/ligasmart/Jugadores.webp",
-  "/Portfolio/images/projects/ligasmart/Torneos.webp",
-  "/Portfolio/images/projects/ligasmart/Asignar_torneo.webp",
-  "/Portfolio/images/projects/ligasmart/Agendar_partidos.webp"
+const screenshots = [
+  { src: "/Portfolio/images/projects/ligasmart/Dashboard.webp", alt: "Panel principal de LigaSmart" },
+  { src: "/Portfolio/images/projects/ligasmart/login.webp", alt: "Inicio de sesión" },
+  { src: "/Portfolio/images/projects/ligasmart/Jugadores.webp", alt: "Administración de jugadores" },
+  { src: "/Portfolio/images/projects/ligasmart/Torneos.webp", alt: "Gestión de torneos" },
+  { src: "/Portfolio/images/projects/ligasmart/Asignar_torneo.webp", alt: "Asignación de equipos al torneo" },
+  { src: "/Portfolio/images/projects/ligasmart/Agendar_partidos.webp", alt: "Programación de partidos" }
 ];
 
 const techStack = [
-  { name: ".NET Framework", icon: "devicon-dotnetcore-plain" },
-  { name: "SQL Server", icon: "devicon-microsoftsqlserver-plain" },
-  { name: "Azure Web App", icon: "devicon-azure-plain" },
-  { name: "Bootstrap", icon: "devicon-bootstrap-plain" },
+  {
+    name: ".NET Framework",
+    icon: "code",
+    description: "Backend robusto con C#",
+    gradient: "from-neutral-800 to-neutral-800"
+  },
+  {
+    name: "SQL Server",
+    icon: "database",
+    description: "Base de datos empresarial",
+    gradient: "from-neutral-800 to-neutral-800"
+  },
+  {
+    name: "Azure Web App",
+    icon: "cloud",
+    description: "Despliegue cloud escalable",
+    gradient: "from-neutral-800 to-neutral-800"
+  },
+  {
+    name: "Bootstrap",
+    icon: "palette",
+    description: "UI responsiva y profesional",
+    gradient: "from-neutral-800 to-neutral-800"
+  }
 ];
 
 const modules = [
   {
-    title: "Gestión de equipos",
-    description: "Registro completo de equipos con plantillas, información detallada y estadísticas históricas de participación.",
+    title: "Gestión de Equipos",
+    description: "Registro completo de equipos con información detallada, plantillas y estadísticas históricas",
+    icon: "users",
+    gradient: "from-neutral-800 to-neutral-800",
+    features: ["Registro de equipos", "Gestión de plantillas", "Historial de participación", "Estadísticas por equipo"]
   },
   {
-    title: "Administración de jugadores",
-    description: "Base de datos de jugadores con perfiles, estadísticas individuales y seguimiento de rendimiento por partido.",
+    title: "Administración de Jugadores",
+    description: "Base de datos completa de jugadores con perfiles, estadísticas y seguimiento de rendimiento",
+    icon: "medal",
+    gradient: "from-neutral-800 to-neutral-800",
+    features: ["Perfiles de jugadores", "Estadísticas individuales", "Historial de partidos", "Seguimiento de rendimiento"]
   },
   {
-    title: "Sistema de partidos",
-    description: "Calendario, registro de resultados, árbitros asignados e incidencias del juego en tiempo real.",
+    title: "Sistema de Partidos",
+    description: "Programación, seguimiento y gestión completa de encuentros deportivos con resultados en tiempo real",
+    icon: "trophy",
+    gradient: "from-neutral-800 to-neutral-800",
+    features: ["Calendario de partidos", "Registro de resultados", "Árbitros asignados", "Incidencias del juego"]
   },
   {
-    title: "Centro de estadísticas",
-    description: "Reportes automáticos, gráficas dinámicas, análisis de tendencias y exportación de datos.",
-  },
+    title: "Centro de Estadísticas",
+    description: "Análisis profundo con reportes automáticos, gráficas y métricas de rendimiento avanzadas",
+    icon: "chart",
+    gradient: "from-neutral-800 to-neutral-800",
+    features: ["Reportes automáticos", "Gráficas dinámicas", "Análisis de tendencias", "Exportación de datos"]
+  }
 ];
 
-const before = [
-  "Administración manual con hojas de cálculo",
-  "Datos dispersos e inconsistentes",
-  "Estadísticas básicas y poco detalladas",
-  "Proceso lento para generar reportes",
-  "Comunicación fragmentada entre organizadores",
+const architecture = [
+  {
+    layer: "Presentación",
+    icon: "monitor",
+    description: "Bootstrap + Razor Views",
+    details: ["Diseño responsivo", "Componentes reutilizables", "UX optimizada", "Validación client-side"]
+  },
+  {
+    layer: "Lógica de Negocio",
+    icon: "settings",
+    description: "C# Business Logic Layer",
+    details: ["Reglas de torneos", "Validaciones complejas", "Cálculos estadísticos", "Procesamiento de datos"]
+  },
+  {
+    layer: "Acceso a Datos",
+    icon: "link",
+    description: "DAO Pattern + SQL Server",
+    details: ["Procedimientos almacenados", "Vistas optimizadas", "Transacciones ACID", "Logs de cambios"]
+  }
 ];
-const after = [
-  "Sistema centralizado y automatizado",
-  "Base de datos normalizada y consistente",
-  "Estadísticas avanzadas en tiempo real",
-  "Reportes automáticos personalizables",
-  "Panel unificado para administradores",
-];
-
-const process = [
-  { title: "Análisis y diseño", desc: "Modelado de entidades deportivas, casos de uso y arquitectura del sistema con Visual Studio." },
-  { title: "Implementación core", desc: "Desarrollo de capas de presentación, lógica de negocio y acceso a datos con patrón MVC." },
-  { title: "Testing y optimización", desc: "Pruebas de integración, optimización de consultas y ajustes de rendimiento." },
-  { title: "Despliegue Azure", desc: "Configuración de Azure Web App, pruebas de producción e implementaciones finales." },
-];
+import Icon from "../../components/atoms/Icon.astro";
 ---
 
-<Layout>
-  <HeroTitle text="LIGASMART" size="text-[10vw]" />
-
-  <!-- Summary -->
+<Layout title="LigaSmart | Gestión de torneos deportivos" description="Caso de estudio de LigaSmart: administración de equipos, jugadores, partidos y estadísticas deportivas.">
+  <HeroTitle text="LIGASMART" />
+  
+  <!-- Hero Section -->
   <BaseSection className="text-center py-20">
-    <p class="lead">
-      Sistema integral de administración de torneos deportivos que digitaliza y optimiza
-      la gestión completa desde equipos hasta estadísticas avanzadas.
-    </p>
-    <div class="pill-row">
-      {techStack.map((t) => <TechnologyButton icon={t.icon} label={t.name} />)}
-    </div>
-    <p class="status-note">En despliegue — funcionalidades core completadas, en fase de testing final sobre Azure.</p>
-    <ProjectCTA repo="https://github.com/Voxewl/GestorDeTorneos" />
-  </BaseSection>
-
-  <!-- Problem / Solution -->
-  <BaseSection>
-    <p class="eyebrow">El reto</p>
-    <h2 class="section-title">Revolucionando la gestión deportiva</h2>
-
-    <div class="compare-grid">
-      <div class="compare-col">
-        <h3 class="compare-label">Gestión tradicional</h3>
-        <ul class="compare-list">
-          {before.map((item) => <li>{item}</li>)}
-        </ul>
-      </div>
-      <div class="compare-col">
-        <h3 class="compare-label compare-label--accent">Solución LigaSmart</h3>
-        <ul class="compare-list">
-          {after.map((item) => <li>{item}</li>)}
-        </ul>
+    <div class="max-w-4xl mx-auto">
+      <p class="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed mb-8">
+        Sistema de administración de torneos deportivos para organizar equipos,
+        partidos y estadísticas desde una plataforma centralizada.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        {[
+          ".NET Framework",
+          "SQL Server",
+          "Azure Web App",
+          "Bootstrap",
+        ].map((technology) => (
+          <span class="px-4 py-2 bg-neutral-800 rounded-full text-sm font-semibold">
+            {technology}
+          </span>
+        ))}
       </div>
     </div>
   </BaseSection>
 
-  <!-- Architecture -->
+  <!-- Problem Solution Section -->
   <BaseSection>
-    <p class="eyebrow">Arquitectura</p>
-    <h2 class="section-title">Capas del sistema</h2>
-
-    <div class="arch-grid">
-      <div class="arch-col">
-        <h4 class="arch-label">Presentación</h4>
-        <p>Bootstrap + Razor Views · diseño responsivo · componentes reutilizables · validación client-side</p>
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-6 text-neutral-100">
+          Revolucionando la Gestión Deportiva
+        </h2>
+        <div class="w-24 h-1 bg-neutral-800 from-neutral-800 to-neutral-800 mx-auto mb-8"></div>
       </div>
-      <div class="arch-col">
-        <h4 class="arch-label">Lógica de negocio</h4>
-        <p>C# Business Logic Layer · reglas de torneos · cálculos estadísticos · validaciones complejas</p>
-      </div>
-      <div class="arch-col">
-        <h4 class="arch-label">Acceso a datos</h4>
-        <p>DAO Pattern + SQL Server · procedimientos almacenados · vistas optimizadas · logs de cambios y transacciones ACID</p>
+      
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <div class="bg-white/5 border border-white/15 rounded-xl p-6">
+            <h3 class="text-xl font-bold text-neutral-200 mb-4"><Icon name="alert" size={22} /> Gestión Tradicional</h3>
+            <ul class="text-neutral-300 space-y-2 text-sm">
+              <li>• Administración manual con hojas de cálculo</li>
+              <li>• Datos dispersos e inconsistentes</li>
+              <li>• Estadísticas básicas y poco detalladas</li>
+              <li>• Proceso lento para generar reportes</li>
+              <li>• Comunicación fragmentada entre organizadores</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="space-y-6">
+          <div class="bg-white/5 border border-white/15 rounded-xl p-6">
+            <h3 class="text-xl font-bold text-neutral-200 mb-4"><Icon name="rocket" size={22} /> Solución LigaSmart</h3>
+            <ul class="text-neutral-300 space-y-2 text-sm">
+              <li>• Sistema centralizado y automatizado</li>
+              <li>• Base de datos normalizada y consistente</li>
+              <li>• Estadísticas avanzadas en tiempo real</li>
+              <li>• Reportes automáticos personalizables</li>
+              <li>• Panel unificado para administradores</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </BaseSection>
 
-  <!-- Modules -->
+  <!-- Tech Stack & Architecture -->
   <BaseSection>
-    <p class="eyebrow">Módulos</p>
-    <h2 class="section-title">El sistema en detalle</h2>
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 text-neutral-100">
+        Arquitectura Empresarial
+      </h2>
+      <div class="w-24 h-1 bg-neutral-800 from-neutral-800 to-neutral-800 mx-auto mb-8"></div>
+    </div>
 
-    <div class="feature-grid">
-      {modules.map((m, i) => (
-        <FeatureCard index={i + 1} title={m.title} description={m.description} />
+    <!-- Tech Stack Cards -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-16">
+      {techStack.map((tech) => (
+        <div class="group bg-neutral-800 from-neutral-800 to-neutral-900 rounded-2xl p-6 border border-neutral-700 hover:border-white/15 hover:scale-105 transition-all duration-300">
+          <div class="text-4xl mb-4 text-center group-hover:scale-110 transition-transform">
+            <Icon name={tech.icon} size={38} class="project-icon" />
+          </div>
+          <h3 class="text-lg font-bold text-center mb-2 text-white">
+            {tech.name}
+          </h3>
+          <p class="text-neutral-400 text-sm text-center">
+            {tech.description}
+          </p>
+        </div>
       ))}
     </div>
+
+    <!-- Architecture Layers -->
+    <div class="bg-neutral-800 from-neutral-800/50 to-neutral-900/50 rounded-2xl p-8 border border-neutral-700">
+      <h3 class="text-2xl font-bold text-center mb-8 text-neutral-200">Capas de Arquitectura</h3>
+      <div class="grid md:grid-cols-3 gap-8">
+        {architecture.map((layer, index) => (
+          <div class="text-center group">
+            <div class="mb-6">
+              <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">
+                <Icon name={layer.icon} size={38} class="project-icon" />
+              </div>
+              <h4 class="font-semibold text-white mb-2 text-lg">
+                {layer.layer}
+              </h4>
+              <p class="text-neutral-200 font-medium text-sm mb-4">
+                {layer.description}
+              </p>
+            </div>
+            <div class="space-y-2">
+              {layer.details.map((detail) => (
+                <div class="flex items-center justify-center space-x-2 text-xs text-neutral-400">
+                  <div class="w-1.5 h-1.5 bg-neutral-700 rounded-full"></div>
+                  <span>{detail}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   </BaseSection>
 
-  <!-- Process -->
+  <!-- Modules Section -->
   <BaseSection>
-    <p class="eyebrow">Proceso</p>
-    <h2 class="section-title">Cómo se construyó</h2>
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 text-neutral-100">
+        Módulos del Sistema
+      </h2>
+      <div class="w-24 h-1 bg-neutral-800 from-neutral-800 to-neutral-800 mx-auto mb-8"></div>
+    </div>
 
-    <div class="process-list">
-      {process.map((step, i) => (
-        <div class="process-item">
-          <span class="process-num">{String(i + 1).padStart(2, "0")}</span>
-          <div>
-            <h3 class="process-title">{step.title}</h3>
-            <p class="process-desc">{step.desc}</p>
+    <div class="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      {modules.map((module, index) => (
+        <div class="group relative bg-neutral-800 from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700 hover:scale-105 transition-all duration-300 overflow-hidden">
+          
+          {/* Background glow effect */}
+          <div class={`absolute inset-0 bg-neutral-800 ${module.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
+          
+          <div class="relative z-10">
+            <div class="flex items-start space-x-4 mb-6">
+              <div class="text-4xl group-hover:scale-110 transition-transform">
+                {module.icon}
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl font-bold mb-3 text-white group-hover:text-neutral-200 transition-colors">
+                  {module.title}
+                </h3>
+                <p class="text-neutral-300 leading-relaxed mb-4">
+                  {module.description}
+                </p>
+              </div>
+            </div>
+
+            {/* Module features */}
+            <div class="grid grid-cols-2 gap-2">
+              {module.features.map((feature) => (
+                <div class="flex items-center space-x-2 text-sm text-neutral-400">
+                  <div class="w-1.5 h-1.5 bg-neutral-700 rounded-full"></div>
+                  <span>{feature}</span>
+                </div>
+              ))}
+            </div>
+
           </div>
         </div>
       ))}
     </div>
   </BaseSection>
 
-  <!-- Gallery -->
+  <!-- Database & Business Logic -->
   <BaseSection>
-    <p class="eyebrow">Capturas</p>
-    <h2 class="section-title">Interfaces del sistema</h2>
-    <GalleryComponent images={screenshots} />
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 text-neutral-100">
+        Base de Datos y Lógica de Negocio
+      </h2>
+      <div class="w-24 h-1 bg-neutral-800 from-neutral-800 to-neutral-800 mx-auto mb-8"></div>
+    </div>
+
+    <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+      <!-- Database Design -->
+      <div class="bg-neutral-800 from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700">
+        <div class="text-center mb-6">
+          <div class="text-4xl mb-3"><Icon name="database" size={22} /></div>
+          <h3 class="text-xl font-bold text-white mb-2">Diseño de Base de Datos</h3>
+          <p class="text-neutral-400 text-sm">SQL Server con arquitectura optimizada</p>
+        </div>
+        
+        <div class="space-y-4">
+          <div class="bg-neutral-700/50 rounded-lg p-4">
+            <h4 class="font-semibold text-neutral-200 mb-2"><Icon name="clipboard" size={22} /> Vistas Especializadas</h4>
+            <p class="text-neutral-300 text-sm">Consultas optimizadas para reportes y estadísticas complejas</p>
+          </div>
+          
+          <div class="bg-neutral-700/50 rounded-lg p-4">
+            <h4 class="font-semibold text-neutral-200 mb-2"><Icon name="sparkles" size={22} /> Procedimientos Almacenados</h4>
+            <p class="text-neutral-300 text-sm">Lógica de negocio encapsulada con alta performance</p>
+          </div>
+          
+          <div class="bg-neutral-700/50 rounded-lg p-4">
+            <h4 class="font-semibold text-neutral-200 mb-2"><Icon name="clipboard" size={22} /> Logs de Cambios</h4>
+            <p class="text-neutral-300 text-sm">Auditoría completa y trazabilidad de modificaciones</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Business Logic -->
+      <div class="bg-neutral-800 from-neutral-800 to-neutral-900 rounded-2xl p-8 border border-neutral-700">
+        <div class="text-center mb-6">
+          <div class="text-4xl mb-3"><Icon name="settings" size={22} /></div>
+          <h3 class="text-xl font-bold text-white mb-2">Lógica de Negocio</h3>
+          <p class="text-neutral-400 text-sm">Reglas deportivas y cálculos automatizados</p>
+        </div>
+        
+        <div class="space-y-4">
+          <div class="bg-neutral-700/50 rounded-lg p-4">
+            <h4 class="font-semibold text-neutral-200 mb-2"><Icon name="trophy" size={22} /> Reglas de Torneos</h4>
+            <p class="text-neutral-300 text-sm">Sistemas de puntuación y clasificación configurables</p>
+          </div>
+          
+          <div class="bg-neutral-700/50 rounded-lg p-4">
+            <h4 class="font-semibold text-neutral-200 mb-2"><Icon name="chart" size={22} /> Cálculos Estadísticos</h4>
+            <p class="text-neutral-300 text-sm">Métricas automáticas de rendimiento individual y grupal</p>
+          </div>
+          
+          <div class="bg-neutral-700/50 rounded-lg p-4">
+            <h4 class="font-semibold text-neutral-200 mb-2"><Icon name="check" size={22} /> Validaciones Complejas</h4>
+            <p class="text-neutral-300 text-sm">Integridad de datos y reglas de negocio estrictas</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </BaseSection>
 
-  <style>
-    .lead {
-      font-family: 'Inter', sans-serif;
-      font-size: 1.1rem;
-      line-height: 1.7;
-      color: #999;
-      max-width: 42rem;
-      margin: 0 auto 2rem;
-    }
+  <!-- Development Workflow -->
+  <BaseSection>
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 text-neutral-100">
+        Proceso de Desarrollo
+      </h2>
+      <div class="w-24 h-1 bg-neutral-800 from-neutral-800 to-neutral-800 mx-auto mb-8"></div>
+    </div>
 
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.6rem;
-      margin-bottom: 1.5rem;
-    }
+    <div class="max-w-4xl mx-auto">
+      <div class="relative">
+        <!-- Timeline line -->
+        <div class="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-neutral-800 from-neutral-800 to-neutral-800 hidden md:block"></div>
+        
+        <div class="space-y-8">
+          <!-- Step 1 -->
+          <div class="flex items-center md:justify-between">
+            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-white/15 transition-colors">
+              <div class="flex items-center space-x-3 mb-3">
+                <span class="text-2xl"><Icon name="clipboard" size={22} /></span>
+                <h3 class="font-bold text-lg text-neutral-200">Análisis y Diseño</h3>
+              </div>
+              <p class="text-neutral-300 text-sm">Modelado de entidades deportivas, casos de uso y arquitectura del sistema con Visual Studio.</p>
+            </div>
+            <div class="hidden md:block w-2/12 text-center">
+              <div class="w-8 h-8 bg-neutral-700 rounded-full mx-auto flex items-center justify-center text-white font-bold">1</div>
+            </div>
+            <div class="hidden md:block md:w-5/12"></div>
+          </div>
 
-    .status-note {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
-      color: #777;
-      max-width: 32rem;
-      margin: 0 auto 2rem;
-    }
+          <!-- Step 2 -->
+          <div class="flex items-center md:justify-between">
+            <div class="hidden md:block md:w-5/12"></div>
+            <div class="hidden md:block w-2/12 text-center">
+              <div class="w-8 h-8 bg-neutral-700 rounded-full mx-auto flex items-center justify-center text-white font-bold">2</div>
+            </div>
+            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-white/15 transition-colors">
+              <div class="flex items-center space-x-3 mb-3">
+                <span class="text-2xl"><Icon name="layers" size={22} /></span>
+                <h3 class="font-bold text-lg text-neutral-200">Implementación Core</h3>
+              </div>
+              <p class="text-neutral-300 text-sm">Desarrollo de capas de presentación, lógica de negocio y acceso a datos con patrón MVC.</p>
+            </div>
+          </div>
 
-    .eyebrow {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: #444;
-      margin-bottom: 0.75rem;
-    }
+          <!-- Step 3 -->
+          <div class="flex items-center md:justify-between">
+            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-neutral-700 hover:border-white/15 transition-colors">
+              <div class="flex items-center space-x-3 mb-3">
+                <span class="text-2xl"><Icon name="wrench" size={22} /></span>
+                <h3 class="font-bold text-lg text-neutral-200">Testing y Optimización</h3>
+              </div>
+              <p class="text-neutral-300 text-sm">Pruebas de integración, optimización de consultas y ajustes de rendimiento.</p>
+            </div>
+            <div class="hidden md:block w-2/12 text-center">
+              <div class="w-8 h-8 bg-neutral-700 rounded-full mx-auto flex items-center justify-center text-white font-bold">3</div>
+            </div>
+            <div class="hidden md:block md:w-5/12"></div>
+          </div>
 
-    .section-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      letter-spacing: -0.03em;
-      color: #f0f0f0;
-      margin-bottom: 2.5rem;
-    }
+          <!-- Step 4 -->
+          <div class="flex items-center md:justify-between">
+            <div class="hidden md:block md:w-5/12"></div>
+            <div class="hidden md:block w-2/12 text-center">
+              <div class="w-8 h-8 bg-neutral-700 rounded-full mx-auto flex items-center justify-center text-white font-bold">4</div>
+            </div>
+            <div class="md:w-5/12 bg-neutral-800 rounded-xl p-6 border border-white/15 transition-colors">
+              <div class="flex items-center space-x-3 mb-3">
+                <span class="text-2xl"><Icon name="cloud" size={22} /></span>
+                <h3 class="font-bold text-lg text-neutral-200">Despliegue Azure (Actual)</h3>
+              </div>
+              <p class="text-neutral-300 text-sm">Configuración de Azure Web App, pruebas de producción e implementaciones finales.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </BaseSection>
 
-    .compare-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
+ <!-- Screenshots/Gallery Section -->
+<BaseSection>
+  <div class="text-center mb-16">
+    <h2 class="text-4xl font-bold mb-6 text-neutral-100">
+      Interfaces del Sistema
+    </h2>
+    <div class="w-24 h-1 bg-neutral-800 from-neutral-800 to-neutral-800 mx-auto mb-8"></div>
+    <p class="text-neutral-300 max-w-2xl mx-auto">
+      Capturas del sistema web responsive desarrollado con Bootstrap
+    </p>
+  </div>
+  
+  <GalleryComponent images={screenshots} label="Capturas de LigaSmart" />
+</BaseSection>
 
-    .compare-label {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      color: #888;
-      margin-bottom: 1rem;
-    }
-    .compare-label--accent { color: #e2e8f0; }
-
-    .compare-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-    .compare-list li {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.88rem;
-      color: #888;
-      padding-left: 1.1rem;
-      position: relative;
-      line-height: 1.5;
-    }
-    .compare-list li::before {
-      content: '—';
-      position: absolute;
-      left: 0;
-      color: #444;
-    }
-
-    .arch-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-    .arch-label {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: #e2e8f0;
-      margin-bottom: 0.6rem;
-    }
-    .arch-col p {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
-      line-height: 1.7;
-      color: #777;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-    }
-
-    .process-list {
-      display: flex;
-      flex-direction: column;
-    }
-    .process-item {
-      display: flex;
-      gap: 1.5rem;
-      padding: 1.5rem 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.07);
-    }
-    .process-item:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.07); }
-    .process-num {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: #333;
-      flex-shrink: 0;
-      width: 2rem;
-    }
-    .process-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1.05rem;
-      color: #f0f0f0;
-      margin-bottom: 0.4rem;
-    }
-    .process-desc {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
-      color: #888;
-      line-height: 1.6;
-    }
-
-    @media (max-width: 640px) {
-      .compare-grid, .arch-grid, .feature-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+<BaseSection className="text-center">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-3xl font-bold mb-4">Revisa la implementación</h2>
+    <p class="text-neutral-300 mb-8">
+      Las capturas muestran los flujos de gestión de torneos, equipos y partidos incluidos en LigaSmart.
+    </p>
+    <a href="https://github.com/Voxewl/GestorDeTorneos" target="_blank" rel="noopener noreferrer" class="inline-flex rounded-full border border-white/20 px-6 py-3 font-semibold hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">
+      Ver repositorio ↗
+    </a>
+  </div>
+</BaseSection>
 </Layout>

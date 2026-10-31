@@ -3,10 +3,10 @@ const { icon, label, isEmoji = false } = Astro.props;
 ---
 
 <div class="tech-pill">
-  {icon && (isEmoji
-    ? <span class="tech-icon-emoji">{icon}</span>
+  {isEmoji
+    ? <i class={`${icon} tech-icon-dev`} aria-hidden="true"></i>
     : <i class={`${icon} tech-icon-dev`} />
-  )}
+  }
   <span class="tech-label">{label}</span>
 </div>
 
@@ -18,7 +18,7 @@ const { icon, label, isEmoji = false } = Astro.props;
     padding: 0.35rem 0.85rem;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 2px;
+    border-radius: var(--radius, .35rem);
     cursor: default;
     transition: border-color 0.2s ease, transform 0.2s ease;
   }
@@ -32,19 +32,15 @@ const { icon, label, isEmoji = false } = Astro.props;
     font-family: 'Inter', sans-serif;
     font-size: 0.78rem;
     font-weight: 500;
-    color: #c0c0c0;
+    color: var(--muted, #c2cee9);
     letter-spacing: 0.02em;
     white-space: nowrap;
   }
 
   .tech-icon-dev {
     font-size: 1rem;
-    color: #e2e8f0;
-    opacity: 0.7;
+    color: var(--accent-strong, #aa91ff);
+    opacity: 1;
   }
 
-  .tech-icon-emoji {
-    font-size: 0.85rem;
-    opacity: 0.7;
-  }
 </style>

@@ -1,60 +1,57 @@
 ---
-const { text, id = "parallax-title", size = "text-[10vw]" } = Astro.props;
+const { text, id = "project-title" } = Astro.props;
+const home = import.meta.env.BASE_URL;
 ---
 
-<section class="relative h-screen overflow-hidden bg-neutral-950 flex items-center justify-center px-4">
-  <div class="w-full max-w-7xl mx-auto text-center">
-    <h1
-      id={id}
-      class={`font-extrabold tracking-tight text-center z-10 gradient-text will-change-transform transition-transform duration-150 ease-out ${size} leading-none`}
-    >
-      {text}
-    </h1>
+<section class="project-hero" aria-labelledby={id}>
+  <div class="project-hero__inner">
+    <a class="project-hero__back" href={`${home}#projects`}>← Volver a proyectos</a>
+    <h1 id={id} data-fit-project-title>{text}</h1>
+    <p>Contexto, solución y decisiones de ingeniería detrás del proyecto.</p>
   </div>
-
-  <script is:inline>
-    window.addEventListener("scroll", () => {
-      const title = document.getElementById("{id}") || document.getElementById("parallax-title");
-      if (title) {
-        const scrollY = window.scrollY;
-        const offset = scrollY * 0.3;
-        const scale = 1 + scrollY * 0.0002;
-        title.style.transform = `translateY(${offset}px) scale(${scale})`;
-      }
-    });
-  </script>
-
-  <style>
-    .gradient-text {
-      display: inline-block;
-      background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 1) 70%,
-        rgba(160, 160, 160, 0.5) 95%,
-        rgba(0, 0, 0, 0) 100%
-      );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      /* Mejoras para móvil */
-      word-break: keep-all;
-      hyphens: none;
-      white-space: nowrap;
-    }
-
-    /* Ajustes responsive para móvil */
-    @media (max-width: 640px) {
-      .gradient-text {
-        white-space: normal;
-        word-break: normal;
-        line-height: 0.9;
-      }
-    }
-    
-    /* Para pantallas muy pequeñas */
-    @media (max-width: 480px) {
-      .gradient-text {
-        line-height: 0.85;
-      }
-    }
-  </style>
 </section>
+
+<style>
+  .project-hero { min-height: clamp(24rem, 55svh, 44rem); display: flex; align-items: center; padding: 2rem var(--page-gutter); background: var(--bg); }
+  .project-hero__inner { width: min(100%, var(--content-width)); margin: 0 auto; }
+  .project-hero__back { display: inline-flex; min-height: 2.75rem; align-items: center; gap: .55rem; margin-bottom: clamp(1.1rem, 2.5vh, 1.75rem); padding: 0 .95rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--muted); font-size: .82rem; text-decoration: none; transition: color .18s ease, border-color .18s ease, background-color .18s ease; }
+  .project-hero__back:hover { border-color: var(--accent); background: var(--surface-raised); color: var(--text); }
+  .project-hero h1 { width: fit-content; max-width: 100%; margin: 0; color: var(--text); font-size: clamp(2rem, 12vw, 10rem); font-weight: 700; line-height: .88; letter-spacing: -.08em; overflow-wrap: normal; word-break: keep-all; }
+  .project-hero p { max-width: 42rem; margin: 1.15rem 0 0; color: var(--muted); font-size: clamp(.95rem, 1.5vw, 1.1rem); }
+  @media (max-width: 900px) {
+    .project-hero { min-height: clamp(21rem, 30svh, 26rem); padding-block: clamp(1rem, 3svh, 2rem); }
+    .project-hero h1 { font-size: clamp(2rem, 12vw, 6rem); }
+  }
+</style>
+
+<script>
+  const titles = document.querySelectorAll<HTMLElement>("[data-fit-project-title]");
+  const measureCanvas = document.createElement("canvas");
+  const measureContext = measureCanvas.getContext("2d");
+
+  for (const title of titles) {
+    const container = title.parentElement;
+    if (!container || !measureContext) continue;
+
+    const fitTitle = () => {
+      title.style.removeProperty("font-size");
+      const styles = getComputedStyle(title);
+      const baseSize = Number.parseFloat(styles.fontSize);
+      const letterSpacing = Number.parseFloat(styles.letterSpacing) || 0;
+      const availableWidth = container.clientWidth;
+      const words = (title.textContent ?? "").trim().split(/\s+/);
+      measureContext.font = `${styles.fontWeight} ${styles.fontSize} ${styles.fontFamily}`;
+      const measuredWidth = Math.max(0, ...words.map((word) =>
+        measureContext.measureText(word).width + letterSpacing * Math.max(0, word.length - 1)));
+
+      if (measuredWidth > availableWidth && availableWidth > 0) {
+        title.style.fontSize = `${Math.max(24, baseSize * availableWidth / measuredWidth * .985)}px`;
+      }
+    };
+
+    const observer = new ResizeObserver(fitTitle);
+    observer.observe(container.parentElement ?? container);
+    fitTitle();
+    document.fonts?.ready.then(fitTitle);
+  }
+</script>

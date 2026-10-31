@@ -39,7 +39,7 @@ echo "⚡ Hook de build configurado"
 
 # 4. Instalar dependencias de Three.js y animaciones
 echo "📦 Instalando dependencias de animaciones..."
-npm install three @react-three/fiber @react-three/drei gsap
+npm install three gsap
 
 echo ""
 echo "✅ Setup completo. Ahora:"
@@ -50,9 +50,8 @@ echo ""
 echo "💬 Primer prompt para Claude Code:"
 echo "────────────────────────────────────────"
 echo "Lee el CLAUDE.md completo y empieza el rediseño."
-echo "Primero define los tokens de diseño globales en tailwind.config.mjs"
-echo "y en Layout.astro (variables CSS, fuentes de Google, cursor personalizado)."
-echo "Luego crea el componente src/components/3d/HeroScene.jsx con una escena"
-echo "Three.js minimalista: geometría que reacciona al mouse, fondo oscuro #080808,"
-echo "partículas o wireframe sutil. Integra en ParallaxHero.astro con client:load."
+echo "Respeta Astro 7 y Tailwind 4 con @tailwindcss/vite. Revisa primero"
+echo "src/styles/global.css, tailwind.config.js y CLAUDE.md antes de tocar tokens."
+echo "Reutiliza src/components/3d/HeroScene.astro y Three.js directamente;"
+echo "no generes una implementación React ni agregues cursores personalizados."
 echo "────────────────────────────────────────"

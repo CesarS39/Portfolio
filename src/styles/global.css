@@ -1,69 +1,114 @@
 @import "tailwindcss";
+@config "../../tailwind.config.js";
 
 @theme {
-  --color-bg: #080808;
-  --color-surface: #0f0f0f;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-accent: #e2e8f0;
-  --color-accent-glow: rgba(226, 232, 240, 0.15);
-  --color-text-base: #f0f0f0;
-  --color-text-muted: #666666;
-
-  --font-display: 'Syne', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --color-neutral-50: #f4f5f6;
+  --color-neutral-100: #e7e9eb;
+  --color-neutral-200: #d0d4d8;
+  --color-neutral-300: #b6bbc2;
+  --color-neutral-400: #969da6;
+  --color-neutral-500: #737b85;
+  --color-neutral-600: #555d67;
+  --color-neutral-700: #383e46;
+  --color-neutral-800: #252a30;
+  --color-neutral-900: #171a1e;
+  --color-neutral-950: #0b0d10;
 }
 
-@keyframes fade-up {
-    0% {
-      opacity: 0;
-      transform: translateY(60px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+/* Shared foundations for the home page and every project case study. */
+:root {
+  color-scheme: dark;
+  --bg: #08090b;
+  --surface: #101216;
+  --surface-raised: #191d22;
+  --line: rgba(231, 235, 240, .18);
+  --text: #f5f6f8;
+  --muted: #c3c7ce;
+  --quiet: #989ea7;
+  --accent: #4ce8c0;
+  --accent-strong: #9af3d8;
+  --accent-warm: #f2a779;
+  --content-width: 72rem;
+  --page-gutter: clamp(1.25rem, 5vw, 5rem);
+  --landing-section-space: clamp(2.25rem, 3.4vw, 2.75rem);
+  --radius: .35rem;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--bg); scroll-behavior: smooth; scroll-padding-top: 6rem; }
+body {
+  margin: 0;
+  min-width: 320px;
+  max-width: 100%;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; }
+a { color: inherit; }
+pre { max-width: 100%; min-width: 0; overflow-x: auto; }
+pre > code { display: block; max-width: 100%; }
+h1, h2, h3, h4, h5, h6 { font-family: Syne, sans-serif; text-wrap: balance; }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 4px;
+}
+::selection { background: var(--accent); color: #08090b; }
+
+/* A single low contrast treatment replaces the old multicolour text gradients. */
+.gradient-text {
+  color: var(--text);
+  background: none;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: currentColor;
+  background-clip: initial;
+}
+
+.project-icon { color: var(--accent); flex: none; filter: drop-shadow(0 0 .75rem rgba(87, 228, 195, .18)); }
+.section-base .w-24.h-1 { background: linear-gradient(90deg, var(--accent), var(--accent-strong)); }
+.section-base .flex-1 { min-width: 0; }
+.section-base .group.relative {
+  background-image: linear-gradient(135deg, rgba(76, 232, 192, .08), transparent 58%, rgba(255, 255, 255, .035));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06);
+}
+
+body:not(.project-page) main > :is(
+  .about-section,
+  .tech-section,
+  .skills-section,
+  .vision-section,
+  .timeline-section,
+  .interests-section,
+  .projects-section,
+  .contact-section
+) {
+  padding-block: var(--landing-section-space);
+}
+
+@media (max-width: 768px) {
+  .container, .max-w-4xl, .max-w-5xl, .max-w-6xl, .max-w-7xl {
+    max-width: calc(100vw - 2 * var(--page-gutter));
   }
-  
-  .fade-up {
-    animation: fade-up 1.2s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
   }
-  
-  .glow-card {
-    position: relative;
-    transition:
-      transform 0.4s ease,
-      box-shadow 0.4s ease;
-  }
-  .glow-card:hover {
-    transform: scale(1.05);
-  }
-  .glow-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 1rem;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  
-  /* Solo cambia el color acá */
-  .glow-card.glow-pink:hover::before {
-    box-shadow: 0 0 40px 15px rgba(130, 0, 70, 0.8);
-    background: radial-gradient(
-      circle,
-      rgba(130, 0, 70, 0.15) 0%,
-      transparent 70%
-    );
-    opacity: 1;
-  }
-  
-  .glow-card.glow-purple:hover::before {
-    box-shadow: 0 0 40px 15px rgba(139, 92, 246, 0.8);
-    background: radial-gradient(
-      circle,
-      rgba(139, 92, 246, 0.15) 0%,
-      transparent 70%
-    );
-    opacity: 1;
-  }
+}
+
+@media (max-width: 640px) {
+  :root { --page-gutter: 1.125rem; }
+  h1 { font-size: clamp(2.65rem, 12vw, 4rem); }
+  .section-base .p-8 { padding: 1.25rem; }
+  .section-base .grid-cols-2 { grid-template-columns: minmax(0, 1fr); }
+  .section-base h2.text-4xl { font-size: clamp(2rem, 8vw, 2.65rem); }
+}

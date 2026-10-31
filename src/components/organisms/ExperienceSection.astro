@@ -47,8 +47,8 @@ const { experiences } = Astro.props as { experiences: Experience[] };
 
 <style>
   .timeline-section {
-    padding: 3rem 1.5rem;
-    background: #080808;
+    padding: clamp(4.5rem, 9vw, 7.5rem) var(--page-gutter);
+    background: var(--bg);
   }
 
   .timeline-inner {
@@ -62,7 +62,7 @@ const { experiences } = Astro.props as { experiences: Experience[] };
     font-size: 0.75rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #666;
+    color: var(--muted);
     margin-bottom: 1rem;
   }
 
@@ -71,7 +71,7 @@ const { experiences } = Astro.props as { experiences: Experience[] };
     font-weight: 800;
     font-size: clamp(1.75rem, 3.5vw, 2.5rem);
     letter-spacing: -0.03em;
-    color: #f0f0f0;
+    color: var(--text);
     margin-bottom: 2rem;
   }
 
@@ -87,7 +87,7 @@ const { experiences } = Astro.props as { experiences: Experience[] };
     top: 0.45rem;
     bottom: 0;
     width: 1px;
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--line);
   }
 
   /* ── Single item ── */
@@ -107,7 +107,7 @@ const { experiences } = Astro.props as { experiences: Experience[] };
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #e2e8f0;
+    background: var(--text);
     opacity: 0.5;
   }
 
@@ -119,7 +119,7 @@ const { experiences } = Astro.props as { experiences: Experience[] };
   .timeline-date {
     font-family: 'Inter', sans-serif;
     font-size: 0.78rem;
-    color: #555;
+    color: var(--muted);
     letter-spacing: 0.04em;
   }
 
@@ -128,7 +128,7 @@ const { experiences } = Astro.props as { experiences: Experience[] };
     font-family: 'Syne', sans-serif;
     font-weight: 700;
     font-size: 1.1rem;
-    color: #f0f0f0;
+    color: var(--text);
     letter-spacing: -0.01em;
     margin-bottom: 0.25rem;
   }
@@ -136,7 +136,7 @@ const { experiences } = Astro.props as { experiences: Experience[] };
   .timeline-subtitle {
     font-family: 'Inter', sans-serif;
     font-size: 0.85rem;
-    color: #555;
+    color: var(--muted);
     margin-bottom: 1rem;
   }
 
@@ -153,7 +153,7 @@ const { experiences } = Astro.props as { experiences: Experience[] };
   .timeline-bullet {
     font-family: 'Inter', sans-serif;
     font-size: 0.875rem;
-    color: #666;
+    color: var(--muted);
     line-height: 1.65;
     padding-left: 1rem;
     position: relative;
@@ -163,6 +163,6 @@ const { experiences } = Astro.props as { experiences: Experience[] };
     content: "–";
     position: absolute;
     left: 0;
-    color: #444;
+    color: var(--accent-warm);
   }
 </style>

@@ -1,413 +1,64 @@
 ---
-interface ContactIcon {
-  href: string;
-  icon: string;
-  title: string;
-  bgColor?: string;
-}
-interface ContactData {
-  name: string; location: string; role: string; prompt: string; image: string;
-  icons: ContactIcon[];
-}
-
+interface ContactIcon { href: string; icon: string; title: string; bgColor?: string }
+interface ContactData { name: string; location: string; role: string; prompt: string; image: string; icons: ContactIcon[] }
 const { data } = Astro.props as { data: ContactData };
-const emailIcon = data.icons.find(i => i.title === "Email");
-const email = emailIcon?.href?.replace("mailto:", "") ?? "cesarsamuel37@gmail.com";
-const socials = data.icons.filter(i => i.title !== "Email");
+const email = data.icons.find((item) => item.title === "Email")?.href?.replace("mailto:", "") ?? "cesarsamuel37@gmail.com";
+const socials = data.icons.filter((item) => item.title !== "Email");
 ---
 
-<section id="contact" class="reveal-section contact-section">
-
-  <!-- Three.js wave grid background -->
-  <canvas id="contact-canvas" aria-hidden="true" class="contact-canvas"></canvas>
-
-  <!-- Content -->
+<section id="contact" class="contact-section reveal-section" aria-labelledby="contact-title">
   <div class="contact-inner">
-    <p class="contact-label">Contacto</p>
-
-    <div class="contact-email-block">
-      <button class="contact-email-btn" id="contact-copy-btn" title="Copiar email">
-        <span class="contact-email-text">{email}</span>
-        <span class="contact-email-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="9" y="9" width="13" height="13" rx="2"/>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-          </svg>
-        </span>
-      </button>
-      <p class="contact-copy-hint" id="contact-copy-hint">clic para copiar</p>
+    <div class="contact-copy">
+      <p class="contact-label">Contacto</p>
+      <h2 id="contact-title">¿Construimos<br />algo útil?</h2>
+      <p class="contact-location">{data.role} · {data.location}</p>
     </div>
-
-    <div class="contact-socials">
-      {socials.map((icon) => (
-        <a href={icon.href} target="_blank" rel="noopener noreferrer"
-           class="contact-social" title={icon.title}>
-          <img src={`${import.meta.env.BASE_URL}${icon.icon.replace(/^\//, "")}`}
-               alt={icon.title} class="contact-social-img" loading="lazy" />
-          <span class="contact-social-name">{icon.title}</span>
-        </a>
-      ))}
+    <div class="contact-links">
+      <a class="contact-email" href={`mailto:${email}`}>{email}<span aria-hidden="true">↗</span></a>
+      <button class="contact-copy-btn" id="contact-copy-btn" type="button">Copiar correo</button>
+      <p class="contact-status" id="contact-copy-hint" aria-live="polite">También puedes encontrarme en</p>
+      <div class="contact-socials">
+        {socials.map((item) => (
+          <a href={item.href} target="_blank" rel="noopener noreferrer" aria-label={item.title}>
+            <img src={`${import.meta.env.BASE_URL}${item.icon.replace(/^\//, "")}`} alt="" width="20" height="20" loading="lazy" />
+            <span>{item.title}</span>
+          </a>
+        ))}
+      </div>
     </div>
   </div>
-
-  <footer class="contact-footer">
-    <span>{data.name}</span><span aria-hidden="true">·</span>
-    <span>2026</span><span aria-hidden="true">·</span>
-    <span>Astro · Three.js · GSAP</span>
-  </footer>
 </section>
 
 <script>
-  /* ── Copy email ─────────────────────────────────────────── */
-  const btn  = document.getElementById("contact-copy-btn");
-  const hint = document.getElementById("contact-copy-hint");
-  btn?.addEventListener("click", () => {
-    const email = btn.querySelector(".contact-email-text")?.textContent?.trim() ?? "";
-    navigator.clipboard.writeText(email).then(() => {
-      if (hint) { hint.textContent = "¡copiado!"; hint.classList.add("copied"); }
-      setTimeout(() => {
-        if (hint) { hint.textContent = "clic para copiar"; hint.classList.remove("copied"); }
-      }, 2000);
-    });
-  });
-
-  /* ── Wave-grid Three.js background ─────────────────────── */
-  import * as THREE from "three";
-
-  const canvas = document.getElementById("contact-canvas") as HTMLCanvasElement;
-
-  function onVisible(cb: () => void) {
-    const main = document.getElementById("main-content");
-    if (!main || main.style.display === "block") { setTimeout(cb, 50); return; }
-    let done = false;
-    const fire = () => { if (done) return; done = true; setTimeout(cb, 80); };
-    const obs = new MutationObserver(() => {
-      if (main.style.display === "block") { obs.disconnect(); fire(); }
-    });
-    obs.observe(main, { attributes: true, attributeFilter: ["style"] });
-    setTimeout(() => { obs.disconnect(); fire(); }, 2700);
-  }
-
-  onVisible(() => {
-    const W = canvas.offsetWidth  || window.innerWidth;
-    const H = canvas.offsetHeight || 480;
-
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-    renderer.setSize(W, H, false);
-    renderer.setClearColor(0x000000, 0);
-
-    const scene  = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(55, W / H, 0.1, 100);
-    camera.position.set(0, 7.5, 9.5);
-    camera.lookAt(0, 0, -2);
-
-    function resize() {
-      const rw = canvas.offsetWidth || window.innerWidth;
-      const rh = canvas.offsetHeight || 480;
-      if (!rw || !rh) return;
-      renderer.setSize(rw, rh, false);
-      camera.aspect = rw / rh;
-      camera.updateProjectionMatrix();
+  const copyButton = document.getElementById("contact-copy-btn");
+  const status = document.getElementById("contact-copy-hint");
+  copyButton?.addEventListener("click", async () => {
+    const emailLink = document.querySelector<HTMLAnchorElement>(".contact-email");
+    const address = emailLink?.getAttribute("href")?.replace("mailto:", "") ?? "";
+    try {
+      await navigator.clipboard.writeText(address);
+      if (status) status.textContent = "Correo copiado al portapapeles.";
+    } catch {
+      if (status) status.textContent = `Copia esta dirección: ${address}`;
     }
-    new ResizeObserver(resize).observe(canvas);
-
-    /* ── Wave grid ───────────────────────────────────────── */
-    const COLS = 28, ROWS = 22, STEP = 0.70;
-    const verts = new Float32Array(COLS * ROWS * 3);
-
-    const lineIdx: number[] = [];
-    const vi = (c: number, r: number) => r * COLS + c;
-    for (let r = 0; r < ROWS; r++)
-      for (let c = 0; c < COLS - 1; c++)
-        lineIdx.push(vi(c, r), vi(c + 1, r));
-    for (let r = 0; r < ROWS - 1; r++)
-      for (let c = 0; c < COLS; c++)
-        lineIdx.push(vi(c, r), vi(c, r + 1));
-
-    const gridGeo = new THREE.BufferGeometry();
-    const posAttr = new THREE.BufferAttribute(verts, 3);
-    gridGeo.setAttribute("position", posAttr);
-    gridGeo.setIndex(lineIdx);
-
-    const gridMat = new THREE.LineBasicMaterial({
-      color: 0xe2e8f0, transparent: true, opacity: 0.18
-    });
-    scene.add(new THREE.LineSegments(gridGeo, gridMat));
-
-    function updateGrid(t: number) {
-      for (let r = 0; r < ROWS; r++) {
-        for (let c = 0; c < COLS; c++) {
-          const x = (c - (COLS - 1) / 2) * STEP;
-          const z = (r - (ROWS - 1) / 2) * STEP;
-          const y =
-            Math.sin(x * 0.55 + t * 0.85) * Math.cos(z * 0.45 + t * 0.65) * 1.2 +
-            Math.sin((x + z) * 0.38 + t * 1.1) * 0.5 +
-            Math.cos(x * 0.28 - z * 0.42 + t * 0.55) * 0.35;
-          const i = (r * COLS + c) * 3;
-          verts[i] = x; verts[i + 1] = y; verts[i + 2] = z;
-        }
-      }
-      posAttr.needsUpdate = true;
-    }
-
-    /* ── Floating data nodes above grid ─────────────────── */
-    interface Node { mesh: THREE.Mesh; vel: THREE.Vector3 }
-    const nodes: Node[] = [];
-    for (let i = 0; i < 18; i++) {
-      const node = new THREE.Mesh(
-        new THREE.SphereGeometry(0.045, 5, 5),
-        new THREE.MeshBasicMaterial({ color: 0xe2e8f0, transparent: true, opacity: 0.55 + Math.random() * 0.3 })
-      );
-      node.position.set(
-        (Math.random() - 0.5) * 16,
-        0.8 + Math.random() * 2.5,
-        (Math.random() - 0.5) * 12
-      );
-      const speed = 0.25 + Math.random() * 0.35;
-      const vel = new THREE.Vector3(
-        (Math.random() - 0.5) * speed,
-        (Math.random() - 0.5) * speed * 0.3,
-        (Math.random() - 0.5) * speed
-      );
-      scene.add(node);
-      nodes.push({ mesh: node, vel });
-    }
-
-    /* ── Transmission pulses (expanding rings) ───────────── */
-    interface Pulse { mesh: THREE.Mesh; life: number; dur: number }
-    const pulses: Pulse[] = [];
-    let pulseCD = 2.0;
-
-    function spawnPulse() {
-      // Random grid position (near center)
-      const px = (Math.random() - 0.5) * 8;
-      const pz = (Math.random() - 0.5) * 6;
-      const ring = new THREE.Mesh(
-        new THREE.TorusGeometry(0.08, 0.022, 5, 48),
-        new THREE.MeshBasicMaterial({ color: 0xe2e8f0, transparent: true, opacity: 0.0 })
-      );
-      ring.position.set(px, 0, pz);
-      ring.rotation.x = Math.PI / 2;
-      scene.add(ring);
-      pulses.push({ mesh: ring, life: 0, dur: 2.8 });
-    }
-
-    /* ── Shooting stars (horizontal streaks) ─────────────── */
-    interface Star { mesh: THREE.Mesh; vel: THREE.Vector3; life: number }
-    const stars: Star[] = [];
-    let starCD = 1.8;
-
-    function spawnStar() {
-      const star = new THREE.Mesh(
-        new THREE.SphereGeometry(0.035, 4, 4),
-        new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.9 })
-      );
-      // Start from random edge
-      const side = Math.random() > 0.5 ? -1 : 1;
-      star.position.set(side * 10, 1 + Math.random() * 3, (Math.random() - 0.5) * 10);
-      const spd = (1.5 + Math.random() * 2) * -side;
-      stars.push({ mesh: star, vel: new THREE.Vector3(spd, (Math.random() - 0.5) * 0.3, 0), life: 0 });
-      scene.add(star);
-    }
-
-    const clock = new THREE.Clock();
-
-    (function animate() {
-      requestAnimationFrame(animate);
-      const d = clock.getDelta();
-      const t = clock.elapsedTime;
-
-      /* wave grid */
-      updateGrid(t);
-
-      /* floating nodes */
-      nodes.forEach(n => {
-        n.mesh.position.addScaledVector(n.vel, d);
-        if (Math.abs(n.mesh.position.x) > 9)  n.vel.x *= -1;
-        if (Math.abs(n.mesh.position.z) > 7)  n.vel.z *= -1;
-        if (n.mesh.position.y < 0.5 || n.mesh.position.y > 3.5) n.vel.y *= -1;
-      });
-
-      /* pulses */
-      pulseCD -= d;
-      if (pulseCD <= 0) { pulseCD = 2.2 + Math.random() * 2; spawnPulse(); }
-      for (let i = pulses.length - 1; i >= 0; i--) {
-        const p = pulses[i]; p.life += d;
-        const prog = p.life / p.dur;
-        if (prog >= 1) { scene.remove(p.mesh); pulses.splice(i, 1); continue; }
-        p.mesh.scale.setScalar(1 + prog * 22);
-        // Fade in then out: peak at 20%
-        const fade = prog < 0.2 ? prog / 0.2 : 1 - (prog - 0.2) / 0.8;
-        (p.mesh.material as THREE.MeshBasicMaterial).opacity = 0.65 * fade;
-        // Move with wave: adjust Y each frame
-        const wx = p.mesh.position.x, wz = p.mesh.position.z;
-        p.mesh.position.y =
-          Math.sin(wx * 0.55 + t * 0.85) * Math.cos(wz * 0.45 + t * 0.65) * 1.2 +
-          Math.sin((wx + wz) * 0.38 + t * 1.1) * 0.5 + 0.05;
-      }
-
-      /* shooting stars */
-      starCD -= d;
-      if (starCD <= 0) { starCD = 2.5 + Math.random() * 3; spawnStar(); }
-      for (let i = stars.length - 1; i >= 0; i--) {
-        const s = stars[i]; s.life += d;
-        s.mesh.position.addScaledVector(s.vel, d);
-        (s.mesh.material as THREE.MeshBasicMaterial).opacity = Math.max(0, 0.9 - s.life * 0.6);
-        if (s.life > 1.5 || Math.abs(s.mesh.position.x) > 12) {
-          scene.remove(s.mesh); stars.splice(i, 1);
-        }
-      }
-
-      renderer.render(scene, camera);
-    })();
   });
 </script>
 
 <style>
-  .contact-section {
-    position: relative;
-    padding: 5rem 1.5rem 0;
-    background: #080808;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    overflow: hidden;
-  }
-
-  /* ── Background canvas ── */
-  .contact-canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  /* ── Content above canvas ── */
-  .contact-inner {
-    position: relative;
-    z-index: 10;
-    max-width: 52rem;
-    margin: 0 auto;
-    padding-bottom: 4.5rem;
-  }
-
-  .contact-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: #444;
-    margin-bottom: 1.75rem;
-  }
-
-  /* ── Email block ── */
-  .contact-email-block { margin-bottom: 3.5rem; }
-
-  .contact-email-btn {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-  }
-
-  .contact-email-text {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: clamp(1.8rem, 5vw, 4rem);
-    letter-spacing: -0.04em;
-    color: #f0f0f0;
-    transition: color 0.2s ease;
-    line-height: 1;
-    overflow-wrap: anywhere;
-    /* Keep legible over the animated grid */
-    text-shadow: 0 0 40px rgba(8, 8, 8, 0.95), 0 2px 12px rgba(8, 8, 8, 0.8);
-  }
-
-  .contact-email-btn:hover .contact-email-text { color: #e2e8f0; }
-
-  .contact-email-icon {
-    color: #333;
-    flex-shrink: 0;
-    transition: color 0.2s ease, transform 0.2s ease;
-  }
-  .contact-email-btn:hover .contact-email-icon {
-    color: #888;
-    transform: scale(1.1);
-  }
-
-  .contact-copy-hint {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #333;
-    margin-top: 0.75rem;
-    transition: color 0.2s ease;
-  }
-  .contact-copy-hint.copied { color: #4ade80; }
-
-  /* ── Social links ── */
-  .contact-socials {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .contact-social {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.82rem;
-    color: #404040;
-    text-decoration: none;
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    padding: 0.6rem 1.1rem;
-    border-radius: 2px;
-    background: rgba(8, 8, 8, 0.6);
-    backdrop-filter: blur(4px);
-    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-  }
-  .contact-social:hover {
-    color: #c8d0dc;
-    border-color: rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.04);
-  }
-
-  .contact-social-img {
-    width: 15px; height: 15px;
-    filter: invert(1) opacity(0.3);
-    transition: opacity 0.2s ease;
-  }
-  .contact-social:hover .contact-social-img { filter: invert(1) opacity(0.7); }
-
-  .contact-social-name { letter-spacing: 0.02em; }
-
-  /* ── Footer ── */
-  .contact-footer {
-    position: relative;
-    z-index: 10;
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
-    padding: 1.25rem 1.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-    color: #262626;
-  }
-
-  @media (max-width: 640px) {
-    .contact-email-btn { align-items: flex-start; }
-    .contact-email-text { font-size: clamp(1.15rem, 6.5vw, 2.5rem); }
-    .contact-socials { gap: 0.65rem; }
-  }
+  .contact-section { padding: clamp(5rem, 11vw, 9rem) var(--page-gutter) 6rem; background: var(--surface); }
+  .contact-inner { width: min(100%, var(--content-width)); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 8vw, 7rem); align-items: end; }
+  .contact-label { margin: 0 0 .8rem; color: var(--muted); font-size: .78rem; }
+  .contact-copy h2 { margin: 0 0 1.2rem; font-size: clamp(3rem, 7vw, 6rem); line-height: .92; letter-spacing: -.075em; }
+  .contact-location { margin: 0; color: var(--muted); font-size: .9rem; }
+  .contact-links { display: flex; flex-direction: column; align-items: flex-start; }
+  .contact-email { display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; padding: 0 0 .8rem; border-bottom: 1px solid var(--line); font-size: clamp(1.1rem, 2.4vw, 1.8rem); text-decoration: none; overflow-wrap: anywhere; }
+  .contact-email:hover { color: var(--accent-strong); }
+  .contact-copy-btn { min-height: 2.75rem; margin-top: .6rem; padding: .55rem 0; border: 0; background: transparent; color: var(--muted); font: 500 .78rem Inter, sans-serif; cursor: pointer; }
+  .contact-copy-btn:hover { color: var(--text); }
+  .contact-status { margin: 1.3rem 0 .7rem; color: var(--quiet); font-size: .75rem; }
+  .contact-socials { display: flex; flex-wrap: wrap; gap: .65rem; }
+  .contact-socials a { display: inline-flex; min-height: 2.75rem; align-items: center; gap: .5rem; padding: .55rem .75rem; border: 1px solid var(--line); border-radius: var(--radius); color: var(--muted); font-size: .78rem; text-decoration: none; transition: color .18s ease, border-color .18s ease; }
+  .contact-socials a:hover { color: var(--text); border-color: var(--accent-strong); }
+  .contact-socials img { opacity: .95; }
+  @media (max-width: 700px) { .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; } }
 </style>
